@@ -1,0 +1,2333 @@
+unit bst_main;
+
+                                                           
+interface
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Menus,db,dbTables,  Buttons, ExtCtrls, StdCtrls, FileCtrl,
+  ComCtrls, OleCtrls, AxCtrls,DBCtrls, ImgList,dbGrids,AddFlow3Lib_TLB,registry,ShellAPI,
+  jpeg, ActnList, ActnMan,cls_bd, ADODB,BSTDB, DBClient,cls_obj,
+  cls_utils,strutils,bst_telaobj, Qrctrls, QuickRpt, gtQrCtrls, Grids,
+  RxGIF, Animate, GIFCtrl,IceLicense, UAnimateButton, UPersonalButton;
+
+
+
+
+type
+  Tfrm_main = class(TForm)
+    MM: TMainMenu;
+    Projetos1: TMenuItem;
+    AreadeInteresse1: TMenuItem;
+    Sair1: TMenuItem;
+    pop_tv: TPopupMenu;
+    Excluir1: TMenuItem;
+    lb_dg: TListBox;
+    lb: TListBox;
+    Class1: TMenuItem;
+    Definies1: TMenuItem;
+    C1: TMenuItem;
+    Atividades1: TMenuItem;
+    Atividades2: TMenuItem;
+    RegrasdeNegcio1: TMenuItem;
+    Informao1: TMenuItem;
+    InfraEstrutura1: TMenuItem;
+    ClassedeAtor1: TMenuItem;
+    Estrutura1: TMenuItem;
+    Dimensionamento1: TMenuItem;
+    ObjetodeInterface1: TMenuItem;
+    ObjetodeContorle1: TMenuItem;
+    Evento1: TMenuItem;
+    SistemasExistentes1: TMenuItem;
+    Processador1: TMenuItem;
+    Fluxodedados1: TMenuItem;
+    Elementodedado1: TMenuItem;
+    Entidade1: TMenuItem;
+    Atributos1: TMenuItem;
+    LocalFsico1: TMenuItem;
+    Mecanismo1: TMenuItem;
+    Diretrio1: TMenuItem;
+    Pessoas1: TMenuItem;
+    Wcase: TListBox;
+    fnt: TFontDialog;
+    ToolbarImages: TImageList;
+    Ferramentas1: TMenuItem;
+    Desbloqueiar1: TMenuItem;
+    Avaliaodeproblemas1: TMenuItem;
+    im2: TImageList;
+    Relatrios1: TMenuItem;
+    Atividades3: TMenuItem;
+    Consistencia1: TMenuItem;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    N3: TMenuItem;
+    N4: TMenuItem;
+    AspectosCrticos2: TMenuItem;
+    Alvosdemelhoria1: TMenuItem;
+    Compactar1: TMenuItem;
+    Configurao1: TMenuItem;
+    Empresas1: TMenuItem;
+    AtorxAtividade1: TMenuItem;
+    AtorxPessoa1: TMenuItem;
+    AtividadexTecnologia1: TMenuItem;
+    RegrasdeNegcio2: TMenuItem;
+    Fluxosdedados1: TMenuItem;
+    Ajuda1: TMenuItem;
+    Ajuda2: TMenuItem;
+    SobreBEST1: TMenuItem;
+    Memo1: TMemo;
+    Session1: TSession;
+    Explorador1: TMenuItem;
+    RelaocomMercado1: TMenuItem;
+    N6: TMenuItem;
+    ConfiguraoObjetos1: TMenuItem;
+    ObjetosdeNegcio1: TMenuItem;
+    ImportaodeDiagramas1: TMenuItem;
+    EntidadesExternas1: TMenuItem;
+    ObjetosdeNegcio2: TMenuItem;
+    Atores1: TMenuItem;
+    EventosdeNegcio1: TMenuItem;
+    Elementosdedado1: TMenuItem;
+    LocaisdeProcessamento1: TMenuItem;
+    lb_cod: TListBox;
+    lb_pai: TListBox;
+    AplicaodosDados2: TMenuItem;
+    fl: TFileListBox;
+    Memo2: TMemo;
+    Image1: TImage;
+    Pessoas2: TMenuItem;
+    Mecanismos1: TMenuItem;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    N7: TMenuItem;
+    Backup1: TMenuItem;
+    AtividadesxObjetosdeInterface1: TMenuItem;
+    N8: TMenuItem;
+    ObjetosdeInterface1: TMenuItem;
+    ObjetosdeControle1: TMenuItem;
+    ConverterBancoparaverso6001: TMenuItem;
+    N5: TMenuItem;
+    ConfiguraoAtual1: TMenuItem;
+    Image2: TImage;
+    Panel1: TPanel;
+    diagx: TAddFlow;
+    lb_cli: TLabel;
+    lb_cen: TLabel;
+    sp_tree: TSpeedButton;
+    sp_custo: TSpeedButton;
+    SpeedButton4: TSpeedButton;
+    sp_cliente: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton6: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton5: TSpeedButton;
+    procedure sp_clienteClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure AreadeInteresse1Click(Sender: TObject);
+    procedure SS2NotRegistered(Sender: TObject);
+    
+    //procedure fViewer;
+    function ExecuteF(const FileName, Params, DefaultDir: string;
+             ShowCmd: Integer): THandle;
+    procedure Empresas1Click(Sender: TObject);
+    procedure SpeedButton5Click(Sender: TObject);
+    procedure sp_cenarioClick(Sender: TObject);
+    procedure Class1Click(Sender: TObject);
+    procedure sp_treeClick(Sender: TObject);
+    procedure SpeedButton10Click(Sender: TObject);
+    procedure AppException(Sender: TObject; E: Exception);
+    procedure Configurao1Click(Sender: TObject);
+    procedure ConfiguraoObjetos1Click(Sender: TObject);
+    procedure Atividades2Click(Sender: TObject);
+    procedure MenuItemClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure ObjetodeInterface1Click(Sender: TObject);
+    procedure ObjetodeContorle1Click(Sender: TObject);
+    procedure Abre_objeto (pTag : integer;pTit : string);
+    procedure ObjetosdeNegcio1Click(Sender: TObject);
+    procedure Atividades3Click(Sender: TObject);
+    procedure EventosdeNegcio1Click(Sender: TObject);
+    procedure RegrasdeNegcio2Click(Sender: TObject);
+    procedure Atores1Click(Sender: TObject);
+    procedure Pessoas2Click(Sender: TObject);
+    procedure Mecanismos1Click(Sender: TObject);
+    procedure Fluxosdedados1Click(Sender: TObject);
+    procedure Elementosdedado1Click(Sender: TObject);
+    procedure LocaisdeProcessamento1Click(Sender: TObject);
+    procedure AspectosCrticos2Click(Sender: TObject);
+    procedure SobreBEST1Click(Sender: TObject);
+    procedure Alvosdemelhoria1Click(Sender: TObject);
+    procedure ObjetosdeNegcio2Click(Sender: TObject);
+    procedure EntidadesExternas1Click(Sender: TObject);
+    procedure AplicaodosDados2Click(Sender: TObject);
+    procedure Sair1Click(Sender: TObject);
+    procedure speedbutton41Click(Sender: TObject);
+    procedure Compactar1Click(Sender: TObject);
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure Ajuda2Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure speedbutton31Click(Sender: TObject);
+    procedure Backup1Click(Sender: TObject);
+    procedure SS2MaxUsers(Sender: TObject);
+    procedure SS2Terminate(Sender: TObject);
+    procedure AtorxAtividade1Click(Sender: TObject);
+    procedure AtividadesxObjetosdeInterface1Click(Sender: TObject);
+    procedure ObjetosdeInterface1Click(Sender: TObject);
+    procedure ConverterBancoparaverso6001Click(Sender: TObject);
+    procedure ConfiguraoAtual1Click(Sender: TObject);
+    procedure Consistencia1Click(Sender: TObject);
+    procedure SpeedButton6Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Image5MouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure sp_custoClick(Sender: TObject);
+    private
+    Fver: string;
+    FCanc_cli: boolean;
+    FDir_canc: boolean;
+    FBack: string;
+    FlastDir: string;
+    FNOme_back: string;
+    Fitab: Tdados_tab;
+    FViewer: boolean;
+    FWdemo: boolean;
+    FWQTDEMO: INTEGER;
+    Fwfecha: boolean;
+    FWQTATIV: integer;
+    FwPerc_Custo: real;
+    Fwtagoi: integer;
+    FLicencaOK: boolean;
+    FMensAbout: string;
+    procedure Setver(const Value: string);
+    procedure SetCanc_cli(const Value: boolean);
+    procedure SetBack(const Value: string);
+    procedure SetDir_canc(const Value: boolean);
+    procedure SetlastDir(const Value: string);
+    procedure SetNOme_back(const Value: string);
+    procedure Setitab(const Value: Tdados_tab);
+    procedure SetViewer(const Value: boolean);
+    procedure SetWdemo(const Value: boolean);
+    procedure SetWQTDEMO(const Value: INTEGER);
+    procedure Setwfecha(const Value: boolean);
+    procedure SetWQTATIV(const Value: integer);
+    procedure SetwPerc_Custo(const Value: real);
+    procedure Setwtagoi(const Value: integer);
+    function Checa_Icelicenca: boolean;
+    procedure SetLicencaOK(const Value: boolean);
+    procedure SetMensAbout(const Value: string);
+    
+    { Private declarations }
+  public
+    //Codigo_Lista : string;
+  published
+   property wtagoi : integer read Fwtagoi write Setwtagoi;
+   property ver : string  read Fver write Setver;
+   property Canc_cli : boolean read FCanc_cli write SetCanc_cli; // qdo escli cancelou
+   property Dir_canc : boolean read FDir_canc write SetDir_canc;
+   property Back : string read FBack write SetBack;
+   property lastDir : string read FlastDir write SetlastDir;
+   property NOme_back : string read FNOme_back write SetNOme_back;
+   property itab : Tdados_tab read Fitab write Setitab;
+   property Viewer : boolean read FViewer write SetViewer;
+   property Wdemo : boolean read FWdemo write SetWdemo;
+   property WQTDEMO : INTEGER read FWQTDEMO write SetWQTDEMO; //qtde máxima diagaram p/versão demo
+   property WQTATIV : integer read FWQTATIV write SetWQTATIV; // qtde máxima de atividades para versão demo
+   property wfecha : boolean read Fwfecha write Setwfecha;
+   property wPerc_Custo : real read FwPerc_Custo write SetwPerc_Custo;
+   property LicencaOK : boolean read FLicencaOK write SetLicencaOK;
+   property MensAbout : string read FMensAbout write SetMensAbout;
+   function COnsiste_tudo(pCli,pProj : integer) : boolean;
+  end;
+
+
+type
+   cStyle = set of 1..100;
+
+ resourcestring
+  def1  = 'Atividades';
+  def2  = 'Eventos de Negócio';
+  def3  = 'Junções';
+  def4  = 'Entidades ';
+  def5  = 'Regras de Negócio';
+  def6  = 'Objetos de Interface';
+  def7  = 'Objetos de Controle';
+  def8  = 'Objetos Entidade';
+  def9  = 'Fluxos de Dados';
+  def10 = 'Atores';
+  def11 = 'Use cases';
+  def12 = 'Objetos de Negócio';
+  def13 = 'Pessoas';
+
+  mens1 = 'Ajuda não disponível!';
+  mens2 = 'Impossível registrar OCX';
+  mens3 = 'Mantém essa configuração como default ?';
+  mens4 = 'A imagem dessa entidade não existe!' ;
+  mens5 = 'Ajusta a Entidade a Imagem';
+  mens6 = 'Correlação não permitida entre objetos não definidos!';
+  mens7 = 'Erro : O Diagrama não foi encontrado no diretório '+#13+'Verificar as configurações do banco de dados!';
+  mens8 = 'Arquivo de Configuraço de Objetos não encontrado no Diretório de dados';
+  mens9 = 'Arquivo de Configuração de Objetos  inexistente!'  ;
+  mens10= 'Nenhum nó escolhido';
+  mens11= 'Nenhum ou mais de um Objeto escolhido';
+  mens12= 'Referencia Circular! A atividade escolhida já existe na hierarquia acima!'  ;
+  mens13= 'Atenção! Essa Atividade possui decomposição! A alteração provocará a perda de todos os níveis abaixo!'+#13+'Continua ?';
+  mens14= 'Arquivo contendo áreas de interesse inexistente! Desejar criar agora ?';
+  mens15= 'Se excluir essa Emprêsa,todos seus Cenários e Diagramas serão também excluidos!'+#13 +'  Continua ?';
+  mens16= 'Se excluir esse Cenário,todos seus Diagramas serão também excluidos!'+#13 +'  Continua ?';
+  mens17= 'Definir a Atividade antes de decompor!';
+  mens18= 'Não é possível alterar o Tipo de Atividade! A Atividade possui decomposição';
+  mens19= 'Informar O Nome da Empresa';
+  mens20= 'Informar a razão Social da Empresa';
+  mens21= 'Informar a área de Interesse da Empresa';
+  mens22= 'Informar a Designação';
+  mens23= 'Confirma a eliminação desse Elemento de Dados?';
+  mens24= 'Confirma a eliminação dessa Correlação?';
+  mens25= 'Eliminação Cancelada!';
+  mens26= 'Confirma a eliminação desse Evento ?';
+  mens27= 'Confirma a eliminação desse lay out ?';
+  mens28= 'Alterando a Dimensão implica na perda das Correlações Atuais! Continua ?';
+  mens29= 'Confirma a eliminação  ?';
+  mens30= 'Não foi possível eliminar!';
+  mens31= 'Informar a Operação';
+  mens32= 'Informar o Tipo de Aspecto!';
+  mens33= 'Informar o Ponto de Vista!';
+  mens34= 'Informar o Tipo de Atividade!';
+  mens35= 'A seleção deve conter o mesmo tipo de conexão';
+  mens36= 'Deseja salvar o Diagrama antes de Sair ?';
+  mens361= 'Desejar sair do Diagrama ?';
+  mens37= 'Conexão não permitida ';
+  mens38= 'Diagrama em uso diferente do Digrama de Configuração! ';
+  mens39= 'Escolher uma Origem';
+  mens40= 'Se excluir essa Atividade,todas as Atividades subordinadas serão também excluidas!'+#13 +'  Continua ?';
+  mens41= 'Operação sem aspectos críticos!';
+  mens42= 'Operação sem Alvos de Melhoria!';
+  mens43= 'Diagrama exportado com Nome :';
+  mens44= 'Não ha executável cadastrado para essa atividade!';
+  mens45= 'Não foi encontrado Diagrama para essa Atividade! Deseja criá-lo em branco ?';
+  mens46= 'Não pode alterar Objeto já definido!';
+  mens47= 'Um ou mais scomponentes de cálculo do Lead Time estão faltando! (TPU,TPI OU LOOPING';
+  mens48= 'Diagrama em uso por outro usuário! Será aberto somente para leitura!';
+  mens49= 'Desenhos não Permitidos na versão Viewer!';
+  mens50= 'É recomendável efetuar o back up antes da Compacatação! '+#13+'Continua ?';
+  mens51= 'Informar o Nome do Servidor SQL!';
+  mens52= 'Informar o caminho do Banco de dados Access!';
+  mens53= 'Campo BLOB não pode ser Chave!';
+  mens54= 'Não é permitido eliminar!';
+  mens55= 'Versão demo : número máximo de objetos gráficos ultrapassado!';
+  mens56= 'Essa Conexão só é permitida entre Regra de Negócio e Atividade!';
+  mens57= 'Já existe uma conexão!';
+  mens58= 'Informar a Dimensão!';
+  mens59= 'Informar a Categoria do Ator!';
+  mens60= 'Não é permitido conectar dois Objetos Diferentes a mesma Atividade Origem! Usar Junção para isso!';
+  mens61= 'Junção Tipo <OU> não pode ter mais que dois Fluxos saindo!' ;
+  mens62= 'Atenção : Verificar os Percentuais de Passagem após alteração da Lógica da Junção!';
+  mens63= 'Objeto Antecessor a Junção deve ser Junção ou Atividade!';
+  mens64= 'Não ha nenhuma Ator Associado a esta Atividade!!';
+  mens65= 'Não é possível copiar para outro Cliente/Cenário';
+  mens66= 'Não é possível copiar para outra classe de Diagrama!';
+  mens67= 'Colar Completo(yes) ou somente esqueleto(no) ?';
+  mens68= 'Diagrama sem Atividade!';
+  mens69= 'Não ha Local de Processamento definido';
+  mens70= 'Informar se Atividade procedural ou não';
+  mens71= 'Junção  não pode ter mais que 1 Fluxo entrando!' ;
+  mens72= 'Impossível calcular Custos : Existem Diagramas Inconsistentes!' ;
+  mens73= 'Informar o Tipo de Exportação!' ;
+  mens74= 'Informar o Nome do Arquivo para Exportação!' ;
+  mens75= 'Problemas na Exportação dos Relatórios ! Tentar novamente' ;
+  mens76= 'Nada a Imprimir!';
+  mens77= 'Nada a Exportar!';
+  mens78= 'Necessário preencher Usuário, Emprêsa e Id do Computador!'  ;
+  mens79= 'Atividade não encontrada!'  ;
+  mens80= 'Informar o Alias!'  ;
+  mens81= 'Alias já usado! Continua assim mesmo ?'  ;
+  mens82= 'Necessário Definir Chave primária!'  ;
+  EI1   = 'Erro_interno : Objeto escolhido não foi encontrado!';
+  EI2   = 'Erro_interno : Decomposição : o nó da árvore não tem filho!';
+  EI3   = 'Erro_interno : Impossível efetuar a decomposição!';
+  EI4   = 'Erro_interno : Impossível criar Objeto !';
+  EI5   = 'Erro_interno : Impossível ler Diagrama  !';
+  EI6   = 'Erro_interno : Impossível Salvar Diagrama  no BD !';
+  EI7   = 'Erro_interno : Impossível Ler Diagrama  no BD !';
+  EI8   = 'Erro_interno : Erro na estrutura do desenho da Junção! !';
+  E19   = 'Erro Interno : Atividade escolhida não foi encontrada na árvore!';
+  E20   = 'Erro Interno : Impossível redimensionar Ator '; 
+ var
+  cFluxos : cStyle;
+  Empresas,CurrEmpresa : Tempresa;
+  Scenario             : Tcenario;
+  Dominios             : TDominios;
+  Atividades, CurrAtiv : TAP;
+  Tab                  : Tdados_tab;
+ // Diagramas  : TDiagrama;
+  TV         : TTv;
+  DG         :TDG;
+       
+  
+
+  ///////////////////////////////////////////////
+  WdirPad,WFilePad,WDirComp: string;
+  Ferme,prev,canc,Wusers ,wForcenewpage: Boolean;
+  chk_k: integer;
+  Wisregistered,WcheckLic : integer;
+  FromDim,WLib : boolean;
+  WnoAnt,WCurrentAnt : TTreeNode;
+  TreeList,Treecli,TreeProj,TreeCod,TreeTi,TreeLevel : TStringList;
+  Ti : integer;
+  Cli_Import,prj_Import,dg_import,Cli_export,
+       prj_export,dg_export: integer;
+  efromAtual,eFromImport : Boolean;     
+  xxlevel : integer;
+  WfrmSrc,WfrnTrg : Tform;
+  WTvsrc,Wtvtrg : TtreeNode ;
+  Fout,F: TextFile;
+  Arqout,S,Hist_db : string;
+  frm_main: Tfrm_main;
+  wfrm ,cod: integer;
+  Wsource : Tdatasource;
+  Wqry : Tquery;
+  case_name,WNomeNivel : string;
+  Wgrid,WSnap : Boolean;
+  WGrid_Alt ,WGrid_Larg : integer;
+  WNivel_Ativo,WuserId : Integer;
+  WSubid,WPai,WAvo,WSubIdPai,WAtividadeMae : integer;
+  WDiag_Id,WClass_Dg,WClass_dgEsc,WUnidade_Tempo : string;
+  WColor : Tcolor;
+  WNome_nivel : string;
+  WdirPalete : string;
+  WCurrentEntity : afNode;
+  WModif : Boolean;
+  Wwin : integer;
+  WWbsPai: string;
+  Worigemdados : integer;
+  WrelSelected : afLink;
+  WentSelected,WEntdestination,WentSource : afNode;
+  WtextCopy,WPopUpClick : string;
+  Novo,WChangeText,WChangeRelationText : boolean;
+  WcodigoCopy : integer;
+  WDirDb,Wdb,Wdbms : string;
+  WNomeDiagAtu : string;
+  Acli  : array of integer;
+  Aprj  : array of integer;
+  ANode : array of TtreeNode;
+  AId   : array of integer;
+  AIdg  : array of integer;
+
+  ANodeCli : array of TtreeNode;
+  Acliger  : array of integer;
+  AcliIdg : array of integer;
+
+  ANodeprj : array of TtreeNode;
+  APrjger  : array of integer;
+
+  WnodeCli : TtreeNode;
+  WPrj_titulo,winteresse,WDiag_Status,WCli_Nome,WDiag_nome : string;
+  Wcli,WProj,Widg,WCliAnt,WProjAnt,WcliImport,WprojImport,WidgImport : integer;
+  Grava : Boolean;
+  WCodigo_Lista,Wcodigo_Ant,Wmenu : integer;
+  WGera_Correlacao : Boolean;
+  WDataset : string;
+
+  WDiag_Palette : string;
+  FirstDg : Boolean;
+  Wtot    : integer;
+  WSubIdtv : integer;
+  WBanco,WDiag_Ant : string;
+  WDirBanco,Wdir,WAlias : string;
+  WBot ,Wtip: string;
+  Wlibera : integer;
+  GravDir : string;
+  Editor : TdbRichEdit;
+  Ed_Memo : TdbMemo;
+  mWidth,mHeight,mTop,mLeft : integer;
+  Wclose : boolean;
+  Wbmp : integer;
+
+  WShowGrid,WSnapToGrid : Boolean;
+  Wx,Wy : single;
+  WGridColor,WDiagColor : Tcolor;
+  WTipoGrid : integer;
+  WFontEntidade,WFontLink : Tfont;
+  WCorEntidade,WCorLink : TColor;
+  Wimagem : Tpicture;
+  WcloseTree : Boolean;
+  mDado : udado;
+  ok : Boolean;
+  Wdiretorio,retour,WdirImp,WNomeDg: string;
+  Wno : TtreeNode;
+  Wimptxt,dg_created ,fromTree,FromTreeator : boolean;
+  WTipoObjeto : string;
+  Rig_width,Rig_height,Rig_Top,Rig_Left : real;
+  chg : boolean;
+  WIdg_Ex ,Wexp   : integer;
+  WDiag_Id_ex: string;
+  Dg_Corrente : TaddFlow;
+  Drv_Atu : string;
+  WCurrentNode,WpreviousNode : TTreeNode;
+  WEntWidth,WEntHeight : variant;
+  
+  const Wdim: array[1..16] of sTRING = ('AP', 'AC', 'CA', 'DG', 'OI', 'PS',
+                                     'OE','DE','JU','RN','SE','EN','LF','EV','IF','DE');
+
+  const Wobj: array[1..16] of sTRING = ('AP', 'AC', 'CA', 'DG', 'OI', 'PS',
+                                     'OE','DE','JU','RN','SE','EN','LF','EV','IF','OC');
+  const WTit: array[1..16] of sTRING = ('Atividades', 'Aspecto Crítico',
+                                        'Classe de Ator', 'Fluxo de Dados',
+                                        'Objeto de Interface', 'Pessoa',
+                                        'Objeto Entidade','Elemento de dado',
+                                        'Junção','Regra de Negócio',
+                                        'Mecanismos',
+                                        'Evento de Negócio','Locais Físicos','Eventos IT',
+                                        'Objeto de negócio',
+                                        'Objeto de Controle');
+ const WVis: array[1..16] of sTRING = ('S', 'N', 'N', 'S', 'S', 'N',
+                                     'S','N','S','S','N','S','N','N','S','S');
+
+
+ const WOeIMP: array[1..5] of sTRING = ('COR_OBJETOS','CMB_DIVERSOS',
+                                      'TI_ADERENCIA', 'TI_LAY', 'TI_REQ');
+
+ const  wtype : array[1..6] of string = ('C','I','N','M','D','T');
+{Acrescentar abaixo os ocx usados no programa para que possam ser registrados
+ função : registra_ocx}
+ 
+
+
+implementation
+
+uses bst_clifull, bst_logo, bst_cenario, bst_ari, bst_diversos,
+  bst_treeAtiv, bst_escli, bst_lista, bst_cfg, bst_ap, bst_aspectos, bst_ca,
+  bst_data, bst_ev, bst_pessoa, bst_de, bst_regra, bst_se, bst_en, bst_lf,
+  bst_if, bst_escativ, bst_cimp, bst_pen, bst_pregra, bst_pca, bst_ppessoa,
+  bst_pse, BST_pdata, bst_pde, bst_plf, bst_Escaspect, bst_about, BST_pdmig,
+  BST_pentext, bst_PApde, bst_treeator, bst_limpa, BST_help, bst_exdir,
+  bst_enc, bst_patorat, bst_patoi, bst_puc, bst_check, bst_pConsistDg,
+  bst_aplic, bst_treeCusto, bst_icereg;
+
+
+
+
+
+{$R *.DFM}
+{$D+}
+{/F}
+procedure Tfrm_main.sp_clienteClick(Sender: TObject);
+
+begin
+  If frm_clifull          = nil then
+     frm_clifull            := Tfrm_clifull.create(self);
+ frm_clifull.sp_novo.enabled := true;
+
+  frm_clifull.showModal;
+end;
+
+
+procedure Tfrm_main.FormCreate(Sender: TObject);
+VAR
+  mens ,Wparm, WDir: string;
+  Wini : string;
+  y : integer;
+
+begin
+  //Application.OnException := AppException;
+  cFluxos := [2,5,6,9]; //fluxos de dados
+  Viewer := false; //identifica se versào Viewer ou não
+  Wdemo  := false;
+  Wlib   := true;
+  Wusers := false;
+  If not sp_custo.Visible then
+    Begin
+     
+          Begin
+          edit2.Text := '6.00.06.37c';
+           for y := 0 to panel1.ControlCount -1 do
+            Begin
+              If panel1.Controls[y] is TSpeedButton then
+               Begin
+                If (panel1.Controls[y] as TSpeedButton) <> sp_tree then
+                   (panel1.Controls[y] as TSpeedButton).left := (panel1.Controls[y] as TSpeedButton).left - 41;
+               end;
+            end;
+          end;
+    end;
+     //edit2.Text := '6.00.06.37';
+
+ {If not Checa_licenca  then
+     begin
+       close;
+       Application.terminate;
+     end }
+ If not Checa_IceLicenca  then
+     begin
+       close;
+       Application.terminate;
+     end
+  else
+   begin
+      iTab             := Tdados_tab.create(self);
+      iTab.Connection  := bdx;
+      LastDir          := 'c:\';
+      decimalSeparator := '.';
+      Ver              := edit2.text ;
+
+      FromDim := false;
+      FromTree := false;
+      FromTreeAtor := false;
+      Dg_Created := false;
+
+      WQTDEMO    := 2;
+      wqtativ    := 10;
+      WCloseTree := true;
+      Wimagem := Tpicture.create;
+      WFontEntidade := Fnt.Font;
+      WFontLink     := Fnt.Font;
+      WCorEntidade  :=  clwhite;
+      WCorLink      := clblack;
+
+
+      iF not viewer then
+         Case_Name := 'BEST DESIGN - BUSINESS ENGINEERING SOLUTION TOOL'
+      else
+         Case_Name := 'BEST READER - BUSINESS ENGINEERING SOLUTION TOOL' ;
+
+      If frm_logo = nil then
+          frm_logo := Tfrm_logo.create(self);
+      frm_logo.Show;
+      frm_logo.repaint;
+      wfrm := 0;
+
+      frm_main.Caption := case_name;
+
+
+     try
+      begin
+        If bdx = nil then
+           bdx := TBd.create(false);
+      end;
+     except
+      begin
+         freeandnil(bdx);
+         raise;
+         showmessage('Não foi possível abrir o Banco de dados!'+#13+'Verificar as Configurações!');
+      end;
+     end;
+
+      If viewer then
+       Begin
+         sp_cliente.Enabled := false;
+        // sp_cenario.Enabled := false;
+         speedbutton3.Enabled := false;
+         speedbutton6.Enabled := false;
+         mm.Items[3].Enabled := false;
+         mm.Items[0].Enabled := false;
+
+
+
+         bdx.Connected := false;
+         bdx.Mode := (cmRead);
+
+
+       end;
+
+     If bdx.TIPOBANCO  > 0 then // bancos SQL
+       mm.Items[3].Items[6].Enabled := false
+     else
+      mm.Items[3].Items[6].Enabled := true;
+     fl.Directory := bdx.DirFluxo;  //tirar
+
+  end;
+end;
+
+
+procedure Tfrm_main.AppException(Sender: TObject; E: Exception);
+ begin
+  //  Application.ShowException(E);
+   // application.Terminate;
+ end;
+
+{procedure Tfrm_main.fViewer;
+var
+i,j : integer;
+wdm : TdataModule;
+begin
+  with application do
+  begin
+    for j := 0 to Screen.DataModuleCount - 1 do
+    begin
+         begin
+           with screen.DataModules[j]  do
+            begin
+              for i := 0 to componentcount - 1 do
+              begin
+                If Components[i] is Tquery then
+                  (Components[i] as Tquery).requestLive := false;
+              end;
+            end;
+         end;
+    end;
+  end;
+end;      }
+
+
+function Tfrm_main.ExecuteF(const FileName, Params, DefaultDir: string;
+  ShowCmd: Integer): THandle;
+var
+  zFileName, zParams, zDir: array[0..79] of Char;
+begin
+  Result := ShellExecuteA(Application.MainForm.Handle, nil,
+    StrPCopy(zFileName, FileName), StrPCopy(zParams, Params),
+    StrPCopy(zDir, DefaultDir), ShowCmd);
+end;
+
+
+
+
+
+procedure Tfrm_main.AreadeInteresse1Click(Sender: TObject);
+begin
+ If frm_ari = nil then
+    frm_ari := Tfrm_ari.create(self);
+ frm_ari.showmodal;
+end;
+
+
+
+procedure Tfrm_main.SS2NotRegistered(Sender: TObject);
+begin
+ {If frm_safe <> nil then
+     frm_safe.close;
+ frm_safe := Tfrm_Safe.Create(self);
+ frm_safe.caption := 'Cópia Não registrada';
+ frm_safe.edit1.text := inttostr(ss2.readdaysAllowed);
+ frm_safe.edit2.text := inttostr(ss2.readdaysAllowed - ss2.Daysleft);
+ frm_safe.PB_rest.max := ss2.readdaysAllowed;
+ frm_safe.pb_rest.min := 0;
+ frm_safe.pb_rest.Position := ss2.readdaysAllowed -ss2.Daysleft;
+ If ss2.Daysleft = 0 then
+    frm_safe.Bitbtn1.enabled := false;
+ frm_safe.showModal; }
+
+end;
+
+
+
+procedure Tfrm_main.Empresas1Click(Sender: TObject);
+begin
+  If frm_clifull           = nil then
+     frm_clifull           := Tfrm_clifull.create(self);
+  frm_clifull.show;
+end;
+
+procedure Tfrm_main.SpeedButton5Click(Sender: TObject);
+begin
+  close;
+end;
+
+procedure Tfrm_main.sp_cenarioClick(Sender: TObject);
+begin
+   If frm_cenario           = nil then
+      frm_cenario           := Tfrm_cenario.create(self);
+    frm_cenario.showModal;
+end;
+
+procedure Tfrm_main.Class1Click(Sender: TObject);
+begin
+  If frm_diversos           = nil then
+     frm_diversos           := Tfrm_diversos.create(self);
+  frm_diversos.showModal;
+end;
+
+procedure Tfrm_main.sp_treeClick(Sender: TObject);
+begin
+  try
+   begin
+     If frm_logo <> nil then
+      frm_logo.close;
+     If frm_treeativ = nil then
+       Begin
+         frm_TreeAtiv := Tfrm_TreeAtiv.Create(self);
+         freeandnil(tv);
+         frm_treeAtiv.showModal;
+
+       end;
+
+
+     
+   end;
+  except
+   begin
+     frm_treeativ.close;
+     raise;
+   end;
+  end;
+
+
+end;
+
+
+procedure Tfrm_main.SpeedButton10Click(Sender: TObject);
+begin
+ If frm_esccli = nil then
+     frm_esccli  := tfrm_esccli.create(self);
+  frm_esccli.top := 0;
+  frm_esccli.showModal;
+end;
+
+procedure Tfrm_main.Configurao1Click(Sender: TObject);
+begin
+  freeandnil(BDx);
+  freeandnil(Empresas);
+  freeandnil(CurrEmpresa);
+  freeandnil(Scenario);
+  freeandnil(Atividades);
+  freeandnil(CurrAtiv );
+  freeandnil(Dominios);
+  freeandnil(Tab);
+  lb_cli.Caption := '' ;
+  lb_cen.Caption := '';
+
+  BDx := TBD.Create(true);
+    If bdx.TIPOBANCO  > 0 then // bancos SQL
+       mm.Items[3].Items[6].Enabled := false
+     else
+      mm.Items[3].Items[6].Enabled := true;
+end;
+   
+procedure Tfrm_main.ConfiguraoObjetos1Click(Sender: TObject);
+begin
+  If frm_cfg = nil then
+     frm_cfg := tfrm_cfg.create(self);
+  frm_cfg.showmodal;
+end;
+
+procedure Tfrm_main.MenuItemClick(Sender: TObject);
+ begin
+ 
+   If CurrEmpresa = nil then
+      SpeedButton10Click(frm_main) ;
+   wfecha := true;
+ //  while wfecha do
+  //  Begin
+       If not canc_cli then
+         Abre_Objeto(TMenuItem(sender as Tobject).Tag,
+               TMenuItem(sender as Tobject).Caption);
+  //  end;
+
+  
+   wfecha := true;
+
+ end;
+
+procedure Tfrm_main.Abre_objeto (pTag : integer;pTit : string);
+var
+mTab,mCodigo : string;
+//itab : Tdados_tab;
+iFrm : Tfrm_obj;
+Existe : boolean;
+begin
+  iTab.Connection := bdx;
+  case  ptag of
+    1 : mtab := 'IDF_AP';
+    2 : mtab := 'IDF_AC';
+    3 : mtab := 'IDF_CA';
+    4 : mtab := 'IDF_DG';
+ 5,16 : mtab := 'IDF_OI';
+    6 : mtab := 'IDF_PS';
+    8 : mtab := 'IDF_DE';
+
+   10 : mtab := 'IDF_RN';
+   11 : mtab := 'IDF_SE';
+   12 : mtab := 'IDF_EN';
+   13 : mtab := 'IDF_LF';
+   15 : mtab := 'IDF_IF';
+   20 : mtab := 'IDF_TX';
+  end;
+
+   try
+ //  iTab := Tdados_tab.create(self) ;
+   with itab  do
+   begin
+     ListaCli := CurrEmpresa.cenarios.CLI_ID ;
+     ListaProj:= CurrEmpresa.Cenarios.PRJ_ID ;
+     ListaDim := mTab ;
+     ListaTit := pTit ;
+     ListaTag := ptag ;
+     ListaEdit:= true ;
+     ListaTree:= nil;
+     Listafecha := true;
+     ListaId  := 0;
+     OPERACAO := 0;
+     mostra_lista;
+     If  ListaCanc then
+      exit;
+
+
+     case Listatag of
+       1 : begin       //atividade
+             begin
+               Tabela := 'IDF_AP';
+                existe := Open_Objeto(ListaCli,ListaProj,ListaCodigo,TABELA) ;
+                 // raise exception.Create(EI1);
+             end;
+             If frm_ap = nil then
+                frm_ap := Tfrm_ap.create(self);
+             with frm_ap do
+              begin
+                Tipo        := 'AP';
+                Visivel     := 'S';
+                Mode        := 'M';
+                AutoFecha   := false;
+                idatasource := DataExt;
+                CLIENTE     := ListaCli;
+                CENARIO     := ListaProj;
+                If not existe then
+                  Begin
+                    Mode := 'I';
+                    sp_insertClick(self);
+                  end;
+                showmodal;
+              end;
+
+            end;
+
+       2 : begin       //Aspectos críticos
+             begin
+               Tabela := 'IDF_AC';
+             existe := Open_Objeto(ListaCli,ListaProj,ListaCodigo,TABELA)
+             //  existe := Openall(ListaCli,ListaProj,TABELA,'AC','',0); 
+             end;
+
+             If frm_aspectos   = nil then
+                frm_aspectos := tfrm_aspectos.Create(self);
+             with frm_aspectos do
+              begin
+                Tipo        := 'AC';
+                Visivel     := 'N';
+                Mode        := 'M';
+                AutoFecha   := false;
+                idatasource := DataExt;
+                CLIENTE     := ListaCli;
+                CENARIO     := ListaProj;
+                If not existe then
+                  Begin
+                    Mode := 'I';
+                    sp_insertClick(self);
+                  end;
+                showmodal;
+              end;
+            end;
+
+       3 : begin       //Ator
+             begin
+               Tabela := 'IDF_CA';
+               existe := Open_Objeto(ListaCli,ListaProj,itab.ListaCodigo,TABELA)
+                  // raise exception.Create(EI1);
+             end;
+             If frm_ca   = nil then
+                frm_ca := tfrm_ca.Create(self);
+             frm_ca.Tipo        := 'CA';
+             frm_ca.Visivel     := 'N';
+             frm_ca.Mode        := 'M';
+             frm_ca.AutoFecha   := false;
+             frm_ca.idatasource := DataExt;
+             frm_ca.CLIENTE     := ListaCli;
+             frm_ca.CENARIO     := ListaProj;
+             If not existe then
+                  Begin
+                    frm_ca.Mode := 'I';
+                    frm_ca.sp_insertClick(self);
+                  end;
+             frm_ca.showmodal;
+            end;
+
+       4 : begin       //Fluxo de dados
+             begin
+               Tabela := 'IDF_DG';
+               existe := Open_Objeto(ListaCli,ListaProj,ListaCodigo,TABELA)
+                  // raise exception.Create(EI1);
+             end;
+
+             If frm_data   = nil then
+                frm_data := tfrm_data.Create(self);
+             with frm_data do
+              begin
+                Tipo        := 'DG';
+                Visivel     := 'S';
+                Mode        := 'M';
+                AutoFecha   := false;
+                idatasource := DataExt;
+                CLIENTE     := ListaCli;
+                CENARIO     := ListaProj;
+                If not existe then
+                  Begin
+                    Mode := 'I';
+                    sp_insertClick(self);
+                  end;
+                showmodal;
+              end;
+            end;
+
+
+      16,5 : begin       //Objeto de Interface
+             begin
+               Tabela := 'IDF_OI';
+               existe :=  Open_Objeto(ListaCli,ListaProj,ListaCodigo,TABELA);
+                  // raise exception.Create(EI1);
+             end;
+
+             If frm_ev   = nil then
+                frm_ev := tfrm_ev.Create(self);
+             with frm_ev do
+              begin
+                If ListaTag = 5 then
+                   begin
+                      caption := 'Objeto de Interface' ;
+                      Tipo    := 'OI';
+                   end
+                else
+                   begin
+                      caption := 'Objeto de Controle';
+                      Tipo    := 'OC';
+                      Tabsheet2.TabVisible := false;
+                      ts_lay.TabVisible    := false;
+                   end;
+                
+                Visivel     := 'S';
+                Mode        := 'M';
+                AutoFecha   := false;
+                idatasource := DataExt;
+                CLIENTE     := ListaCli;
+                CENARIO     := ListaProj;
+                If not existe then
+                  Begin
+                    Mode := 'I';
+                    sp_insertClick(self);
+                  end;
+                 
+                showmodal;
+              end;
+            end;
+
+       6 : begin       //Pessoa
+
+             begin
+               Tabela := 'IDF_PS';
+
+               existe := Open_Objeto(ListaCli,ListaProj,ListaCodigo,TABELA) ;
+               //  raise exception.Create(EI1);
+             end;
+
+             If frm_pessoa   = nil then
+                frm_pessoa := tfrm_pessoa.Create(self);
+             frm_pessoa.Tipo        := 'PS';
+             frm_pessoa.Visivel     := 'N';
+             frm_pessoa.Mode        := 'M';
+             frm_pessoa.AutoFecha   := false;
+             frm_pessoa.idatasource := DataExt;
+             frm_pessoa.CLIENTE     := ListaCli;
+             frm_pessoa.CENARIO     := ListaProj;
+             If not existe then
+                  Begin
+                    frm_pessoa.Mode := 'I';
+                    frm_pessoa.sp_insertClick(self);
+                  end;
+             frm_pessoa.showmodal;
+            end;
+
+        8 : begin       //Características
+             begin
+               Tabela := 'IDF_DE';
+             existe :=  Open_Objeto(ListaCli,ListaProj,ListaCodigo,TABELA);
+                //   raise exception.Create(EI1);
+             end;
+
+             If frm_de   = nil then
+                frm_de := tfrm_de.Create(self);
+             with frm_de do
+              begin
+                Tipo        := 'DE';
+                Visivel     := 'N';
+                Mode        := 'M';
+                AutoFecha   := false;
+                idatasource := DataExt;
+                dbg_de.DataSource       := dataext;
+                db_descricao.DataSource := dataext;
+                db_dominio.DataSource   := Dataext;
+                db_Descricao.dataField  := 'IDF_DESCRICAO';
+                db_Dominio.dataField    := 'IDF_DOMINIO';
+                CLIENTE     := ListaCli;
+                CENARIO     := ListaProj;
+                If not existe then
+                  Begin
+                    Mode := 'I';
+                    sp_insertClick(self);
+                  end;
+                showmodal;
+              end;
+            end;
+
+        10 : begin       //Regras de negócio
+
+             begin
+              Tabela := 'IDF_RN';
+             existe :=  Open_Objeto(ListaCli,ListaProj,ListaCodigo,TABELA) ;
+                //   raise exception.Create(EI1);
+             end;
+
+             If frm_regra   = nil then
+                frm_regra := tfrm_regra.Create(self);
+             frm_regra.Tipo        := 'RN';
+             frm_regra.Visivel     := 'S';
+             frm_regra.Mode        := 'M';
+             frm_regra.AutoFecha   := false;
+             frm_regra.idatasource := DataExt;
+             frm_regra.CLIENTE     := ListaCli;
+             frm_regra.CENARIO     := ListaProj;
+             If not existe then
+                  Begin
+                    frm_regra.Mode := 'I';
+                    frm_regra.sp_insertClick(self);
+                  end;
+             frm_regra.showmodal;
+            end;
+
+        11 : begin       //Mecanismos
+             begin
+               Tabela := 'IDF_SE';
+               existe :=  Open_Objeto(ListaCli,ListaProj,ListaCodigo,TABELA) ;
+                  // raise exception.Create(EI1);
+             end;
+
+             If frm_se   = nil then
+                frm_se := tfrm_se.Create(self);
+             frm_se.Tipo        := 'SE';
+             frm_se.Visivel     := 'N';
+             frm_se.Mode        := 'M';
+             frm_se.AutoFecha   := false;
+             frm_se.idatasource := DataExt;
+             frm_se.CLIENTE     := ListaCli;
+             frm_se.CENARIO     := ListaProj;
+             If not existe then
+                  Begin
+                    frm_se.Mode := 'I';
+                    frm_se.sp_insertClick(self);
+                  end;
+             frm_se.showmodal;
+            end;
+
+        12 : begin       //evento de negócio
+             begin
+               Tabela := 'IDF_EN';
+               existe := Open_Objeto(ListaCli,ListaProj,ListaCodigo,TABELA) ;
+                 //  raise exception.Create(EI1);
+             end;
+
+             If frm_en   = nil then
+                frm_en := tfrm_en.Create(self);
+             frm_en.Tipo        := 'EN';
+             frm_en.Visivel     := 'S';
+             frm_en.Mode        := 'M';
+             frm_en.AutoFecha   := false;
+             frm_en.idatasource := DataExt;
+             frm_en.CLIENTE     := ListaCli;
+             frm_en.CENARIO     := ListaProj;
+             If not existe then
+                  Begin
+                    frm_en.Mode := 'I';
+                    frm_en.sp_insertClick(self);
+                  end;
+             frm_en.showmodal;
+            end;
+
+         13 : begin       //Locais
+             begin
+               Tabela := 'IDF_LF';
+               existe := Open_Objeto(ListaCli,ListaProj,ListaCodigo,TABELA) ;
+                 //  raise exception.Create(EI1);
+             end;
+
+             If frm_lf   = nil then
+                frm_lf := tfrm_lf.Create(self);
+             with frm_lf do
+              begin
+                Tipo        := 'LF';
+                Visivel     := 'N';
+                Mode        := 'M';
+                AutoFecha   := false;
+                idatasource := DataExt;
+                CLIENTE     := ListaCli;
+                CENARIO     := ListaProj;
+                If not existe then
+                  Begin
+                    Mode := 'I';
+                    sp_insertClick(self);
+                  end;
+                showmodal;
+              end;
+            end;
+
+         15 : begin       //Objetos de negócio
+             begin
+               Tabela := 'IDF_IF';
+               existe := Open_Objeto(ListaCli,ListaProj,ListaCodigo,TABELA) ;
+                   //raise exception.Create(EI1);
+             end;
+
+             If frm_if   = nil then
+                frm_if := tfrm_if.Create(self);
+             with frm_if do
+              begin
+                Tipo        := 'IF';
+                Visivel     := 'S';
+                Mode        := 'M';
+                AutoFecha   := false;
+                idatasource := DataExt;
+                CLIENTE     := ListaCli;
+                CENARIO     := ListaProj;
+                If not existe then
+                  Begin
+                    Mode := 'I';
+                    sp_insertClick(self);
+                  end;
+                showmodal;
+              end;
+            end;
+
+          20 : begin       //Aplicativos
+             begin
+               Tabela := 'IDF_TX';
+               existe := Open_Objeto(ListaCli,ListaProj,ListaCodigo,TABELA) ;
+                   //raise exception.Create(EI1);
+             end;
+
+             If frm_aplic   = nil then
+                frm_aplic := tfrm_aplic.Create(self);
+             with frm_aplic do
+              begin
+                Tipo        := 'TX';
+                Visivel     := 'N';
+                Mode        := 'M';
+                AutoFecha   := false;
+                idatasource := DataExt;
+                CLIENTE     := ListaCli;
+                CENARIO     := ListaProj;
+                If not existe then
+                  Begin
+                    Mode := 'I';
+                    sp_insertClick(self);
+                  end;
+                showmodal;
+              end;
+            end;
+
+     end; //endcase
+   end;
+   finally
+    iTab.ListaCanc := false;
+   // freeandNil(iTab);
+   end;
+end;
+
+procedure Tfrm_main.Atividades2Click(Sender: TObject);
+var
+idados : Tdados_tab;
+begin
+  { idados :=  TDados_tab.create(self);
+   idados.Connection := bdx;
+   If TmainMenu(sender as TOBject).Tag = 2 then
+   begin
+     try
+       If CurrEmpresa = nil then
+      SpeedButton10Click(frm_main) ;
+       idados.Openall(CurrEmpresa.cenarios.CLI_ID ,CurrEmpresa.Cenarios.PRJ_ID,'IDF_AC','AC','',0);
+
+
+       If frm_aspectos   = nil then
+          frm_aspectos := tfrm_aspectos.Create(self);
+       with frm_aspectos do
+        begin
+          Tipo        := 'AC';
+          Visivel     := 'N';
+          Mode        := 'M';
+          AutoFecha   := false;
+          idatasource := idados.DataExt;
+          CLIENTE     := CurrEmpresa.cenarios.CLI_ID ;
+          CENARIO     := CurrEmpresa.Cenarios.PRJ_ID ;
+
+          showmodal;
+          exit;
+        end;
+     finally
+       freeandnil(idados);
+
+     end;
+     exit;
+   end; }
+   MenuItemClick(Sender);
+end;
+
+procedure Tfrm_main.SpeedButton1Click(Sender: TObject);
+var
+Wdiag : Tdiag_dados;
+i,p : integer;
+Wname : string;
+begin
+  Wdiag := TDiag_dados.create(self);
+  for i := 0 to fl.Items.count -1 do
+   begin
+    Wname := fl.Items[i] ;
+    p := pos('.',Wname);
+    Wname := leftstr(Wname,p-1);
+    If leftstr(wname,2) <> 'DG' then
+       continue;
+    Wname := rightstr(Wname,length(WName)-6) ;
+    If wname = '' then
+       continue;
+    If not Wdiag.Get_Diagrama(12,14,strtoint(Wname)) then
+       deletefile(fl.filename);
+   end;
+
+
+end;
+
+procedure Tfrm_main.ObjetodeInterface1Click(Sender: TObject);
+begin
+  MenuItemClick(Sender);
+end;
+
+procedure Tfrm_main.ObjetodeContorle1Click(Sender: TObject);
+begin
+   MenuItemClick(Sender);
+end;
+
+procedure Tfrm_main.ObjetosdeNegcio1Click(Sender: TObject);
+begin
+   MenuItemClick(Sender);
+end;
+
+procedure Tfrm_main.Atividades3Click(Sender: TObject);
+begin
+   If CurrEmpresa = nil then
+      SpeedButton10Click(frm_main) ;
+   If not canc_cli then
+    begin
+      If frm_escativ = nil then
+         frm_escativ  := tfrm_escativ.create(self);
+      frm_escativ.show;
+    end;
+   
+end;
+
+
+
+procedure Tfrm_main.EventosdeNegcio1Click(Sender: TObject);
+var
+wprev : string;
+begin
+  If CurrEmpresa = nil then
+      SpeedButton10Click(frm_main) ;
+  If  canc_cli then
+    exit;
+  If  frm_Cimp    =   nil then
+     frm_Cimp    := Tfrm_Cimp.Create(self);
+  frm_cimp.label1.caption := TmenuItem(sender as Tobject).caption;
+  frm_Cimp.showModal;
+  If canc then
+     exit;
+  If prev then
+    wprev := 'V'
+  else
+    wPrev := 'P';
+  If frm_pen = nil then
+        frm_pen:= tfrm_pen.create(self);
+  FRM_PEN.iEn.OpenAllbyDesc(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID,'IDF_EN','EN','') ;
+  Imprime_Evento(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID,wprev,wForceNewpage);
+  frm_pen.close;
+
+end;
+
+
+procedure Tfrm_main.RegrasdeNegcio2Click(Sender: TObject);
+var
+wprev : string;
+
+begin
+  If CurrEmpresa = nil then
+      SpeedButton10Click(frm_main) ;
+  If  canc_cli then
+    exit;
+  If  frm_Cimp    =   nil then
+     frm_Cimp    := Tfrm_Cimp.Create(self);
+  frm_cimp.label1.caption := TmenuItem(sender as Tobject).caption;
+  frm_Cimp.showModal;
+
+  If canc then
+     exit;
+  If prev then
+    wprev := 'V'
+  else
+    wPrev := 'P';
+  If frm_pregra = nil then
+     frm_pregra := Tfrm_pregra.create(self);
+  frm_pregra.iRn.OpenAll(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID,'IDF_RN','','',0);
+  Imprime_regra(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID,wprev,wForceNewpage);
+  frm_pregra.close;
+ 
+
+end;
+
+procedure Tfrm_main.EntidadesExternas1Click(Sender: TObject);
+var
+wprev : string;
+ Begin
+  If CurrEmpresa = nil then
+      SpeedButton10Click(frm_main) ;
+  If  canc_cli then
+    exit;
+
+  If  frm_Cimp    =   nil then
+     frm_Cimp    := Tfrm_Cimp.Create(self);
+  frm_cimp.label1.caption := TmenuItem(sender as Tobject).caption;
+  frm_Cimp.showModal;
+  If canc then
+     exit;
+
+  If prev then
+    wprev := 'V'
+  else
+    wPrev := 'P';
+  If frm_pEntExt = nil then
+      frm_pEntExt:= Tfrm_pEntExt.create(self);
+  frm_pEntExt.iEe.OpenAll(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID,'IDF_CA','EE','',0) ;
+  Imprime_Externo(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID,wprev,wForceNewpage);
+  frm_pEntExt.close;
+ end;
+
+procedure Tfrm_main.Fluxosdedados1Click(Sender: TObject)  ;
+var
+wprev : string;
+ Begin
+   If CurrEmpresa = nil then
+      SpeedButton10Click(frm_main) ;
+   If  canc_cli then
+    exit;
+   If  frm_Cimp    =   nil then
+     frm_Cimp    := Tfrm_Cimp.Create(self);
+  frm_cimp.label1.caption := TmenuItem(sender as Tobject).caption;
+  frm_Cimp.showModal;
+
+  If canc then
+     exit;
+   If prev then
+    wprev := 'V'
+  else
+    wPrev := 'P';
+
+
+  If frm_pdata = nil then
+    frm_pdata := tfrm_pdata.create(self);
+
+   frm_pData.idado.OpenAllbyDesc(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID,'IDF_DG','DG','');
+   Imprime_Fluxodado(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID,wprev,wForceNewpage);
+   frm_pdata.close;
+ end;
+
+procedure Tfrm_main.LocaisdeProcessamento1Click(Sender: TObject);
+var
+wprev : string;
+ Begin
+   If CurrEmpresa = nil then
+      SpeedButton10Click(frm_main) ;
+  If  canc_cli then
+    exit;
+
+  If  frm_Cimp    =   nil then
+     frm_Cimp    := Tfrm_Cimp.Create(self);
+  frm_cimp.label1.caption := TmenuItem(sender as Tobject).caption;
+  frm_Cimp.showModal;
+  If canc then
+     exit;
+
+  If prev then
+    wprev := 'V'
+  else
+    wPrev := 'P';
+    If frm_pLf = nil then
+        frm_pLf:= tfrm_pLf.create(self);
+
+    frm_pLf.iLf.OpENAll(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID,'IDF_LF','LF','',0) ;
+    Imprime_LF(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID,wprev,wForceNewpage);
+    frm_pLf.Close;
+ end;
+
+
+
+
+procedure Tfrm_main.ObjetosdeInterface1Click(Sender: TObject);
+var
+wprev : string;
+ Begin
+  wtagOi := TMenuItem(sender as Tobject).Tag;
+
+  If CurrEmpresa = nil then
+      SpeedButton10Click(frm_main) ;
+  If  canc_cli then
+    exit;
+  If  frm_Cimp    =   nil then
+     frm_Cimp    := Tfrm_Cimp.Create(self);
+  frm_cimp.label1.caption := TmenuItem(sender as Tobject).caption;
+  frm_Cimp.showModal;
+  If canc then
+     exit;
+  If frm_puc = nil then
+     frm_puc := Tfrm_Puc.Create(self);
+
+   If wtagOi = 2 then
+      frm_puc.iOi.OpenAll(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID,'IDF_OI','OC','',0)
+   else
+      frm_puc.iOi.OpenAll(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID,'IDF_OI','OI','',0);
+  If prev then
+    wprev := 'V'
+  else
+    wPrev := 'P';
+  Imprime_OI(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID,wprev,wForceNewpage,wTagOi);
+  frm_puc.close;
+
+
+ end;
+
+
+
+procedure Tfrm_main.Atores1Click(Sender: TObject);
+var
+iCa,iPs : Tdados_tab;
+I : INTEGER;
+begin
+  If CurrEmpresa = nil then
+      SpeedButton10Click(frm_main) ;
+  If  canc_cli then
+    exit;
+  If  frm_Cimp    =   nil then
+     frm_Cimp    := Tfrm_Cimp.Create(self);
+  frm_cimp.label1.caption := TmenuItem(sender as Tobject).caption;
+  frm_Cimp.showModal;
+  If canc then
+     exit;
+  If frm_pca = nil then
+    frm_pca := tfrm_pca.create(self);
+
+  try
+
+    iCa := Tdados_tab.Create(self);
+    frm_pca.qrp.dataset := iCa;
+    iCa.OpenAllbyDesc(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID,'IDF_CA','CA','');
+    with frm_pca do
+      begin
+         for i := 0 to componentCount -1 do
+          begin
+           If (Components[i] is Tqrband) or  (Components[i] is TqrChildband) then
+              qrdataset(frm_pca.Components[i],ica);
+          end;
+      end;
+
+     iPs := Tdados_tab.Create(self);
+     iPs.DataSource := iCa.DataExt;
+     iPs.Get_PaisFilhos(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID,'CA','PS','IDF_PS') ;
+
+     qrDataSet(frm_pCA.Qr_ps,iPs);
+
+     frm_Pca.titulo.caption  := 'CLASSE DE ATORES';
+
+     If Prev then
+        frm_pca.qRP.preview
+     else
+        frm_pca.qrp.print;
+     frm_pca.close;
+  finally
+     freeandnil(iPs);
+     freeandnil(iCa);
+  end;
+
+
+end;
+
+procedure Tfrm_main.Pessoas2Click(Sender: TObject);
+var
+iEn : TDados_tab;
+begin
+  If CurrEmpresa = nil then
+      SpeedButton10Click(frm_main) ;
+  If  canc_cli then
+    exit;    
+
+  If  frm_Cimp    =   nil then
+     frm_Cimp    := Tfrm_Cimp.Create(self);
+  frm_cimp.label1.caption := TmenuItem(sender as Tobject).caption;
+  frm_Cimp.showModal;
+  If canc then
+     exit;
+  try
+     iEn := TDados_tab.create(self);
+     iEn.OpenAll(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID,'IDF_PS','PS','',0) ;
+     If frm_pPessoa = nil then
+        frm_pPessoa:= tfrm_pPessoa.create(self);
+     frm_pPessoa.titulo.caption := 'PESSOAS';
+     qrDataSet(frm_pPessoa.DetailBand1,iEn);
+     frm_pPessoa.qrp.dataset := iEn;
+
+     If prev then
+        frm_pPessoa.qrp.preview
+     else
+        frm_pPessoa.Print;
+     frm_pPessoa.close;
+  finally
+     FREEANDNIL(IeN);
+
+  end;
+
+end;
+
+procedure Tfrm_main.Mecanismos1Click(Sender: TObject);
+var
+iEn,iAp : Tdados_tab;
+I : INTEGER;
+begin
+  if CurrEmpresa = nil then
+      SpeedButton10Click(frm_main) ;
+  If  canc_cli then
+    exit;    
+
+  If  frm_Cimp    =   nil then
+     frm_Cimp    := Tfrm_Cimp.Create(self);
+  frm_cimp.label1.caption := TmenuItem(sender as Tobject).caption;
+  frm_Cimp.showModal;
+  If canc then
+     exit;
+  try
+     iEn := TDados_tab.create(self);
+     iEn.OpenAllbyDesc(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID,'IDF_SE','SE','') ;
+     If frm_PSE = nil then
+        frm_PSE:= tfrm_PSE.create(self);
+     frm_PSE.titulo.caption := 'MECANISMOS';
+      with frm_pse do
+      begin
+         for i := 0 to componentCount -1 do
+          begin
+           If (Components[i] is Tqrband) or  (Components[i] is TqrChildband) then
+              qrdataset(Components[i],iEn);
+          end;
+      end;
+     frm_PSE.qrp.dataset := iEn;
+
+     iAp := Tdados_tab.Create(self);
+     iAp.DataSource := iEn.DataExt;
+     iAp.Get_PaiDosFilhos(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID,'AP','SE','IDF_AP') ;
+
+     qrDataSet(frm_PSE.Qr_at,iAp);
+     If prev then
+        frm_PSE.qrp.preview
+     else
+        frm_PSE.qrp.Print;
+     frm_pse.close ;
+  finally
+     FREEANDNIL(IeN);
+     FREEANDNIL(iAp);
+  end;
+
+
+end;
+
+
+
+procedure Tfrm_main.Elementosdedado1Click(Sender: TObject);
+var
+iEn : TDados_tab;
+begin
+  If CurrEmpresa = nil then
+      SpeedButton10Click(frm_main) ;
+  If  canc_cli then
+    exit;    
+
+  If  frm_Cimp    =   nil then
+     frm_Cimp    := Tfrm_Cimp.Create(self);
+  frm_cimp.label1.caption := TmenuItem(sender as Tobject).caption;
+  frm_Cimp.showModal;
+  If canc then
+     exit;
+  try
+     iEn := TDados_tab.create(self);
+     iEn.OpenAllbyDesc(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID,'IDF_DE','DE','') ;
+     If frm_pDe = nil then
+        frm_pDe:= tfrm_pDe.create(self);
+     frm_pDe.titulo.caption := 'ELEMENTOS DE DADO';
+     qrDataSet(frm_pDe.QRBand1,iEn);
+     frm_pDe.qrp.dataset := iEn;
+
+
+
+     If prev then
+        frm_pDe.qrp.preview
+     else
+        frm_pDe.Print;
+    frm_pde.close
+  finally
+     FREEANDNIL(IeN);
+
+  end;
+
+end;
+
+
+
+procedure Tfrm_main.AspectosCrticos2Click(Sender: TObject);
+begin
+ If CurrEmpresa = nil then
+      SpeedButton10Click(frm_main) ;
+  If  canc_cli then
+    exit;    
+ If  frm_EscAspect    =   nil then
+      frm_EscAspect    := Tfrm_EscAspect.Create(self);
+      frm_escAspect.conc.tag := TmenuItem(sender as Tobject).tag;
+      frm_EscAspect.caption := TmenuItem(sender as Tobject).caption;
+   frm_EscAspect.showModal;
+end;
+
+procedure Tfrm_main.SobreBEST1Click(Sender: TObject);
+begin
+  If frm_about = nil then
+     frm_about := tfrm_about.create(self);
+  frm_about.show;
+end;
+
+procedure Tfrm_main.Alvosdemelhoria1Click(Sender: TObject);
+begin
+ If CurrEmpresa = nil then
+      SpeedButton10Click(frm_main) ;
+ If  canc_cli then
+    exit;
+ If  frm_EscAspect    =   nil then
+      frm_EscAspect    := Tfrm_EscAspect.Create(self);
+      frm_escAspect.conc.tag := TmenuItem(sender as Tobject).tag;
+      frm_EscAspect.caption := TmenuItem(sender as Tobject).caption;
+   frm_escaspect.rdg3.Visible := false;   
+   frm_EscAspect.showModal;
+end;
+
+procedure Tfrm_main.ObjetosdeNegcio2Click(Sender: TObject);
+var
+ide : Tdad;
+iOn : Tdados_tab;
+i : integer;
+
+begin
+  If CurrEmpresa = nil then
+      SpeedButton10Click(frm_main) ;
+  If  canc_cli then
+    exit;
+  If  frm_Cimp    =   nil then
+     frm_Cimp    := Tfrm_Cimp.Create(self);
+  frm_cimp.label1.caption := TmenuItem(sender as Tobject).caption;
+  frm_cimp.ckb1.Visible := true;
+
+  frm_Cimp.showModal;
+  If canc then
+     exit;
+  
+  If frm_pdmig = nil then
+    frm_pdmig := tfrm_pdmig.create(self);
+  If wForcenewpage then
+    frm_pdmig.QRGroup1.ForceNewPage := true
+  else
+    frm_pdmig.QRGroup1.ForceNewPage := false;
+  try
+
+  iDe := Tdad.Create(self);
+
+
+  If not ide.get_allbyDesc(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID) then
+     Raise exception.create(mens76);
+     with frm_pdmig do
+      begin
+         for i := 0 to componentCount -1 do
+          begin
+           If (Components[i] is Tqrband) or  (Components[i] is TqrChildband) or  (Components[i] is TqrSubDetail)
+              or  (Components[i] is Tqrgroup)then
+              qrdataset(frm_pdmig.Components[i],iDe);
+          end;
+      end;
+
+     frm_Pdmig.qrp.DataSet := ide;
+     frm_Pdmig.titulo.caption  := 'OBJETOS DE NEGÓCIO';
+
+     If Prev then
+        frm_Pdmig.qRP.preview
+     else
+        frm_Pdmig.qrp.print;
+     frm_Pdmig.close;
+  finally
+     freeandnil(iDe);
+  end;
+end;
+
+
+
+procedure Tfrm_main.AplicaodosDados2Click(Sender: TObject);
+var
+iGer,iDg,iIf,iRn : Tdados_tab;
+begin
+  If CurrEmpresa = nil then
+      SpeedButton10Click(frm_main) ;
+  If  canc_cli then
+    exit;    
+
+  If  frm_Cimp    =   nil then
+     frm_Cimp    := Tfrm_Cimp.Create(self);
+  frm_cimp.label1.caption := TmenuItem(sender as Tobject).caption;
+  frm_Cimp.showModal;
+  If canc then
+     exit;
+  try
+     iGer := TDados_tab.create(self);
+     iGer.AplicDadosDe(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID);
+     If  frm_PApde    =   nil then
+      frm_PApde    := Tfrm_PApde.Create(self);
+     frm_pApde.titulo.caption := 'APLICAÇÃO DOS DADOS';
+     qrDataSet(frm_paPDE.Detailband1,iger);
+     
+     frm_pApde.qrp.dataset := iger;
+
+     iDg := TDados_tab.create(self);
+     idg.DataSource := iGer.DataExt;
+     iDg.AplicDadosDg(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID);
+      qrDataSet(frm_paPDE.QRSubDetail1,iDg);
+
+     iif := TDados_tab.create(self);
+     iif.DataSource := iGer.DataExt;
+     iif.AplicDadosIf(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID);
+     qrDataSet(frm_paPDE.QRSubDetail2,iif);
+
+
+     iRN := TDados_tab.create(self);
+     iRN.DataSource := iGer.DataExt;
+     iRN.AplicDadosRb(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID);
+     qrDataSet(frm_paPDE.QRSubDetail3,iRN);
+      
+      
+     If prev then
+        frm_pApde.qrp.preview
+     else
+        frm_pApde.Print;
+     frm_pApde.close
+  finally
+     FREEANDNIL(IGer);
+     FREEANDNIL(Iif);
+     FREEANDNIL(Idg);
+     FREEANDNIL(Irn);
+
+  end;
+end;
+
+procedure Tfrm_main.Sair1Click(Sender: TObject);
+begin
+  close;
+end;
+
+procedure Tfrm_main.speedbutton41Click(Sender: TObject);
+begin
+
+  If frm_TreeAtiv <> nil then
+      frm_TreeAtiv.close;
+  If CurrEmpresa = nil then
+      SpeedButton10Click(frm_main) ;
+  If  canc_cli then
+    exit;    
+  If frm_treeator =  nil then
+     frm_TreeAtor := tfrm_TreeAtor.create(self);
+
+ frm_TreeAtor.left           := 0;
+ frm_TreeAtor.top            := 70;
+
+ //frm_treeator.tv.align       := alLeft;
+ frm_TreeAtor.showModal;
+end;
+
+procedure Tfrm_main.Compactar1Click(Sender: TObject);
+begin
+ frm_main.SpeedButton10Click(frm_main);
+ If  canc_cli then
+    exit;
+     
+  If frm_limpa = nil then
+     frm_limpa := tfrm_limpa.create(self);
+  frm_limpa.showModal;  
+end;
+
+procedure Tfrm_main.Edit1KeyPress(Sender: TObject; var Key: Char);
+begin
+//showmessage(inttostr(ord(key)));
+end;
+
+
+
+
+procedure Tfrm_main.Setver(const Value: string);
+begin
+  Fver := Value;
+end;
+
+procedure Tfrm_main.Ajuda2Click(Sender: TObject);
+begin
+ shellexecute(handle,'open','C:\BEST\HELP\INDEX.HTML','','',sw_shownormal);
+
+{ If frm_help  = nil then
+     frm_help      :=       tfrm_help.create(self);
+  frm_help.show;   }
+end;
+
+procedure Tfrm_main.SetCanc_cli(const Value: boolean);
+begin
+  FCanc_cli := Value;
+end;
+
+procedure Tfrm_main.SpeedButton2Click(Sender: TObject);
+begin
+  AreadeInteresse1Click(self);
+end;
+
+procedure Tfrm_main.speedbutton31Click(Sender: TObject);
+begin
+  Class1Click(self);
+end;
+
+procedure Tfrm_main.Backup1Click(Sender: TObject);
+var
+wtxt,wzip,wn : string;
+begin
+ If CurrEmpresa = nil then
+      SpeedButton10Click(frm_main) ;
+
+  If frm_exdir = nil then
+   frm_exdir := tfrm_exdir.create(self);
+  frm_exdir.edit2.visible := false; 
+  frm_exdir.showmodal;
+  If length(lb_cli.caption) < 3 then
+   wn := lb_cli.Caption
+  else
+   wn := copy(lb_Cli.caption,1,3);
+  If not frm_main.Dir_canc then
+   Begin
+    bdx.Connected := false;
+    wzip := frm_main.Back  + '\'+wn+formatdatetime('yymmddhhmmss',now)+'.zip';;
+
+    wtxt := wzip+' '+bdx.dirFluxo+'*.add '+ bdx.dirFluxo+'*.mdb';
+    ShellExecute(0,nil, 'wzzip.exe' ,pChar(wtxt),nil,sw_showmaximized);
+    Showmessage('Por precaução, verificar se o Backup foi efetuado corretamente em '+ frm_main.back);
+    //WinExec(wTxt,sw_Hide);
+
+    //bdx.Connected := true;
+   end;
+  
+end;
+
+procedure Tfrm_main.SetBack(const Value: string);
+begin
+  FBack := Value;
+end;
+
+procedure Tfrm_main.SetDir_canc(const Value: boolean);
+begin
+  FDir_canc := Value;
+end;
+
+procedure Tfrm_main.SetlastDir(const Value: string);
+begin
+  FlastDir := Value;
+end;
+
+procedure Tfrm_main.SS2MaxUsers(Sender: TObject);
+begin
+   
+  // If ss2.UsersCount > ss2.Counter then
+    Begin
+     wlib   := false;
+     Wusers := true;
+    end;
+      
+
+end;
+
+procedure Tfrm_main.SS2Terminate(Sender: TObject);
+begin
+ { If ss2.lastSSerror > 0 then
+     begin
+       case ss2.lastSSerror of
+       10 : showmessage('010  Invalid code: the code entered in the registration dialog is empty.');
+       11 : showmessage('011  Invalid code: the code entered in the registration dialog has illegal characters. The only permitted ones are 0-9 and A-F.');
+       12 : showmessage('012  Bad CRC in code entered in the registration dialog. The most common causes are: '+#13+'1) a character has been mistyped, 2) you have generated a code for a different application 3) License files were deleted, or application was reinstalled after getting the customer code, so the system seed number has changed.');
+       133 : showmessage('133 System date/time manipulation: '+#13+'SafeSerial has detected that date/time has been moved backwards from the last run.'+#13+'This can be intentional in time-limited licenses. SafeSerial only displays an error if the difference is greater than 15 minutes, since in a network different workstations may have different times.');
+       141 : showmessage('141 Access denied to Windows directory: Read/write access to Windows directory is required.');
+       142 : showmessage('142 Access denied to the application directory: Read/write access to the application’s main directory is required. This is the same directory of the executable.');
+       201 : showmessage('201 Wrong Disk: This error will happen when customer tries to restore a License with SafeImport from a disk that has been copied/manipulated.');
+       202 : showmessage('202 Floating license required for this operation: You are trying to use a function which is only available with floating license, but Network property is set to false.');
+       701 : showmessage('701 Invalid path: A protected application is being run from an UNC path (e.g \\servername\drive\path\ type). SafeSerial can’t allow a protected application to be run without a mapped drive.');
+       904 : showmessage('904 Error writing to disk: Disk is write protected, has a format error or disk drive is locked.');
+     else
+       showmessage('Erro '+inttostr(ss2.LastSSerror) );
+     end ;
+     end;  }
+
+end;
+
+procedure Tfrm_main.SetNOme_back(const Value: string);
+begin
+  FNOme_back := Value;
+end;
+
+procedure Tfrm_main.AtorxAtividade1Click(Sender: TObject);
+var
+iCa ,iAp: Tdados_tab;
+I : INTEGER;
+begin
+  If CurrEmpresa = nil then
+      SpeedButton10Click(frm_main) ;
+  If  canc_cli then
+    exit;
+  If  frm_Cimp    =   nil then
+     frm_Cimp    := Tfrm_Cimp.Create(self);
+  frm_cimp.label1.caption := TmenuItem(sender as Tobject).caption;
+  frm_Cimp.showModal;
+  If canc then
+     exit;
+
+  iCa := Tdados_tab.Create(self);
+  iAp := Tdados_tab.Create(self);
+  iAp.DataSource := iCa.DataExt;
+
+
+
+
+  //qrDataSet(frm_patorat.qr_at,iAp);
+  If frm_patorat = nil then
+    frm_patorat := tfrm_patorat.create(self);
+
+  try
+     frm_patorat.db2.DataSet := iAp;
+    frm_patorat.qrp.dataset := iCa;
+    iCa.OpenAllbyDesc(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID,'IDF_CA','','');
+    iAp.Get_PaiDosFilhos(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID,'AP','CA','IDF_AP') ;
+    
+    qrDataSet(frm_patorat.DB2,iAp);
+   with frm_patorat do
+      begin
+          for i := 0 to componentCount -1 do
+         begin
+           If (Components[i] is Tqrband) or  (Components[i] is TqrChildband) then
+              qrdataset(frm_patorat.Components[i],ica);
+          end;
+   
+     
+      titulo.caption  := 'MANUAL DE GESTÃO DE PROCESSOS';
+      If Prev then
+        qRP.preview
+     else
+        qrp.print;
+      close;
+      end;
+
+  finally
+   //  freeandnil(iPs);
+
+  end;
+
+
+end;
+
+procedure Tfrm_main.AtividadesxObjetosdeInterface1Click(Sender: TObject);
+var
+
+Wwbs ,ruc,ruc1: string;
+iOi,iSe: Tdados_tab;
+iAp : Tap;
+i : integer;
+begin
+   If CurrEmpresa = nil then
+      SpeedButton10Click(frm_main) ;
+
+   If  canc_cli then
+    exit;
+  If  frm_Cimp    =   nil then
+     frm_Cimp    := Tfrm_Cimp.Create(self);
+  frm_cimp.label1.caption := TmenuItem(sender as Tobject).caption;
+  frm_Cimp.showModal;
+
+
+  If canc then
+     exit;
+
+   iAp := Tap.create(self);
+   //DBgrid1.DataSource := iap.DataExt;
+   iAp.AtivPr(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID,
+              'AP','',0,1)  ;
+
+
+ If frm_patoi = nil then
+    frm_patoi     := Tfrm_patoi .create(self);
+
+ frm_patoi.qrp.DataSet := iAp;
+ with frm_patoi do
+      begin
+         for i := 0 to componentCount -1 do
+          begin
+           If (Components[i] is Tqrband) or  (Components[i] is TqrChildband) then
+              qrdataset(frm_patoi.Components[i],iAp);
+          end;
+      end;
+
+   frm_patoi.Titulo.caption := 'ATIVIDADES X OBJETOS DE INTERFACE';
+
+   frm_patOI.pr_cli.caption     :=  frm_main.lb_cli.caption;
+   frm_patOI.pr_proj.caption    :=  frm_main.lb_cen.caption;
+
+    try
+     //ator
+     iOi := TDados_tab.create(self);
+     iOi.DataSource := iAp.DataExt;
+     ioI.Get_OI(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID) ;
+     qrDataSet(frm_pAtOI.Qr_OI,ioI);
+
+     {ise := TDados_tab.create(self);
+     ise.DataSource := iAp.DataExt;
+
+     ise.Get_SE(CurrEmpresa.Cenarios.CLI_ID,CurrEmpresa.Cenarios.PRJ_ID,'AP',) ;
+     qrDataSet(frm_pAtOI.Qr_se,ise); }
+      iF PREV then
+         frm_patOI.QRP.preview
+      else
+         frm_patOI.QRP.print;
+      frm_patOI.close;
+
+
+   finally
+      FreeAndNil(ioI);
+      FreeAndNil(iAp);
+   end;
+
+end;
+
+procedure Tfrm_main.Setitab(const Value: Tdados_tab);
+begin
+  Fitab := Value;
+end;
+
+procedure Tfrm_main.SetViewer(const Value: boolean);
+begin
+  FViewer := Value;
+end;
+
+
+
+
+procedure Tfrm_main.ConverterBancoparaverso6001Click(Sender: TObject);
+var
+bdxnovo :TBd;
+DirNovo : string;
+i,j : integer;
+TableList : Tstrings;
+FieldList : Tstrings;
+sqlList   : tstrings;
+begin
+   TableList := TStringList.create;
+   FieldList := TStringList.create;
+   SqlList:= TStringList.create;
+   bdxNovo := TBD.create(false);
+   BdxNovo.Connected := false;
+   Dirnovo := ExtractFilePath(bdx.Dirbanco);
+   DirNovo := DirNovo + 'CASE2000.MDB';
+   BdxNovo.provider         := 'Microsoft.Jet.OLEDB.4.0';
+   BdxNovo.ConnectionString := 'Provider=Microsoft.Jet.OLEDB.4.0;Data Source='+DirNovo+';Persist Security Info=False';
+   BdxNovo.connected := true;
+   bdxNovo.GetTableNames(TableList,false);
+   for i := 0 to TableList.Count -1 do
+    Begin
+     bdx.GetFieldNames(TableList[i], FieldList);
+     for j := 0 to FieldList.count - 1 do
+      Begin
+        If j = FieldList.count -1 then
+           SqlList.add(FieldList[j])
+        else
+           SqlList.add(FieldList[j]+',');
+      end;
+     with TadoQuery.Create(self) do
+      Begin
+       close;
+       sql.Clear;
+       connection := bdxnovo;
+       sql.add('SELECT * FROM '+''+tableList[i]+'');
+       open;
+       while not eof do
+        Begin
+
+
+         next;
+        end;
+      end;
+    end;
+end;
+
+procedure Tfrm_main.ConfiguraoAtual1Click(Sender: TObject);
+var
+wbanco : string;
+begin
+ { TODO -c6-00-0029b : 
+Help : mostra o banco de dados em uso
+Inobe Backip quando banco é SQL. }
+If bdx.TIPOBANCO = 0 then    //access
+ wbanco := 'Access : '+ bdx.Dirbanco
+else
+If bdx.TIPOBANCO = 1 then  //sql.server
+ wbanco := 'SQL Server : '+ bdx.Servidor;
+  showmessage('Diagramas : '+bdx.DirFluxo+#13+ wbanco);
+
+end;
+
+procedure Tfrm_main.Consistencia1Click(Sender: TObject);
+ Begin
+  If CurrEmpresa = nil then
+       SpeedButton10Click(frm_main) ;
+     If canc_cli then
+       exit;
+  COnsiste_tudo(CurrEmpresa.cenarios.CLI_ID,CurrEmpresa.cenarios.PRJ_ID);
+ end;
+
+function Tfrm_main.COnsiste_tudo(pCli,pProj : integer) : boolean;
+var
+iTemp : TTemp;
+wcli,wproj : integer;
+begin
+ { frm_main.SpeedButton10Click(frm_main);
+  If frm_check = nil then
+     frm_check := tfrm_check.create(self);
+  frm_check.Label1.caption := frm_main.lb_cli.caption;
+  frm_check.Label2.caption := frm_main.lb_cen.caption;
+  frm_check.showModal;    }
+  result := true;
+ 
+
+  itemp := TTemp.create(self);
+  itemp.del_temp;
+  Consiste_Modelo(pcli,pProj);
+
+
+    with iTemp do
+      Begin
+         get_all;
+         If not eof then
+          Begin
+             result := false;
+             If frm_pConsistdg     = nil then
+                frm_pConsistdg       := Tfrm_pConsistdg .create(self);
+
+             With frm_pCOnsistDg do
+              Begin
+                qrp.DataSet := iTemp;
+                qrdataset(db,itemp) ;
+                qrdataset(gr,itemp) ;
+                qrp.preview;
+                Close;
+              end;
+          end;
+         
+      end;
+end;
+
+procedure Tfrm_main.SpeedButton6Click(Sender: TObject);
+begin
+  compactar1Click(nil);
+end;
+
+procedure Tfrm_main.SetWdemo(const Value: boolean);
+begin
+  FWdemo := Value;
+end;
+
+procedure Tfrm_main.SetWQTDEMO(const Value: INTEGER);
+begin
+  FWQTDEMO := Value;
+end;
+
+procedure Tfrm_main.Setwfecha(const Value: boolean);
+begin
+  Fwfecha := Value;
+end;
+
+procedure Tfrm_main.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+   If wdemo then
+      Showmessage ('Informações : '+#13+ ' - e-mail best2000@terra.com.br '+ #13+
+                   '-  site www.mytech.inf.br');
+end;
+
+procedure Tfrm_main.SetWQTATIV(const Value: integer);
+begin
+  FWQTATIV := Value;
+end;
+
+procedure Tfrm_main.Image5MouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+begin
+  TImage(sender as Tobject).Cursor :=  crHandPoint ;
+end;
+
+procedure Tfrm_main.SetwPerc_Custo(const Value: real);
+begin
+  FwPerc_Custo := Value;
+end;
+
+procedure Tfrm_main.sp_custoClick(Sender: TObject);
+begin
+  try
+   begin
+     If frm_logo <> nil then
+      frm_logo.close;
+     If frm_treeCusto = nil then
+        frm_treeCusto := Tfrm_treeCusto.Create(self);
+     freeandnil(tv);
+     
+     frm_treeCusto.showModal;
+   end;
+  except
+   begin
+     frm_treeCusto.close;
+     raise;
+   end;
+  end;
+end;
+
+procedure Tfrm_main.Setwtagoi(const Value: integer);
+begin
+  Fwtagoi := Value;
+end;
+
+
+function Tfrm_main.Checa_Icelicenca: boolean;
+begin
+  frm_Icerg := Tfrm_Icerg.create(self);
+
+
+ // frm_Icerg.testa_licenca;
+  result := LicencaOk;
+end;
+
+procedure Tfrm_main.SetLicencaOK(const Value: boolean);
+begin
+  FLicencaOK := Value;
+end;
+
+procedure Tfrm_main.SetMensAbout(const Value: string);
+begin
+  FMensAbout := Value;
+end;
+
+end.
+
+
+
+

@@ -1,0 +1,1473 @@
+unit bst_unit;
+
+interface
+uses
+Aligrid,
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, Menus, ComCtrls,Provider,DBClient,
+  ADODb,dbTables,math,strUtils,DB,db_tier,basetier;
+
+type
+  uLst = ^TLst;
+  TLst = record
+    eObj     : string;
+end;
+
+type
+
+TDad = class(TDOBject)
+  private
+    FdDS: TDataSource;
+    Fqry: Tobject;
+    procedure SetdDS(const Value: TDataSource);
+    procedure Setqry(const Value: Tobject);
+
+
+
+ protected
+   DBD          : TDB;
+   TipoQuery    : TClass;
+   dSql         : string;
+   dTabela      : string;
+   DBdad        : TClass;
+
+
+ published
+   property dDS : TDataSource read FdDS write SetdDS;
+   property qry : Tobject  read Fqry write Setqry;
+
+ public
+   constructor create(sender : Tclass);
+
+end;
+
+{INICIO CLASSES}
+
+{Início Classe Tpais}
+{Classe Tpais}
+Tpais = Class(Tdad)
+     private
+      FCODIGO       : integer ;
+      FPAIS         : string ;
+      procedure SetCODIGO(const value   : integer );
+      procedure SetPAIS(const value   : string );
+
+  published
+   property CODIGO   : integer            read FCODIGO write SetCODIGO;
+   property PAIS     : string             read FPAIS write SetPAIS;
+
+{ salva  1 registro}
+  function SaveObject(PDObject: TOObject): TObjectID ;override;
+
+    { Deleta 1 registro (Chave Primária)}
+  procedure Deleteobject(PDObject: TOObject);override;
+
+{ retorna Objeto específico}
+  procedure LoadObject (PDObject: TOObject); override;
+
+{ retorna maior código}
+  function Get_MaxKey() : integer;
+
+{ retorna todos os registros}
+  function GetAllObjects(PDObject: TOObject) : TStringList;override;
+
+ { popula as properties do objeto de dados}
+  procedure ddMap(DataSet : Tdataset);
+ { retorna todos os registros num Grid}
+{ retorna todos os registros num Grid}
+  function GetAllDetailsGrid(PDObject: TOObject;pFK : string ): TStringAlignGrid;
+ { deleta todos os registros de contatos de uma empresa}
+{ deleta todos os registros de detalhe de uma empresa}
+  function DeletaDaEmpresa(pid : integer) : boolean;
+
+end;
+
+{Fim Classe Tpais}
+
+
+{Início Classe Tatividade}
+{Classe Tatividade}
+Tatividade = Class(Tdad)
+     private
+      FCODIGO                                             : integer ;
+      FATIVIDADE                                          : string ;
+      procedure SetCODIGO(const value   : integer );
+      procedure SetATIVIDADE(const value   : string );
+
+  published
+   property CODIGO    : integer            read FCODIGO write SetCODIGO;
+   property ATIVIDADE : string             read FATIVIDADE write SetATIVIDADE;
+
+{ salva  1 registro}
+  function SaveObject(PDObject: TOObject): TObjectID ;override;
+
+    { Deleta 1 registro (Chave Primária)}
+  procedure Deleteobject(PDObject: TOObject);override;
+
+{ retorna Objeto específico}
+  procedure LoadObject (PDObject: TOObject); override;
+
+{ retorna maior código}
+  function Get_MaxKey() : integer;
+
+{ retorna todos os registros}
+  function GetAllObjects(PDObject: TOObject) : TStringList;override;
+
+ { popula as properties do objeto de dados}
+  procedure ddMap(DataSet : Tdataset);
+ { retorna todos os registros num Grid}
+{ retorna todos os registros num Grid}
+  function GetAllDetailsGrid(PDObject: TOObject;pFK : string ): TStringAlignGrid;
+ { deleta todos os registros de contatos de uma empresa}
+{ deleta todos os registros de detalhe de uma empresa} 
+  function DeletaDaEmpresa(pid : integer) : boolean;    
+
+end;  
+
+{Fim Classe Tatividade}
+
+
+{Início Classe Tcontato}
+{Classe Tcontato}
+Tcontato = Class(Tdad)
+     private
+      FID_CONTATO                                         : integer ;
+      FCARGO                                              : string ;
+      FCELULAR                                            : string ;
+      FCEP                                                : string ;
+      FCIDADE                                             : string ;
+      FCOMMENTARIO                                        : string ;
+      FEMAIL                                              : string ;
+      FENDERECO                                           : string ;
+      FESTADO                                             : string ;
+      FFANTASIA                                           : string ;
+      FID_EMP                                             : integer ;
+      FNOME                                               : string ;
+      FPAIS                                               : string ;
+      FSOBRENOME                                          : string ;
+      FTELEFONE_PESS                                      : string ;
+      procedure SetID_CONTATO(const value   : integer );
+      procedure SetCARGO(const value   : string );
+      procedure SetCELULAR(const value   : string );
+      procedure SetCEP(const value   : string );
+      procedure SetCIDADE(const value   : string );
+      procedure SetCOMMENTARIO(const value   : string );
+      procedure SetEMAIL(const value   : string );
+      procedure SetENDERECO(const value   : string );
+      procedure SetESTADO(const value   : string );
+      procedure SetFANTASIA(const value   : string );
+      procedure SetID_EMP(const value   : integer );
+      procedure SetNOME(const value   : string );
+      procedure SetPAIS(const value   : string );
+      procedure SetSOBRENOME(const value   : string );
+      procedure SetTELEFONE_PESS(const value   : string );
+
+  published
+   property ID_CONTATO                                        : integer            read FID_CONTATO write SetID_CONTATO;
+   property CARGO                                             : string             read FCARGO write SetCARGO;
+   property CELULAR                                           : string             read FCELULAR write SetCELULAR;
+   property CEP                                               : string             read FCEP write SetCEP;
+   property CIDADE                                            : string             read FCIDADE write SetCIDADE;
+   property COMMENTARIO                                       : string             read FCOMMENTARIO write SetCOMMENTARIO;
+   property EMAIL                                             : string             read FEMAIL write SetEMAIL;
+   property ENDERECO                                          : string             read FENDERECO write SetENDERECO;
+   property ESTADO                                            : string             read FESTADO write SetESTADO;
+   property FANTASIA                                          : string             read FFANTASIA write SetFANTASIA;
+   property ID_EMP                                            : integer            read FID_EMP write SetID_EMP;
+   property NOME                                              : string             read FNOME write SetNOME;
+   property PAIS                                              : string             read FPAIS write SetPAIS;
+   property SOBRENOME                                         : string             read FSOBRENOME write SetSOBRENOME;
+   property TELEFONE_PESS                                     : string             read FTELEFONE_PESS write SetTELEFONE_PESS;
+
+{ salva  1 registro}
+  function SaveObject(PDObject: TOObject): TObjectID ;override;
+  
+    { Deleta 1 registro (Chave Primária)}
+  procedure Deleteobject(PDObject: TOObject);override;
+  
+{ retorna Objeto específico}
+  procedure LoadObject (PDObject: TOObject); override;
+  
+{ retorna maior código}
+  function Get_MaxKey() : integer;
+  
+{ retorna todos os registros}
+  function GetAllObjects(PDObject: TOObject) : TStringList;override;
+
+ { popula as properties do objeto de dados}
+  procedure ddMap(DataSet : Tdataset);
+ { retorna todos os registros num Grid}
+{ retorna todos os registros num Grid} 
+  function GetAllDetailsGrid(PDObject: TOObject;pFK : string ): TStringAlignGrid;
+ { deleta todos os registros de contatos de uma empresa}
+{ deleta todos os registros de detalhe de uma empresa} 
+  function DeletaDaEmpresa(pid : integer) : boolean;
+
+ function GetAllByProp(PDObject: TOObject; pField: string;
+      pvalue: variant): TStringList;
+
+end;
+
+{Fim Classe Tcontato}
+
+
+{Início Classe Tempresa}
+{Classe Tempresa}
+Tempresa = Class(Tdad)
+     private
+      FID_EMP                                             : integer ;
+      FATIV                                               : string ;
+      FCEP                                                : string ;
+      FCGC                                                : string ;
+      FCIDAD                                              : string ;
+      FCOMMENT                                            : string ;
+      FDATAT                                              : real ;
+      FE_MAIL                                             : string ;
+      FEMPRESA                                            : string ;
+      FENDER                                              : string ;
+      FESTADO                                             : string ;
+      FFANTASIA                                           : string ;
+      FFAX                                                : string ;
+      FINSCR                                              : string ;
+      FPAIS                                               : string ;
+      FSITE                                               : string ;
+      FTELEF                                              : string ;
+      FTELEF1                                             : string ;
+      FTIPO                                               : string ;
+      procedure SetID_EMP(const value   : integer );
+      procedure SetATIV(const value   : string );
+      procedure SetCEP(const value   : string );
+      procedure SetCGC(const value   : string );
+      procedure SetCIDAD(const value   : string );
+      procedure SetCOMMENT(const value   : string );
+      procedure SetDATAT(const value   : real );
+      procedure SetE_MAIL(const value   : string );
+      procedure SetEMPRESA(const value   : string );
+      procedure SetENDER(const value   : string );
+      procedure SetESTADO(const value   : string );
+      procedure SetFANTASIA(const value   : string );
+      procedure SetFAX(const value   : string );
+      procedure SetINSCR(const value   : string );
+      procedure SetPAIS(const value   : string );
+      procedure SetSITE(const value   : string );
+      procedure SetTELEF(const value   : string );
+      procedure SetTELEF1(const value   : string );
+      procedure SetTIPO(const value   : string );
+
+  published
+   property ID_EMP        : integer            read FID_EMP write SetID_EMP;
+   property ATIV          : string             read FATIV write SetATIV;
+   property CEP           : string             read FCEP write SetCEP;
+   property CGC           : string             read FCGC write SetCGC;
+   property CIDAD         : string             read FCIDAD write SetCIDAD;
+   property COMMENT       : string             read FCOMMENT write SetCOMMENT;
+   property DATAT         : real               read FDATAT write SetDATAT;
+   property E_MAIL        : string             read FE_MAIL write SetE_MAIL;
+   property EMPRESA       : string             read FEMPRESA write SetEMPRESA;
+   property ENDER         : string             read FENDER write SetENDER;
+   property ESTADO        : string             read FESTADO write SetESTADO;
+   property FANTASIA      : string             read FFANTASIA write SetFANTASIA;
+   property FAX           : string             read FFAX write SetFAX;
+   property INSCR         : string             read FINSCR write SetINSCR;
+   property PAIS          : string             read FPAIS write SetPAIS;
+   property SITE          : string             read FSITE write SetSITE;
+   property TELEF         : string             read FTELEF write SetTELEF;
+   property TELEF1        : string             read FTELEF1 write SetTELEF1;
+   property TIPO          : string             read FTIPO write SetTIPO;
+
+{ salva  1 registro}
+  function SaveObject(PDObject: TOObject): TObjectID ;override;
+
+    { Deleta 1 registro (Chave Primária)}
+  procedure Deleteobject(PDObject: TOObject);override;
+
+{ retorna Objeto específico}
+  procedure LoadObject (PDObject: TOObject); override;
+
+{ retorna maior código}
+  function Get_MaxKey() : integer;
+
+{ retorna todos os registros}
+  function GetAllObjects(PDObject: TOObject) : TStringList;override;
+
+ { popula as properties do objeto de dados}
+  procedure ddMap(DataSet : Tdataset);
+
+
+   function GetAllByProp(PDObject: TOObject; pField: string;
+      pvalue: variant): TStringList;
+
+end;
+
+{Fim Classe Tempresa}
+
+
+{FIM CLASSES}
+
+
+implementation
+
+
+{INICIO METODOS}
+
+
+Constructor Tdad.create(sender : TClass);
+   begin
+     Dbd := DBatu;
+     dDs := TDatasource.Create(application);
+     If dbd.DbTipo is TADoConnection then
+        Begin
+         dds.DataSet :=  (qry as TADoQuery) ;
+         qry := TADoquery.create(application);
+         (qry as TADoQuery).Connection := (dbd.DbTipo as TAdoConnection);
+        end;
+   end;
+
+
+  {Início Métodos Tpais}
+procedure Tpais.ddMap(DataSet: TDataSet);
+  begin
+      CODIGO                    := DataSet.fieldbyname('CODIGO').asinteger;
+      PAIS                      := DataSet.fieldbyname('PAIS').asstring;
+  end;
+
+
+{Tpais Métodos}
+
+
+function Tpais.SaveObject(PDObject: TOObject): TObjectID ;
+VAR
+Wkey : integer;
+oObj : Tpais;
+begin
+ PDOBJECT.resulta := 'Operação Não concluida!';
+ result := 0;
+ with (qry as TADOQuery) do
+  begin
+    DecimalSeparator := '.';
+    close;
+    sql.clear;
+    sql.text :=     'SELECT * FROM PAIS'+
+' WHERE CODIGO = '+InttoStr(CODIGO);
+
+
+    open;
+    If eof then 
+     begin
+      begin
+         oObj := Tpais.create(nil);
+         oObj.CODIGO:= CODIGO;
+         wkey := oObj.get_maxkey() + 1;
+         Freeandnil(oObj);
+         CODIGO := WKEY;
+      end;
+       sql.text := 'INSERT INTO PAIS('+
+       'CODIGO,'+
+        'PAIS)'+
+       'VALUES ('+
+
+       InttoStr(CODIGO)+','+
+       AnsiQuotedStr(PAIS,chr(39))+
+      ')';
+      execsql;
+      If rowsaffected > 0 then 
+        begin
+          PDObject.resulta := 'Incluido!';
+         result := wkey;
+        end;
+ end
+ else 
+  begin 
+   close;
+   sql.clear;
+   sql.text := 'UPDATE PAIS'+
+   ' SET '+
+   'PAIS = '+AnsiQuotedStr(PAIS,chr(39))+
+    ' WHERE CODIGO = '+InttoStr(CODIGO);
+
+
+   execsql;
+   If rowsaffected > 0 then
+     PDObject.resulta := 'Atualizado!';
+   end; 
+  end;
+ DecimalSeparator := ',';
+end;
+
+
+procedure Tpais.DeleteObject (PDObject: TOObject);
+ begin
+  with (qry as TADOQuery) do
+    begin
+
+      DecimalSeparator := '.';
+      close;
+      sql.clear;
+      sql.text := 'DELETE FROM PAIS'+
+     ' WHERE CODIGO = '+InttoStr(CODIGO);
+
+
+      execsql;
+      If rowsaffected > 0 then 
+        PDObject.resulta := 'Excluido!';
+    end;
+  DecimalSeparator := ',';
+end;
+
+
+procedure Tpais.LoadObject (PDObject: TOObject);
+ begin
+   with (qry as TADOQuery) do
+    begin
+       close;
+       sql.clear;
+       sql.text := 'SELECT * FROM PAIS WHERE CODIGO = '+ PDObject.Id ;
+       open;
+       If not Eof then
+         begin
+          DDMAP((qry as TADOQuery));
+         end;
+     end;
+end;
+
+
+function Tpais.Get_MaxKey () : integer;
+ begin
+  with (qry as TADOQuery) do
+  begin  
+   result := 0;
+   close;
+   sql.clear;
+   sql.text := 'SELECT CODIGO AS MAXK FROM PAIS'+
+               ' WHERE CODIGO = (SELECT MAX(CODIGO) FROM PAIS'+')';
+   open;
+   If not eof  then 
+    Result := fieldbyName('MAXK').asinteger;
+  end;
+end;
+
+
+function Tpais.GetAllObjects(PDObject: TOObject) :TStringList;
+var  
+ pList : TStringList; 
+ NewOObject : TPK;
+ wNOme : string;
+ begin
+  pList := TStringList.create;
+ with (qry as TADOQuery) do
+   begin;
+    close;
+    sql.clear;
+    sql.text := 'SELECT * FROM PAIS';
+    open;
+    While not Eof do 
+      begin;
+         NewOObject     := TPK.Create;
+         NewOObject.PK1 := fieldbyname('CODIGO').Value;
+         pList.AddObject(fieldbyname(PDObject.AtributoLista).value,NewOObject);         
+        next;
+      end;
+      result := pList;
+ end;
+end;
+
+
+ function Tpais.GetAllDetailsGrid(PDObject: TOObject;pFK : string ): TStringAlignGrid; 
+ var                                                                                       
+  i,j,m,n : integer;                                                                       
+  pList : TStringAlignGrid;                                                                
+  begin                                                                                    
+   pList := PDObject.ListaGrid;                                                            
+   j := pList.FixedCols ;                                                                  
+   i := pList.FixedRows;
+   with (qry as TADOQuery) do
+    begin
+     close;
+     sql.clear;
+     sql.text := 'SELECT * FROM PAIS WHERE ID_EMP = '+pFK;
+     open;
+     While not Eof do
+       begin;
+        for m := 0 to pList.colcount -1 do  //monta o grid a aprtir dos campos definidos no objeto do grid (monta_cab)
+         begin
+           pList.Cells[m,i] := fieldbyname((pList.Objects[m,0] as TProp).nomecampo).AsString;
+         end;
+         PDObject.PK := Tpk.create;
+         PDObject.PK.PK1 := fieldbyname('CODIGO').Value;
+         pList.Objects[ 0,i] := PDObject.PK;
+         inc(i);
+         If i > pList.RowCount - pList.FixedRows then
+          begin
+            pList.RowCount  := pList.RowCount+1;
+          end;
+
+         next;
+       end;
+       result := pList;
+    end;
+  end;
+
+
+ function Tpais.DeletadaEmpresa (pId : integer) : boolean;
+  begin
+   with (qry as TADOQuery) do
+     begin
+       DecimalSeparator := '.';
+       close;
+       sql.clear;
+       sql.text := 'DELETE FROM PAIS WHERE ID_EMP = PAIS'+InttoStr(pid);
+       execsql;
+       If rowsaffected > 0 then
+         result := true;
+     end;
+   DecimalSeparator := '.';
+ end;
+
+{Fim Métodos Tpais}
+
+  {Início Métodos Tatividade}
+procedure Tatividade.ddMap(DataSet: TDataSet);
+  begin
+      CODIGO                    := DataSet.fieldbyname('CODIGO').asinteger;
+      ATIVIDADE                 := DataSet.fieldbyname('ATIVIDADE').asstring;
+  end;
+
+
+{Tatividade Métodos}
+
+function Tatividade.SaveObject(PDObject: TOObject): TObjectID ;
+VAR
+Wkey : integer;
+oObj : Tatividade;
+begin
+ PDOBJECT.resulta := 'Operação Não concluida!';
+ result := 0;
+ with (qry as TADOQuery) do
+  begin 
+
+    DecimalSeparator := '.';
+    close;
+    sql.clear;
+    sql.text :=     'SELECT * FROM ATIVIDADE WHERE CODIGO = '+InttoStr(CODIGO);
+    open;
+    If eof then 
+     begin
+      begin
+         oObj := Tatividade.create(nil);
+         oObj.CODIGO:= CODIGO;
+         wkey := oObj.get_maxkey() + 1;
+         Freeandnil(oObj);
+         CODIGO := WKEY;
+      end;
+       sql.text := 'INSERT INTO ATIVIDADE('+
+       'CODIGO,'+
+        'ATIVIDADE)'+
+       'VALUES ('+
+
+       InttoStr(CODIGO)+','+
+       AnsiQuotedStr(ATIVIDADE,chr(39))+
+      ')';
+      execsql;
+      If rowsaffected > 0 then 
+        begin
+          PDObject.resulta := 'Incluido!';
+         result := wkey;
+        end;
+ end
+ else 
+  begin 
+   close;
+   sql.clear;
+   sql.text := 'UPDATE ATIVIDADE'+
+   ' SET '+
+   'ATIVIDADE = '+AnsiQuotedStr(ATIVIDADE,chr(39))+
+    ' WHERE CODIGO = '+InttoStr(CODIGO);
+   execsql;
+   If rowsaffected > 0 then 
+     PDObject.resulta := 'Atualizado!';
+   end; 
+  end; 
+ DecimalSeparator := ',';
+end;
+
+
+procedure Tatividade.DeleteObject (PDObject: TOObject);
+ begin
+with (qry as TADOQuery) do
+    begin   
+
+      DecimalSeparator := '.';
+      close;
+      sql.clear;
+      sql.text := 'DELETE FROM ATIVIDADE'+
+     ' WHERE CODIGO = '+InttoStr(CODIGO);
+      execsql;
+      If rowsaffected > 0 then 
+        PDObject.resulta := 'Excluido!';
+    end;
+  DecimalSeparator := ',';
+end;
+
+
+procedure Tatividade.LoadObject (PDObject: TOObject);
+
+ begin
+
+   with (qry as TADOQuery) do
+    begin
+       close;
+       sql.clear;
+       sql.text := 'SELECT * FROM ATIVIDADE WHERE CODIGO = '+ PDObject.Id ;
+       open;
+       If not Eof then 
+         begin 
+           ddmap((qry as TADOQuery));
+         end; 
+     end;
+end;
+
+
+function Tatividade.Get_MaxKey () : integer;
+ begin
+  with (qry as TADOQuery) do
+  begin  
+   result := 0;
+   close;
+   sql.clear;
+   sql.text := 'SELECT CODIGO AS MAXK FROM ATIVIDADE'+
+               ' WHERE CODIGO = (SELECT MAX(CODIGO) FROM ATIVIDADE'+')';
+   open;
+   If not eof  then 
+    Result := fieldbyName('MAXK').asinteger;
+  end;
+end;
+
+
+function Tatividade.GetAllObjects(PDObject: TOObject) :TStringList;
+var  
+ pList : TStringList; 
+ NewOObject : TPK;
+ begin
+  pList := TStringList.create;
+  with (qry as TADOQuery) do
+   begin;
+    close;
+    sql.clear;
+    sql.text := 'SELECT * FROM ATIVIDADE';
+    open;
+    While not Eof do
+      begin;
+         NewOObject     := TPK.Create;
+         NewOObject.PK1 := fieldbyname('CODIGO').Value; 
+         pList.AddObject(fieldbyname(PDObject.AtributoLista).value,NewOObject);
+        next;
+      end;
+      result := pList;
+ end;
+end;
+
+
+ function Tatividade.GetAllDetailsGrid(PDObject: TOObject;pFK : string ): TStringAlignGrid; 
+ var                                                                                       
+  i,j,m,n : integer;                                                                       
+  pList : TStringAlignGrid;                                                                
+  begin                                                                                    
+   pList := PDObject.ListaGrid;                                                            
+   j := pList.FixedCols ;                                                                  
+   i := pList.FixedRows;                                                                   
+with (qry as TADOQuery) do
+    begin
+     close;
+     sql.clear;                                                                            
+     sql.text := 'SELECT * FROM ATIVIDADE WHERE ID_EMP = '+pFK;
+     open;
+     While not Eof do                                                                      
+       begin;                                                                              
+        for m := 0 to pList.colcount -1 do  //monta o grid a aprtir dos campos definidos no objeto do grid (monta_cab) 
+         begin                                                                             
+           pList.Cells[m,i] := fieldbyname((pList.Objects[m,0] as TProp).nomecampo).AsString;
+         end;                                                                     
+         PDObject.PK := Tpk.create;
+         PDObject.PK.PK1 := fieldbyname('CODIGO').Value; 
+         pList.Objects[ 0,i] := PDObject.PK;                                      
+         inc(i);                                                                  
+         If i > pList.RowCount - pList.FixedRows then                             
+          begin                                                                  
+            pList.RowCount  := pList.RowCount+1;                                 
+          end;
+         next;
+       end;
+       result := pList;
+    end;
+  end;
+
+
+ function Tatividade.DeletadaEmpresa (pId : integer) : boolean;
+  begin
+    with (qry as TADOQuery) do     begin
+       DecimalSeparator := '.';
+       close;
+       sql.clear;
+       sql.text := 'DELETE FROM ATIVIDADE'+
+       'WHERE ID_EMP = ATIVIDADE'+InttoStr(pid);
+       execsql;
+       If rowsaffected > 0 then
+         result := true;
+     end;
+   DecimalSeparator := '.';
+ end;
+
+{Fim Métodos Tatividade}
+
+  {Início Métodos Tcontato}
+procedure Tcontato.ddMap(DataSet: TDataSet);
+  begin
+      ID_CONTATO                := DataSet.fieldbyname('ID_CONTATO').asinteger;
+      CARGO                     := DataSet.fieldbyname('CARGO').asstring;
+      CELULAR                   := DataSet.fieldbyname('CELULAR').asstring;
+      CEP                       := DataSet.fieldbyname('CEP').asstring;
+      CIDADE                    := DataSet.fieldbyname('CIDADE').asstring;
+      COMMENTARIO               := DataSet.fieldbyname('COMMENTARIO').asstring;
+      EMAIL                     := DataSet.fieldbyname('EMAIL').asstring;
+      ENDERECO                  := DataSet.fieldbyname('ENDERECO').asstring;
+      ESTADO                    := DataSet.fieldbyname('ESTADO').asstring;
+      FANTASIA                  := DataSet.fieldbyname('FANTASIA').asstring;
+      ID_EMP                    := DataSet.fieldbyname('ID_EMP').asinteger;
+      NOME                      := DataSet.fieldbyname('NOME').asstring;
+      PAIS                      := DataSet.fieldbyname('PAIS').asstring;
+      SOBRENOME                 := DataSet.fieldbyname('SOBRENOME').asstring;
+      TELEFONE_PESS             := DataSet.fieldbyname('TELEFONE_PESS').asstring;
+  end;
+
+
+{Tcontato Métodos}
+
+function TContato.GetAllByProp(PDObject : TOObject;pField : string;pvalue : variant) :TStringList;
+var
+ NewOObject : TPK;
+ wNOme : string;
+ begin
+  PDObject.Lista := TStringList.create;
+  with (qry as TADOQuery) do   begin;
+    close;
+    sql.clear;
+    sql.text := 'SELECT * FROM CONTATOS' +
+                ' WHERE '+pField +' = '+ansiquotedstr(pvalue,chr(39));
+
+    open;
+    While not Eof do
+      begin;
+         NewOObject     := TPK.Create;
+         NewOObject.PK1 := fieldbyname('ID_CONTATO').Value;
+         PDObject.Lista.AddObject(fieldbyname(PDObject.AtributoLista).value,NewOObject);
+         PDObject.Lista.AddObject(wNOme,NewOObject);
+        next;
+      end;
+      result := PDObject.Lista;
+ end;
+end;
+
+
+function Tcontato.SaveObject(PDObject: TOObject): TObjectID ;
+VAR
+Wkey : integer;
+oObj : Tcontato;
+begin
+ PDOBJECT.resulta := 'Operação Não concluida!';
+ result := 0;
+  with (qry as TADOQuery) do
+  begin 
+
+    DecimalSeparator := '.';
+    close;
+    sql.clear;
+    sql.text :=     'SELECT * FROM CONTATOS'+
+' WHERE ID_CONTATO = '+InttoStr(ID_CONTATO);
+
+
+    open;
+    If eof then
+     begin
+      begin
+         oObj := Tcontato.create(nil);
+         oObj.ID_CONTATO:= ID_CONTATO;
+         wkey := oObj.get_maxkey() + 1;
+         Freeandnil(oObj);
+         ID_CONTATO := WKEY;
+      end;
+       sql.text := 'INSERT INTO CONTATOS('+
+       'ID_CONTATO,'+
+       'CARGO,'+
+       'CELULAR,'+
+       'CEP,'+
+       'CIDADE,'+
+       'COMMENTARIO,'+
+       'EMAIL,'+
+       'ENDERECO,'+
+       'ESTADO,'+
+       'FANTASIA,'+
+       'ID_EMP,'+
+       'NOME,'+
+       'PAIS,'+
+       'SOBRENOME,'+
+        'TELEFONE_PESS)'+
+       'VALUES ('+
+
+       InttoStr(ID_CONTATO)+','+
+       AnsiQuotedStr(CARGO,chr(39))+','+
+       AnsiQuotedStr(CELULAR,chr(39))+','+
+       AnsiQuotedStr(CEP,chr(39))+','+
+       AnsiQuotedStr(CIDADE,chr(39))+','+
+       AnsiQuotedStr(COMMENTARIO,chr(39))+','+
+       AnsiQuotedStr(EMAIL,chr(39))+','+
+       AnsiQuotedStr(ENDERECO,chr(39))+','+
+       AnsiQuotedStr(ESTADO,chr(39))+','+
+       AnsiQuotedStr(FANTASIA,chr(39))+','+
+       InttoStr(ID_EMP)+','+
+       AnsiQuotedStr(NOME,chr(39))+','+
+       AnsiQuotedStr(PAIS,chr(39))+','+
+       AnsiQuotedStr(SOBRENOME,chr(39))+','+
+       AnsiQuotedStr(TELEFONE_PESS,chr(39))+
+      ')';
+      execsql;
+      If rowsaffected > 0 then 
+        begin
+          PDObject.resulta := 'Incluido!';
+         result := wkey;
+        end;
+ end
+ else 
+  begin 
+   close;
+   sql.clear;
+   sql.text := 'UPDATE CONTATOS'+
+   ' SET '+
+   'CARGO = '+AnsiQuotedStr(CARGO,chr(39))+','+
+   'CELULAR = '+AnsiQuotedStr(CELULAR,chr(39))+','+
+   'CEP = '+AnsiQuotedStr(CEP,chr(39))+','+
+   'CIDADE = '+AnsiQuotedStr(CIDADE,chr(39))+','+
+   'COMMENTARIO = '+AnsiQuotedStr(COMMENTARIO,chr(39))+','+
+   'EMAIL = '+AnsiQuotedStr(EMAIL,chr(39))+','+
+   'ENDERECO = '+AnsiQuotedStr(ENDERECO,chr(39))+','+
+   'ESTADO = '+AnsiQuotedStr(ESTADO,chr(39))+','+
+   'FANTASIA = '+AnsiQuotedStr(FANTASIA,chr(39))+','+
+   'ID_EMP = '+InttoStr(ID_EMP)+','+
+   'NOME = '+AnsiQuotedStr(NOME,chr(39))+','+
+   'PAIS = '+AnsiQuotedStr(PAIS,chr(39))+','+
+   'SOBRENOME = '+AnsiQuotedStr(SOBRENOME,chr(39))+','+
+   'TELEFONE_PESS = '+AnsiQuotedStr(TELEFONE_PESS,chr(39))+
+    ' WHERE ID_CONTATO = '+InttoStr(ID_CONTATO);
+
+
+   execsql;
+   If rowsaffected > 0 then 
+     PDObject.resulta := 'Atualizado!';
+   end; 
+  end; 
+ DecimalSeparator := ',';
+end;
+
+
+procedure Tcontato.DeleteObject (PDObject: TOObject);
+ begin
+  with (qry as TADOQuery) do
+    begin   
+
+      DecimalSeparator := '.';
+      close;
+      sql.clear;
+      sql.text := 'DELETE FROM CONTATOS'+
+     ' WHERE ID_CONTATO = '+InttoStr(ID_CONTATO);
+
+
+      execsql;
+      If rowsaffected > 0 then 
+        PDObject.resulta := 'Excluido!';
+    end;
+  DecimalSeparator := ',';
+end;
+
+
+procedure Tcontato.LoadObject (PDObject: TOObject);
+
+ begin
+
+   with (qry as TADOQuery) do
+    begin
+       close;
+       sql.clear;
+       sql.text := 'SELECT * FROM CONTATOS WHERE ID_CONTATO = '+ PDObject.Id ;
+       open;
+       If not Eof then 
+         begin 
+           ddmap((qry as TADOQuery));
+         end; 
+     end;
+end;
+
+
+function Tcontato.Get_MaxKey () : integer;
+ begin
+  with (qry as TADOQuery) do
+  begin  
+   result := 0;
+   close;
+   sql.clear;
+   sql.text := 'SELECT ID_CONTATO AS MAXK FROM CONTATOS'+
+' WHERE ID_CONTATO = (SELECT MAX(ID_CONTATO) FROM CONTATOS'+')';
+
+   open;
+   If not eof  then 
+    Result := fieldbyName('MAXK').asinteger;
+  end;
+end;
+
+
+function Tcontato.GetAllObjects(PDObject: TOObject) :TStringList;
+var  
+ pList : TStringList; 
+ NewOObject : TPK;
+ wNOme : string;
+ begin
+  pList := TStringList.create;
+  with (qry as TADOQuery) do
+   begin;
+    close;
+    sql.clear;
+    sql.text := 'SELECT * FROM CONTATOS';
+    open;
+    While not Eof do 
+      begin;
+         NewOObject     := TPK.Create;
+         NewOObject.PK1 := fieldbyname('ID_CONTATO').Value;
+         wNome := trim(fieldbyname('SOBRENOME').asstring)+','+trim(fieldbyname('NOME').asstring) ;
+        // pList.AddObject(fieldbyname(PDObject.AtributoLista).value,NewOObject);
+         pList.AddObject(wNome,NewOObject);
+        next;
+      end;
+      result := pList;
+ end;
+end;
+
+
+ function Tcontato.GetAllDetailsGrid(PDObject: TOObject;pFK : string ): TStringAlignGrid; 
+ var
+  i,j,m,n : integer;                                                                       
+  pList : TStringAlignGrid;                                                                
+  begin                                                                                    
+   pList := PDObject.ListaGrid;
+   j := pList.FixedCols ;                                                                  
+   i := pList.FixedRows;                                                                   
+   with (qry as TADOQuery) do
+    begin   
+     close;                                                                                
+     sql.clear;                                                                            
+     sql.text := 'SELECT * FROM CONTATOS WHERE ID_EMP = '+pFK;
+     open;                                                                                 
+     While not Eof do                                                                      
+       begin;
+        for m := 0 to pList.colcount -1 do  //monta o grid a aprtir dos campos definidos no objeto do grid (monta_cab)
+         begin                                                                             
+           pList.Cells[m,i] := fieldbyname((pList.Objects[m,0] as TProp).nomecampo).AsString;
+         end;                                                                     
+         PDObject.PK         := Tpk.create;
+         PDObject.PK.PK1     := fieldbyname('ID_CONTATO').Value;
+         pList.Objects[ 0,i] := PDObject.PK;                                      
+         inc(i);                                                                  
+         If i > pList.RowCount - pList.FixedRows then                             
+          begin
+            pList.RowCount  := pList.RowCount+1;
+          end;                                                                   
+                                                                                 
+         next;                                                                    
+       end;                                                                       
+       result := pList;                                                           
+    end;                                                                            
+  end;                                                                             
+
+
+ function Tcontato.DeletadaEmpresa (pId : integer) : boolean;
+  begin
+   with (qry as TADOQuery) do
+     begin
+       DecimalSeparator := '.';
+       close;
+       sql.clear;
+       sql.text := 'DELETE FROM CONTATOS'+
+       'WHERE ID_EMP = CONTATOS'+InttoStr(pid);
+       execsql;
+       If rowsaffected > 0 then
+         result := true;
+     end;
+   DecimalSeparator := '.';
+ end;
+
+{Fim Métodos Tcontato}
+
+  {Início Métodos Tempresa}
+procedure Tempresa.ddMap(DataSet: TDataSet);
+  begin
+      ID_EMP                    := DataSet.fieldbyname('ID_EMP').asinteger;
+      ATIV                      := DataSet.fieldbyname('ATIV').asstring;
+      CEP                       := DataSet.fieldbyname('CEP').asstring;
+      CGC                       := DataSet.fieldbyname('CGC').asstring;
+      CIDAD                     := DataSet.fieldbyname('CIDAD').asstring;
+      COMMENT                   := DataSet.fieldbyname('COMMENT').asstring;
+      DATAT                     := DataSet.fieldbyname('DATAT').asfloat;
+      E_MAIL                    := DataSet.fieldbyname('E_MAIL').asstring;
+      EMPRESA                   := DataSet.fieldbyname('EMPRESA').asstring;
+      ENDER                     := DataSet.fieldbyname('ENDER').asstring;
+      ESTADO                    := DataSet.fieldbyname('ESTADO').asstring;
+      FANTASIA                  := DataSet.fieldbyname('FANTASIA').asstring;
+      FAX                       := DataSet.fieldbyname('FAX').asstring;
+      INSCR                     := DataSet.fieldbyname('INSCR').asstring;
+      PAIS                      := DataSet.fieldbyname('PAIS').asstring;
+      SITE                      := DataSet.fieldbyname('SITE').asstring;
+      TELEF                     := DataSet.fieldbyname('TELEF').asstring;
+      TELEF1                    := DataSet.fieldbyname('TELEF1').asstring;
+      TIPO                      := DataSet.fieldbyname('TIPO').asstring;
+  end;
+
+
+{Tempresa Métodos}
+
+
+function Tempresa.SaveObject(PDObject: TOObject): TObjectID ;
+VAR
+Wkey : integer;
+oObj : Tempresa;
+begin
+ PDOBJECT.resulta := 'Operação Não concluida!';
+ result := 0;
+ with (qry as TADOQuery) do
+  begin 
+    DecimalSeparator := '.';
+    close;
+    sql.clear;
+    sql.text :=     'SELECT * FROM EMPRESAS WHERE ID_EMP = '+InttoStr(ID_EMP);
+    open;
+    If eof then 
+     begin
+      begin
+         oObj := Tempresa.create(nil);
+         oObj.ID_EMP:= ID_EMP;
+         wkey := oObj.get_maxkey() + 1;
+         Freeandnil(oObj);
+         ID_EMP := WKEY;
+      end;
+       sql.text := 'INSERT INTO EMPRESAS('+
+       'ID_EMP,'+
+       'ATIV,'+
+       'CEP,'+
+       'CGC,'+
+       'CIDAD,'+
+       'COMMENT,'+
+       'DATAT,'+
+       'E_MAIL,'+
+       'EMPRESA,'+
+       'ENDER,'+
+       'ESTADO,'+
+       'FANTASIA,'+
+       'FAX,'+
+       'INSCR,'+
+       'PAIS,'+
+       'SITE,'+
+       'TELEF,'+
+       'TELEF1,'+
+        'TIPO)'+
+       'VALUES ('+
+
+       InttoStr(ID_EMP)+','+
+       AnsiQuotedStr(ATIV,chr(39))+','+
+       AnsiQuotedStr(CEP,chr(39))+','+
+       AnsiQuotedStr(CGC,chr(39))+','+
+       AnsiQuotedStr(CIDAD,chr(39))+','+
+       AnsiQuotedStr(COMMENT,chr(39))+','+
+       AnsiQuotedStr(FormatDateTime('YYYY/MM/DD',DATAT),chr(39))+','+
+       AnsiQuotedStr(E_MAIL,chr(39))+','+
+       AnsiQuotedStr(EMPRESA,chr(39))+','+
+       AnsiQuotedStr(ENDER,chr(39))+','+
+       AnsiQuotedStr(ESTADO,chr(39))+','+
+       AnsiQuotedStr(FANTASIA,chr(39))+','+
+       AnsiQuotedStr(FAX,chr(39))+','+
+       AnsiQuotedStr(INSCR,chr(39))+','+
+       AnsiQuotedStr(PAIS,chr(39))+','+
+       AnsiQuotedStr(SITE,chr(39))+','+
+       AnsiQuotedStr(TELEF,chr(39))+','+
+       AnsiQuotedStr(TELEF1,chr(39))+','+
+       AnsiQuotedStr(TIPO,chr(39))+
+      ')';
+      execsql;
+      If rowsaffected > 0 then 
+        begin
+          PDObject.resulta := 'Incluido!';
+         result := wkey;
+        end;
+ end
+ else 
+  begin 
+   close;
+   sql.clear;
+   sql.text := 'UPDATE EMPRESAS'+
+   ' SET '+
+   'ATIV = '+AnsiQuotedStr(ATIV,chr(39))+','+
+   'CEP = '+AnsiQuotedStr(CEP,chr(39))+','+
+   'CGC = '+AnsiQuotedStr(CGC,chr(39))+','+
+   'CIDAD = '+AnsiQuotedStr(CIDAD,chr(39))+','+
+   'COMMENT = '+AnsiQuotedStr(COMMENT,chr(39))+','+
+   'DATAT = '+AnsiQuotedStr(FormatDateTime('YYYY/MM/DD',DATAT),chr(39))+','+
+   'E_MAIL = '+AnsiQuotedStr(E_MAIL,chr(39))+','+
+   'EMPRESA = '+AnsiQuotedStr(EMPRESA,chr(39))+','+
+   'ENDER = '+AnsiQuotedStr(ENDER,chr(39))+','+
+   'ESTADO = '+AnsiQuotedStr(ESTADO,chr(39))+','+
+   'FANTASIA = '+AnsiQuotedStr(FANTASIA,chr(39))+','+
+   'FAX = '+AnsiQuotedStr(FAX,chr(39))+','+
+   'INSCR = '+AnsiQuotedStr(INSCR,chr(39))+','+
+   'PAIS = '+AnsiQuotedStr(PAIS,chr(39))+','+
+   'SITE = '+AnsiQuotedStr(SITE,chr(39))+','+
+   'TELEF = '+AnsiQuotedStr(TELEF,chr(39))+','+
+   'TELEF1 = '+AnsiQuotedStr(TELEF1,chr(39))+','+
+   'TIPO = '+AnsiQuotedStr(TIPO,chr(39))+
+    ' WHERE ID_EMP = '+InttoStr(ID_EMP);
+
+
+   execsql;
+   If rowsaffected > 0 then 
+     PDObject.resulta := 'Atualizado!';
+   end; 
+  end; 
+ DecimalSeparator := ',';
+end;
+
+
+procedure Tempresa.DeleteObject (PDObject: TOObject);
+ begin
+  with (qry as TADOQuery) do
+    begin
+
+      DecimalSeparator := '.';
+      close;
+      sql.clear;
+      sql.text := 'DELETE FROM EMPRESAS'+
+     ' WHERE ID_EMP = '+InttoStr(ID_EMP);
+      execsql;
+      If rowsaffected > 0 then 
+        PDObject.resulta := 'Excluido!';
+    end;
+  DecimalSeparator := ',';
+end;
+
+
+procedure Tempresa.LoadObject (PDObject: TOObject);
+
+ begin
+   with (qry as TADOQuery) do
+    begin
+       close;
+       sql.clear;
+       sql.text := 'SELECT * FROM EMPRESAS WHERE ID_EMP = '+ PDObject.Id ;
+       open;
+       If not Eof then
+         begin
+           ddmap((qry as TADOQuery));
+         end;
+     end;
+end;
+
+
+function Tempresa.Get_MaxKey () : integer;
+ begin
+  with (qry as TADOQuery) do
+  begin
+   result := 0;
+   close;
+   sql.clear;
+   sql.text := 'SELECT ID_EMP AS MAXK FROM EMPRESAS'+
+               ' WHERE ID_EMP = (SELECT MAX(ID_EMP) FROM EMPRESAS'+')';
+   open;
+   If not eof  then
+    Result := fieldbyName('MAXK').asinteger;
+  end;
+end;
+
+
+function Tempresa.GetAllObjects(PDObject: TOObject) :TStringList;
+var
+ pList : TStringList;
+ NewOObject : TPK;
+ begin
+  pList := TStringList.create;
+  with (qry as TADOQuery) do
+   begin;
+    close;
+    sql.clear;
+    sql.text := 'SELECT * FROM EMPRESAS';
+    open;
+    While not Eof do 
+      begin;
+         NewOObject     := TPK.Create;
+         NewOObject.PK1 := fieldbyname('ID_EMP').Value; 
+         pList.AddObject(fieldbyname(PDObject.AtributoLista).value,NewOObject);
+        next;
+      end;
+      result := pList;
+ end;
+end;
+
+{Fim Métodos Tempresa}
+
+function Tempresa.GetAllByProp(PDObject : TOObject;pField : string;pvalue : variant) :TStringList;
+var
+ NewOObject : TPK;
+ begin
+  PDObject.Lista := TStringList.create;
+  with (qry as TADOQuery) do
+   begin;
+    close;
+    sql.clear;
+    sql.text := 'SELECT * FROM EMPRESAS' +
+                ' WHERE '+pField +' = '+ansiquotedstr(pvalue,chr(39));
+
+    open;
+    While not Eof do
+      begin;
+         NewOObject     := TPK.Create;
+         NewOObject.PK1 := fieldbyname('ID_EMP').Value; 
+         PDObject.Lista.AddObject(fieldbyname(PDObject.AtributoLista).value,NewOObject);
+        next;
+      end;
+      result := PDObject.Lista;
+ end;
+end;
+
+
+
+{FIM METODOS}
+
+{INICIO SET VALUES}
+
+procedure TDad.SetdDS(const Value: TDataSource);
+begin
+  FdDS := Value;
+end;
+  {Início Set Values Tpais}
+{Set Value Tpais}
+
+procedure Tpais.SetCODIGO(const value   : integer );
+ begin
+  FCODIGO := value;
+ end;
+
+procedure Tpais.SetPAIS(const value   : string );
+ begin
+  FPAIS := value;
+ end;
+
+{Fim Set Values Tpais}
+
+  {Início Set Values Tatividade}
+{Set Value Tatividade}
+
+procedure Tatividade.SetCODIGO(const value   : integer );
+ begin
+  FCODIGO := value;
+ end;
+
+procedure Tatividade.SetATIVIDADE(const value   : string );
+ begin
+  FATIVIDADE := value;
+ end;
+
+{Fim Set Values Tatividade}
+
+  {Início Set Values Tcontato}
+{Set Value Tcontato}
+
+procedure Tcontato.SetID_CONTATO(const value   : integer );
+ begin
+  FID_CONTATO := value;
+ end;
+
+procedure Tcontato.SetCARGO(const value   : string );
+ begin
+  FCARGO := value;
+ end;
+
+procedure Tcontato.SetCELULAR(const value   : string );
+ begin
+  FCELULAR := value;
+ end;
+
+procedure Tcontato.SetCEP(const value   : string );
+ begin
+  FCEP := value;
+ end;
+
+procedure Tcontato.SetCIDADE(const value   : string );
+ begin
+  FCIDADE := value;
+ end;
+
+procedure Tcontato.SetCOMMENTARIO(const value   : string );
+ begin
+  FCOMMENTARIO := value;
+ end;
+
+procedure Tcontato.SetEMAIL(const value   : string );
+ begin
+  FEMAIL := value;
+ end;
+
+procedure Tcontato.SetENDERECO(const value   : string );
+ begin
+  FENDERECO := value;
+ end;
+
+procedure Tcontato.SetESTADO(const value   : string );
+ begin
+  FESTADO := value;
+ end;
+
+procedure Tcontato.SetFANTASIA(const value   : string );
+ begin
+  FFANTASIA := value;
+ end;
+
+procedure Tcontato.SetID_EMP(const value   : integer );
+ begin
+  FID_EMP := value;
+ end;
+
+procedure Tcontato.SetNOME(const value   : string );
+ begin
+  FNOME := value;
+ end;
+
+procedure Tcontato.SetPAIS(const value   : string );
+ begin
+  FPAIS := value;
+ end;
+
+procedure Tcontato.SetSOBRENOME(const value   : string );
+ begin
+  FSOBRENOME := value;
+ end;
+
+procedure Tcontato.SetTELEFONE_PESS(const value   : string );
+ begin
+  FTELEFONE_PESS := value;
+ end;
+
+{Fim Set Values Tcontato}
+
+  {Início Set Values Tempresa}
+{Set Value Tempresa}
+
+procedure Tempresa.SetID_EMP(const value   : integer );
+ begin
+  FID_EMP := value;
+ end;
+
+procedure Tempresa.SetATIV(const value   : string );
+ begin
+  FATIV := value;
+ end;
+
+procedure Tempresa.SetCEP(const value   : string );
+ begin
+  FCEP := value;
+ end;
+
+procedure Tempresa.SetCGC(const value   : string );
+ begin
+  FCGC := value;
+ end;
+
+procedure Tempresa.SetCIDAD(const value   : string );
+ begin
+  FCIDAD := value;
+ end;
+
+procedure Tempresa.SetCOMMENT(const value   : string );
+ begin
+  FCOMMENT := value;
+ end;
+
+procedure Tempresa.SetDATAT(const value   : real );
+ begin
+  FDATAT := value;
+ end;
+
+procedure Tempresa.SetE_MAIL(const value   : string );
+ begin
+  FE_MAIL := value;
+ end;
+
+procedure Tempresa.SetEMPRESA(const value   : string );
+ begin
+  FEMPRESA := value;
+ end;
+
+procedure Tempresa.SetENDER(const value   : string );
+ begin
+  FENDER := value;
+ end;
+
+procedure Tempresa.SetESTADO(const value   : string );
+ begin
+  FESTADO := value;
+ end;
+
+procedure Tempresa.SetFANTASIA(const value   : string );
+ begin
+  FFANTASIA := value;
+ end;
+
+procedure Tempresa.SetFAX(const value   : string );
+ begin
+  FFAX := value;
+ end;
+
+procedure Tempresa.SetINSCR(const value   : string );
+ begin
+  FINSCR := value;
+ end;
+
+procedure Tempresa.SetPAIS(const value   : string );
+ begin
+  FPAIS := value;
+ end;
+
+procedure Tempresa.SetSITE(const value   : string );
+ begin
+  FSITE := value;
+ end;
+
+procedure Tempresa.SetTELEF(const value   : string );
+ begin
+  FTELEF := value;
+ end;
+
+procedure Tempresa.SetTELEF1(const value   : string );
+ begin
+  FTELEF1 := value;
+ end;
+
+procedure Tempresa.SetTIPO(const value   : string );
+ begin
+  FTIPO := value;
+ end;
+
+{Fim Set Values Tempresa}
+
+
+{FIM SET VALUES}
+
+
+
+procedure TDad.Setqry(const Value: Tobject);
+begin
+  Fqry := Value;
+end;
+
+end.

@@ -1,0 +1,21 @@
+object primar: Tprimar
+  Left = 296
+  Top = 269
+  Width = 544
+  Height = 382
+  HorzScrollBar.Visible = False
+  VertScrollBar.Visible = False
+  Color = 14145495
+  Font.Charset = ANSI_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Arial'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 14
+end

@@ -1,0 +1,3 @@
+Verão 7.1
+* Na tabela "BST_VALIDACAO", foi criado duas colunas "ATUACAO" e "LOCAL", ambos como "Texto" com 50 posições
+* Na Unit "BS"

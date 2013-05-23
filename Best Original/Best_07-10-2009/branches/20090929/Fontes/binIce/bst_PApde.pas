@@ -1,0 +1,154 @@
+unit bst_PApde;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  STD_PREL,  Qrctrls, QuickRpt, ExtCtrls, jpeg, gtQrCtrls, gtQRXport_WMF,
+  gtQRXport_Metafile, gtQRXport_EMF, gtQRXport_BMP, gtQRXport_JPEG,
+  gtQRXport_Graphic, gtQRXport_GIF, gtQRXport_Text, gtQRXport_Excel,
+  gtQRXport_RTF, gtQRXport_XHTML, gtQRXport_HTML, gtQRXport, gtQRXport_Doc,
+  gtQRXport_PDF, gtQRXport_Hub;
+
+type
+  Tfrm_PApde = class(Tfrm_pvertstd)
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure QRSubDetail1BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRSubDetail2BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRSubDetail3BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure DetailBand1BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure qrpBeforePrint(Sender: TCustomQuickRep;
+      var PrintReport: Boolean);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_PApde: Tfrm_PApde;
+  fIf,fdg,frn : boolean;
+  qrs1,qrs2,qrs3 : integer;
+  wgrupo,won,wregra : string;
+implementation
+
+uses bst_main;
+
+
+
+{$R *.DFM}
+
+procedure Tfrm_PApde.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  inherited;
+    frm_PApDe    := nil;
+    action := caFree;
+end;
+
+procedure Tfrm_PApde.FormCreate(Sender: TObject);
+begin
+  inherited;
+   fif := true;
+   fdg := true;
+   frn := true;
+
+   {tit1.caption            :=   deff1;//  grupo de dados
+   tit2.caption            :=   def96;//  on
+   tit3.caption            :=   def67;//  rn}
+
+
+end;
+
+procedure Tfrm_PApde.QRSubDetail1BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  inherited;
+
+   {If  (qrsubdetail1.DataSet.FieldByName('IDF_DESIGNACAO').asstring = '') then
+    qrsubdetail1.Height := 0
+   else
+    qrsubdetail1.Height := qrs1;
+
+   If fdg then
+      Begin
+        tit1.caption := def41    ;
+        fdg := false;
+      end
+   else
+        tit1.caption := '';
+    }
+      
+end;
+
+procedure Tfrm_PApde.QRSubDetail2BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  inherited;
+  {If  qrsubdetail2.DataSet.FieldByName('IDF_TABELA').asstring = '' then
+    qrsubdetail2.Height := 0
+   else
+    qrsubdetail2.Height := qrs2;
+  If fif then
+      Begin
+        tit2.caption := def42 ;
+        fif  := false;
+      end
+   else
+        tit2.caption := '';}
+end;
+
+procedure Tfrm_PApde.QRSubDetail3BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  inherited;
+  {If  qrsubdetail3.DataSet.FieldByName('IDF_DESIGNACAO').asstring = ''  then
+    qrsubdetail3.Height := 0
+   else
+    qrsubdetail3.Height := qrs3;
+  If frn then
+      Begin
+        tit3.caption := def43 ;
+        frn  := false;
+      end
+   else
+        tit3.caption := '';}
+end;
+
+procedure Tfrm_PApde.DetailBand1BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  inherited;
+   fif := true;
+   fdg := true;
+   frn := true;
+    {If wgrupo = qrp.DataSet.FieldByName('pdes').asstring then
+    Begin
+      pdes1.Caption := '';
+      pdesc1.Lines.Text := '';
+      detailband1.Height := 0;
+    end
+   else
+    Begin
+      wgrupo :=  qrp.DataSet.FieldByName('pdes').asstring ;
+      pdes1.Caption := qrp.DataSet.FieldByName('pdes').asstring  ;
+      pdesc1.Lines.Text := qrp.DataSet.FieldByName('pdesc').value ;
+      detailband1.Height := 19;
+    end;}
+end;
+
+procedure Tfrm_PApde.qrpBeforePrint(Sender: TCustomQuickRep;
+  var PrintReport: Boolean);
+begin
+  inherited;
+  {qrs1 := qrsubdetail1.height;
+  qrs2 := qrsubdetail2.height;
+  qrs3:= qrsubdetail3.height;}
+end;
+
+end.

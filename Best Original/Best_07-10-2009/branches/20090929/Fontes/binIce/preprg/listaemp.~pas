@@ -1,0 +1,24 @@
+unit listaemp;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, LISTA_STD, Menus, StdCtrls, Buttons, ExtCtrls;
+
+type
+  Tfrm_lista_emp = class(TLISTA_STD)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_lista_emp: Tfrm_lista_emp;
+
+implementation
+
+{$R *.dfm}
+
+end.

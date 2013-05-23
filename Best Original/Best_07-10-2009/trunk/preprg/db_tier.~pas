@@ -1,0 +1,84 @@
+unit db_tier;     {classes de connection  com Bancos de dados}
+
+interface
+
+uses
+  windows,DB, ADODB,forms,Messages,Dialogs,DBtables;
+
+
+type
+
+//classe genérica de BD
+TDb = Class
+  private
+    FDbTipo: TObject;
+    FDBName: string;
+    FProvider: Tstring;
+    procedure SetDbTipo(const Value: TObject);
+    procedure SetDBName(const Value: string);
+    procedure SetProvider(const Value: string);
+ protected
+
+
+ public
+    constructor create(pClass : Tclass;pProvider : TObject; pDbName : string);overload;
+
+ published
+  property DbTipo : TObject read FDbTipo write SetDbTipo;
+  property Provider : string ;
+  property DBName   : string read FDBName write SetDBName;
+  function DbQry  : TOBject;abstract;virtual;
+
+end;
+
+var
+DBAtu : TDB;
+
+implementation
+
+
+  Constructor TDB.create(pClass : Tclass;pProvider : string; pDbName : string)
+   begin
+     pClass.Create;
+     If pClass = TADOConnection then
+      begin
+         DbTipo   := TadoConnection.create(application);
+         Provider := pProvider;
+         DefaultDatabase := pDbname;
+         DbQry  := TAdoQuery.Create(application);
+         DbQry.
+      //   (DbTipo as Tadoconnection).ConnectionString := dbs.adoc.connectionstring;
+         (DbTipo as Tadoconnection).LoginPrompt := false;
+      end;
+     If pClass = TDatabase then
+      begin
+          DbTipo := TDatabase.create(Application);  // Interbase
+         {(DbTipo as TdataBase).DriverName         := dbs.INTERDB.DriverName;
+         (DbTipo as TdataBase).DatabaseName       := 'SAT';
+         (DbTipo as TdataBase).Name               := 'iib';
+         (DbTipo as TdataBase).LoginPrompt        := false;
+         (DbTipo as TdataBase).Params             := dbs.INTERDB.Params; }
+      end;
+
+
+   end;
+
+
+
+
+procedure TDb.SetDBName(const Value: string);
+begin
+  FDBName := Value;
+end;
+
+procedure TDb.SetDbTipo(const Value: TObject);
+begin
+  FDbTipo := Value;
+end;
+
+procedure TDb.SetProvider(const Value: string);
+begin
+  FProvider := Value;
+end;
+
+end.

@@ -1,0 +1,41 @@
+unit FORM0;
+
+interface
+    { criar duas units : uma para novas queries (camada dados);
+     outra para para camada de negócios e derivar as classes desejadas
+     para classe de negócios, criar constructor :
+     constructor ipessoa.create;
+     Begin
+       inherited;
+      DMObject := TDObject(dPessoa.create(nil));
+     end;
+     no create, criar o iObj com nova classe definida}
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs,Stdctrls,CAD_STAND, ComCtrls, Menus, Buttons, ExtCtrls,adodb,db_tier;
+
+  
+type
+  TForm3 = class(TForm)
+
+
+  private
+  
+
+  public
+
+    
+  published
+   
+  end;
+
+var
+  Form3: TForm3;
+
+implementation
+
+{$R *.dfm}
+
+
+
+end.
