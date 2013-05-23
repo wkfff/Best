@@ -1,0 +1,2294 @@
+unit bst_ger;
+
+{ acrescentar : - opção de escolha dos campos a serem listados (lb)
+
+
+
+}
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Menus, ImgList, ComCtrls, StdCtrls, DBCtrls, Grids,
+  DBGrids, Buttons, ToolWin, Mask, ExtCtrls,bst_objetos,bstdb,dbtables,db,
+  strUtils,cls_obj,cls_codigo,fonctions, ADODB,bst_Basefrm, BST_TELAOBJ;
+
+type
+  Tfrm_ger = class(TBaseFrm)
+    tab_atributos: TTabSheet;
+    tab_metodos: TTabSheet;
+    DBG_ATRIB: TDBGrid;
+    dbg_met: TDBGrid;
+    SpeedButton8: TSpeedButton;
+    TabSheet1: TTabSheet;
+    DBGrid1: TDBGrid;
+    RD_MVIS: TDBRadioGroup;
+    RD_MTIPO: TDBRadioGroup;
+    RD_TIM: TDBRadioGroup;
+    RD_BIN: TDBRadioGroup;
+    RD_DIR: TDBRadioGroup;
+    DBG_PARM: TDBGrid;
+    DBMemo1: TDBMemo;
+    Label4: TLabel;
+    Label5: TLabel;
+    DBMemo2: TDBMemo;
+    Tab_objeto: TTabSheet;
+    prg_unit: TMemo;
+    SpeedButton1: TSpeedButton;
+    sp_atrib: TSpeedButton;
+    Memo1: TMemo;
+    OO_unit: TMemo;
+    GroupBox3: TGroupBox;
+    Label12: TLabel;
+    GroupBox1: TGroupBox;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Memo2: TMemo;
+    Label7: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Edit5: TEdit;
+    Label15: TLabel;
+    Edit6: TEdit;
+    Label16: TLabel;
+    Edit7: TEdit;
+    Label17: TLabel;
+    rg_vis: TRadioGroup;
+    SpeedButton6: TSpeedButton;
+    rd_tipo: TRadioGroup;
+    e_nomeLista: TEdit;
+    Label18: TLabel;
+    BT1: TSpeedButton;
+    Label19: TLabel;
+    Label6: TLabel;
+    Label9: TLabel;
+    Label11: TLabel;
+    sp_verdd: TSpeedButton;
+    sp_veroo: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton9: TSpeedButton;
+    sp_crude: TSpeedButton;
+    e_classe: TEdit;
+    sp_classe: TSpeedButton;
+    Edit1: TEdit;
+    Edit4: TEdit;
+    Edit8: TEdit;
+    Edit9: TEdit;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure SpeedButton5Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure sp2Click(Sender: TObject);
+    procedure Excluir1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure sp_crudeClick(Sender: TObject);
+    procedure SpeedButton9Click(Sender: TObject);
+    procedure sp_verddClick(Sender: TObject);
+    procedure sp_verooClick(Sender: TObject);
+    procedure sp_classeClick(Sender: TObject);
+  private
+    Fidados: TIdf_cs;
+    FiProp: TIdf_Py;
+    FiAncestor: TIdf_cs;
+    Fiparm: TIDF_pr;
+    FObjDir: string;
+    FObj: string;
+    FObjName: string;
+    Fidad: Tdad;
+    FNOMECLASSE: STRING;
+    FNOME_DFM: STRING;
+    FNOME_UNIT: STRING;
+    Fform_name: string;
+    FPROGDIR: STRING;
+    FwList: TStringList;
+    FwText: TStringList;
+    FNOMEOO: string;
+    FObjNameOO: string;
+    FTABELA: STRING;
+    FNOMETELAMASTER: STRING;
+    FNOMETELADETAIL: STRING;
+    FCliente: integer;
+    FCenario: integer;
+    FID: integer;
+    procedure Setidados(const Value: TIdf_cs);
+    procedure SetiProp(const Value: TIdf_Py);
+    procedure SetiAncestor(const Value: TIdf_cs);
+    procedure Setiparm(const Value: TIDF_pr);
+    function Deleta_Classe(pClasse : string; pUNit : TMemo ) : Tmemo;
+    function Gerar_Classe: boolean;
+    function Preparar_Geracao: boolean;
+    function Recriar_Crude(pClasse : string;pUnit : Tmemo) : Tmemo;
+    procedure SetObjDir(const Value: string);
+    procedure SetObj(const Value: string);
+    procedure SetObjName(const Value: string);
+    procedure Setidad(const Value: Tdad);
+    procedure Delete_class(pObjeto,pFuncao : string);
+    procedure Deleta_Funcao(pObjeto: string);
+    function Importa_property(pCli,pProj,pClasse : integer;pTabela : string) : boolean;
+    procedure Get_prop(pClasse : integer);
+    procedure aScroll(Dataset: Tdataset);
+    procedure SetNOMECLASSE(const Value: STRING);
+    function Carrega_cpo_Confirma(pList: TstringList): TstringList;
+    function Carrega_edit(pTab, pTipo: string): boolean;
+    function Cria_Confirma(pClass, pObj: string): boolean;
+    function Cria_Confirma_det(pClass, pObj: string): boolean;
+    function Cria_Consiste: boolean;
+    function Cria_Consiste_det: boolean;
+    function Cria_Create: boolean;
+    function Cria_DataClose(pPref: string): boolean;
+    function Cria_DBGrid1Click: boolean;
+    function Cria_del(pClass, pObj, pFunc: string): boolean;
+    function Cria_del_Det(pClass, pObj: string): boolean;
+    function Cria_Edit(pPreflab, pprefdate: string): boolean;
+    function Cria_Limpa(pFunc: string): boolean;
+    function Cria_MostraCampos(pClass, pObj: string): boolean;
+    function Cria_MostraCamposDet(pClass, pObj: string): boolean;
+    function Cria_Property(MasterDet: boolean): boolean;
+    function Cria_Show: boolean;
+    procedure Cria_showMaster;
+    function CriaParmMetodo: string;
+    procedure Gera_tela(pnom: string);
+    function Insert_code(pLinhaFim: integer; pText,
+      pCode: TstringList): TStringList;
+    procedure Setform_name(const Value: string);
+    procedure SetNOME_DFM(const Value: STRING);
+    procedure SetNOME_UNIT(const Value: STRING);
+    function Altera_use: boolean;
+    procedure SetPROGDIR(const Value: STRING);
+    procedure SetwList(const Value: TStringList);
+    procedure SetwText(const Value: TStringList);
+    function Editavel(pIndex: integer): boolean;
+    function Gerar_ClasseOO: boolean;
+    procedure SetNOMEOO(const Value: string);
+    procedure SetObjNameOO(const Value: string);
+    function Cria_ddMap(pClass, pObj: string): boolean;
+    function Cria_LBclick(pClass,pObj : string): boolean;
+    function Cria_MostraObjeto(pClass, pObj: string): boolean;
+    function Cria_Close: boolean;
+    procedure ddmap_atrib(dataset: Tdataset);
+    procedure ddmap_atu(pde, ppara: TIdf_py);
+    function Monta_dominio(pDom: TstringList;pNome : string): boolean;
+    procedure SetTABELA(const Value: STRING);
+    procedure SetNOMETELADETAIL(const Value: STRING);
+    procedure SetNOMETELAMASTER(const Value: STRING);
+    procedure SetCenario(const Value: integer);
+    procedure SetCliente(const Value: integer);
+    procedure SetID(const Value: integer);
+
+    { Private declarations }
+  public
+    { Public declarations }
+  published
+   property ObjName : string read FObjName write SetObjName;
+   property ObjNameOO : string read FObjNameOO write SetObjNameOO;
+   property ObjDir : string read FObjDir write SetObjDir;
+   property Objeto : string read FObj write SetObj;
+   property idados : TIdf_cs read Fidados write Setidados;
+   property iProp  : TIdf_Py read FiProp write SetiProp;
+   property iAncestor : TIdf_cs read FiAncestor write SetiAncestor;
+   property iparm : TIDF_pr read Fiparm write Setiparm;
+   property idad : Tdad read Fidad write Setidad;
+   property NOMECLASSE : STRING read FNOMECLASSE write SetNOMECLASSE;
+   property NOMEOO : string read FNOMEOO write SetNOMEOO;
+   property form_name : string  read Fform_name write Setform_name;
+   property NOME_UNIT : STRING read FNOME_UNIT write SetNOME_UNIT;
+   PROPERTY NOME_DFM : STRING read FNOME_DFM write SetNOME_DFM;
+   property PROGDIR  : STRING read FPROGDIR write SetPROGDIR; // diretório do programa (BEST)
+   property wList : TStringList read FwList write SetwList;
+   property wText : TStringList read FwText write SetwText;
+   property TABELA : STRING read FTABELA write SetTABELA;
+   property NOMETELAMASTER : STRING read FNOMETELAMASTER write SetNOMETELAMASTER;
+   property NOMETELADETAIL : STRING read FNOMETELADETAIL write SetNOMETELADETAIL;
+   property Cliente : integer read FCliente write SetCliente;
+   property Cenario : integer read FCenario write SetCenario;
+   property ID : integer read FID write SetID;
+   procedure LoadConstantObj;override;
+ end;
+
+ { Marcador de Blocos}
+  const WMarc: array[1..6] of sTRING = ('{Início Classe ', '{Fim Classe ', '{Início Métodos ','{Fim Métodos ','{Início Set Values ','{Fim Set Values ');
+
+
+var
+  frm_ger: Tfrm_ger;
+implementation
+
+uses bst_main, bst_if, bst_dir4, bst_cs;
+
+
+{$R *.dfm}
+
+procedure Tfrm_ger.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+   frm_cs := nil;
+   action := caFree;
+end;
+
+procedure Tfrm_ger.SpeedButton5Click(Sender: TObject);
+begin
+  inherited;
+  close;
+end;
+
+procedure Tfrm_ger.FormShow(Sender: TObject);
+begin
+ // inherited;
+  //sp2.enabled := true;
+end;  
+
+
+procedure Tfrm_ger.Setidados(const Value: TIdf_cs);
+begin
+  Fidados := Value;
+end;
+
+procedure Tfrm_ger.FormCreate(Sender: TObject);
+begin
+  inherited;
+ // sp2.enabled := true;
+  idados      :=  TIdf_cs.create(self);
+  iDad       := TDad.create(self);   
+END;
+
+procedure Tfrm_ger.SetTABELA(const Value: STRING);
+begin
+  FTABELA := Value;
+end;
+
+
+
+procedure Tfrm_ger.SetiProp(const Value: TIdf_Py);
+begin
+  FiProp := Value;
+end;
+
+
+procedure Tfrm_ger.sp2Click(Sender: TObject);   //confirma
+ begin
+  inherited;
+  //Salvar;
+   close;
+
+ end;
+
+
+procedure Tfrm_ger.Excluir1Click(Sender: TObject);
+begin
+ // inherited;
+
+end;
+
+procedure Tfrm_ger.SetiAncestor(const Value: TIdf_cs);
+begin
+  FiAncestor := Value;
+end;
+
+procedure Tfrm_ger.Setiparm(const Value: TIDF_pr);
+begin
+  Fiparm := Value;
+end;
+
+
+
+
+
+
+procedure Tfrm_ger.SpeedButton2Click(Sender: TObject);
+begin
+  inherited;
+ // Salvar;
+  Preparar_geracao;
+end;
+
+function Tfrm_ger.Preparar_Geracao : boolean;   //prepara a geração do código
+
+var
+i,j : integer;
+wmens : string;
+wl : integer;
+s : string;
+begin
+  inherited;
+   If ObjDir = '' then   //diretório
+    raise exception.Create('Informar o Diretório do projeto');
+   If RightSTR(ObjDir,1) = '\' then
+      ObjDir := leftstr(ObjDir,length(ObjDir)-1);
+   If not DirectoryExists(ObjDir) then
+     CreateDir(ObjDir);
+   //copia arquivos
+   If not FileExists(ObjDir+'\basetier.pas') then
+      xCopyFile(ProgDir,ObjDir,'basetier.pas','basetier.pas');
+   If not FileExists(ObjDir+'\db_tier.pas') then
+      xCopyFile(ProgDir,ObjDir,'db_tier.pas','db_tier.pas');
+   If not FileExists(ObjDir+'\cad_stand.pas') then
+      xCopyFile(ProgDir,ObjDir,'cad_stand.pas','cad_stand.pas');
+   If not FileExists(ObjDir+'\cad_stand.dfm') then
+     xCopyFile(ProgDir,ObjDir,'cad_stand.dfm','cad_stand.dfm');
+   If not FileExists(ObjDir+'\frm_primar.dfm') then
+      xCopyFile(ProgDir,ObjDir,'frm_primar.dfm','frm_primar.dfm');
+   If not FileExists(ObjDir+'\frm_primar.pas') then
+     xCopyFile(ProgDir,ObjDir,'frm_primar.pas','frm_primar.pas');
+   If not FileExists(ObjDir+'\pd_tier.pas') then
+     xCopyFile(ProgDir,ObjDir,'pd_tier.pas','frm_prim.pas');
+   If not FileExists(ObjDir+'\bst_basefrm.pas') then
+     xCopyFile(ProgDir,ObjDir,'bst_basefrm.pas','bst_basefrm.pas');
+   If not FileExists(ObjDir+'\bst_basefrm.dfm') then
+     xCopyFile(ProgDir,ObjDir,'bst_basefrm.dfm','bst_basefrm.dfm');
+   If ObjName = '' then
+    raise exception.Create('Informar o nome da Camada de Dados');
+   If ExtractFileext(ObjName) <> '' then
+     begin
+      i := pos('.',ObjName);
+      ObjName := leftstr(ObjName,length(ObjName) - i);
+     end;
+
+   If ObjNameOO = '' then
+    raise exception.Create('Informar o nome da Camada de Objetos de Negócio');
+
+   If ExtractFileext(ObjNameOO) <> '' then
+     begin
+      i := pos('.',ObjNameOO);
+      ObjNameOO := LeftStr(ObjNameOO,length(ObjNameOO) - i);
+     end;
+
+   //Gera Data Tier
+   prg_unit.Lines.Clear;
+
+   If fileexists(ObjDir + '\'+ObjName+'.pas') then
+     begin
+      wMens := AnsireplaceStr(Mens145,'&',ObjDir + '\'+ObjName+'.pas');
+      If MessageDlg(wmens, mtConfirmation,[mbYes, mbNo], 0)= mrYes then
+        begin
+          deletefile(ObjDir + '\'+ObjName+'.pas') ;
+          prg_unit.lines.LoadFromFile(ProgDir + '\bst_unit.pas') ;
+        end
+      else
+         prg_unit.lines.LoadFromFile(ObjDir + '\'+ObjName+'.pas')
+     end ;
+
+   // prg_unit.lines.saveToFile(ObjDir +'\'+ ObjName+'.pas');
+    If Localiza_Objeto(prg_unit,NOMECLASSE,0) = -1 then
+    begin
+    If MessageDlg(def23+NOMECLASSE+ def24+#13+def25, mtConfirmation,[mbYes, mbNo], 0)= mrYes then
+       Begin
+         prg_unit.lines.LoadFromFile(ProgDir + '\bst_unit.pas') ;
+         Gerar_Classe;
+       end;
+    end;
+    prg_unit.lines.saveToFile(ObjDir +'\'+ ObjName+'.pas');
+
+   //Objetos de negócio Tier
+   oo_unit.Lines.Clear;
+
+   If fileexists(ObjDir + '\'+ObjNameOO+'.pas') then
+      begin
+      wMens := AnsireplaceStr(Mens145,'&',ObjDir + '\'+ObjNameOO+'.pas');
+      If MessageDlg(wmens, mtConfirmation,[mbYes, mbNo], 0)= mrYes then
+        begin
+          deletefile(ObjDir + '\'+ObjNameOO+'.pas') ;
+          oo_unit.lines.LoadFromFile(ProgDir + '\pd_tier.pas') ;
+        end
+      else
+        oo_unit.lines.LoadFromFile(ObjDir + '\'+ObjNameOO+'.pas')
+      end ;
+
+
+    If Localiza_Objeto(OO_unit,NOMEOO,0) = -1 then
+    begin
+       If MessageDlg(def23+NOMEOO+ def24+#13+def25, mtConfirmation,[mbYes, mbNo], 0)= mrYes then
+         Begin
+         oo_unit.lines.LoadFromFile(ProgDir + '\pd_tier.pas') ;
+         Gerar_ClasseOO;
+       end; 
+    end;
+    oo_unit.lines.saveToFile(ObjDir +'\'+ ObjNameOO+'.pas');
+end;
+
+function Tfrm_ger.Gerar_Classe : boolean;
+var                             { gera os comandos sql para o CRUDE}
+wmem : Tmemo;
+wcod : integer;
+begin
+  inherited;
+  wmem := Tmemo.Create(self);
+  wmem.Visible := false;
+  self.InsertControl(wmem);
+  wmem.Lines.ADD(' ');
+  try
+    idad.fClient.first;
+    wmem := Gera_objeto(id,TABELA,objname,NOMECLASSE,prg_unit,idad,true) ;
+    If wmem <> nil then
+     Begin
+      prg_unit := wmem;
+      If prg_unit.lines.count > 0 then
+        prg_unit.lines.saveToFile(ObjDir + '\' + objname+'.pas')
+     end;
+  finally
+
+  end;
+end;
+
+function Tfrm_ger.Gerar_ClasseOO : boolean;
+var                             { gera os comandos sql para o CRUDE}
+wmemoo : Tmemo;
+wcod : integer;
+oo : TIdf_cs;
+begin
+  inherited;
+  wmemoo := Tmemo.Create(self);
+  wmemoo.Visible := false;
+  self.InsertControl(wmemoo);
+  wmemoo.Lines.ADD(' ');
+  try
+    //verificar se classe oo já existe  , senão cria..
+    OO := TIdf_Cs.create(self);
+    If OO.get_ObjectByNome(Cliente,Cenario,NomeOO) = 0 then
+     begin
+      OO.CLI_ID := Cliente;
+      OO.PRJ_ID := Cenario  ;
+      OO.LCK    := '';
+      OO.IDG_ID := 0;
+      OO.IDF_VISIBLE := '';
+      OO.IDF_VERSAO_DATA := date;
+      OO.IDF_VERSAO := '1';
+      OO.IDF_TIPO_ATIVIDADE := 'CS';
+      OO.IDF_RESPONSAVEL := '';
+      OO.IDF_OBJETIVO := 'Objeto de negócio da Classe '+NOMECLASSE;
+      OO.IDF_DIRETORIO := '';
+      OO.IDF_DESIGNACAO := NOMEOO;
+      OO.IDF_DEL := '';
+      OO.Inclui;
+      //.. e criar as properties
+      Get_prop(OO.IDF_CODIGO);
+
+     end;
+
+
+    idad.fClient.first;
+    wmemoo := Gera_OO(OO.IDF_CODIGO,TABELA,NOMECLASSE,objnameOO,NOMECLASSE,ObjName,oo_unit,idad,true) ;
+    If wmemoo <> nil then
+     Begin
+      oo_unit := wmemoo;
+      If oo_unit.lines.count > 0 then
+        oo_unit.lines.saveToFile(ObjDir + '\' + objnameOO+'.pas')
+     end;
+  finally
+
+  end;
+end;
+
+
+
+
+procedure Tfrm_ger.SpeedButton3Click(Sender: TObject);
+begin
+  inherited;
+  Gerar_Classe;
+end;
+
+procedure Tfrm_ger.sp_crudeClick(Sender: TObject);
+begin
+  inherited;
+  sp_verddClick(nil);
+  Recriar_Crude(NOMECLASSE,prg_unit);
+end;
+
+
+function Tfrm_ger.Recriar_Crude(pClasse : string;pUnit : Tmemo) : TMemo;
+begin
+  inherited;
+  Deleta_Classe(pClasse,pUnit);     //deleta classes, métodos e set values do DD e do OO
+  Gerar_classe ;
+  Gerar_ClasseOO;
+
+end;
+// deleta classe no DD  e OO
+function Tfrm_ger.Deleta_Classe(pClasse : string; pUNit : TMemo ) : Tmemo;
+var                                   // delete declaracoa da funçào pFuncaoa específica
+i ,j,begCont,Lin_Ini,Lin_fim,k,m: integer;
+wtxt,wtxt1,wtxt2,wline :string;
+wtab,wnom,wNomOO,wNomDDWconstant,wObj : string;
+wUnitDD,wUnitOO : TStringList;
+
+ Begin
+ wUnitDD := TstringList.create;
+ wUnitOO := TstringList.create;
+ try
+  try
+     prg_unit.Lines.LoadFromFile(ObjDir + '\' + ObjName+'.pas');
+     OO_unit.Lines.LoadFromFile(ObjDir + '\' + ObjNameOO+'.pas');
+     wUnitDD.AddStrings(prg_Unit.lines);   //salva
+     wUnitOO.AddStrings(OO_Unit.lines);    //salva
+     wnom   := 'T'+lowercase(pClasse);
+     for m := 1 to 2 do   //1 DD ;2 : OO
+     begin
+       Begin
+         If m = 1 then    //DD
+            Begin
+             wnom   := 'T'+lowercase(pClasse) ;
+             pUnit  := prg_unit;
+             wObj   := ObjName;
+            end
+         else      //OO
+             Begin
+              wnom   := 'O'+lowercase(pClasse) ;
+              pUnit  := OO_Unit;
+              wObj   := ObjNameOO;
+             end;
+         j := 1;
+         While j <= 5 do
+          begin
+            K := Localiza_Objeto (pUnit,wMarc[j] + WNom+'}',0) ; //posiciona na linha  da Classes
+            If k >= 0 then
+             Begin
+               Lin_ini := K;
+               K := Localiza_Objeto (pUnit,wMarc[j+1] + WNom+'}',0) ; //posiciona na linha  da Classes
+               If (k >=0) and (k >= Lin_ini) then
+                 Begin
+                   Lin_Fim := K;
+                   for i := Lin_Fim Downto Lin_Ini do
+                      pUnit.Lines.Delete(i);
+                   If punit.lines.count > 0 then
+                      punit.lines.saveToFile(ObjDir + '\' + wObj+'.pas')  ;
+                 end;
+             end
+            else
+             Raise Exception.create('Código não pode ser atualizado! Foi Alterado Manualmente!');
+            j := j + 2;
+          end;
+
+      end;
+     end;
+  except
+    prg_unit.Lines  := wUnitDD;
+    oo_unit.lines   := wUnitOO;
+    prg_unit.lines.saveToFile(ObjDir + '\' + ObjName+'.pas')  ;
+    oo_unit.lines.saveToFile(ObjDir +'\'+ ObjNameOO+'.pas');
+    raise;
+  end;
+ finally
+  prg_unit.Lines.LoadFromFile(ObjDir + '\' + ObjName+'.pas');
+  OO_unit.Lines.LoadFromFile(ObjDir + '\' + ObjNameOO+'.pas');
+ end;
+ end;
+
+
+procedure Tfrm_ger.SetObjDir(const Value: string);
+begin
+  FObjDir := Value;
+end;
+
+procedure Tfrm_ger.SetObj(const Value: string);
+begin
+  FObj := Value;
+end;
+
+procedure Tfrm_ger.SetObjName(const Value: string);
+begin
+  FObjName := Value;
+end;
+
+procedure Tfrm_ger.Setidad(const Value: Tdad);
+begin
+  Fidad := Value;
+end;
+
+
+procedure Tfrm_ger.SetNOMECLASSE(const Value: STRING);
+begin
+  FNOMECLASSE := Value;
+end;
+
+
+procedure Tfrm_ger.SpeedButton9Click(Sender: TObject);
+begin
+  inherited;
+ 
+  If NomeTelaMaster = '' then
+     raise exception.create('Informar o Nome da tela!');
+  If e_NomeLista.text = '' then
+     raise exception.create('Informar o Nome do Atributo a Listar!');
+   Gera_tela(NomeTelaMaster);
+   memo1.Visible := true;
+end;
+
+procedure Tfrm_ger.Gera_tela(pnom : string);
+var
+i,Lin_ini : integer;
+ws : string;
+begin
+  inherited;
+  FORM_NAME := 'FRM_'+ pNom ;
+  NOME_UNIT :=  pNom+'.PAS';
+  NOME_DFM  :=  pNom+'.DFM';
+  If wlist = nil then
+    wList := Tstringlist.Create;
+    wlist.Clear;
+    prg_unit.Lines.clear;
+    PRG_UNIT.Lines.loadfromfile(PROGDIR+'\FORM0.PAS');
+    prg_unit.lines[0] := 'unit '+ leftstr(NOME_UNIT,LENGTH(NOME_UNIT)-4)+';';  
+    prg_unit.Text := Replacestr(prg_unit.Text,'TForm3 = class(TForm)','T'+
+                             form_name +' = class(TCAD_STAND)');
+    prg_unit.Text := Replacestr(prg_unit.Text,'Form3',form_name);
+    prg_unit.Text := Replacestr(prg_unit.Text,'TForm3','T'+form_name);
+    prg_unit.Lines.SAVETOFILE(OBJDIR+'\'+NOME_UNIT);
+
+   { cria DFM}
+
+    wList.loadfromfile(PROGDIR+'\FORM0.DFM');
+    wlist[0] := 'inherited '+ form_name +' : T'+form_name;
+    wlist[1] := 'Color = 14145495';
+    Lin_ini := Localiza_objeto(wList,'Caption',0);
+    If Lin_ini >= 0 then
+      wList[lin_ini] := 'Caption = '+''''+NOMECLASSE+'''';
+    wList.SAVETOFILE(OBJDIR+'\'+NOME_DFM);
+
+   Carrega_edit(TABELA,'M');   //cria os tedits e tlabels;
+   altera_use;                       // coloca o nome da unit de classes no use;
+   Cria_property (false) ;           //cria property para objetop de negócio
+   Cria_ddmap(NOMEOO,'iObj'); ;      //cria property para popular as properties do Objeto de negócio
+   Cria_create;                      //  cria o create do objeto no formcreate;
+   Cria_close;                      //  cria o close do objeto no formcreate;
+   Cria_Show ;                     // Cria método onShow
+   Cria_Confirma(NOMEOO,'iObj');     //  cria o método de Confirmação
+   Cria_Consiste;                    //  cria o método de consistencia
+  // Cria_Edit('l_','d_');             //  cria os Objetos Tedit (type)_
+   Cria_MostraCampos(NOMEOO,'iObj'); //  cria oo método que popula os tedit a partir dos atributos da tabela
+   Cria_MostraObjeto(NOMEOO,'iObj'); // mostra o objeto a partir da Chava
+   Cria_LBClick(NOMEOO,'iObj');      // Cria o método do click do ListBox ;
+  // Cria_Limpa('Limpa_campos');       // Cria o método para limpar os Tedit;
+   Cria_DataClose('d_');             // Cria o método para colocar a data do Datetimepicker no tedit;
+   Cria_del(NOMEOO,'iObj','spb_delClick(Sender: TObject)'); // Cria o método de deleção;
+
+end;
+
+function Tfrm_ger.Carrega_edit(pTab : string;pTipo : string) : boolean;
+ var
+ wleft,wtop,i,wtaborder,dt,Lin_ini,Lin_end,wpos,Linha: integer;
+ ws: string;
+ wCode,wtxt,wDom : TstringList;
+ Begin
+   wtxt := TStringList.create;
+   wDom := TStringList.create;
+   If not idad.Get_dados(pTab) then
+    Raise exception.create(def27+pTab+def271);
+  // Salva_cpo(idad); ativar
+   If pTipo <> 'D' then //e master
+    aCpoMast := aCpo;
+   wList.loadfromfile(OBJDIR+'\'+NOME_DFM);
+   prg_unit.Lines.clear;
+   prg_unit.lines := wlist;
+   wtaborder := 0;
+   Lin_ini := 0;
+   wText.Clear;
+
+   If pTipo = 'D' then  //detalhe
+    Begin
+       dt     := 0;
+       wleft  := 0;
+       wtop   := 0;
+       for i := 0 to  WLIST.count -1 do
+        Begin
+         ws := trim(wlist[i]);
+         wpos := pos('Panel4', ws) ;
+         If  wpos  > 0 then
+          Begin
+             Lin_ini := i;
+             break;
+          end;
+         end;
+
+       If Lin_ini = 0 then
+        exit;
+       for i := Lin_ini to  WLIST.count -1 do
+        Begin
+         ws := trim(wlist[i]);
+         If pos('end', ws) > 0 then
+          Begin
+             Lin_end := i;
+             break;
+          end;
+         end;
+
+    end
+   else       //master
+     Begin
+        Lin_end := wlist.count-1;
+        dt     := 0;
+        wleft  := 358;
+        wtop   := 52;
+     end;
+
+
+   idad.fclient.first;
+    while not idad.fclient.eof do
+     begin
+    //  If not InMemo(idad.fclient.fieldbyname('IDF_DESIGNACAO').asstring,wtext,0,0) then   // verifica duplicidade
+      begin
+         // Monta labels
+         If ((idad.fclient.fieldbyname('IDF_VISIBLE').asstring <> '') and
+              (uppercase(idad.fclient.fieldbyname('IDF_VISIBLE').asstring) <> 'N') ) OR
+              (idad.fclient.fieldbyname('IDF_PK').asinteger > 0 )then
+
+          Begin
+             //NOME DO CAMPO (LABEL)
+             wtext.clear;
+             wtext.add('   object '+''+'l_'+idad.fclient.fieldbyname('IDF_DESIGNACAO').asstring+''+': Tlabel');
+             wtext.add('     caption = '+''''+idad.fclient.fieldbyname('IDF_CAPTION').asstring+'''');
+             wtext.add('     Height = 13');
+             wtext.add('     Width = 32');
+             wtext.add('     Top = '+''+inttostr(wtop)+'');
+             wtext.add('     Left = '+''+inttostr(wleft)+'');
+             wtext.add('   end');
+
+             wtop := wtop+16;
+
+              If uppercase(idad.fClient.FieldByName('IDF_DATA_TYPE').AsString) = 'D' then
+                Begin
+                  // Monta datetime picker em caso de data
+                 inc(dt);
+                 wtext.add('object d_'+''+idad.fclient.fieldbyname('IDF_DESIGNACAO').asstring+''+': TDateTimePicker');
+                 wtext.add('Left = '+''+inttostr(wleft)+'');
+                 wtext.add('Top = '+''+inttostr(wtop)+'');
+                 wtext.add('Width = 145');
+                 wtext.add('Height = 21');
+                 wtext.add('TabOrder = '+''+inttostr(wtabOrder)+'');
+                 wtext.add('kind = dtkdate');  wtext.add('parseInput = false');
+                 wtext.add('dateFormat = dfShort');
+                 wtext.add('time = 38140.5243169329');
+                 wtext.add('date = 38140.5243169329');
+                 wtext.add('CalAlignment = dtaLeft');
+                 wtext.add('OnCloseUp = DateClose');
+                 wtext.add('end');
+                end;
+
+
+             If (trim(idad.fClient.FieldByName('IDF_DOMINIO').Value) <> '') and (uppercase(idad.fClient.FieldByName('IDF_DOMINIO').Value) <> '(MEMO)') then
+                Begin
+                  // Monta Combo Domínio
+                 inc(dt);
+                 wtext.add('object c_'+''+idad.fclient.fieldbyname('IDF_DESIGNACAO').asstring+''+' : TComboBox');   
+                 wtext.add('Left = '+''+inttostr(wleft)+'');
+                 wtext.add('Top = '+''+inttostr(wtop)+'');
+                 wtext.add('Width = 145');
+                 wtext.add('Height = 21');
+                 wtext.add('ItemHeight = 17');
+                 wtext.add('TabOrder = '+''+inttostr(wtabOrder)+'');
+                 wtext.add('Text = '+''''+'CMB_TAB'+'''' );
+                 wtext.add('OnCloseUp = CmbClose');
+                 wtext.add('end');
+                 wDom.Clear;
+                 wdOm.Text := idad.fClient.FieldByName('IDF_DOMINIO').Value;
+                 inc(wTaborder);
+                 Monta_dominio(wDom,'c_'+idad.fclient.fieldbyname('IDF_DESIGNACAO').asstring);
+
+                end;
+
+
+
+             { monta Tedits}
+             If uppercase(idad.fclient.fieldbyname('IDF_DATA_TYPE').asstring) = 'M' then
+                wtext.add('object '+''+idad.fclient.fieldbyname('IDF_DESIGNACAO').asstring+''+': Tmemo')
+             else
+                wtext.add('object '+''+idad.fclient.fieldbyname('IDF_DESIGNACAO').asstring+''+': TEdit');
+
+
+             wtext.add('Left = '+''+inttostr(wleft)+'');
+             wtext.add('Top = '+''+inttostr(wtop)+'');
+             wtext.add('Width = 121');
+             wtext.add('Height = 21');
+             wtext.add('TabOrder = '+''+inttostr(wtabOrder)+'');
+             wtext.add('BorderStyle = bsNone');
+             wtext.add('Color = 13224393');
+
+             If uppercase(idad.fclient.fieldbyname('IDF_DATA_TYPE').asstring) = 'M' then
+                wtext.add('Lines.Strings  = ('+ ansiquotedstr('',chr(39))+')')
+             else
+               begin
+                 If (idad.fclient.fieldbyname('IDF_PK').asstring <> '') AND
+                    (idad.fclient.fieldbyname('IDF_PK').asstring <> '0') then
+                    begin
+                      wtext.add('     ReadOnly = TRUE ');
+                      wtext.add('     TabStop  = FALSE ');
+                      wtext.add('     Color = clBtnFace');
+                      wtext.add('     Top = '+''+'5'+'');
+                    end;
+
+               end;
+
+             wtext.add('end');
+
+
+             If pTipo = 'D'  then
+               Begin
+                  wtop := wtop - 16;
+                  wleft := wleft + 121;
+                  If wleft >1500 then
+                   Begin
+                    wtop := wtop + 25;
+                    wleft := 0;
+                   end;
+               end
+              else //master
+               Begin
+                wtop := wtop + 25;
+                If wTop >400 then
+                 Begin
+                  wtop := 52;
+                  wleft := wleft +  160;
+                 end;
+               end;
+
+             inc(wTaborder);
+             Insert_code(lin_end,wtext,wlist);
+             
+          end;
+      end;
+     idad.fClient.next;
+     end;
+     wtext.add('inherited lb: TListBox');
+     wtext.add('TabOrder = 15');
+     wtext.add('OnClick = lbClick');
+     wtext.add('end');
+
+    wList.SAVETOFILE(OBJDIR+'\'+NOME_DFM);
+    wDom.free;
+
+ end;
+
+function Tfrm_ger.Cria_Property(MasterDet : boolean) : boolean;
+var
+i,lin_ini,lin_fim,lin_proc,Lin_end,j: integer;
+wtext : TStringList;
+dt : integer;
+ws : string;
+odad : Tdad;
+ Begin
+   Lin_fim := 0;
+   Lin_proc := 0;
+   wtext := TStringList.create;
+   dt := 0;
+
+  wtext.clear;
+  prg_unit.Lines.LoadFromFile(OBJDIR+'\'+NOME_UNIT);
+   Lin_ini := Localiza_objeto(prg_unit,'private',0);
+   for j := 0 to length(aCpo) - 1 do
+       Begin
+
+        If Editavel(j) then
+         Begin
+           If (aTipo[j] = 'C') or (aTipo[j] = 'N') or (aTipo[j] = 'I') then
+              wtext.add('     '+formataCampo(acpo[j],'B',35,'R')+' : Tedit;')
+           else
+           If aTipo[j] = 'M' then
+              wtext.add('     '+formataCampo(acpo[j],'B',35,'R')+' : TMemo;');
+           If aTipo[j] = 'D' THEN
+           Begin
+             inc(dt);
+             s := 'D_'+aCpo[j];
+             wtext.add('     '+formataCampo(s,'B',35,'R')+' : TDateTimePicker;');
+             wtext.add('     '+formataCampo(acpo[j],'B',35,'R')+' : Tedit;')
+           end;
+          wtext.add('     '+formataCampo('L_'+acpo[j],'B',35,'R')+' : Tlabel;');
+         end;
+       end;
+   Insere_bloco(prg_unit,0,Lin_ini,wtext.text,false,FALSE);
+   prg_unit.Lines.saveToFile(OBJDIR+'\'+NOME_UNIT);
+
+
+ // antes do private
+   wtext.clear;
+   prg_unit.Lines.LoadFromFile(OBJDIR+'\'+NOME_UNIT);
+   Lin_ini := Localiza_objeto(prg_unit,'private',0);
+   If Lin_ini > -1 then
+    begin
+       wtext.add('     procedure FormCreate (sender : TObject);');
+       wtext.add('     procedure FormClose (Sender: TObject; var Action: TCloseAction);');
+       wtext.add('     procedure FormShow (Sender: TObject);');
+       wtext.add('     procedure DateClose(sender : Tobject);');
+       wtext.add('     procedure CmbClose(sender : Tobject);');
+       wtext.add('     procedure lbClick(Sender: TObject);');
+       wtext.add('     procedure sp2click(Sender: TObject);');
+       wtext.add('     Procedure spb_delClick(sender : TObject);');
+       Insere_bloco(prg_unit,0,Lin_ini,wtext.text,false,FALSE);
+       prg_unit.Lines.saveToFile(OBJDIR+'\'+NOME_UNIT);
+
+    end;
+
+
+    // após o private
+  prg_unit.Lines.LoadFromFile(OBJDIR+'\'+NOME_UNIT);
+   wtext.Clear;
+   Lin_ini := Localiza_objeto(prg_unit,'private',0);
+   wtext.add('     procedure Mostra_Objeto(pNome : string);');
+   wtext.add('     function  consiste : boolean;');
+ //  wtext.add('     function  Limpa_Campos : boolean;');
+   wtext.add('     procedure ooMap;');
+   Insere_bloco(prg_unit,Lin_ini+1,0,wtext.text,TRUE,FALSE);
+   prg_unit.Lines.saveToFile(OBJDIR+'\'+NOME_UNIT);
+
+    wtext.Clear;
+   // após o published
+   prg_unit.Lines.LoadFromFile(OBJDIR+'\'+NOME_UNIT);
+   Lin_ini := Localiza_objeto(prg_unit,'published',0);
+   wtext.add('     property iObj; ');
+ //  wtext.add('     function  consiste : boolean;');
+ //  wtext.add('     function  Limpa_Campos : boolean;');
+   wtext.add('     function  Mostra_Campos : boolean;');
+ //  wtext.add('     procedure ooMap;');
+   Insere_bloco(prg_unit,Lin_ini+1,0,wtext.text,TRUE,FALSE);
+   prg_unit.Lines.saveToFile(OBJDIR+'\'+NOME_UNIT);
+
+   //combos
+    prg_unit.Lines.LoadFromFile(OBJDIR+'\'+NOME_UNIT);
+    wtext.Clear;
+   Lin_ini := Localiza_objeto(prg_unit,'T'+form_name +' = class(TCAD_STAND)',0);
+
+    odad :=Tdad.create(self);
+    odad.CLI_ID := cliente;
+    oDad.PRJ_ID := Cenario;
+    If not odad.Get_dados(TABELA) then
+      Raise exception.create(def27+TABELA+def271);
+    odad.fclient.first;
+   while not odad.fclient.eof do
+     Begin
+      If (trim(odad.fClient.FieldByName('IDF_DOMINIO').Value) <> '') and (uppercase(odad.fClient.FieldByName('IDF_DOMINIO').Value) <> '(MEMO)') then
+         wtext.add('     C_'+formataCampo(odad.fClient.FieldByName('IDF_DESIGNACAO').asstring,'B',35,'R')+' : TComboBox;');
+
+        odad.fclient.next;
+     end;  
+   Insere_bloco(prg_unit,Lin_ini+1,0,wtext.text,TRUE,FALSE);
+   prg_unit.Lines.saveToFile(OBJDIR+'\'+NOME_UNIT);
+   odad.free;
+end;
+
+procedure Tfrm_ger.Cria_showMaster;   //master/detail
+
+var
+   Lin_fim : integer;
+   Lin_proc : integer;
+   Lin_ini : integer;
+   Lin_end : integer;
+   wCode : TstringList;
+ begin
+   Lin_fim := 0;
+   Lin_proc := 0;
+   Lin_ini := 0;
+   wtext.clear;
+   wList.loadfromfile(OBJDIR+'\'+NOME_UNIT);
+
+   lin_end := wlist.count-1;
+
+
+   wText.add( '{ evento do Show} ');
+   wText.add( 'procedure T'+FORM_NAME +'.FormShow(Sender: TObject);');
+   wText.add( 'begin ');
+   wText.add( '   inherited; ');
+   wtext.Add('    iObj.Get_All'+'('+Cria_ValParam('iObj',FALSE)+');');
+   wText.add( '   If not iDetalhe.Eof then');
+   wText.add( '     DBGrid3CellClick(nil)');
+   wText.add( '  self.Dbgrid1.Datasource := iMaster.dataext;');
+   wText.add( '  If not iMaster.eof then ');
+   wText.add( '    CliClick;   ');
+   wText.add( '    Dbgrid3.Datasource := iDetalhe.DataExt;');
+   wText.add( '');
+   wText.add (' end;');
+   wText.add('  ');
+   Insert_code(lin_end,wtext,wList);
+   wList.Savetofile(OBJDIR+'\'+NOME_UNIT);
+ end;
+
+
+function Tfrm_ger.Insert_code(pLinhaFim : integer;pText,pCode : TstringList) : TStringList;   //insere código no dfm
+var
+i,lin_fim : integer;
+ begin
+  lin_fim := pLinhaFim ;
+  for i := ptext.Count -1 downto 0  do
+     pCode.Insert(Lin_Fim,pText[i]);
+   result := pCode;
+ end;
+
+
+
+function Tfrm_ger.Cria_Create : boolean;
+var
+i,lin_ini,lin_fim,lin_proc,Lin_end: integer;
+ws : string;
+
+ Begin
+
+   prg_unit.Lines.LoadFromFile(OBJDIR+'\'+NOME_UNIT);
+   wInserttext.Clear;
+   wInserttext.Add('') ;
+   wInserttext.Add('procedure T'+FORM_NAME +'.FormCreate(Sender: TObject);') ;
+   wInserttext.Add('var') ;
+   wInserttext.Add(' wdir,wfile,P1,P2: string;') ;
+   wInserttext.Add(' wbd : TstringList;') ;
+   wInserttext.Add('  begin') ;
+   wInserttext.Add('   inherited;') ;
+   wInserttext.Add('   wBd := TstringList.create;') ;
+   wInserttext.Add('   wFile := '+''''+'\'+NomeTelaMaster+''''+' ;') ;
+   wInserttext.Add('   wFile := wFile+'+''''+'.ini'+''''+' ;') ;
+   wInserttext.Add('   wdir := ExtractFileDir(Application.ExeName);') ;
+   wInserttext.Add('   wdir := wdir + wFile'+';') ;
+   wInserttext.Add('   If FileExists(wDir) then') ;
+   wInserttext.Add('     begin') ;
+   wInserttext.Add('      wbd.Loadfromfile(wDir);') ;
+   wInserttext.Add('      DBAtu := Tdb.create(TADOConnection);') ;
+   wInserttext.Add('      P1:= '+''''+'Provider=Microsoft.Jet.OLEDB.4.0;Data Source='+''''+';') ;
+   wInserttext.Add('      P2:= '+''''+';Persist Security Info=False'+''''+';') ;
+   wInserttext.Add('      (Dbatu.DbTipo as TAdoConnection).connectionstring := '+''+'P1'+'+'+'wbd'+'.text'+'+'+'p2'+''+';');
+   wInserttext.Add('      end') ;
+   wInserttext.Add('     else') ;
+   wInserttext.Add('      Raise exception.create('+''''+'Arquivo '+''''+'+'+'wfile'+'+'+''''+' não Encontrado no Diretório!)'+''''+');') ;
+   winserttext.add('   iObj := '+NOMEOO+ '.create;');
+   winserttext.add('   wbd.free;;');
+   wInserttext.Add(' end;') ;
+   wInserttext.Add('') ;
+   Insere_bloco(prg_unit,0,prg_unit.Lines.Count,wInserttext.text,false,FALSE);
+   prg_unit.Lines.Savetofile(OBJDIR+'\'+NOME_UNIT);
+end;
+
+function Tfrm_ger.Cria_Close : boolean;
+var
+i,lin_ini,lin_fim,lin_proc,Lin_end: integer;
+ws : string;
+
+ Begin
+   prg_unit.Lines.LoadFromFile(OBJDIR+'\'+NOME_UNIT);
+
+   wInserttext.Clear;
+   wInserttext.Add('') ;
+   wInserttext.Add('procedure T'+FORM_NAME +'.FormClose(Sender: TObject; var Action: TCloseAction);');
+   wInserttext.Add('  begin;') ;
+   wInserttext.Add('   Inherited;');
+   wInserttext.Add('  '+FORM_NAME +' := nil;');
+   wInserttext.Add('   action := cafree;');
+   wInserttext.Add(' end;') ;
+   Insere_bloco(prg_unit,0,prg_unit.Lines.Count,wInserttext.text,false,FALSE);
+   prg_unit.Lines.Savetofile(OBJDIR+'\'+NOME_UNIT);
+
+end;
+
+function Tfrm_ger.Cria_Show : boolean;
+var
+i,lin_ini,lin_fim,lin_proc,Lin_end,j: integer;
+ws : string;
+pDom : TStringList;
+odad : Tdad;
+ Begin
+   odad := Tdad.Create(self);
+   odad.CLI_ID := cliente;
+   oDad.PRJ_ID := Cenario;
+   pDom := TStringList.create;
+   prg_unit.Lines.LoadFromFile(OBJDIR+'\'+NOME_UNIT);
+
+   wInserttext.Clear;
+   wInserttext.Add('') ;
+   wInserttext.Add('procedure T'+FORM_NAME +'.FormShow(Sender: TObject);');
+   wInserttext.Add('  begin') ;
+   wInserttext.Add('   Inherited;');
+   wInserttext.Add('   If lb.Count > 0 then');
+   wInserttext.Add('     begin');
+   wInserttext.Add('       lb.ItemIndex := 0;');
+   wInserttext.Add('       lbClick(nil);');
+   wInserttext.Add('       ActiveControl := lb;');
+   wInserttext.Add('     end;');
+
+
+   //carrega combos com dominios
+   If not oDad.Get_dados(TABELA) then
+    Raise exception.create(def27+TABELA+def271);
+   oDad.fclient.first;
+   while not oDad.fclient.eof do
+     Begin
+      If (trim(oDad.fClient.FieldByName('IDF_DOMINIO').Value) <> '') and (uppercase(oDad.fClient.FieldByName('IDF_DOMINIO').Value) <> '(MEMO)') then
+          Begin
+            pDom.Text := oDad.fClient.FieldByName('IDF_DOMINIO').Value;
+            wInserttext.Add('        c_'+oDad.fClient.FieldByName('IDF_DESIGNACAO').asstring+'.clear;');
+
+            for j := 0 to pDom.Count - 1 do
+             Begin
+               wInserttext.Add('        c_'+oDad.fClient.FieldByName('IDF_DESIGNACAO').asstring+'.items.add('+''''+pdom[j]+''''+');');
+             end;
+          end;
+
+      oDad.fclient.next;
+     end;
+
+
+
+   wInserttext.Add(' end;') ;
+   Insere_bloco(prg_unit,0,prg_unit.Lines.Count,wInserttext.text,false,FALSE);
+   prg_unit.Lines.Savetofile(OBJDIR+'\'+NOME_UNIT);
+   pdom.Free;
+   oDad.Free;
+   
+end;
+
+function Tfrm_ger.Cria_DBGrid1Click : boolean;
+
+ Begin
+   prg_unit.Lines.LoadFromFile(OBJDIR+'\'+NOME_UNIT);
+   wInserttext.Clear;
+   wInserttext.Add('') ;
+   wInserttext.Add('procedure T'+FORM_NAME +'. DBGrid1CellClick(Column: TColumn);') ;
+   wInserttext.Add('  begin;') ;
+   wInserttext.Add('   inherited;') ;
+   wInserttext.Add('   Mostra_campos;') ;
+   wInserttext.Add('  end; ') ;
+   wInserttext.Add('') ;
+
+   Insere_bloco(prg_unit,0,prg_unit.Lines.Count,wInserttext.text,false,FALSE);
+   prg_unit.Lines.Savetofile(OBJDIR+'\'+NOME_UNIT);
+
+
+end;
+
+function Tfrm_ger.Cria_DataClose(pPref : string) : boolean;
+var
+j : integer;
+s : string;
+ Begin
+   prg_unit.Lines.LoadFromFile(OBJDIR+'\'+NOME_UNIT);
+   wInserttext.Clear;
+   wInserttext.Add('') ;
+   wInserttext.Add('procedure T'+FORM_NAME +'.DateClose(sender : TObject);');
+   wInserttext.Add('  begin;') ;
+   wInserttext.Add('   inherited;') ;
+   for j := 0 to length(aCpo) - 1 do
+   begin
+     If aTipo[j] = 'D' then
+       Begin
+         If Editavel(j) then
+          Begin
+           s := uppercase(pPref+  acpo[j]);
+           wInserttext.Add('   If uppercase(TDatetimePicker(sender as Tobject).name) = '+''''+s+'''' +' then ');
+           wInserttext.Add('    begin');
+           wInserttext.Add('          '+''+acpo[j]+''+'.text := DateToStr(TDatetimePicker(sender as Tobject).date);');
+           wInserttext.Add('          exit;');
+           wInserttext.Add('    end;');
+          end;
+         end;
+   end;
+   wInserttext.Add('  end; ') ;
+   wInserttext.Add('') ;
+
+   Insere_bloco(prg_unit,0,prg_unit.Lines.Count,wInserttext.text,false,FALSE);
+   prg_unit.Lines.Savetofile(OBJDIR+'\'+NOME_UNIT);
+
+end;
+
+function Tfrm_ger.Monta_dominio(pDom : TstringList;pNome : string) : boolean;
+var                        //monta os combos apra atributis com domminios fechados
+j,lin_ini : integer;
+s : string;
+odad : Tdad;
+ Begin
+   prg_unit.Lines.LoadFromFile(OBJDIR+'\'+NOME_UNIT);
+   If LOcaliza_objeto(prg_unit,'procedure T'+FORM_NAME +'.CmbClose(sender : TObject);',0) < 0 then
+   begin
+     wInserttext.Clear;
+     wInserttext.Add('') ;
+     wInserttext.Add('procedure T'+FORM_NAME +'.CmbClose(sender : TObject);');
+     wInserttext.Add('  begin') ;
+     wInserttext.Add('   inherited;') ;
+     wInserttext.Add('        ');
+
+    //closeup dos combos
+    odad :=Tdad.create(self);
+    odad.CLI_ID := cliente;
+    oDad.PRJ_ID := Cenario;
+     If not odad.Get_dados(TABELA) then
+      Raise exception.create(def27+TABELA+def271);
+     odad.fclient.first;
+     while not odad.fclient.eof do
+       Begin
+        If (trim(odad.fClient.FieldByName('IDF_TIPODOMINIO').asstring) = 'F') then
+        Begin
+          If (trim(odad.fClient.FieldByName('IDF_DOMINIO').Value) <> '') and (uppercase(odad.fClient.FieldByName('IDF_DOMINIO').Value) <> '(MEMO)') then
+              Begin
+                pNome := 'C_'+Uppercase(odad.fClient.FieldByName('IDF_DESIGNACAO').asstring);
+                pDom.Text := odad.fClient.FieldByName('IDF_DOMINIO').Value;
+                wInserttext.Add('  If UpperCase(TComboBox(sender as Tobject).name) = '+''''+pNome+''''+' then ');
+                wInserttext.Add('    begin');
+                wInserttext.Add('      '+''+odad.fClient.FieldByName('IDF_DESIGNACAO').asstring+''+'.text := TComboBox(sender as Tobject).Items[TComboBox(sender as Tobject).ItemIndex];');
+                wInserttext.Add('      exit;');
+                wInserttext.Add('    end;');
+              end;
+        end;
+        odad.fclient.next;
+       end;
+
+
+     wInserttext.Add('  end; ') ;
+     wInserttext.Add('') ;
+     Insere_bloco(prg_unit,0,prg_unit.Lines.Count,wInserttext.text,false,FALSE);
+     prg_unit.Lines.Savetofile(OBJDIR+'\'+NOME_UNIT);
+     odad.free;
+   end;
+end;
+
+
+
+
+function Tfrm_ger.Cria_Confirma(pClass,pObj : string) : boolean;
+var
+ini,fim : integer;
+ Begin
+   prg_unit.Lines.LoadFromFile(OBJDIR+'\'+NOME_UNIT);
+   wtext.Clear;
+   wtext.add(' ');
+
+   wtext.add('procedure T'+FORM_NAME +'.sp2click(Sender: TObject);');
+   wtext.add('  Begin  ');
+   wtext.add('   If not Consiste then');
+   wtext.add('     raise exception.create('+''''+'Inclusão não efetuada!'+''''+');');
+   wtext.add('   oomap;');
+   wtext.add('   inherited;');
+   wtext.add('   If Status = '+ansiquotedstr('I',CHR(39))+' then');
+   wtext.add('      begin' );
+   wtext.add('        If iObj.ID > 0 then //gravou novo ');
+   wtext.add('        begin ');
+   wtext.add('          (iObj as '+NOMEOO+').GetProperties; ');
+   wtext.add('          iObj.PK.PK1  := iObj.ID;' );
+   wtext.add('          lb.ItemIndex := lb.Items.AddObject((iObJ as '+NOMEOO+').'+frm_cs.e_nomeLista.text+',iObj.PK);' );
+   wtext.add('          Mostra_objeto(iObj.Getitem(lb)); ');
+   wtext.add('        end;' );
+   wtext.add('      end;' );
+  // wtext.add('   else ');
+ //  wtext.add('        begin ');
+ //  wtext.add('         lb.Items[lb.ItemIndex] := (iObJ as '+NOMEOO+').'+frm_cs.e_nomeLista.text+';');
+   
+ //  wtext.add('        end;');
+
+   If uppercase(pObj) = 'IMASTER' then
+      wtext.add('  Mostra_Itens;');
+   wtext.add(' end;');
+   wtext.add('  ');
+
+   Insere_bloco(prg_unit,0,prg_unit.Lines.Count,wtext.text,false,FALSE);
+   prg_unit.Lines.Savetofile(OBJDIR+'\'+NOME_UNIT);
+
+   end;
+
+function Tfrm_ger.Carrega_cpo_Confirma(pList : TstringList) : TstringList;
+var
+j,k : integer;
+wpk : TstringList;
+Begin                // monta a carga das propriedades do objeto a partir dos edit da tela (sem identificar o objeto)
+ result := nil;
+  for j := 0 to length(aCpo) - 1 do
+    begin
+          If Editavel(j) then
+          begin
+            If (aTipo[j] = 'C')  then
+               pList.add('      '+''+FormataCampo(acpo[j],'B',35,'R')+''+' := self.' +''+acpo[j]+''+'.text;')
+            else
+            If (aTipo[j] = 'M') then
+               pList.add('      '+''+FormataCampo(acpo[j],'B',35,'R')+''+' := self.' +''+acpo[j]+''+'.text;')
+             else
+            If aTipo[j] = 'I' then
+               Begin
+                 pList.add('      If self.'+''+FormataCampo(aCpo[j],'B',35,'R')+''+'.text <> '+''''+''+''''+' then');
+                 pList.add('         '+''+acpo[j]+''+' := strtoint(self.' +''+acpo[j]+''+'.text);') ;
+               end
+            else
+            If aTipo[j] = 'N' then
+              Begin
+                pList.add('      If self.'+''+aCpo[j]+''+'.text <> '+''''+''+''''+' then');
+                pList.add('        '+''+FormataCampo(acpo[j],'B',35,'R')+''+' := strtofloat(self.' +''+acpo[j]+''+'.text);') ;
+              end
+            else
+            If aTipo[j] = 'D' then
+              Begin
+                pList.add('      If self.'+''+aCpo[j]+''+'.text <> '+''''+''+''''+' then');
+                pList.add('        '+''+FormataCampo(acpo[j],'B',35,'R')+''+' := STRTODATE(self.' +''+acpo[j]+''+'.text);');
+
+              end;
+         end;
+
+    end;
+
+    wpk := Get_pk() ;
+    k :=  wPk.count -2  ;
+
+    for j := 0 to k do
+     begin
+       pList.add('        '+''+FormataCampo(wPk[j],'B',35,'R')+''+' := iObj.' +''+acpo[j]+''+';');
+
+     end;
+    result := pList;
+end;
+
+function Tfrm_ger.Cria_del(pClass,pObj,pFunc : string) : boolean;
+var
+i,j,lin_ini,lin_fim,lin_proc,Lin_end: integer;
+ws,wcpo : string;
+
+ Begin
+  prg_unit.Lines.LoadFromFile(OBJDIR+'\'+NOME_UNIT);
+  wtext.Clear;
+  wtext.add('  ');
+  wtext.add('{Evento do Elimina}');
+  wtext.add('procedure T'+FORM_NAME +'.'+pFunc+';');
+  wtext.add('  begin');
+  wtext.add('    inherited;');
+  wtext.add('  end;');
+  wtext.add('  ');
+  Insere_bloco(prg_unit,0,prg_unit.Lines.Count,wtext.text,false,FALSE);
+  prg_unit.Lines.Savetofile(OBJDIR+'\'+NOME_UNIT);
+end;
+
+function Tfrm_ger.Cria_del_Det(pClass,pObj : string) : boolean;
+var
+i,j,lin_ini,lin_fim,lin_proc,Lin_end: integer;
+ws,wcpo : string;
+
+ Begin
+
+   Lin_fim := 0;
+   Lin_proc := 0;
+   Lin_ini := 0;
+   wList.loadfromfile(OBJDIR+'\'+NOME_UNIT);
+   lin_end := wlist.count-1;
+   wtext.clear;
+
+    wtext.add('{Evento do Elimina}');
+    wtext.add('procedure T'+FORM_NAME +'.Del_itens;');
+    wtext.add('  begin');
+    wtext.add('      If MessageDlg('+''''+'Confirma a Eliminação ?'+''''+',mtConfirmation, [mbYes, mbNo], 0) = mrYes then ');
+    wtext.add('        begin');
+    wtext.add('          With '+pClass+'.create(self) do' );
+    wtext.add('          try');
+    wtext.add('           begin' );
+    wtext.add('              If not Delete_Object('+CriaparmMetodo+') then');
+    wtext.add('                Raise exception.create('+''''+'Não foi possível Eliminar!'+''''+');');
+    wtext.add('           end;' );
+    wtext.add('         finally');
+    wtext.add('           free;');
+    wtext.add('        end;');
+    wtext.add('  end;' );
+    wtext.add('   '+pObj+'.close;');
+    wtext.add('   '+pObj+'.Open;');
+    wtext.add('  If not '+pObj+'.eof then ');
+    wtext.add('     Dbgrid1Cellclick(nil)');
+    wtext.add('  else ');
+    wtext.add('     Limpa_Campos_itens;');
+    wtext.add('   inherited;');
+    wtext.add(' end;');
+    wtext.add('  ');
+    Insert_code(lin_end,wtext,wlist);
+
+   prg_unit.Lines.clear;
+   prg_unit.lines := wlist;
+   wList.Savetofile(OBJDIR+'\'+NOME_UNIT);
+end;
+
+function Tfrm_ger.Cria_MostraCampos(pClass,pObj : string): boolean;
+var
+i,j,lin_ini,lin_fim,lin_proc,Lin_end: integer;
+ws,wcpo,wtxt,wtipo,WOBJ  : string;
+
+ Begin
+   wtext.clear;
+   Lin_fim := 0;
+   Lin_proc := 0;
+   Lin_ini := 0;
+   wList.loadfromfile(OBJDIR+'\'+NOME_UNIT);
+   lin_end := wlist.count-1;
+   wObj := '(iObj as '+NOMEOO+')';
+   wtext.add('{ Popula os campos Edit com os atributos da tabela} ');
+   If (uppercase(pObj) = 'IMASTER') or (uppercase(pObj) = 'IOBJ') then
+    Begin
+      wtext.add('function T'+FORM_NAME +'.Mostra_Campos : boolean;') ;
+      wTipo := 'M';
+    end
+
+   else
+    Begin
+      wtext.add('function T'+FORM_NAME +'.Mostra_Campos_Itens : boolean;') ;
+       wTipo := 'D';
+    end;
+
+
+   wtext.add(' begin');
+    wtext.add('   '+wObj+'.GetProperties;');
+    for j := 0 to length(aCpo) - 1 do
+    begin
+    If wTipo = 'D' then
+     Begin
+       If inArray( aCpo[j],aCpoMast) then   // se detalhe e existe atributo noa master,ignora(ex : PK)
+        continue;
+     end;
+    wtxt :=  formataCampo('self.'+trim(aCpo[j]+'.text'),'B',35,'R') ;
+
+    If Editavel(j) then
+      begin
+      If (aTipo[j] = 'C')  then
+          wtext.add('   '+''+wtxt+''+':= '+WObj+'.'+''+acpo[j]+''+';')
+       else
+       If aTipo[j] = 'I' then
+          wtext.add('   '+''+wTxt+''+':= '+'InttoStr('+wObj+'.'+''+acpo[j]+''+');')
+      else
+      If aTipo[j] = 'N' then
+         wtext.add('   '+''+wTxt+''+':= '+'FloattoStr('+wObj+'.'+''+acpo[j]+''+');')
+      else
+      If aTipo[j] = 'D' then
+         wtext.add('   '+''+wTxt+''+':= '+'DatetoStr('+wObj+'.'+''+acpo[j]+''+');')
+      else
+      If aTipo[j] = 'M' then
+         wtext.add('   '+''+wtxt+''+':= '+wObj+'.'+''+acpo[j]+''+';')
+      end;
+   end;
+   wtext.add(' end;');
+   wtext.add('  ');
+   insert_code(lin_end,wtext,wlist);
+   wList.Savetofile(OBJDIR+'\'+NOME_UNIT);
+end;
+
+function Tfrm_ger.Cria_LBclick(pClass,pObj : string): boolean;
+var
+i,j,lin_ini,lin_fim,lin_proc,Lin_end: integer;
+ws,wcpo,wtxt,wtipo : string;
+
+ Begin
+   wtext.clear;
+   Lin_fim := 0;
+   Lin_proc := 0;
+   Lin_ini := 0;
+   wList.loadfromfile(OBJDIR+'\'+NOME_UNIT);
+   lin_end := wlist.count-1;
+
+   wtext.add('{ Cria o click do ListBox} ');
+   If (uppercase(pObj) = 'IMASTER') or (uppercase(pObj) = 'IOBJ') then
+    Begin
+      wtext.add('procedure T'+FORM_NAME +'.lbClick(Sender: TObject);') ;
+      wTipo := 'M';
+    end
+   else
+    Begin
+      wtext.add('procedure T'+FORM_NAME +'.lbClick(Sender: TObject);') ;
+       wTipo := 'D';
+    end;
+
+
+   wtext.add(' begin');
+   wtext.add('   Inherited;');
+   wtext.add('   Mostra_objeto(iObj.Getitem(lb));');
+   wtext.add(' end;');
+   wtext.add('  ');
+   insert_code(lin_end,wtext,wlist);
+   wList.Savetofile(OBJDIR+'\'+NOME_UNIT);
+
+
+   wList.loadfromfile(OBJDIR+'\'+NOME_DFM);
+   wText.Clear;
+
+     wtext.add('inherited lb: TListBox');
+     wtext.add('TabOrder = 15');
+     wtext.add('OnClick = lbClick');
+     wtext.add('end');
+
+   insert_code(wList.Count-2,wtext,wlist);
+    wList.SAVETOFILE(OBJDIR+'\'+NOME_DFM);
+
+
+
+end;
+
+function Tfrm_ger.Cria_MostraObjeto(pClass,pObj : string): boolean;
+var
+i,j,lin_ini,lin_fim,lin_proc,Lin_end: integer;
+ws,wcpo,wtxt,wtipo,wObj : string;
+
+ Begin
+   wtext.clear;
+   Lin_fim := 0;
+   Lin_proc := 0;
+   Lin_ini := 0;
+   wList.loadfromfile(OBJDIR+'\'+NOME_UNIT);
+   lin_end := wlist.count-1;
+
+   wtext.add('{ Popula os campos Edit com os atributos da tabela} ');
+   If (uppercase(pObj) = 'IMASTER') or (uppercase(pObj) = 'IOBJ') then
+    Begin
+      wtext.add('procedure T'+FORM_NAME +'.Mostra_Objeto(pNome : string);') ;
+      wTipo := 'M';
+    end
+
+   else
+    Begin
+      wtext.add('procedure T'+FORM_NAME +'.Mostra_Objeto(pNome : string);') ;
+       wTipo := 'D';
+    end;
+
+
+   wtext.add(' begin');
+   wtext.add('   iObj.Load(pNome);');
+   wtext.add('   Mostra_Campos;');
+   wtext.add('   spb_del.Enabled := true;');
+   wtext.add('   sp_Insert.Enabled := true;');
+   wtext.add(' end;');
+   wtext.add('  ');
+   insert_code(lin_end,wtext,wlist);
+   wList.Savetofile(OBJDIR+'\'+NOME_UNIT);
+end;
+
+function Tfrm_ger.Cria_ddMap(pClass,pObj : string): boolean;
+var
+i,j,lin_ini,lin_fim,lin_proc,Lin_end: integer;
+ws,wcpo,wtxt,wtipo : string;
+lpk : TstringList;
+
+ Begin
+   wtext.clear;
+   lpk := TstringList.create;
+   Lin_fim := 0;
+   Lin_proc := 0;
+   Lin_ini := 0;
+   wList.loadfromfile(OBJDIR+'\'+NOME_UNIT);
+   lin_end := wlist.count-1;
+
+   wtext.add('{ Popula os campos do Objeto de negócio com os edit da tela} ');
+   If (uppercase(pObj) = 'IMASTER') or (uppercase(pObj) = 'IOBJ') then
+    Begin
+      wtext.add('procedure T'+FORM_NAME +'.ooMap;') ;
+      wTipo := 'M';
+    end
+
+   else
+    Begin
+      wtext.add('procedure T'+FORM_NAME +'.ooMap_Itens : boolean;') ;
+       wTipo := 'D';
+    end;
+
+   lPk := Get_pk;
+   wtext.add(' begin');
+
+    
+
+
+    for j := 0 to length(aCpo) - 1 do
+    begin
+   { If (aPk[j] <> '0') and  (aPk[j] <> '') then      //PK
+      continue;  }
+
+     If lPk.count > 1 then
+      Begin
+
+      end
+    else
+      Begin
+        If (aPk[j] = '1')  then
+          Begin
+            wtext.add('   If self.'+acpo[j]+'.text ='+ ''''+''+''''+ ' then ') ;
+            wtext.add('    (iObj as '+NOMEOO+').'+acpo[j]+'  := 0');
+            wtext.add('   else');
+            wtext.add('    (iObj as '+NOMEOO+').'+acpo[j]+'  := StrtoInt(self.'+acpo[j]+'.text);');
+          end;
+
+      end;
+
+
+
+    If wTipo = 'D' then
+     Begin
+       If inArray( aCpo[j],aCpoMast) then   // se detalhe e existe atributo noa master,ignora(ex : PK)
+        continue;
+     end;
+    wtxt :=  formataCampo('(iObj as '+NOMEOO+').'+trim(aCpo[j]),'B',50,'R') ;
+
+    If Editavel(j) then
+      begin
+      If (aTipo[j] = 'C')  then
+          wtext.add('   '+wtxt+':= self.'+acpo[j]+'.text;')
+       else
+       If aTipo[j] = 'I' then
+         begin
+           wtext.add('    If self.'+acpo[j]+'.text = '+ ansiquotedstr('',chr(39))+' then');
+           wtext.add('      '+ wtxt+ ' := 0 ' ) ;
+           wtext.add('    else');
+           wtext.add('      '+wtxt+':= StrtoInt(self.'+acpo[j]+'.text);');
+         end
+
+      else
+      If aTipo[j] = 'N' then
+         begin
+           wtext.add('    If self.'+acpo[j]+'.text = '+ ansiquotedstr('',chr(39))+' then');
+           wtext.add('      '+ wtxt+ ' := 0' );
+           wtext.add('    else');
+           wtext.add('   '+wtxt+':= StrToFloat(self.'+acpo[j]+'.text);') ;
+         end
+
+      else
+      If aTipo[j] = 'D' then
+        wtext.add('   '+wtxt+':= Strtodate(self.'+acpo[j]+'.text);')
+      else
+      If aTipo[j] = 'M' then
+         wtext.add('   '+wtxt+':= self.'+acpo[j]+'.text;')
+      end;
+
+   end;
+    wtext.add('   (iObj as '+NOMEOO+').ddmap;');
+
+   wtext.add(' end;');
+   wtext.add('  ');
+   insert_code(lin_end,wtext,wlist);
+   wList.Savetofile(OBJDIR+'\'+NOME_UNIT);
+end;
+
+function Tfrm_ger.Editavel(pIndex : integer): boolean;
+begin
+ result := false;
+ If ( (aVisible[pIndex] <> '')  and (uppercase(aVisible[pIndex]) <> 'N') ) {AND    // é visivel...
+    ( (aPk[pIndex] = '') or ( aPk[pIndex] = '0') )} then         // .. e não é PK.
+     result := true;
+
+end;
+
+
+function Tfrm_ger.Cria_MostraCamposDet(pClass,pObj : string): boolean;
+var
+i,j,lin_ini,lin_fim,lin_proc,Lin_end: integer;
+ws,wcpo,wtxt ,wObj: string;
+
+ Begin
+   wtext.clear;
+   wList.loadfromfile(OBJDIR+'\'+NOME_UNIT);
+   lin_end := wlist.count-1;
+   wObj := '('+Pobj+' as '+NOMEOO+')';
+
+   wtext.add('{ Popula os campos Edit com os atributos ta tabela} ');
+   wtext.add('function T'+FORM_NAME +'.Mostra_Campos_Itens : boolean;');
+   wtext.add(' begin');
+   for j := 0 to length(aCpo) - 1 do
+    begin
+      If Editavel(j) then
+        begin
+        wtxt :=  formataCampo(trim(aCpo[j]+'.text'),'B',25,'R') ;
+        If (aTipo[j] = 'C') or (aTipo[j] = 'M') then
+           // wtext.add('   '+wtxt+':= '+pObj+'.'+AnsiQuotedStr(acpo[j],chr(39))+';')
+            wtext.add('   '+''+wtxt+''+':= '+wObj+'.'+''+acpo[j]+''+';')
+         else
+        If aTipo[j] = 'I' then
+            wtext.add('   '+''+wTxt+''+':= '+'InttoStr('+wObj+'.'+''+acpo[j]+''+');')
+        else
+        If aTipo[j] = 'N' then
+           wtext.add('   '+''+wTxt+''+':= '+'FloattoStr('+wObj+'.'+''+acpo[j]+''+');')
+        else
+        If aTipo[j] = 'D' then
+           wtext.add('   '+''+wTxt+''+':= '+'DatetoStr('+wObj+'.'+''+acpo[j]+''+');') ;
+        end;
+    end;
+
+   wtext.add(' end;');
+   wtext.add('  ');
+   Insert_code(lin_end,wtext,wlist);
+
+   wList.Savetofile(OBJDIR+'\'+NOME_UNIT);
+end;
+
+function Tfrm_ger.Cria_Edit(pPreflab,pprefdate : string) : boolean;  //declara os tipos dos componentes no programa
+var                                                    // ppref : prefxo no nome do componente
+i,j,lin_ini,lin_fim,lin_proc,Lin_end,dt: integer;
+ws,s : string;
+
+ Begin
+   dt := 0;
+   Lin_fim := 0;
+   Lin_proc := 0;
+   Lin_ini := 0;
+   wList.loadfromfile(OBJDIR+'\'+NOME_UNIT);
+   wtext.Clear;
+   for i := 0 to  WLIST.count -1 do
+    Begin
+     ws := trim(wlist[i]);
+     If pos('type', ws) > 0 then
+          Begin
+          lin_proc := i+1;
+           break;
+          end;
+     end;
+
+    for i := lin_proc to  WLIST.count -1 do
+    Begin
+     ws := trim(wlist[i]);
+     If pos('procedure', ws) > 0 then
+          Begin
+          lin_fim := i;
+           break;
+          end;
+     end;
+
+     for j := 0 to length(aCpo) - 1 do
+       Begin
+     //  If InMemo(acpo[j],wlist,lin_proc,lin_fim) then   // verifica duplicidade
+      //    continue;
+        If Editavel(j) then
+         Begin
+           If (aTipo[j] = 'C') or (aTipo[j] = 'N') or (aTipo[j] = 'I') then
+              wlist.Insert(lin_proc+1,'     '+formataCampo(acpo[j],'B',35,'R')+' : Tedit;')
+           else
+           If aTipo[j] = 'M' then
+              wlist.Insert(lin_proc+1,'     '+formataCampo(acpo[j],'B',35,'R')+' : TMemo;');
+           If aTipo[j] = 'D' THEN
+           Begin
+             inc(dt);
+             s := pprefDate+aCpo[j];
+             wlist.Insert(lin_proc+1,'     '+formataCampo(s,'B',35,'R')+' : TDateTimePicker;');
+             wlist.Insert(lin_proc+1,'     '+formataCampo(acpo[j],'B',35,'R')+' : Tedit;')
+           end;
+           wlist.Insert(lin_proc+1,'     '+formataCampo(pPrefLab+acpo[j],'B',35,'R')+' : Tlabel;');
+         end;
+       end;
+     // wList.insert(lin_proc+1,'adoc: TADOConnection;');
+   wList.Savetofile(OBJDIR+'\'+NOME_UNIT);
+end;
+
+function Tfrm_ger.Cria_Limpa(pFunc : string) : boolean;
+var
+i,j,lin_ini,lin_fim,lin_proc,Lin_end: integer;
+w,wtxt : string;
+
+ Begin
+  prg_unit.Lines.LoadFromFile(OBJDIR+'\'+NOME_UNIT);
+  wtext.Clear;
+  wtext.add(' ');
+  wtext.add('{ Limpa os Tedits} ');
+  wtext.add('function T'+FORM_NAME +'.'+pFunc+' : boolean;');
+  wtext.add(' begin');
+  wtext.add('   inherited;');
+  wtext.add(' end;');
+  wtext.add('  ');
+  Insere_bloco(prg_unit,0,prg_unit.Lines.Count,wtext.text,false,FALSE);
+ prg_unit.lines.Savetofile(OBJDIR+'\'+NOME_UNIT);
+end;
+
+
+function Tfrm_ger.Cria_Consiste : boolean;
+var
+i,j,lin_ini,lin_fim,lin_proc,Lin_end: integer;
+ws : string;
+
+ Begin
+  prg_unit.Lines.LoadFromFile(OBJDIR+'\'+NOME_UNIT);
+    wtext.Clear;
+    wtext.add(' ');
+    wtext.add('{ Consiste Obrigatoriedade dos Campos antes da Inclusão ou Atualização} ');
+    wtext.add('function T'+FORM_NAME +'.Consiste : boolean;');
+    wtext.add(' begin');
+    wtext.add('   inherited;');
+    wtext.add('   result := true;');
+    for j := 0 to length(aCpo) - 1 do
+      begin
+       {If (apk[j]<> '') and (apk[j] <> '0')  then  // chave primáriaa
+        Begin
+              wtext.add('    If '+''+acpo[j]+''+'.text'+' = ' +''''+''+''''+' then ');
+              wtext.add('         raise exception.create('+''''+'Informar o campo '+aCaption[j]+''''+');');
+        end
+       else }
+        Begin
+           If (aObrig[j]<> '') and ( (apk[j] = '0') or (apk[j]= '') ) then  // campos Obrigatorios
+            Begin
+              wtext.add('    If '+''+'self.'+aCpo[j]+''+'.text'+' =' +''''+''+''''+' then ');     //campo obrigatorio
+              wtext.add('         raise exception.create('+''''+'Informar o campo '+aCaption[j]+''''+');');
+            end;
+        end;
+      end;
+
+   wtext.add(' end;');
+   wtext.add('');
+   Insere_bloco(prg_unit,0,prg_unit.Lines.Count,wtext.text,false,FALSE);
+   prg_unit.Lines.Savetofile(OBJDIR+'\'+NOME_UNIT);
+
+end;
+
+
+
+
+
+
+function Tfrm_ger.Cria_Confirma_det(pClass,pObj : string) : boolean;
+var
+i,j,lin_ini,lin_fim,lin_proc,Lin_end: integer;
+ws : string;
+wcpo,WKEY : string;
+ Begin
+   Lin_fim := 0;
+   Lin_proc := 0;
+   Lin_ini := 0;
+   wList.loadfromfile(OBJDIR+'\'+NOME_UNIT);
+   lin_end := wlist.count-1;
+   WkEY := GET_PARAMkEY(0);
+   wtext.Clear;
+
+
+   wtext.add('{Evento do Botão Confirma}');
+   wtext.add('procedure T'+FORM_NAME+'.Confirma_item;');
+   wtext.add('var');
+   wtext.add(' wInd : '+''+TIPO_LASTARGUM+''+';');
+   wtext.add('Begin  ');
+   wtext.add(' If self.STATUS_ITEM = '+''''+'I'+''''+' then ');
+   wtext.add('  begin');
+   wtext.add('    with '+pClass+'.create(self) do ');
+   wtext.add('     Begin  ');
+   wtext.add('      wind := Get_MaxKey('+FIRSTARGUM+');');
+   If TIPO_LASTARGUM = 'STRING' then
+    wtext.add('     wInd := inttostr(strtoint(wInd) + 1);')
+   else
+    wtext.add('     wInd := wInd + 1;') ;
+   wtext.add('      free;');
+   wtext.add('     end;');
+   wtext.add('  end;');
+   wtext.add('   iDetalhe.'+lastargum+':= wInd;');
+   If TIPO_LASTARGUM = 'STRING' then
+   wtext.add('   self.'+lastargum+'.text:= wInd;')
+  else
+   wtext.add('   self.'+lastargum+'.text:= inttostr(wInd);');
+   wtext.add('    If not Consiste_item then ');
+   wtext.add('      raise exception.create('+''''+'Inclusão não efetuada!'+''''+');');
+   wtext.add('    With '+pClass+'.create(self) do ');
+   wtext.add('      begin  ');
+   for j := 0 to length(aCpo) - 1 do
+        begin
+         If Editavel(j) then
+          begin
+            If (aTipo[j] = 'C') or (aTipo[j] = 'M') then
+               wtext.add('      '+''+acpo[j]+''+' := self.' +''+acpo[j]+''+'.text;')
+             else
+             If aTipo[j] = 'I' then
+               Begin
+                 wtext.add('      If self.'+''+aCpo[j]+''+'.text <> '+''''+''+''''+' then');
+                 wtext.add('         '+''+acpo[j]+''+' := strtoint(self.' +''+acpo[j]+''+'.text);') ;
+               end
+
+            else
+            If aTipo[j] = 'N' then
+              Begin
+                wtext.add('      If self.'+''+aCpo[j]+''+'.text <> '+''''+''+''''+' then');
+                wtext.add('        '+''+acpo[j]+''+' := strtofloat(self.' +''+acpo[j]+''+'.text);') ;
+              end
+
+            else
+            If aTipo[j] = 'D' then
+              Begin
+                wtext.add('      If self.'+''+aCpo[j]+''+'.text <> '+''''+''+''''+' then');
+                wtext.add('        '+''+acpo[j]+''+' := STRTODATE(self.' +''+acpo[j]+''+'.text);');
+
+              end;
+         end;
+
+       end;
+
+   wtext.add('       If Self.STATUS_ITEM = '+''''+'I'+''''+' then ');
+   wtext.add('          Inclui   ');
+   wtext.add('       else    ');
+   wtext.add('       If Self.STATUS_ITEM = '+''''+'M'+''''+' then   ');
+   wtext.add('           Atualiza('+CriaparmMetodo+');');
+   wtext.add('       free;');
+   wtext.add('   end; ');
+   wtext.add('   idetalhe.fclient.close;  ');
+   wtext.add('   idetalhe.fclient.Open; ');
+   wtext.add('   If not iDetalhe.fclient.eof then ');
+   wtext.add('     DBGrid3CellClick(nil);  ');
+   wtext.add('   inherited;  ');
+   wtext.add('    end;    ');
+
+
+   Insert_code(lin_end,wtext,wlist);
+   wList.Savetofile(OBJDIR+'\'+NOME_UNIT);
+end;
+
+
+
+
+function Tfrm_ger.Cria_Consiste_det : boolean;
+var
+i,j,lin_ini,lin_fim,lin_proc,Lin_end: integer;
+ws : string;
+
+ Begin
+   Lin_fim := 0;
+   Lin_proc := 0;
+   Lin_ini := 0;
+   wList.loadfromfile(OBJDIR+'\'+NOME_UNIT);
+   lin_end := wlist.count-1;
+
+   wtext.Clear;
+
+
+   wtext.add('{ Consiste Obrigatoriedade dos Campos antes da Inclusão ou Atualização} ');
+   wtext.add('function T'+FORM_NAME +'.Consiste_Item : boolean;');
+   wtext.add(' begin');
+   wtext.add('   inherited;');
+   wtext.add('   result := true;');
+   for j := 0 to length(aCpo) - 1 do
+   begin
+     If (apk[j]<> '') and (apk[j]<> '0') then  // chave primáriaa
+        Begin
+              wtext.add('    If '+''+acpo[j]+''+'.text'+' = ' +''''+''+''''+' then ');
+              wtext.add('         raise exception.create('+''''+'Informar o campo '+aCaption[j]+''''+');');
+        end
+       else
+        Begin
+           If aObrig[j]<> ''  then  // campos Obrigatorios
+            Begin
+              wtext.add('    If '+''+aCpo[j]+''+'.text'+' =' +''''+''+''''+' then ');     //campo obrigatorio
+              wtext.add('         raise exception.create('+''''+'Informar o campo '+aCaption[j]+''''+');');
+
+            end;
+        end;
+   end;
+
+   wtext.add(' end;');
+   wtext.add('  ');
+
+   Insert_code(lin_end,wtext,wlist);
+   wList.Savetofile(OBJDIR+'\'+NOME_UNIT);
+end;
+
+
+
+
+function Tfrm_ger.CriaParmMetodo : string;   //cria os parámetros do metodo (inclui,atualiza,deleta)
+var
+wparm : string;
+i : integer;
+Begin
+  for i := 0 to length(aPk)- 1 do
+    Begin
+     If (apk[i]<> '') and (apk[i]<> '0')then
+       Begin
+         If aTipo[i] = 'C' THEN
+           wparm := wparm+ 'self.'+acpo[i] + '.text,'
+         else
+         If aTipo[i] = 'I' THEN
+           wparm := wparm+ 'StrToInt(self.'+acpo[i] + '.text),'
+         else
+         If aTipo[i] = 'N' THEN
+           wparm := wparm+ 'StrToFGloat(self.'+acpo[i] + '.text),'
+         else
+         If aTipo[i] = 'D' THEN
+           wparm := wparm+ 'StrToDate(self.'+acpo[i] + '.text),' ;
+       end;
+
+    end;
+   delete(wparm,length(wparm),1);
+   result := wparm;
+end;
+
+function Tfrm_ger.Altera_use : boolean;
+var
+i,lin_ini,lin_fim: integer;
+ws : string;
+
+ Begin
+   wList.loadfromfile(OBJDIR+'\'+NOME_UNIT);
+    //acrscenta nome da unit de objetos no uses principal
+   for i := 0 to  WLIST.count -1 do
+    Begin
+     ws := trim(wlist[i]);
+     If pos('uses', ws) > 0 then
+      begin
+       Lin_ini := i;
+      end;
+
+     If pos('type', ws) > 0 then
+      Begin
+         Lin_fim := i-1;
+         break;
+      end;
+
+    end;
+    i := Lin_fim;
+    while i >= Lin_ini do
+     Begin
+       ws := trim(wlist[i]);
+       If ws = '' then
+        i := i -1
+       else
+        Begin
+
+        //  wlist[i] := leftstr(ws,length(ws)-1)+','+ leftstr(ObjNameOO,length(ObjNameOO)-4)+';';
+          wlist[i] := leftstr(ws,length(ws)-1)+','+ ObjNameOO+';';
+          break;
+        end;
+
+     end;
+    wList.Savetofile(OBJDIR+'\'+NOME_UNIT);
+ end;
+
+procedure Tfrm_ger.Setform_name(const Value: string);
+begin
+  Fform_name := Value;
+end;
+
+procedure Tfrm_ger.SetNOME_DFM(const Value: STRING);
+begin
+  FNOME_DFM := Value;
+end;
+
+procedure Tfrm_ger.SetNOME_UNIT(const Value: STRING);
+begin
+  FNOME_UNIT := Value;
+end;
+
+procedure Tfrm_ger.SetPROGDIR(const Value: STRING);
+begin
+  FPROGDIR := Value;
+end;
+
+procedure Tfrm_ger.SetwList(const Value: TStringList);
+begin
+  FwList := Value;
+end;
+
+procedure Tfrm_ger.SetwText(const Value: TStringList);
+begin
+  FwText := Value;
+end;
+
+procedure Tfrm_ger.SetNOMEOO(const Value: string);
+begin
+  FNOMEOO := Value;
+end;
+
+procedure Tfrm_ger.SetObjNameOO(const Value: string);
+begin
+  FObjNameOO := Value;
+end;
+
+procedure Tfrm_ger.sp_verddClick(Sender: TObject);
+begin
+  inherited;
+  If FileExists(ObjDir+'\'+ObjName+'.pas') then
+    Begin
+      Prg_unit.Lines.LoadFromFile(ObjDir+'\'+ObjName+'.pas');
+      prg_unit.BringToFront;
+    end;
+
+
+end;
+
+procedure Tfrm_ger.sp_verooClick(Sender: TObject);
+begin
+  inherited;
+  If FileExists(ObjDir+'\'+ObjNameOO+'.pas') then
+    Begin
+      oo_unit.Lines.LoadFromFile(ObjDir+'\'+ObjNameOO+'.pas');
+      oo_unit.BringToFront;
+    end;
+
+end;
+
+
+procedure Tfrm_ger.LoadConstantObj;
+begin
+inherited ;
+
+ { Caption := 'Classes'   ;
+  Label1.Caption := 'Nome da Classe '  ;
+  Label2.Caption := 'Descrição ' ;
+  Label3.Caption := 'Classe mãe' ;
+  Label10.Caption := 'Tabela '  ;
+  SpeedButton11.Caption := 'Lista  '  ;
+  SpeedButton7.Caption := 'Propriedades'   ;
+  spmet.Caption := 'Métodos      '  ;
+  rg_style.Caption := 'Estilo de Classe' ;
+  tab_atributos.Caption := 'Propriedades'  ;
+  SpeedButton8.Caption := 'Incluir Atributo de Objeto de Negócio';
+  SpeedButton1.Caption := 'Excluir por Propriedades     '  ;
+  sp_atrib.Caption := 'Gerar Propriedades' ;
+  Label7.Caption := 'Descrição' ;
+  Label13.Caption := 'Nome Atributo'   ;
+  Label14.Caption := 'Valor padrão' ;
+  Label15. Caption := 'Mostra na Lista'  ;
+  Label16.Caption := 'Tipo' ;
+  Label17.Caption := 'Visibilidade'   ;
+  SpeedButton6.Caption := 'Salvar'  ;
+  DBG_ATRIB.columns[0].title.caption:= 'Nome'             ;
+  rg_vis.Caption := 'Visibilidade'   ;
+  rd_tipo.Caption := 'Tipos'  ;
+  tab_metodos.Caption := 'Métodos'  ;
+  Label4.Caption := 'Parámetros' ;
+  Label5.Caption := 'Descrição Parámetro' ;
+  RD_MVIS. Caption := 'Visibilidade' ;
+  RD_MTIPO.Caption := 'Tipo';
+  RD_TIM.Caption := 'Tipo Método'  ;
+  RD_BIN.Caption := 'Binding' ;
+  RD_DIR. Caption := 'Diretivas'  ;
+  dbg_met.columns[0].title.caption :=  'Seq.';
+  dbg_met.columns[1].title.caption :=  'Nome';
+  dbg_met.columns[2].title.caption :=  'Tipo';
+
+  dbg_parm.columns[0].title.caption :=  'Seq.';
+  dbg_parm.columns[1].title.caption :=  'Parámetro';
+  dbg_parm.columns[2].title.caption :=  'Tipo';
+  TabSheet1.Caption := 'Eventos' ;
+  DBGrid1.columns[0].title.caption :=  'Seq.';
+  DBGrid1.columns[1].title.caption :=  'Vis.';
+  DBGrid1.columns[2].title.caption :=  'Nome';
+  Tab_objeto.Caption := 'Geração' ;
+  SpeedButton2.Hint := 'Gerar camada de dados e camada de Objetos de negócio' ;
+  SpeedButton2.Caption := 'Gerar Códigos' ;
+  sp_crude.Hint :=
+          'Recria Métodos Básicos iniciais ;  preserva os métodos criados m' +
+          'anualmente.'  ;
+ SpeedButton9.Caption := 'Gerar Form    ' ;
+ Memo1.  text := (
+          'Para Compilar o Form .'  +
+          ' - abrir um Projeto'      +
+          ' - adicionar ao projeto .' +
+          '   .. frm_primar'            +
+          '   .. cad_stand,'            +
+          '   .. o form criado'       +
+          '   -- Unia Class Objetos'  +
+          '   -- Unita Classes DD'    +
+          '   -- Base_tier'           +
+          ''                          +
+          ''                          +
+          ''                          +
+          'Nas options do Projeto, colocar o form criado como autocreate')  ;
+  GroupBox3.Caption := 'Projeto'   ;
+  Label11.Caption := 'Nome Unit Classes de Objetos de Negócio' ;
+  sp_veroo. Caption := 'Ver Código' ;
+  sp_verdd.Caption := 'Ver Código'  ;
+  Caption := 'Nome da Tela '  ;
+  GroupBox1. Caption := 'Telas'  ;
+  Caption := 'Atributo da Lista'  ;
+  g_master.  Caption := 'Master/Detail'  ;
+  sp_ger.Caption := 'Gerar Form    ' ;
+  Label8. Caption := 'Tabela Detail' ;
+  rg.caption  :=  'Tipo tela'  ;
+  rg.items[0]     :=  'Simples'    ;
+  rg.items[1]     :=  'Master/Detail'    ;    }
+
+end;
+
+
+procedure Tfrm_ger.sp_classeClick(Sender: TObject);
+begin
+  inherited;
+  with Tdados_tab.create(self) do
+     begin
+       ListaCli := Cliente ;
+       ListaProj:= Cenario ;
+      // ListaDim := 'IDF_DE' ;
+       ListaDim := 'IDF_CS' ;
+       ListaTit := def26 ;
+       ListaTag := 0 ;
+       ListaEdit:= false ;
+       ListaTree:= nil;
+       ListaId  := 0;
+       Listafecha:= true;
+       mostra_lista;
+
+       If ListaCodigo = 0 then
+          exit;
+       E_CLASSE.text := Listadesc;
+       If not idad.Get_dados(E_CLASSE.text) then   // tabela vazia-> cria a partir das correlações (compatibiliade)
+          exit;
+       Salva_Cpo(idad);
+       idados.Get_object(Cliente,Cenario,Listacodigo);
+       If iDados.eof then
+        raise exception.create('Classe '+ e_classe.text + ' não encontrada!');
+       edit9.text        := iDados.fieldbyname('IDF_FORM').ASSTRING;
+       edit4.text        := iDados.fieldbyname('IDF_UNIT').ASSTRING;
+       edit5.text        := iDados.fieldbyname('IDF_UNIT_OO').ASSTRING;
+       edit1.text        := iDados.fieldbyname('IDF_DIRPROJ').ASSTRING;
+       TABELA            := iDados.fieldbyname('IDF_TABELA').ASSTRING;
+       iProp := TIdf_pY.Create(self);
+       iProp.Get_AtribLista(cliente,Cenario ,Id);
+       e_nomeLista.Text := iProp.fieldbyname('IDF_DESIGNACAO').asstring;
+       iProp.free;
+
+       ObjDir         := edit1.Text;
+       ObjName        := edit4.Text;
+       ObjNameOO      := edit8.Text;
+       NOMECLASSE     := 'T'+FirstUpper(e_Classe.text);
+       NOMEOO         := 'O'+FirstUpper(e_Classe.text);
+       Objeto         := NOMECLASSE;
+       NomeTelaMaster := NomeTelaMaster;
+
+       PROGDIR :=  ExtractFileDir(application.ExeName);
+       begin
+        If fileexists(ProgDir+ '\preprg\bst_unit.pas' ) then
+           PROGDIR := ProgDir+ '\preprg'
+        else
+          begin
+           wmens := AnsireplaceStr(Mens144,'&', 'bst_unit.pas');
+           wmens := AnsireplaceStr(wmens,'#', ProgDir+ '\preprg');
+           Raise exception.create(wmens);
+          end;
+
+      end;
+     end;
+end;
+
+procedure Tfrm_ger.aScroll(Dataset: Tdataset);
+begin
+
+end;
+
+procedure Tfrm_ger.ddmap_atrib(dataset: Tdataset);
+begin
+
+end;
+
+procedure Tfrm_ger.ddmap_atu(pde, ppara: TIdf_py);
+begin
+
+end;
+
+procedure Tfrm_ger.Deleta_Funcao(pObjeto: string);
+begin
+
+end;
+
+procedure Tfrm_ger.Delete_class(pObjeto, pFuncao: string);
+begin
+
+end;
+
+procedure Tfrm_ger.Get_prop(pClasse: integer);
+begin
+
+end;
+
+function Tfrm_ger.Importa_property(pCli, pProj, pClasse: integer;
+  pTabela: string): boolean;
+begin
+
+end;
+
+procedure Tfrm_ger.SetNOMETELADETAIL(const Value: STRING);
+begin
+  FNOMETELADETAIL := Value;
+end;
+
+procedure Tfrm_ger.SetNOMETELAMASTER(const Value: STRING);
+begin
+  FNOMETELAMASTER := Value;
+end;
+
+procedure Tfrm_ger.SetCenario(const Value: integer);
+begin
+  FCenario := Value;
+end;
+
+procedure Tfrm_ger.SetCliente(const Value: integer);
+begin
+  FCliente := Value;
+end;
+
+procedure Tfrm_ger.SetID(const Value: integer);
+begin
+  FID := Value;
+end;
+
+end.

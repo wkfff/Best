@@ -1,0 +1,448 @@
+unit bst_usuario;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+Dialogs,Stdctrls,CAD_STAND, ComCtrls, Menus, Buttons, ExtCtrls,adodb,db_tier,BST_PERS,OOSEG,baseTier,
+  Grids, Aligrid;
+
+
+type
+  TFRM_usuario = class(TCAD_STAND)
+
+
+       ID_USUARIO                          : Tedit;
+     D_DATATU                            : TDateTimePicker;
+     DATATU                              : Tedit;
+     L_DATATU                            : Tlabel;
+     US_NOME                             : Tedit;
+     L_US_NOME                           : Tlabel;
+    SpeedButton1: TSpeedButton;
+    gpb: TGroupBox;
+    Panel4: TPanel;
+    lb_uc: TListBox;
+    GB_PRIV: TGroupBox;
+    Panel2: TPanel;
+    lb_priv: TListBox;
+    Label1: TLabel;
+    Edit1: TEdit;
+    CMB_CLI: TComboBox;
+    CMB_PROJ: TComboBox;
+    Edit2: TEdit;
+    Label2: TLabel;
+    CLI_ID: TEdit;
+    PRJ_ID: TEdit;
+    IncludeBtn: TSpeedButton;
+    IncAllBtn: TSpeedButton;
+    ExcludeBtn: TSpeedButton;
+    ExAllBtn: TSpeedButton;
+
+       procedure FormCreate (sender : TObject);
+     procedure FormClose (Sender: TObject; var Action: TCloseAction);
+     procedure FormShow (Sender: TObject);
+     procedure DateClose(sender : Tobject);
+     procedure lbClick(Sender: TObject);
+     procedure sp2click(Sender: TObject);
+     Procedure Monta_cab ;
+     Procedure Mostra_Contatos ;
+     Procedure Abre_Det(Sender: TObject);
+     Procedure sp_inserDetClick(Sender: TObject);
+     Procedure grid_contDblClick(Sender: TObject);
+    procedure CMB_CLIClick(Sender: TObject);
+    procedure CMB_PROJClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure lb_ucDblClick(Sender: TObject);
+    procedure lb_privDblClick(Sender: TObject);
+    procedure sp_insertClick(Sender: TObject);
+    procedure IncludeBtnClick(Sender: TObject);
+
+
+  private
+     FoContato: OPessoa;
+     function  consiste : boolean;
+     procedure ooMap;
+
+
+
+
+      procedure SetoContato(const Value:OPessoa);
+    procedure Mostra_Privilegios;
+
+
+
+  public
+
+
+  published
+     property iContatos :OPessoa read FoContato write SetoContato;
+     property iObj;
+     function  Mostra_Campos : boolean;
+     procedure Mostra_Objeto(pNome : string);
+     procedure Mostra_UC;
+
+
+  end;
+
+{definição dos campos a mostrar no grid (master-detail)}
+const
+cCampos  : array [0..1] of string = ('PES_NOME','DATATU');
+cCaption  : array [0..1] of string = ('Usuário','Dt. Atualização');
+ {fim definição dos campos a mostrar no grid (master-detail)}
+
+
+
+var
+  FRM_usuario: TFRM_usuario;
+
+implementation
+
+uses BST_PRIVILEGIO;
+
+{$R *.dfm}
+
+
+
+  
+             {Monta Grid - Master/detail}  
+procedure TFRM_usuario.Monta_cab;  
+ var    
+ i : integer;   
+   begin;  
+    Inherited;  
+    grid_cont.ColCount := length(cCaption); 
+    for i := 0 to length(ccaption)-1 do  
+     begin  
+       grid_cont.Objects[i,0] := TProp.create; 
+       grid_cont.Cells[i,0]   := cCaption[i];  
+       (grid_cont.Objects[i,0] as TProp).nomecampo := cCampos[i];
+     end;  
+   end;  
+ {fim Monta Grid - Master/detail}
+
+
+  
+     {Mostra Contatos - Master/detail}  
+procedure TFRM_usuario.Mostra_Contatos;
+var
+i : integer;
+begin
+ inherited;
+ Limpa_grid(Grid_cont);
+ iContatos           :=OPessoa.create;
+ iContatos.ListaGrid := Grid_cont;
+ iContatos.GetContatos(iObj.getitem(lb)) ;
+end;
+{fim Mostra COntatos - Master/detail}
+
+procedure TFRM_usuario.Mostra_Privilegios;
+var
+i : integer;
+begin
+ inherited;
+ lb_Priv.Clear;
+ with oPrivilegio.create do
+   Begin
+     lb_priv.items := GetDoUsuario((iObj as oUsuario).ID_USUARIO);
+     free;
+   end;
+ iContatos           :=OPessoa.create;
+ iContatos.ListaGrid := Grid_cont;
+ iContatos.GetContatos(inttostr(key_detail)) ;
+end;
+
+       {Início click Grid - Master/detail}  
+procedure TFRM_usuario.Abre_det;
+ var
+  wpk : variant;
+  i : integer;
+  Begin
+   Inherited;
+   If Frm_pers = nil then
+      Frm_pers := TFrm_pers.create(self);
+   Frm_pers.grid_cont.visible := false;
+   Frm_pers.sp_print.visible := false;
+   Frm_pers.panel1.visible := false;
+   Frm_pers.Type_Form := 1;    //simples = detail
+   Frm_pers.Key_master := self.Key_Detail;
+   If (sender as TObject) is TSpeedButton then
+      Frm_pers.sp_insertClick(nil)
+   else
+      Begin
+        If grid_cont.Objects[0,grid_cont.row] <> nil then
+           Begin
+              wpk := TPK(grid_cont.Objects[0,grid_cont.row]).pk1 ;
+              Frm_pers.Key_detail := wpk;
+              Frm_pers.Mostra_Objeto(wpk);
+           end;
+      end;
+     Frm_pers.showmodal;   
+     Mostra_Contatos; 
+  end;     
+     {fim click Grid - Master/detail}
+
+
+  procedure TFRM_usuario.sp_inserDetClick(Sender: TObject);
+ Begin
+   Abre_det(sp_insertDet);
+ end;     
+
+  procedure TFRM_usuario.grid_contDblClick(Sender: TObject);
+ Begin
+   abre_det(grid_cont);
+ end;     
+
+  
+procedure TFRM_usuario.SetoContato(const Value:OPessoa);
+begin  
+  FoContato := Value;  
+end; 
+
+{ Popula os campos do Objeto de negócio com os edit da tela} 
+procedure TFRM_usuario.ooMap;
+{Início OOMAP}
+ begin
+   If self.ID_USUARIO.text ='' then
+    (iObj as OUsuario).ID_USUARIO  := 0
+   else
+    (iObj as OUsuario).ID_USUARIO  := StrtoInt(self.ID_USUARIO.text);
+   (iObj as OUsuario).DATATU                         := DATE;
+   (iObj as OUsuario).US_NOME                        := self.US_NOME.text;
+    If self.CLI_ID.text = '' then
+      (iObj as OUsuario).CLI_ID                          := 0
+    else
+      (iObj as OUsuario).CLI_ID                         := StrtoInt(self.CLI_ID.text);
+    If self.PRJ_ID.text = '' then
+      (iObj as OUsuario).PRJ_ID                          := 0
+    else
+      (iObj as OUsuario).PRJ_ID                         := StrtoInt(self.PRJ_ID.text);
+   (iObj as OUsuario).ddmap;
+ end;
+{Fim OOMAP}
+
+procedure TFRM_usuario.FormCreate(Sender: TObject);
+var
+ wdir,wfile,P1,P2: string;
+ wbd : TstringList;
+  begin
+   inherited;
+   iObj := OUsuario.create;
+   Monta_cab;
+   grid_cont.OnDblClick := grid_contDBLClick ;
+   sp_insertDet.OnClick := sp_inserDetClick ;
+   height := lb.height + grid_cont.height + 150 ;
+   GetCompanyinCombo(cmb_cli);
+ end;
+
+
+  
+procedure TFRM_usuario.FormClose(Sender: TObject; var Action: TCloseAction);
+  begin;
+   Inherited;
+  FRM_usuario := nil;
+   action := cafree;
+ end;
+
+  
+procedure TFRM_usuario.FormShow(Sender: TObject);
+  begin
+   Inherited;
+   If lb.Count > 0 then
+     begin
+       lb.ItemIndex := 0;
+       lbClick(nil);
+       ActiveControl := lb;
+     end;
+  self.height := panel3.Height + panel1.Height +100;
+ end;
+
+   
+procedure TFRM_usuario.sp2click(Sender: TObject);
+  Begin  
+   If not Consiste then
+     raise exception.create('Inclusão não efetuada!');
+   oomap;
+   inherited;
+   If Status = 'I' then
+      begin
+        If iObj.ID > 0 then //gravou novo 
+        begin 
+          (iObj as OUsuario).GetProperties; 
+          iObj.PK.PK1  := iObj.ID;
+          lb.ItemIndex := lb.Items.AddObject((iObJ as OUsuario).US_NOME,iObj.PK);
+          Mostra_objeto(iObj.Getitem(lb)); 
+        end;
+      end;
+ end;
+  
+
+   
+{ Consiste Obrigatoriedade dos Campos antes da Inclusão ou Atualização} 
+function TFRM_usuario.Consiste : boolean;
+ begin
+   inherited;
+   result := true;
+
+    If self.US_NOME.text ='' then 
+         raise exception.create('Informar o campo Usuário');
+    
+ end;
+
+
+{ Popula os campos Edit com os atributos da TABELA} 
+function TFRM_usuario.Mostra_Campos : boolean;
+ begin
+    
+   (iObj as OUsuario).GetProperties;
+   self.ID_USUARIO.text               := InttoStr((iObj as OUsuario).ID_USUARIO);
+   self.DATATU.text                   := DatetoStr((iObj as OUsuario).DATATU);
+   self.US_NOME.text                  := (iObj as OUsuario).US_NOME;
+   self.CLI_ID.text                   := InttoStr((iObj as OUsuario).CLI_ID);
+   self.PRJ_ID.text                   := InttoStr((iObj as OUsuario).PRJ_ID);
+   with OCompany.create do
+     Begin
+       edit1.Text := GetDesc(self.cli_id.Text);
+       free;
+     end;
+   with oScenario.create do
+     Begin
+       cli_id := strtoint(self.cli_id.Text);
+       prj_id := strtoint(self.prj_id.Text);
+       ddmap;
+       edit2.text := GetDesc(self.prj_id.Text);
+      free;
+     end;
+
+ end;
+  
+{ Popula os campos Edit com os atributos da tabela}
+procedure TFRM_usuario.Mostra_Objeto(pNome : string);
+ begin
+   iObj.Load(pNome);
+   Mostra_Campos;
+   spb_del.Enabled := true;
+   sp_Insert.Enabled := true;
+
+ end;
+  
+{ Cria o click do ListBox} 
+procedure TFRM_usuario.lbClick(Sender: TObject);
+ begin
+   Inherited;
+   LB_UC.Clear;
+   Key_Detail := TPK(lb.Items.Objects[lb.ItemIndex]).PK1;
+   gb_priv.Visible := false;
+   Mostra_objeto(iObj.Getitem(lb));
+   Mostra_Contatos;
+   Mostra_Privilegios;
+
+ end;
+  
+  
+procedure TFRM_usuario.DateClose(sender : TObject);
+  begin;
+   inherited;
+   If uppercase(TDatetimePicker(sender as Tobject).name) = 'D_DATATU' then 
+    begin
+          DATATU.text := DateToStr(TDatetimePicker(sender as Tobject).date);
+          exit;
+    end;
+  end; 
+
+
+    
+{Evento do Elimina}
+procedure TFRM_usuario.CMB_CLIClick(Sender: TObject);
+begin
+  inherited;
+  cli_id.Text := TPK(cmb_cli.Items.Objects[cmb_cli.ItemIndex] ).PK1;
+  self.edit1.text := cmb_cli.Items[cmb_cli.ItemIndex];
+  with OSCenario.create do
+    Begin
+      cmb_proj.Items := GetOfCOmpany(strtoint(self.cli_id.text));
+
+      free;
+    end;
+  cmb_proj.Enabled := true;
+end;
+
+procedure TFRM_usuario.CMB_PROJClick(Sender: TObject);
+begin
+  inherited;
+  prj_id.Text := TPK(cmb_proj.Items.Objects[cmb_proj.ItemIndex] ).PK1;
+  self.edit2.text := cmb_proj.Items[cmb_proj.ItemIndex];
+  Mostra_UC;
+end;
+
+procedure TFRM_usuario.Mostra_UC;
+begin
+ with oUsecase.create do
+    Begin
+       self.lb_uc.items := GetAllNOT((iObj as oUsuario).ID_USUARIO,strtoint(Cli_id.text),strtoint(prj_id.text));
+       free;
+    end;
+end;
+
+procedure TFRM_usuario.SpeedButton1Click(Sender: TObject);
+begin
+  inherited;
+  If id_usuario.Text = '' then
+   raise exception.Create('Escolher um Usuário');
+  gb_priv.Visible := true;
+  If (cli_id.Text <> '' ) and (prj_id.Text <> '') then
+    Mostra_UC;
+  
+  
+end;
+
+procedure TFRM_usuario.lb_ucDblClick(Sender: TObject);
+begin
+  inherited;
+  If frm_privilegio  = nil  then
+    frm_privilegio:= Tfrm_privilegio.create(self);
+  frm_privilegio.sp_insertClick(nil);
+  frm_privilegio.ID_USECASE.text := inttostr(TPK(lb_uc.Items.Objects[lb_uc.ItemIndex] ).PK1);
+  frm_privilegio.ID_USUARIO.text := self.ID_USUARIO.text;
+  frm_privilegio.PRV_DESCRICAO.text := lb_uc.Items[lb_uc.ItemIndex];
+  If self.CLI_ID.text ='' then 
+      raise exception.create('Informar a Empresa');
+    If self.PRJ_ID.text ='' then
+       raise exception.create('Informar o Cenário');
+  frm_privilegio.CLI_ID.text := self.CLI_ID.text;
+  frm_privilegio.PRJ_ID.text := self.PRJ_ID.text;
+  frm_privilegio.showmodal;
+  Mostra_Privilegios;
+  lb_uc.DeleteSelected;
+end;
+
+procedure TFRM_usuario.lb_privDblClick(Sender: TObject);
+begin
+  inherited;
+  If frm_privilegio  = nil  then
+    frm_privilegio:= Tfrm_privilegio.create(self);
+   Frm_privilegio.Key_detail := TPK(lb_priv.Items.Objects[lb_priv.ItemIndex]).pk1;
+   Frm_privilegio.Mostra_Objeto( TPK(lb_priv.items.Objects[lb_priv.ItemIndex]).pk1);
+   frm_privilegio.ShowModal;
+end;
+
+procedure TFRM_usuario.sp_insertClick(Sender: TObject);
+begin
+  inherited;
+  activecONTROL := us_nome;
+end;
+
+
+procedure TFRM_usuario.IncludeBtnClick(Sender: TObject);
+
+begin
+  inherited;
+  with oPrivilegio.Create do
+
+    Begin
+      DelDoUsuario(TPK(lb_priv.Items.Objects[lb_Priv.ItemIndex]).PK1;
+
+     free;
+    end;
+end;
+
+end.
