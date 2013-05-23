@@ -1,0 +1,423 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="bgModalidade">
+    </Component>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="closable" type="boolean" value="true"/>
+    <Property name="iconifiable" type="boolean" value="true"/>
+    <Property name="maximizable" type="boolean" value="true"/>
+    <Property name="resizable" type="boolean" value="true"/>
+    <Property name="title" type="java.lang.String" value="Cadastro de Clientes"/>
+    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[100, 31]"/>
+    </Property>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+  </SyntheticProperties>
+  <Events>
+    <EventHandler event="internalFrameActivated" listener="javax.swing.event.InternalFrameListener" parameters="javax.swing.event.InternalFrameEvent" handler="formInternalFrameActivated"/>
+    <EventHandler event="internalFrameOpened" listener="javax.swing.event.InternalFrameListener" parameters="javax.swing.event.InternalFrameEvent" handler="formInternalFrameOpened"/>
+    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="formMouseClicked"/>
+    <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="formComponentShown"/>
+    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="formFocusGained"/>
+  </Events>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="31" pref="31" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jsQtdMaquinas" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
+                  <Component id="jlQtdMaquinas" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtfNome" alignment="0" pref="533" max="32767" attributes="1"/>
+                  <Component id="jlContato" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jtfCpfCnpj" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlCpfCnpj" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jtfRgIe" min="-2" pref="166" max="-2" attributes="0"/>
+                          <Component id="jlRgIe" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jlDataCompra" min="-2" max="-2" attributes="0"/>
+                          <Component id="jxDataCompra" min="-2" pref="133" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jtfFone" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlFone" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jlEmail" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="263" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jtfEmail" pref="409" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="jtfContato" alignment="0" pref="533" max="32767" attributes="1"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jtfCodigo" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlCodigo" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlNome" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLayeredPane1" pref="361" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+          </Group>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jlCodigo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jtfCodigo" min="-2" max="-2" attributes="1"/>
+                      <EmptySpace pref="15" max="32767" attributes="0"/>
+                      <Component id="jlNome" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jLayeredPane1" min="-2" pref="71" max="-2" attributes="1"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <Component id="jtfNome" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jlContato" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jtfContato" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jlCpfCnpj" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlDataCompra" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlRgIe" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jtfCpfCnpj" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jxDataCompra" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtfRgIe" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jlFone" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jtfFone" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtfEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jlQtdMaquinas" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jsQtdMaquinas" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="jlCodigo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="N&#xfa;mero do Contrato"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfCodigo">
+      <Properties>
+        <Property name="columns" type="int" value="20"/>
+      </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtfCodigoFocusLost"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfCodigoKeyReleased"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
+    </Component>
+    <Container class="javax.swing.JLayeredPane" name="jLayeredPane1">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Modalidade de Venda"/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JRadioButton" name="jrbVenda">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="bgModalidade"/>
+            </Property>
+            <Property name="selected" type="boolean" value="true"/>
+            <Property name="text" type="java.lang.String" value="Venda"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
+              <JLayeredPaneConstraints x="10" y="20" width="70" height="21" layer="0" position="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="jrbAluguel">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="bgModalidade"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Aluguel"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
+              <JLayeredPaneConstraints x="10" y="40" width="80" height="20" layer="0" position="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="jrbLivre">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="bgModalidade"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Livre"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jrbLivreActionPerformed"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
+              <JLayeredPaneConstraints x="170" y="20" width="70" height="-1" layer="0" position="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="jrbDemo">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="bgModalidade"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Demo"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
+              <JLayeredPaneConstraints x="170" y="40" width="80" height="-1" layer="0" position="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jlNome">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nome / Raz&#xe3;o Social"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfNome">
+      <Properties>
+        <Property name="columns" type="int" value="40"/>
+      </Properties>
+      <Events>
+        <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="jtfNomeInputMethodTextChanged"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfNomeKeyReleased"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlContato">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Contato"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfContato">
+      <Properties>
+        <Property name="columns" type="int" value="40"/>
+      </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfContatoKeyReleased"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlCpfCnpj">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="CPF /CNPJ"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfCpfCnpj">
+      <Properties>
+        <Property name="columns" type="int" value="14"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlRgIe">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="RG /IE"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfRgIe">
+      <Properties>
+        <Property name="columns" type="int" value="14"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlDataCompra">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Data da Compra"/>
+      </Properties>
+    </Component>
+    <Component class="org.jdesktop.swingx.JXDatePicker" name="jxDataCompra">
+      <Properties>
+        <Property name="formats" type="[Ljava.text.DateFormat;" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new String [] { &quot;dd/MM/yyyy&quot; }" type="code"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlFone">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Telefone de Contato"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfFone">
+      <Properties>
+        <Property name="columns" type="int" value="14"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlEmail">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="E-Mail"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfEmail">
+      <Properties>
+        <Property name="columns" type="int" value="30"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+            <EtchetBorder/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="74" max="32767" attributes="0"/>
+                  <Component id="jbNovo" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jbListaLicenca" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jbLiberaLicenca" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jbPesquisar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jbApagar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jbApagar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbPesquisar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbLiberaLicenca" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbListaLicenca" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbNovo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JButton" name="jbApagar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Apagar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbApagarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jbPesquisar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Pesquisar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbPesquisarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jbLiberaLicenca">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Libera Licen&#xe7;a"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbLiberaLicencaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jbNovo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Novo"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbNovoActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jbListaLicenca">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Vincular M&#xe1;quinas/Licen&#xe7;as"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbListaLicencaActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jlQtdMaquinas">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Qtd. M&#xe1;quinas"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="jsQtdMaquinas">
+      <Properties>
+        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+          <SpinnerModel initial="1" maximum="150" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Quantidade de m&#xe1;quina que executar&#xe3;o o Best."/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
+    </Component>
+  </SubComponents>
+</Form>
