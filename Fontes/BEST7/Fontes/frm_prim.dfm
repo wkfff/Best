@@ -1,0 +1,22 @@
+object prim: Tprim
+  Left = 303
+  Top = 245
+  HorzScrollBar.Visible = False
+  VertScrollBar.Visible = False
+  BorderStyle = bsSingle
+  ClientHeight = 348
+  ClientWidth = 536
+  Color = clBtnFace
+  Font.Charset = ANSI_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Arial'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 14
+end

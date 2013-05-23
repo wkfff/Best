@@ -1,0 +1,280 @@
+unit bst_check;
+
+interface
+
+uses
+  Windows, bst_basefrm,Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, Buttons, AddFlow3Lib_TLB, Grids, bstdb, cls_obj, db, dbtables,
+  ImgList, ComCtrls, ToolWin ;
+
+type
+  Tfrm_check = class(TBaseFRm)
+    lb10: TListBox;
+    SpeedButton1: TSpeedButton;
+    lb3: TListBox;
+    SpeedButton2: TSpeedButton;
+    ft: TFontDialog;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label2: TLabel;
+    Label1: TLabel;
+    SpeedButton5: TSpeedButton;
+    sg: TStringGrid;
+    CoolBar1: TCoolBar;
+    ToolBar1: TToolBar;
+    ToolButton1: TToolButton;
+    ToolButton2: TToolButton;
+    ImageList1: TImageList;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure SpeedButton1Click(Sender: TObject);
+    function Consiste(pCli : integer;pproj : integer) : boolean;
+    procedure FormCreate(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton5Click(Sender: TObject);
+  private
+    Fchk_k: integer;
+    procedure Setchk_k(const Value: integer);
+    procedure Mostra_erro(pErro: integer);
+    { Private declarations }
+  public
+    procedure Loadconstantobj;override;
+
+  published
+   property chk_k : integer read Fchk_k write Setchk_k;
+  end;
+
+var
+  frm_check: Tfrm_check;
+  DiagOrg,DiagRef : TDG;
+  errado : Boolean;
+  erro : integer;
+  WNomediagOrg ,WNomeDiagRef,mens,Wnome,Wtext,Wblank,wtipo : string;
+  Tot,k ,Tot1,TotLink,wCodeRef,IndAtu,WcodeOrg : integer;
+  WEntOrg,Wtexto,WEntRef : afNode;
+  wdelet : tstringlist;
+  iDiag : TDados_Tab;
+  iDg   : TDiag_dados;
+implementation
+
+uses bst_main, bst_pcons;
+
+
+
+{$R *.DFM}
+
+
+procedure Tfrm_check.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  DiagOrg := nil;
+  DiagOrg.free;
+  DiagRef := nil;
+  DiagRef.Free;
+  freeandnil(iDiag);
+  frm_check := nil;
+  action := cafree;
+end;
+
+procedure Tfrm_check.SpeedButton1Click(Sender: TObject);
+begin
+  Consiste(CurrEmpresa.cenarios.CLI_ID,CurrEmpresa.cenarios.PRJ_ID);
+end;
+
+function Tfrm_check.Consiste(pCli : integer;pproj : integer) : boolean;
+var
+i,j : integer;
+wqry : Tquery;
+begin
+  sg.RowCount := 2;
+  sg.Cells[0,sg.RowCount-1] := '';
+  
+  iDiag.Get_Diag(pCli,pProj) ;
+
+  while not iDiag.eof do    // procura os diagramas...
+
+     Begin
+      WNomeDiagOrg := bdx.DirFluxo + iDiag.fieldbyname('diag_id').asstring;
+
+     If FileExists(WNomeDiagOrg) then    // abre o diagrama físico...
+       Begin           // inclui entitiy na tabela
+
+         DiagOrg.Loadfile(WNomeDiagOrg);
+         Tot := DiagOrg.Nodes.count;
+
+         for i := 1 to tot do   //le todos os objetos e procura processo externo (54)
+         Begin
+           WEntOrg := DiagOrg.Nodes.item(i);
+           If (WEntOrg.Shape = 54) then    //processo externo
+            begin
+              wCodeRef  := WEntOrg.Userdata ;                     // processo referenciado
+              WcodeOrg  := iDiag.fieldbyname('Idg_Id').value;   //diagrama origem
+              If WEntOrg.InLinks.Count > 0 then
+               Begin
+                 If WEntOrg.OutLinks.Count > 0 then
+                   wtipo := 'ES'  // ha entradas e saidas
+                 else
+                  wtipo := 'E' ;  // ha somente entradas
+               end ;
+              If WEntOrg.OutLinks.Count > 0 then
+               Begin
+                 If WEntOrg.InLinks.Count > 0 then
+                   wtipo := 'ES'  // ha entradas e saidas
+                 else
+                  wtipo := 'S' ;  // ha somente saidas
+               end ;
+
+
+              WText     := WEntOrg.text ;
+              idg       := TDiag_dados.create(self);
+              try
+                iDg.Get_Diagrama(iDiag.fieldbyname('Cli_id').asinteger,
+                                        iDiag.fieldbyname('Prj_id').asinteger,
+                                         wCodeRef);  //procura externo....
+                WNomeDiagRef := iDg.DIAG_ID;
+              finally
+                 freeandNil(Idg);
+              end;
+
+              If WNomeDiagRef <> '' then
+                 begin
+                   WNomeDiagRef := bdx.DirFluxo + WNomeDiagRef ;
+                   If FileExists(WNomeDiagRef) then    // abre o diagrama físico...
+                    Begin           // inclui entitiy na tabela
+
+                     DiagRef.Loadfile(WNomeDiagRef);
+                     Tot1 := DiagRef.Nodes.count;
+                     If Tot1 > 0 then
+                     begin
+                     errado := true;
+                     erro := 0;
+                     for j := 1 to Tot1 do
+                       begin
+                         WEntRef  := DiagRef.Nodes.item(j);
+
+                         If (WEntRef.Shape = 54) then    //processo externo
+                           begin
+                             If WcodeOrg = WEntRef.userdata then
+                                begin
+                                  If wtipo = 'S' then
+                                   Begin
+                                   If WEntRef.inlinks.count = 0  then
+                                     erro := 1
+                                   end
+                                  else
+                                  If wtipo = 'E' then
+                                   Begin
+                                    If WEntRef.outlinks.count = 0  then
+                                     erro := 2
+                                   end
+                                  else
+                                  If wtipo = 'ES' then
+                                   Begin
+                                    If (WEntRef.outlinks.count) * (WEntRef.Inlinks.count) = 0 then
+                                     erro := 3
+                                   end
+                                  else
+                                   Begin
+                                      errado := false;
+                                      erro  := 0;
+                                      break;
+                                   end;
+
+                                end; //wcodorg = ...
+                           end;   // FIM 54
+                       end;  // FOR NEXT
+                     If errado then
+                      Begin
+                       If erro > 0 then
+                         begin
+                          // Mostra_erro(erro);
+                         end;  //end erro >0
+                        sg.repaint;
+                      end; //end errado
+                     end; //tot1 > 0
+                    end;  //fileexists
+
+                 end  //diag <> ''
+                else
+                 begin
+                  //  Mostra_erro(5);
+                 end;
+            end; //end shape 54
+         end; //for..end
+
+       end; //end fileexists
+     iDiag.next;
+
+     end;
+end;
+
+procedure Tfrm_check.Mostra_erro(pErro : integer);
+Begin
+ If sg.Cells[0,sg.rowcount-1] <> '' then
+    sg.rowcount := sg.rowcount + 1;
+  sg.cells[0,sg.rowcount-1] := iDiag.fieldbyname('sub_nome').asstring;
+  sg.cells[1,sg.rowcount-1] := Wtext;
+  case perro of
+  1 : sg.cells[2,sg.rowcount-1] := 'O processo referenciado deveria conter o Processo Origem como Entrada! ';
+  2 : sg.cells[2,sg.rowcount-1] := 'O processo referenciado deveria conter o Processo Origem como Saída';
+  3 : sg.cells[2,sg.rowcount-1] := 'O processo referenciado deveria conter o Processo Origem como Entrada/Saída! ';
+  4 : sg.cells[2,sg.rowcount-1] := 'O processo Origem Inexistente no Processo referenciado!';
+  5 : sg.cells[2,sg.rowcount-1] := 'Processo referenciado Inexistente!';
+
+  end;
+end;
+
+procedure Tfrm_check.FormCreate(Sender: TObject);
+begin
+  sg.Cells[0,0] := 'Processo Origem';
+  sg.Cells[1,0] := 'Processo referenciado no Processo origem';
+  sg.Cells[2,0] := 'Inconsistencia';
+  iDiag := Tdados_Tab.create(self);
+
+  DiagOrg :=Tdg.CREATE;
+ // InsertControl(DiagOrg);
+ // DiagOrg.Width := 1;
+ // DiagOrg.height := 1;
+
+  DiagRef :=Tdg.CREATE;
+ // InsertControl(DiagRef);
+ // DiagRef.Width := 1;
+ // DiagRef.height := 1;
+
+end;
+
+procedure Tfrm_check.SpeedButton2Click(Sender: TObject);
+begin
+  If frm_consist = nil then
+     frm_consist := tfrm_consist.create(self);
+  chk_k := 1;
+  frm_consist.pr_cli.caption  := label1.caption ;
+  frm_consist.pr_proj.caption := label2.caption ;
+  frm_consist.rp_ac.preview;
+  frm_consist.close;
+end;
+
+procedure Tfrm_check.SpeedButton5Click(Sender: TObject);
+begin
+  close;
+end;
+
+procedure Tfrm_check.Setchk_k(const Value: integer);
+begin
+  Fchk_k := Value;
+end;
+
+procedure Tfrm_check.Loadconstantobj;
+var
+i : integer;
+
+begin
+  Caption                 := defC33;//'Consistencia dos diagramas' ;
+  SpeedButton1.Caption    := defV3 ;//'Verificar Referenciamento dos Processos'  ;
+  SpeedButton2.Hint       := def761;//'Imprimir Ficha' ;
+  Label3.Caption          := def67210 +'  :' ;//'Empresa '  ;
+  Caption                 := defc16;//'Cenário '  ;
+
+
+end;
+
+end.
+
