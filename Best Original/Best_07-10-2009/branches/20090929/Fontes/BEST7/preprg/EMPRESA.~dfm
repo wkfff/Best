@@ -1,0 +1,282 @@
+inherited FRM_EMPRESA: TFRM_EMPRESA
+  Left = 226
+  Top = 101
+  Caption = 'Form3'
+  ClientHeight = 554
+  ClientWidth = 751
+  Color = clBtnFace
+  OldCreateOrder = False
+  WindowState = wsMaximized
+  PixelsPerInch = 96
+  TextHeight = 15
+  object l_SITE: TLabel [0]
+    Left = 550
+    Top = 452
+    Width = 22
+    Height = 15
+    Caption = 'Site'
+  end
+  object l_TIPO: TLabel [1]
+    Left = 558
+    Top = 491
+    Width = 23
+    Height = 15
+    Caption = 'Tipo'
+  end
+  object l_DATA: TLabel [2]
+    Left = 366
+    Top = 498
+    Width = 88
+    Height = 15
+    Caption = 'Data Atualiza'#231#227'o'
+  end
+  object l_COMMENT: TLabel [3]
+    Left = 350
+    Top = 385
+    Width = 66
+    Height = 15
+    Caption = 'Observa'#231#245'es'
+  end
+  object l_ATIV: TLabel [4]
+    Left = 518
+    Top = 184
+    Width = 50
+    Height = 15
+    Caption = 'Atividade'
+  end
+  object l_E_MAIL: TLabel [5]
+    Left = 486
+    Top = 335
+    Width = 34
+    Height = 15
+    Caption = 'E-Mail'
+  end
+  object l_FAX: TLabel [6]
+    Left = 350
+    Top = 326
+    Width = 19
+    Height = 15
+    Caption = 'Fax'
+  end
+  object l_TELEF1: TLabel [7]
+    Left = 350
+    Top = 277
+    Width = 46
+    Height = 15
+    Caption = 'Telefone'
+  end
+  object l_PAIS: TLabel [8]
+    Left = 358
+    Top = 180
+    Width = 21
+    Height = 15
+    Caption = 'Pais'
+  end
+  object l_CEP: TLabel [9]
+    Left = 534
+    Top = 138
+    Width = 20
+    Height = 15
+    Caption = 'CEP'
+  end
+  object l_CIDAD: TLabel [10]
+    Left = 358
+    Top = 137
+    Width = 52
+    Height = 15
+    Caption = 'Munic'#237'pio'
+  end
+  object l_ESTADO: TLabel [11]
+    Left = 486
+    Top = 136
+    Width = 14
+    Height = 15
+    Caption = 'UF'
+  end
+  object l_ENDER: TLabel [12]
+    Left = 358
+    Top = 87
+    Width = 48
+    Height = 15
+    Caption = 'Endere'#231'o'
+  end
+  object l_INSCR: TLabel [13]
+    Left = 494
+    Top = 229
+    Width = 50
+    Height = 15
+    Caption = 'Inscri'#231#227'o'
+  end
+  object l_CGC: TLabel [14]
+    Left = 350
+    Top = 228
+    Width = 22
+    Height = 15
+    Caption = 'CGC'
+  end
+  object d_DATA: TDateTimePicker [16]
+    Left = 366
+    Top = 514
+    Width = 145
+    Height = 21
+    Date = 38140.524316932900000000
+    Time = 38140.524316932900000000
+    TabOrder = 13
+    OnCloseUp = DateClose
+  end
+  inherited Panel3: TPanel
+    Width = 751
+    TabOrder = 16
+  end
+  object SITE: TEdit [18]
+    Left = 550
+    Top = 468
+    Width = 121
+    Height = 23
+    TabOrder = 15
+  end
+  object TIPO: TEdit [19]
+    Left = 558
+    Top = 507
+    Width = 121
+    Height = 23
+    TabOrder = 14
+  end
+  object DATA: TEdit [20]
+    Left = 366
+    Top = 514
+    Width = 121
+    Height = 23
+    TabOrder = 17
+  end
+  object COMMENT: TMemo [21]
+    Left = 350
+    Top = 401
+    Width = 387
+    Height = 56
+    Lines.Strings = (
+      '')
+    TabOrder = 12
+  end
+  object ATIV: TEdit [22]
+    Left = 518
+    Top = 200
+    Width = 121
+    Height = 23
+    TabOrder = 11
+  end
+  object E_MAIL: TEdit [23]
+    Left = 486
+    Top = 351
+    Width = 121
+    Height = 23
+    TabOrder = 10
+  end
+  object FAX: TEdit [24]
+    Left = 350
+    Top = 350
+    Width = 121
+    Height = 23
+    TabOrder = 9
+  end
+  object TELEF1: TEdit [25]
+    Left = 350
+    Top = 293
+    Width = 121
+    Height = 23
+    TabOrder = 8
+  end
+  object TELEF: TEdit [26]
+    Left = 486
+    Top = 292
+    Width = 121
+    Height = 23
+    TabOrder = 7
+  end
+  object PAIS: TEdit [27]
+    Left = 358
+    Top = 196
+    Width = 121
+    Height = 23
+    MaxLength = 15
+    TabOrder = 6
+  end
+  object CEP: TEdit [28]
+    Left = 534
+    Top = 154
+    Width = 121
+    Height = 23
+    MaxLength = 10
+    TabOrder = 5
+  end
+  object CIDAD: TEdit [29]
+    Left = 358
+    Top = 153
+    Width = 121
+    Height = 23
+    MaxLength = 20
+    TabOrder = 4
+  end
+  object ESTADO: TEdit [30]
+    Left = 486
+    Top = 152
+    Width = 35
+    Height = 23
+    MaxLength = 2
+    TabOrder = 3
+  end
+  object ENDER: TEdit [31]
+    Left = 358
+    Top = 105
+    Width = 371
+    Height = 23
+    MaxLength = 60
+    TabOrder = 2
+  end
+  object INSCR: TEdit [32]
+    Left = 494
+    Top = 245
+    Width = 121
+    Height = 23
+    MaxLength = 15
+    TabOrder = 1
+  end
+  object CGC: TEdit [33]
+    Left = 350
+    Top = 244
+    Width = 121
+    Height = 23
+    MaxLength = 18
+    TabOrder = 0
+  end
+  object EMPRESA: TEdit [34]
+    Left = 360
+    Top = 56
+    Width = 369
+    Height = 23
+    MaxLength = 50
+    TabOrder = 18
+    Text = 'EMPRESA'
+  end
+  inherited lb: TListBox
+    Width = 313
+    Height = 489
+    Sorted = True
+    TabOrder = 19
+    OnClick = lbClick
+  end
+  object FANTASIA: TEdit [36]
+    Left = 360
+    Top = 24
+    Width = 121
+    Height = 23
+    CharCase = ecUpperCase
+    ReadOnly = True
+    TabOrder = 20
+    Text = 'FANTASIA'
+  end
+  inherited PopupMenu1: TPopupMenu
+    Left = 696
+    Top = 376
+  end
+end

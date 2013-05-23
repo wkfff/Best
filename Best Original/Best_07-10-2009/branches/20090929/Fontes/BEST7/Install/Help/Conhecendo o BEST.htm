@@ -1,0 +1,1004 @@
+<HTML>
+ <HEAD>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pt-br">
+  <!-- $MVD$:app("RoboHELP HTML Edition by Blue Sky Software, portions by MicroVision Dev. Inc.","769") -->
+  <!-- $MVD$:template("","0","0") -->
+  <!-- $MVD$:color("18","2e5029","musgo","0") -->
+  <!-- $MVD$:color("19","77cdf2","laranja","0") -->
+  <!-- $MVD$:fontset("Arial","Arial") -->
+  <!-- $MVD$:fontset("Verdana","Verdana") -->
+  <!-- $MVD$:fontset("Folio BdCn BT","Folio BdCn BT") -->
+  <meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+  <meta name="ProgId" content="FrontPage.Editor.Document">
+  <TITLE>Diagrama de processo de neg&oacute;cio</TITLE>
+ <LINK REL="STYLESHEET" HREF="default.css" TYPE="text/css"></HEAD>
+ <BODY>
+   <TABLE WIDTH="100%" CELLPADDING="2" CELLSPACING="0" BORDER="0">
+    <TR>
+     <TD HEIGHT="36" WIDTH="100%" BGCOLOR="BLUE" VALIGN=CENTER>
+      <P>
+       <b><font face="Verdana" color="#FFFFFF" size="4">Modelos e técnicas suportadas</font></b></TD>
+    </TR>
+   </TABLE>
+   <p><font face="Verdana" size="1">&nbsp;&nbsp;</font>
+   </p>
+   <p ALIGN="left">&nbsp;</p>
+  <P STYLE="margin-top: -14.0pt" ALIGN=left>
+   <font face="Verdana" size="1">&nbsp;<u><b><font face="Verdana" color="#0000FF" size="3"><a name="cb01"></a></font><a href="Diagrama%20de%20processo%20de%20negócio.htm" target="inferior direito">Modelagem
+          de processo de negócio - IDEF3&nbsp; Ajustada</a></b></u></font></P>
+  <P STYLE="margin-top: -14.0pt" ALIGN=left>
+   &nbsp;</P>
+  <P STYLE="text-align : center;margin-top : -14.0pt;" ALIGN=CENTER>
+   <b><font color="MAROON" face="Verdana" size="1">&quot;Conjunto de a&ccedil;&otilde;es 
+   (atividades) interdependentes e ordenadas no tempo e espa&ccedil;o,</font></b></P>
+  <P STYLE="text-align : center;margin-top : -14.0pt;" ALIGN=CENTER>
+   <b><font color="MAROON" face="Verdana" size="1">que ocorrem como resposta a est&iacute;mulos, e 
+   que possuem in&iacute;cio, fim, inputs</font></b></P>
+  <P STYLE="text-align : center;margin-top : -14.0pt;" ALIGN=CENTER>
+   <b><font color="MAROON" face="Verdana" size="1">e outputs, bem definidos.&quot;</font></b></P>
+  <P STYLE="text-align : center;margin-top : -14.0pt;" ALIGN=CENTER>
+   &nbsp;</P>
+  <P>
+   <font face="Verdana" size="1">
+   Podemos compreender a empresa como um conjunto de processos de 
+   neg&oacute;cio inter-relacionados que t&ecirc;m, na ess&ecirc;ncia, 
+   como objetivo prim&aacute;rio responder direta ou indiretamente aos 
+   est&iacute;mulos da classe de ator externo Cliente. Por 
+   decorr&ecirc;ncia, s&atilde;o geradas outras rela&ccedil;&otilde;es 
+   com diversas classes de atores externos, que suportam e controlam a 
+   execu&ccedil;&atilde;o desses processos.</font></P>
+  <P>
+   <font face="Verdana" size="1">
+   Processos de neg&oacute;cio permeiam a estrutura organizacional da 
+   empresa envolvendo coordenadamente &aacute;reas de diversas 
+   disciplinas com o objetivo de produzir outputs, sejam eles bens, 
+   servi&ccedil;os ou informa&ccedil;&otilde;es, para atender &agrave;s 
+   necessidades de seus &quot;Clientes &quot;.</font></P>
+  <P>
+   <font face="Verdana" size="1">
+   o BEST utiliza a t&eacute;cnica <FONT COLOR="BLUE"><a HREF="#cb06">SADT/IDEF3</a> ajustada</FONT> 
+   como padr&atilde;o de notaç&atilde;o gr&aacute;fica para 
+   representa&ccedil;&atilde;o de diagramas de processo de 
+   neg&oacute;cio. Este &quot;ajuste&quot; realizado sobre a notaç&atilde;o original da t&eacute;cnica
+   SADT/IDEF3 objetiva 
+   permitir a representa&ccedil;&atilde;o de Eventos 
+   e <A HREF="Entidade Externa.htm">Classe de Atores Externos</A> 
+   necess&aacute;rios para melhor compreender e representar 
+   Inicio/Disparo de processos e o FIm/Destino dos seus outputs.</font></P>
+  <P>
+   <font face="Verdana" size="1">
+   O diagrama de processo de neg&oacute;cio &eacute; a base fundamental 
+   e o ponto de partida para definiç&atilde;o do <FONT COLOR="MAROON"><SPAN STYLE="font-weight : bold;">Modelo
+    Operacional de Neg&oacute;cio</SPAN></FONT><SPAN STYLE="font-weight : bold;"><FONT COLOR="MAROON"> .</FONT></SPAN></font></P>
+  <P>
+   <SPAN STYLE="font-weight : normal;"><FONT COLOR="BLACK" face="Verdana" size="1">No
+   Diagrama de Processo de neg&oacute;cio s&atilde;o representados graficamente:</FONT></SPAN></P>
+  <UL>
+   <LI CLASS="mvd-P">
+   <P>
+    <SPAN STYLE="font-weight : normal;"><FONT COLOR="BLACK" face="Verdana" size="1"><A HREF="Evento.htm">Evento
+     de Neg&oacute;cio</A></FONT></SPAN></P>
+   <LI CLASS="mvd-P">
+   <P>
+    <SPAN STYLE="font-weight : normal;"><FONT COLOR="BLACK" face="Verdana" size="1"><A HREF="Atividade.htm">Atividade</A></FONT></SPAN></P>
+   <LI CLASS="mvd-P">
+   <P>
+    <SPAN STYLE="font-weight : normal;"><FONT COLOR="BLACK" face="Verdana" size="1"><A HREF="Regra de Neg&oacute;cio.htm">Regra
+     de Neg&oacute;cio</A></FONT></SPAN></P>
+   <LI CLASS="mvd-P">
+   <P>
+    <SPAN STYLE="font-weight : normal;"><FONT COLOR="BLACK" face="Verdana" size="1"><A HREF="Classe de ator.htm">Classe
+     de Ator</A> (externa)</FONT></SPAN></P>
+   <LI CLASS="mvd-P">
+   <P>
+    <SPAN STYLE="font-weight : normal;"><FONT COLOR="BLACK" face="Verdana" size="1"><A HREF="Grupo de dados.htm">Fluxos
+     de dados</A> ( Input e output)</FONT></SPAN></P>
+   </UL>
+  <P>
+   <SPAN STYLE="font-weight : normal;"><FONT COLOR="BLACK" face="Verdana" size="1">No
+   Diagrama de Processo de neg&oacute;cio n&atilde;o s&atilde;o representados 
+   graficamente :Mecanismos, Classe de Ator (Processador da 
+   atividade) e Local de processamento, embora estejam associados a cada 
+   Atividade atrav&eacute;s de sua especifica&ccedil;&atilde;o.</FONT></SPAN></P>
+  <P STYLE="text-align : center;" ALIGN=CENTER>
+   <HR ALIGN=CENTER WIDTH="100%" SIZE="2">
+  <P STYLE="text-align : center;margin-top : -14.0pt;" ALIGN=CENTER>
+   &nbsp;</P>
+  <P STYLE="text-align : center;margin-top : -14.0pt;" ALIGN=CENTER>
+   <FONT COLOR="MAROON" face="Verdana" size="1">&quot;...ordena&ccedil;&atilde;o 
+   espec&iacute;fica das atividades de trabalho no tempo e espa&ccedil;o,
+    com inputs e outputs claramente identificados; uma estrutura para a&ccedil;&atilde;o...&quot;</FONT></P>
+  <P STYLE="text-align : center;margin-top : -14.0pt;" ALIGN=CENTER>
+   <font face="Verdana" size="1">
+   THOMAS H. DAVEMPORT</font></P>
+  <P STYLE="text-align : center;margin-top : -14.0pt;" ALIGN=CENTER>
+   <font face="Verdana" size="1">
+   <!-- $MVD$:spaceretainer() -->&nbsp;</font></P>
+  <P STYLE="text-align : center;margin-top : -14.0pt;" ALIGN=CENTER>
+   <FONT COLOR="MAROON" face="Verdana" size="1">&quot;... conjunto de atividades com uma ou mais 
+   esp&eacute;cies de entrada, e que cria uma sa&iacute;da de valor para 
+   o cliente...&quot;</FONT></P>
+  <P STYLE="text-align : center;margin-top : -14.0pt;" ALIGN=CENTER>
+   <font face="Verdana" size="1">
+   MICHAEL HAMMER</font></P>
+  <P STYLE="text-align : center;margin-top : -14.0pt;" ALIGN=CENTER>
+   <font face="Verdana" size="1">
+   <!-- $MVD$:spaceretainer() -->&nbsp;</font></P>
+  <P STYLE="text-align : center;margin-top : -14.0pt;" ALIGN=CENTER>
+   <FONT COLOR="MAROON" face="Verdana" size="1">&quot;...uma ou um conjunto de atividades
+   inter-relacionadas, destinadas a transformar um ou mais inputs em um 
+   ou mais outputs que representem solu&ccedil;&otilde;es do ponto de 
+   vista de clientes internos ou externos...&quot;</FONT></P>
+  <P STYLE="text-align : center;margin-top : -14.0pt;" ALIGN=CENTER>
+   <font face="Verdana" size="1">
+   LON ROBERTS</font></P>
+  <P STYLE="text-align : center;margin-top : -14.0pt;" ALIGN=CENTER>
+   <font face="Verdana" size="1">
+   <!-- $MVD$:spaceretainer() -->&nbsp;</font></P>
+  <P STYLE="text-align : center;margin-top : -14.0pt;" ALIGN=CENTER>
+   <font face="Verdana" size="1">
+   <!-- $MVD$:spaceretainer() -->&nbsp;</font>
+  <P STYLE="text-align : center;margin-top : -14.0pt;" ALIGN=CENTER>
+   &nbsp;
+  <P STYLE="text-align : center;margin-top : -14.0pt;" ALIGN=CENTER>
+   &nbsp;
+  <P STYLE="text-align : center;margin-top : -14.0pt;" ALIGN=CENTER>
+   &nbsp;
+  <P STYLE="text-align : center;margin-top : -14.0pt;" ALIGN=CENTER>
+   &nbsp;
+  <P STYLE="text-align : center;margin-top : -14.0pt;" ALIGN=CENTER>
+   &nbsp;
+  <P STYLE="text-align : center;margin-top : -14.0pt;" ALIGN=CENTER>
+   &nbsp;
+  <P STYLE="text-align : center;margin-top : -14.0pt;" ALIGN=CENTER>
+   &nbsp;
+  <P STYLE="text-align : center;margin-top : -14.0pt;" ALIGN=CENTER>
+   &nbsp;
+   <HR ALIGN=CENTER WIDTH="100%" SIZE="2">
+  <p STYLE="margin-top: -14.0pt" ALIGN="CENTER">&nbsp;</p>
+  <p STYLE="margin-top: -14.0pt" ALIGN="CENTER">&nbsp;</p>
+  <p STYLE="margin-top: -14.0pt" ALIGN="CENTER">&nbsp;</p>
+  <p STYLE="margin-top: -14.0pt" ALIGN="CENTER">&nbsp;</p>
+  <p STYLE="margin-top: -14.0pt" ALIGN="CENTER">&nbsp;</p>
+  <p STYLE="margin-top: -14.0pt" ALIGN="CENTER">&nbsp;</p>
+  <p STYLE="margin-top: -14.0pt" ALIGN="CENTER">&nbsp;</p>
+   <p STYLE="margin-top: -14.0pt" ALIGN="left"><u><b><font face="Verdana" color="#0000FF" size="1"><a name="cb02"></a>Modelo
+        de Transi&ccedil;&atilde;o
+        de Estado - IDEF 3 - Ajustada</font></b></u></p>
+  <H1>
+   <SPAN STYLE="font-size : 8.0pt;"><FONT FACE="Verdana"><SPAN STYLE="font-weight : normal;">O
+    modelo de transi&ccedil;&atilde;o de estado IDEF_3 auxilia na representa&ccedil;</SPAN></FONT></SPAN><SPAN STYLE="font-weight : normal;font-size : 8.0pt;"><FONT FACE="Verdana">&atilde;o
+    da mudan&ccedil;a de estado dos &quot;Objetos de Neg&oacute;cio 
+   &quot; manipulados pelas atividades do processo de neg&oacute;cio.</FONT></SPAN></H1>
+  <P>
+   <SPAN STYLE="font-weight : normal;font-size : 8.0pt;"><FONT FACE="Verdana">Cada
+    diagrama representa a evolu&ccedil;&atilde;o de estado de um 
+   determinado &quot;Objeto de Neg&oacute;cio &quot; ao longo de um 
+   processo de neg&oacute;cio especifico auxiliando a compreens&atilde;o 
+   do ciclo de vida do &quot;Objeto de neg&oacute;cio &quot; e a implementaç&atilde;o
+   da regra de evoluç&atilde;o no 
+   projeto de sistemas aplicativos. o Modelo declara a seqü&ecirc;ncia de 
+   evolu&ccedil;&atilde;o dos estados bem como a(s) atividades(s) 
+   respons&aacute;veis por cada transi&ccedil;&atilde;o. Este modelo representa graficamente:</FONT></SPAN></P>
+  <UL>
+   <LI CLASS="mvd-P">
+   <P>
+    <SPAN STYLE="font-weight : normal;font-size : 8.0pt;"><FONT FACE="Verdana"><A HREF="Transi&ccedil;&atilde;o de estado.htm">Estado</A></FONT></SPAN></P>
+   <LI CLASS="mvd-P">
+   <P>
+    <SPAN STYLE="font-weight : normal;font-size : 8.0pt;"><FONT FACE="Verdana"><A HREF="Atividade.htm">Atividade</A></FONT></SPAN></P>
+   </UL>
+  <P>
+   <!-- $MVD$:spaceretainer() -->&nbsp;
+   <HR ALIGN=CENTER WIDTH="100%" SIZE="2">
+  <P>
+   &nbsp;
+  <P>
+   <u><b><font face="Verdana" color="#0000FF" size="1"><a name="cb03"></a>Modelo
+        de Use
+        Cases - OOSE - Ajustada</font></b></u>
+  <p><font face="Verdana" size="1">O BEST adota a técnica <a HREF="#cb07">OOSE</a>
+  - Object Oriented System Engineering como a técnica para suportar a
+  Engenharia de Software ( aplicaç&otilde;es de negócio).</font></p>
+  <p><font face="Verdana" size="1">O Modelo de Use Case na técnica OOSE tem
+  como <span STYLE="font-weight : bold;text-decoration :underline;">objetivo básico
+  a captura dos requerimentos funcionais do sistema aplicativo a ser projetado</span>,
+  partindo da observaç&atilde;o do negócio e de que o software poderia fazer para
+  suportar sua operaç&atilde;o. Para isso a técnica observa as relaç&otilde;es que uma
+  determinada <a HREF="Classe%20de%20ator.htm">Classe de Ator</a> pode ter com o
+  sistema e como o sistemas de reagir ou melhor interar-se com o Ator em cada
+  caso de uso &quot;<a HREF="Use%20Case.htm">USE CASE</a>&quot;.</font></p>
+  <p><font face="Verdana" size="1">No BEST os Use Case's representados neste
+  modelo s&atilde;o derivados de lista de atividades criadas nos processos de negócio
+  e determinadas como &quot;Atividades Suportadas por Sistemas Aplicativos
+  &quot; , portanto concebidas junto com o processo de negócio como USE CASE.
+  Da mesma forma as Classes de Ator, que s&atilde;o as classes responsáveis pela execuç&atilde;o
+  das atividades do negócio no mundo real, e conseqüentemente, Atores de cada
+  Use Case.</font></p>
+   <HR ALIGN=CENTER WIDTH="100%" SIZE="2">
+  <p>&nbsp;</p>
+  <p><u><b><font color="#0000FF" face="Verdana" size="1"><a name="cb04"></a>Organograma</font></b></u></p>
+  <p><font face="Verdana" size="1">Organograma representa a estrutura
+  organizacional dos recursos humanos e materiais da empresa. Uma forma hierárquica
+  ou matricial de representar a subordinaç&atilde;o entre as diversas <a HREF="Classe%20de%20ator.htm">Classes
+  de Atores</a> que comp&otilde;em essa estrutura, sejam estas classes Unidades
+  Organizacionais ou Colaboradores.</font></p>
+  <p><font face="Verdana" size="1">No BEST o Organograma é uma representaç&atilde;o
+  gráfica das possíveis formas de subordinaç&atilde;o entre as Classes de Atores e
+  associaç&atilde;o com as <a HREF="Pessoa.htm">Pessoas</a> que ocupam as Posiç&otilde;es
+  de cada Classe de Ator, ambos já criados no modelo operacional do negócio ou
+  criados no momento da diagramaç&atilde;o.</font></p>
+  <p><!-- $MVD$:spaceretainer() -->
+  &nbsp;
+   <HR ALIGN=CENTER WIDTH="100%" SIZE="2">
+  <P>
+   &nbsp;
+   <p ALIGN="left"><u><b><font color="#0000FF" face="Verdana" size="1"><a name="cb05"></a>Diagrama
+        Livre</font></b></u></p>
+  <p><font face="Verdana" size="1">O BEST suporta a criaç&atilde;o de diagramas
+  livres podendo representar qualquer classe de modelagem tanto através da
+  utilizaç&atilde;o das classes de símbolos disponíveis no próprio BEST quanto através
+  da utilizaç&atilde;o de objetos gráficos como símbolos.</font></p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <P>
+   &nbsp;
+  <hr ALIGN="CENTER" WIDTH="100%" SIZE="2">
+   <h1>&nbsp;</h1>
+   <h1><b><font face="Verdana" color="#FF0000" size="1"><a name="cb06"></a>IDEF
+   - Integrated definition</font></b></h1>
+   <p><font face="Verdana" size="1">A técnica IDEF foi desenvolvida no inicio
+   dos anos 70, e originalmente conhecida por SADT (Structure Analysis and
+   Design Technique). No inicio dos anos 80, a Força Aérea Norte
+   Americana-USAF adotou a técnica SADT como ferramenta primária para apoiar
+   seu programa chamado ICAM (Integrated Computer Aided Manufacturing). Em 1993
+   o NIST - National Institute of Standards and Technology formalizou o IDEF0
+   como técnica padr&atilde;o para modelagem funcional.</font></p>
+   <p><font face="Verdana" size="1">O objetivo do programa ICAM era encorajar os
+   fornecedores da indústria de defesa a melhorar sua produtividade, e reduzir
+   custos e prazos através da reestruturaç&atilde;o dos seus processos de negócio.
+   O SADT tornou-se uma das duas técnicas de modelagem de negócios usadas no
+   programa ICAM, que mudou o nome de <span STYLE="font-weight : bold;">SADT
+   para IDEF0 (IDEF derivado de ICAM Definition Language).</span> Hoje, o acrônimo
+   tem o significado de <span STYLE="font-weight : bold;">Integrated Definition</span>.</font></p>
+   <p><font face="Verdana" size="1">O sufixo zero distingue as técnicas de
+   modelagem de atividade da técnica de modelagem da regra de negócio, que é
+   chamada de IDEF1 Extended, ou IDEF1X. Foram essas técnicas desenvolvidas
+   pela coaliz&atilde;o de industrias formada pela Força Aérea Americana, e liderada
+   por D. Appleton Company (DACOM). Juntas, as duas técnicas de modelagem de
+   negócios, s&atilde;o simplesmente chamadas IDEF.</font></p>
+   <p><font face="Verdana" size="1">Começando no início dos anos 80, equipes
+   de fornecedores da indústria de defesa construíram centenas de modelos IDEF
+   ( IDEF0 e IDEF1X ),usando-os para entender e melhorar todo tipo de processos
+   empresariais de controle do ch&atilde;o-de-fábrica, inventário gerencial, design
+   conceitual do produto, design detalhado do produto, controle de qualidade,
+   apoio logístico, engenharia de suporte, e assim por diante.</font></p>
+   <p><font face="Verdana" size="1">O ICAM teve dois objetivos para esses
+   projetos de modelagem. O Primeiro era construir modelos padr&otilde;es de processos
+   empresariais críticos.</font></p>
+   <p><font face="Verdana" size="1">Esses modelos seriam usados para avaliar os
+   processos dos fornecedores da indústria de defesa para determinar áreas de
+   problemas potenciais. Eles também seriam usados como Benchmarks para
+   melhores práticas: isto é; um Fornecedor poderia usar um modelo IDEF ICAM
+   como um referencial para auto-melhoria.</font></p>
+   <p><font face="Verdana" size="1">O segundo Objetivo, e em muitos casos o mais
+   importante dos dois, era dar aos fornecedores uma simples, mas rigorosa,
+   linguagem que poderia ser empregada por qualquer um, n&atilde;o apenas pessoal técnico
+   em análise de negócios.</font></p>
+   <p><font face="Verdana" size="1">Dado a esta linguagem, os fornecedores
+   puderam ent&atilde;o estabelecer um programa interno de engenharia de negócios,
+   similar ao emergente programa TQM (Total Quality Management), e melhorar o
+   passo da modernizaç&atilde;o industrial, como ent&atilde;o foi chamado.</font></p>
+   <p><font face="Verdana" size="1">Ambos os Objetivos foram atingidos mas o
+   segundo excedeu os sonhos do ICAM. Milhares de pessoas, de executivos a
+   empregados, foram treinados pelo IDEF, e começou a ter vida própria.</font></p>
+   <p><font face="Verdana" size="1">N&atilde;o somente foi abraçado pelos
+   fornecedores da indústria de defesa, em todas as formas e tamanhos, mas
+   alastrou-se para fora do segmento, encontrando seu caminho dentro de
+   companhias como General Motors, IBM, Motorola, Bank of América, American
+   Airlines, GTE, GE, Westinghouse e Digital Equipment. Ao mesmo tempo começou
+   a funcionar dentro do Departamento de Defesa Norte Americano, tornando-se uma
+   linguagem padr&atilde;o interna (DoD) parte do padr&atilde;o do programa CIM (Corporate
+   Information Processing) e subseqüentemente, um padr&atilde;o do governo federal
+   inteiro, chamado de padr&atilde;o FIP (Federal Information Processing).</font></p>
+   <p><font face="Verdana" size="1">A técnica IDEF está sendo padronizada pelo
+   Instituto Americano de Padr&otilde;es Nacionais (ANSI) sob os auspícios do
+   Instituto Nacional de Padr&otilde;es e Tecnologia (NIST) do Departamento de Comércio
+   Norte Americano.</font></p>
+   <p><font face="Verdana" size="1">Até 1994, com programa CIM do Pentágono, a
+   técnica IDEF foi responsável por permitir a identificaç&atilde;o de mais de US$
+   2 Bilh&otilde;es em economias e na época o Governo Norte Americano, Administraç&atilde;o
+   Clinton, estava analisando a adoç&atilde;o da técnica como base para o programa
+   de Reinvenç&atilde;o do Governo</font></p>
+   <p><font face="Verdana" size="1"><!-- $MVD$:spaceretainer() -->
+   &nbsp;</font></p>
+   <p><span STYLE="font-weight : bold;"><font COLOR="BLUE" size="1" face="Verdana">Porque
+   a técnica IDEF tem sido t&atilde;o bem sucedida?</font></span></p>
+   <p><font face="Verdana" size="1">A resposta é que o IDEF é a linguagem de análise
+   de negócio mais simples, eloqüente, consistente e rigorosa.. O IDEF é t&atilde;o
+   simples de ser aprendido por todos, e o mais importante que é, todos podem
+   usá-lo para entender qualquer processo, de como transformar uma pesquisa
+   científica em produtos de consumidor para como melhorar o cuidado com a saúde,
+   e como fazer um pote de café.</font></p>
+   <p><font face="Verdana" size="1">Sobretudo, o IDEF tem sido um sucesso por
+   ser fácil de aprender e usar, e, FUNCIONA.</font></p>
+   <p><font face="Verdana" size="1">Hoje existem novas variaç&otilde;es da técnica
+   IDEF0 original:</font></p>
+   <ul TYPE="square">
+    <li CLASS="mvd-P">
+      <p STYLE="margin-top : -14.0pt;"><font face="Verdana" size="1">IDEF0 &#8211;
+      Modelo Funcional</font></p>
+    <li CLASS="mvd-P">
+      <p STYLE="margin-top : -14.0pt;"><font face="Verdana" size="1">IDEF1 &#8211;
+      Modelo de Informaç&otilde;es</font></p>
+    <li CLASS="mvd-P">
+      <p STYLE="margin-top : -14.0pt;"><font face="Verdana" size="1">IDEF1X &#8211;
+      Modelo de Dados</font></p>
+    <li CLASS="mvd-P">
+      <p STYLE="margin-top : -14.0pt;"><font face="Verdana" size="1">IDEF2 &#8211;
+      Modelo de Simulaç&atilde;o</font></p>
+    <li CLASS="mvd-P">
+      <p STYLE="margin-top : -14.0pt;"><font face="Verdana" size="1">IDEF3 &#8211;
+      Descriç&atilde;o de Processos</font></p>
+    <li CLASS="mvd-P">
+      <p STYLE="margin-top : -14.0pt;"><font face="Verdana" size="1">IDEF4 &#8211;
+      Modelo de Objetos</font></p>
+    <li CLASS="mvd-P">
+      <p STYLE="margin-top : -14.0pt;"><font face="Verdana" size="1">IDEF5 &#8211;
+      Modelo para Coleta/Aquisiç&atilde;o de Informaç&atilde;o</font></p>
+    <li CLASS="mvd-P">
+      <p STYLE="margin-top : -14.0pt;"><font face="Verdana" size="1">IDEF6 &#8211;
+      Design</font></p>
+    <li CLASS="mvd-P">
+      <p STYLE="margin-top : -14.0pt;"><font face="Verdana" size="1">IDEF7 &#8211;
+      Sistema de Informaç&atilde;o</font></p>
+    <li CLASS="mvd-P">
+      <p STYLE="margin-top : -14.0pt;"><font face="Verdana" size="1">IDEF8 &#8211;
+      Modelo de Interface com o Usuário</font></p>
+    <li CLASS="mvd-P">
+      <p STYLE="margin-top : -14.0pt;"><font face="Verdana" size="1">IDEF9 &#8211;
+      Modelo de Cenários</font></p>
+    <li CLASS="mvd-P">
+      <p STYLE="margin-top : -14.0pt;"><font face="Verdana" size="1">IDEF10 &#8211;
+      Modelo de Arquitetura de Implementaç&atilde;o</font></p>
+    <li CLASS="mvd-P">
+      <p STYLE="margin-top : -14.0pt;"><font face="Verdana" size="1">IDEF11 &#8211;
+      Modelo de Construç&atilde;o</font></p>
+    <li CLASS="mvd-P">
+      <p STYLE="margin-top : -14.0pt;"><font face="Verdana" size="1">IDEF12 &#8211;
+      Modelo Organizacional</font></p>
+    <li CLASS="mvd-P">
+      <p STYLE="margin-top : -14.0pt;"><font face="Verdana" size="1">IDEF13 &#8211;
+      Projeto de Mapeamento do Esquema Triplo</font></p>
+    <li CLASS="mvd-P">
+      <p STYLE="margin-top : -14.0pt;"><font face="Verdana" size="1">IDEF14 &#8211;
+      Projeto de Rede</font></p>
+   </ul>
+   <p><font face="Verdana" size="1">(Fonte: Richard J. Mayer &#8211; Abril/1993 &#8211;
+   College Station Texas)</font></p>
+   <p><font face="Verdana" size="1">Conheça mais sobre IDEF no site: <a HREF="http://www.idef.com">www.idef.com</a></font></p>
+   <p>&nbsp;</p>
+   <p>&nbsp;</p>
+   <p>&nbsp;</p>
+   <p>&nbsp;</p>
+   <p>&nbsp;</p>
+   <p>&nbsp;</p>
+   <p>&nbsp;</p>
+   <p>&nbsp;</p>
+   <p>&nbsp;</p>
+   <p>&nbsp;</p>
+   <p><!-- $MVD$:spaceretainer() -->
+   &nbsp;
+   <hr color="#C0C0C0">
+   <p>&nbsp;</p>
+   <h1><b><font color="#FF0000" face="Verdana" size="1"><a name="cb07"></a>OOSE
+   - Object Oriented Software Engineering:&nbsp;<br>
+   A Use Case Driven Approach</font></b></h1>
+   <p><font face="Verdana" size="1">OOSE é um método de modelagem de sistema
+   de informaç&atilde;o orientado a objeto criado pelo sr. Ivar Jacobson em 1992,
+   pesquisador, &quot;metodologista&quot; e membro da OMG - Object Management
+   Group.</font></p>
+   <p><font face="Verdana" size="1">A ess&ecirc;ncia deste método consiste na
+   descoberta dos requerimentos funcionais do sistema através da observaç&atilde;o
+   das interaç&otilde;es de Atores com o pretenso sistema. Com base nessas interaç&otilde;es,
+   denominadas <span STYLE="font-weight : bold;">Use Cases</span>, s&atilde;o
+   modelados os Objetos que comp&otilde;em o sistema. Estes Objetos s&atilde;o classificados
+   em tr&ecirc;s subclasses: Objetos de Interface (IO); Objetos de Controle (CO) e
+   Objetos Entidade (EO)</font></p>
+   <p><font face="Verdana" size="1"><!-- $MVD$:spaceretainer() -->
+   &nbsp;</font></p>
+   <p><span STYLE="font-weight : bold;"><font COLOR="BLUE" size="1" face="Verdana">O
+   conceito de Classe de Ator</font></span></p>
+   <p><font face="Verdana" size="1"><font COLOR="BLACK">Defini-se ator como uma
+   classe</font><font COLOR="BLUE"> </font><font COLOR="BLACK">ou cat</font>egoria
+   de &quot;usuários&quot;, mais propriamente uma <span STYLE="font-weight : bold;">classe
+   de pessoas</span> ou um papel interpretado por processadores humanos no mundo
+   real, os quais interagem com o sistema.<br>
+   Uma pessoa pode assumir e executar vários papeis de ator.&nbsp; Basicamente,
+   compreendemos atores como pessoas, porém , também podemos compreender como
+   sendo outros sistemas que se comunicam com o sistema sendo modelado,
+   essencialmente é alguma coisa externa aos limites do sistema e que necessita
+   interagir com ele.</font></p>
+   <p><span STYLE="font-weight : bold;"><font COLOR="BLUE" size="1" face="Verdana">Conceito
+   Use Case</font></span></p>
+   <p><font face="Verdana" size="1">O conceito de use case consiste da descriç&atilde;o
+   da interaç&atilde;o entre um Ator e o Sistema. Um Use Case é a definiç&atilde;o de uma
+   forma singular de usar um Sistema, ou alguma classe de cenário de alto nível
+   , que captura como os Atores utilizam suas aplicaç&otilde;es
+   &quot;caixa-preta&quot;.<br>
+   Use Case é basicamente utilizado para encontrar e identificar os
+   requerimentos em termos de diálogos com o Sistema. Um Use Case é ent&atilde;o uma
+   seqü&ecirc;ncia especifica e completa de transaç&otilde;es relacionadas ( vários estímulos
+   e respostas ), executadas por uma <span STYLE="font-weight : bold;">Classe de
+   Ator</span> e pelo Sistema em um dialogo determinado para prover algum valor
+   significante para o Ator no contexto de seu negócio.</font></p>
+   <p><span STYLE="font-weight : bold;"><font COLOR="BLUE" size="1" face="Verdana">Mais
+   Informaç&otilde;es podem ser obtidas nas obras:</font></span></p>
+   <p><font face="Verdana" size="1">Object-Oriented Software Engineering: A Use
+   Case Driven Approach , ADDISON WESLEY P. Co.(ISBN 0-201-54435-0) 1992 - Ivar
+   Jacobson</font></p>
+   <p><font face="Verdana" size="1">The Object Advantage-Business Process :Rengineering
+   with Object Technology, ADDISON WESLEY P. Co.(ISBN 0-201-42289-1) 1994 - Ivar
+   Jacobson</font>
+   <hr color="#C0C0C0">
+  <P>
+   <font face="Verdana" size="1">&nbsp;</font>
+   <TABLE WIDTH="100%" CELLPADDING="2" CELLSPACING="0" BORDER="0">
+    <TR>
+     <TD HEIGHT="36" WIDTH="100%" BGCOLOR="BLUE" VALIGN=CENTER>
+      <P>
+       <b><font face="Verdana" color="#FFFFFF" size="4"> Conceitos fundamentais</font></b></TD>
+    </TR>
+   </TABLE>
+   <p><font face="Verdana" color="#0000FF" size="1">
+          &nbsp;&nbsp;&nbsp;&nbsp;<br>
+          &nbsp;<b><u><a name="cb08"></a>  Vis&atilde;o global do método</u></b></font>
+   </p>
+   <p class="Texto"><font face="Verdana" size="1">Como o novo caminho para a
+   melhoria da operaç&atilde;o de negócios, a Engenharia Operacional de Negócio
+   surge da evoluç&atilde;o das tradicionais especialidades, Reengenharia de
+   Processos, Programas de Qualidade e Engenharia de Sistemas de Informaç&atilde;o.
+   Incorporando os conceitos científicos da Engenharia Operacional de Produç&atilde;o&nbsp;
+   e suas disciplinas correlacionadas a Engenharia Operacional de Negócio foca
+   a abordagem integral e holística&nbsp; dos sete elementos que constituem a
+   operaç&atilde;o de qualquer negócio que envolva a transformaç&atilde;o de
+   informaç&atilde;o e/ou&nbsp; execuç&atilde;o de serviços.</font></p>
+   <p class="Texto"><font face="Verdana" size="1">Com isso a Engenharia
+   Operacional de Negócio cria um diferencial de mercado para as empresas que
+   venham a aplica-la, movendo-as do estado de &#8220;Usuárias de
+   Tecnologia&#8221; para &#8220;referenciais de qualidade operacional&#8221;&nbsp;
+   proporcionando vantagens competitivas em relaç&atilde;o a seus concorrentes
+   de mercado.</font></p>
+   <font face="Verdana" size="1">Complementado, a Engenharia Operacional de Negócio,
+   por natureza, tem a capacidade de unificar e sincronizar os esforços de
+   transformaç&atilde;o Tecnológica, Humana,&nbsp; Ambiental, de Relaç&otilde;es
+   com Mercado e de Qualidade, normalmente dispersos,&nbsp; através de um esforço
+   único integrado reduzindo atritos, desgastes, investimentos e prazos
+   elevados quando comparados com as abordagens tradicionais isoladas.</font>
+   <p class="Texto"><font face="Verdana" size="1">A miss&atilde;o da Engenharia
+   Operacional de Negócio é transformar o ambiente operacional de negócio,&nbsp;
+   provendo Eficácia, Efici&ecirc;ncia, Flexibilidade, Segurança e Preservaç&atilde;o
+   de investimentos realizados, e abordar, integralmente e harmoniosamente, as
+   sete dimens&otilde;es de negócio:</font></p>
+   <table border="0" width="100%">
+    <tr>
+      <td width="50%"><font face="Verdana" size="1">&middot; <!--[if gte vml 1]><v:shapetype id="_x0000_t202"
+ coordsize="21600,21600" o:spt="202" path="m0,0l0,21600,21600,21600,21600,0xe">
+ <v:stroke joinstyle="miter"/>
+ <v:path gradientshapeok="t" o:connecttype="rect"/>
+</v:shapetype><v:shape id="_x0000_s1026" type="#_x0000_t202" style='position:absolute;
+ left:0;text-align:left;margin-left:171pt;margin-top:6pt;width:294.55pt;
+ height:172.85pt;z-index:1'>
+ <v:shadow on="t"/>
+ <v:textbox>
+  <![if !mso]>
+  <table cellpadding=0 cellspacing=0 width="100%">
+   <tr>
+    <td><![endif]>
+    <div>
+    <p class=MsoNormal><v:shapetype id="_x0000_t75" coordsize="21600,21600"
+     o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f"
+     stroked="f">
+     <v:stroke joinstyle="miter"/>
+     <v:formulas>
+      <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+      <v:f eqn="sum @0 1 0"/>
+      <v:f eqn="sum 0 0 @1"/>
+      <v:f eqn="prod @2 1 2"/>
+      <v:f eqn="prod @3 21600 pixelWidth"/>
+      <v:f eqn="prod @3 21600 pixelHeight"/>
+      <v:f eqn="sum @0 0 1"/>
+      <v:f eqn="prod @6 1 2"/>
+      <v:f eqn="prod @7 21600 pixelWidth"/>
+      <v:f eqn="sum @8 21600 0"/>
+      <v:f eqn="prod @7 21600 pixelHeight"/>
+      <v:f eqn="sum @10 21600 0"/>
+     </v:formulas>
+     <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+     <o:lock v:ext="edit" aspectratio="t"/>
+    </v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:279pt;
+     height:165pt'>
+     <v:imagedata src="file:///C:/windows/TEMP/msoclip1/01/clip_image001.gif"
+      o:title=""/>
+    </v:shape></p>
+    </div>
+    <![if !mso]></td>
+   </tr>
+  </table>
+  <![endif]></v:textbox>
+</v:shape><![endif]-->Relaç&otilde;es de Mercado (RM);<br>
+        &middot; Recursos Humanos (RH);<br>
+        &middot; Atividades (ATV);<br>
+        &middot; Tecnologia de Informaç&atilde;o (TI);<br>
+        &middot; Regra de Negócio (RN);<br>
+        &middot; Informaç&atilde;o (INF);<br>
+        . Meio Ambiente Físico (AF).</font></td>
+      <td width="50%"><img border="0" src="Conhec1.gif" width="396" height="234"></td>
+    </tr>
+   </table>
+   <hr color="#C0C0C0">
+   <p><font face="Verdana" color="#0000FF" size="1"><br>
+          &nbsp;<u><b><a name="cb09"></a>Papeis envolvidos na modelagem</b></u></font>
+   </p>
+   <p class="Texto"><font size="1" face="Verdana"><span style="mso-bidi-font-size: 10.0pt; mso-fareast-font-family: Times New Roman; color: black; mso-ansi-language: PT-BR; mso-fareast-language: PT-BR; mso-bidi-language: AR-SA">Intenso
+   e fundamental na fase de conhecimento da situaç&atilde;o corrente, a qual
+   envolve análise de problemas e captura de conhecimento sobre a operaç&atilde;o
+   engenhada. Menor na fase de engenharia da situaç&atilde;o
+   &#8220;ideal&#8221; ( otimizada), pois é nesta fase que o engenheiro tem
+   maior responsabilidade sobre a concepç&atilde;o das soluç&otilde;es cabendo
+   ao cliente o papel de questionador e aprovador das ideias,&nbsp; conceitos e
+   princípios apresentados pelo modelador</span><span style="font-size:12.0pt;mso-bidi-font-size:10.0pt;
+font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:&quot;Times New Roman&quot;;
+color:black;mso-ansi-language:PT-BR;mso-fareast-language:PT-BR;mso-bidi-language:
+AR-SA">. </span>Os trabalhos s&atilde;o realizados com a total participaç&atilde;o
+   e envolvimento dos clientes visando:<br>
+   1-<span style="mso-spacerun: yes"> </span>Cliente envolvido e comprometido em
+   todos os papeis relevantes<br>
+   2-<span style="mso-spacerun: yes"> </span>Harmonia de objetivos<br>
+   3-<span style="mso-spacerun: yes"> </span>Espírito de equipe<br>
+   4-<span style="mso-spacerun: yes"> </span>Atividades em grupo, racionais e
+   otimizadas<br>
+   5-<span style="mso-spacerun: yes"> </span>Recursos visuais (WYSIWYG)<br>
+   6-<span style="mso-spacerun: yes"> </span>Base de conhecimento única e sólida
+   para compreens&atilde;o do negócio</font></p>
+   <p class="MsoListBullet2"><font face="Verdana" size="1">S&atilde;o envolvidas
+   quatro meta-classes de pessoas detentoras do conhecimento operacional sob a
+   ótica dos pontos de vista fundamentais para cada operaç&atilde;o abordada:<br>
+   1-<span style="font-style: normal; font-variant: normal; font-weight: normal">
+   </span>Gestor da operaç&atilde;o<br>
+   2-<span style="font-style: normal; font-variant: normal; font-weight: normal">
+   </span>Especialista da operaç&atilde;o<br>
+   3-<span style="font-style: normal; font-variant: normal; font-weight: normal">
+   </span>Operador<br>
+   4-<span style="font-style: normal; font-variant: normal; font-weight: normal">
+   </span>Stake holder da operaç&atilde;o</font></p>
+   <p><font face="Verdana" size="1">Estas meta-classes, suas sub-classes e
+   respectivas pessoas podem ser criadas no BEST através da configuraç&atilde;o de <b>&lt;tabelas
+   - domínios&gt; </b>e através da criaç&atilde;o de <b>&lt;dimens&otilde;es -
+   recursos humanos -classe de ator&gt; e&lt;dimens&otilde;es - recursos humanos
+   - pessoas&gt; .&nbsp;</b></font>
+   </p>
+   <p><font face="Verdana" size="1">Essas meta-classes, sub-classes e pessoas s&atilde;o
+   apropriadas ao longo da modelagem ao &lt;problemas&gt; da analise de
+   problemas e suas respectivas aç&otilde;es corretivas e &agrave;s atividades
+   do modelo de processos caracterizando a apropriaç&atilde;o de responsabilidade a
+   classes de pessoas e pessoas.</font>
+   </p>
+   <p>&nbsp;
+   </p>
+   <p>&nbsp;
+   </p>
+   <p>&nbsp;
+   </p>
+   <p>&nbsp;
+   </p>
+   <hr color="#C0C0C0">
+   <p><font face="Verdana" color="#0000FF" size="1"> <a name="cb10"></a><b><u>Subordinaç&atilde;o de diagramas</u></b></font>
+   </p>
+   <p><font face="Verdana" size="1">O BEST utiliza de uma estrutura de subordinaç&atilde;o
+   vertical entre os diagramas. Esta característica visa permitir ao moderador
+   o recurso de &quot;explos&atilde;o&quot; ou decomposiç&atilde;o dos modelo de
+   processo de negócio a fim de agrupar ou especificar os processos,
+   sub-processos e atividades de uma dada operaç&atilde;o.</font></p>
+   <p><font face="Verdana" size="1">Nesta característica encontra-se os
+   conceitos básicos da técnica IDEF0 conforme descrito anteriormente.</font></p>
+   <p><font face="Verdana" size="1">A estrutura de subordinaç&atilde;o obedece aos
+   seguintes níveis:<br>
+   1o.nivel - Empresa<br>
+   2o.nivel - Cenário<br>
+   3o.nivel em diante - diagramas &nbsp;</font></p>
+   <p><font face="Verdana" size="1">A subordinaç&atilde;o e/ou decomposiç&atilde;o dos
+   diagramas somente poder ser realizada com os diagramas o tipo:<br>
+   - Modelo de processo de negócio;<br>
+   - Modelo de Informaç&atilde;o</font></p>
+   <p><font face="Verdana" size="1">Voc&ecirc; pode decompor este diagramas <b>&lt; Selecionando
+   &gt; </b>com um clique sobre a instancia de símbolo a ser decomposta e
+   seguida clicando na seta <b>&lt; nível abaixo&gt; </b>situada na barra de
+   ferramenta na parte superior da janela do diagramador. Este procedimento
+   criara um diagrama subordinado ao símbolo que voc&ecirc; selecionou.</font></p>
+   <p><font face="Verdana" size="1"><b><u>Tree-View</u><br>
+   </b>Toda a estrutura de subordinaç&atilde;o criada pelo software é exibida através
+   da janela aberta do lado esquerdo da tela ao lado da janela do diagramado.<br>
+   <b>Importantíssimo:</b> N&atilde;o é possível alterar a subordinaç&atilde;o de
+   um diagrama uma vez que ele é criado. Nem t&atilde;o pouco cria-lo no
+   primeiro nível da estrutura e depois subordina-lo.<br>
+   Para alterar a subordinaç&atilde;o de um diagrama é necessário redesenha-lo sob
+   o &quot;pai&quot; desejado. Isto pode ser feito facilmente visto que todas as
+   especificaç&otilde;es permanecem no banco de dados para reutilizaç&atilde;o.</font></p>
+   <hr color="#C0C0C0">
+   <p><font face="Verdana" color="#0000FF" size="1"><br>
+ <b><u> <a name="cb11"></a>Reusabilidade de especificaç&otilde;es e
+instancias de símbolos</u></b></font>
+   </p>
+   <p>&nbsp;<font face="Verdana" size="1">Todas as especificaç&otilde;es das dimens&otilde;es
+   encontradas no menu <b>&lt; dimens&otilde;es - &quot;&quot; - &quot;&quot;
+   &gt; </b>podem ser utilizadas múltiplas vezes nos diversos diagramas
+   produzidos pelo modelador. A cada instancia de símbolo criada nos diagramas
+   através da &lt; lista&gt; disponível no <b>&lt;pop-up menu&gt; </b>quando
+   selecionado um símbolo voc&ecirc; pode selecionar &quot;vincular&quot; uma
+   instancia de símbolo a uma especificaç&atilde;o já existente.</font></p>
+   <p><font face="Verdana" size="1">O mesmo vale para as &quot;associaç&otilde;es&quot;
+   criadas entre as especificaç&otilde;es onde as listas também est&atilde;o disponíveis
+   através do bot&atilde;o <b>&lt; lista&gt; </b>ao lado direito de cada janela
+   de associaç&atilde;o.</font></p>
+   <p>&nbsp;</p>
+   <p>&nbsp;</p>
+   <hr color="#C0C0C0">
+   <TABLE WIDTH="100%" CELLPADDING="2" CELLSPACING="0" BORDER="0">
+    <TR>
+     <TD HEIGHT="36" WIDTH="100%" BGCOLOR="BLUE" VALIGN=CENTER>
+      <P>
+       <b><font face="Verdana" color="#FFFFFF" size="4"><a name="cb12"></a>Controle de acesso</font></b></TD>
+    </TR>
+   </TABLE>
+   <p><font face="Verdana" size="1">O BEST usa do recurso de controle de acesso
+   nativo dos banco de dados sobre os quais ele funciona. Obtenha junto ao DBA
+   de sua empresa o recurso de controle de acesso de seu DBMS.</font><font face="Verdana" color="#0000FF" size="1">
+          <br>
+   </font>
+   </p>
+   <p>&nbsp;
+   </p>
+   <p>&nbsp;
+   </p>
+   <hr color="#C0C0C0">
+   <TABLE WIDTH="100%" CELLPADDING="2" CELLSPACING="0" BORDER="0">
+    <TR>
+     <TD HEIGHT="36" WIDTH="100%" BGCOLOR="BLUE" VALIGN=CENTER>
+      <P>
+       <b><font face="Verdana" color="#FFFFFF" size="4"><a name="cb14"></a>Análise de problemas</font></b></TD>
+    </TR>
+   </TABLE>
+   <p class="MsoNormal"><font face="Verdana" size="1">O primeiro passo consiste
+   em identificar e classificar os problemas e correlacioná-los aos elementos
+   operacionais e suas instâncias. Cada problema encontrado é analisado a fim
+   de que se compreenda sua real causa e efeito. <span style="mso-fareast-font-family: Times New Roman; mso-ansi-language: PT-BR; mso-fareast-language: PT-BR; mso-bidi-language: AR-SA">Esta
+   análise é realizada dentro de contextos específicos da operaç&atilde;o do
+   negócio, adotando-se pontos de vista diferentes para a completa percepç&atilde;o
+   dos problemas, suas causas e efeitos(executor, alta administraç&atilde;o,
+   fornecedor, cliente...etc). As aç&otilde;es corretivas s&atilde;o os
+   primeiros aspectos a serem considerados na optimizaç&atilde;o do modelo
+   operacional, e especificaç&atilde;o das necessidades de ajustes para cada um
+   dos elementos operacionais.</span></font></p>
+   <p class="MsoNormal"><font face="Verdana" size="1"><span style="mso-fareast-font-family: Times New Roman; mso-ansi-language: PT-BR; mso-fareast-language: PT-BR; mso-bidi-language: AR-SA">A
+   analise de problema esta baseada nos conceitos da técnica MASP (metodo de
+   analise e soluç&atilde;o de problema) -SIMPLIFICADA.</span></font></p>
+   <p align="center"><font face="Verdana" color="#0000FF" size="1"><img border="0" src="Conhec2.gif" width="543" height="144">
+   </font>
+   </p>
+   <p><font face="Verdana" size="1">O acesso &agrave; ANALISE DE PROBLEMA esta disponível
+   através do menu &lt; dimens&otilde;es -&nbsp; avaliaç&atilde;o de problemas e
+   melhorias&gt;&nbsp;</font>
+   </p>
+   <p>&nbsp;
+   </p>
+   <hr color="#C0C0C0">
+   <TABLE WIDTH="100%" CELLPADDING="2" CELLSPACING="0" BORDER="0">
+    <TR>
+     <TD HEIGHT="36" WIDTH="100%" BGCOLOR="BLUE" VALIGN=CENTER>
+      <P>
+       <font face="Verdana" color="#FFFFFF" size="4"><b><a name="cb16"></a>  Imprimindo (&nbsp;
+       relatórios, diagramas, relatório padr&atilde;o,
+tree-view)</b></font></TD>
+    </TR>
+   </TABLE>
+   <p><u><b><font size="1" face="Verdana" color="#0000FF">Relatórios</font></b></u>
+   </p>
+   <p><font face="Verdana" size="1">O BEST possui um conjunto de relatórios padr&otilde;es
+   para as diversas dimens&otilde;es especificadas.&nbsp;</font>
+   </p>
+   <p><font face="Verdana" size="1">Voc&ecirc; tem quatro formas de imprimir as
+   imformaç&otilde;es contidas no banco de dados</font>
+   </p>
+   <p><font face="Verdana" size="1"><u>1. Voc&ecirc; gerar os relatórios padr&otilde;es do
+   BEST através do menu <b>&lt;relatórios&gt;</b>&nbsp;</u><br>
+   Escolha a <b>&lt;empresa&gt;</b> e o <b>&lt;cenário&gt;</b> desejado e gere
+   os relatórios configurando os parâmetros que o BEST lhe solicitará.<br>
+   </font>
+   </p>
+   <p><font size="1" face="Verdana"><u>2. Voc&ecirc; também pode gerar os relatórios
+   utilizando o recurso disponível no tree-view para seu maior conforto e
+   produtividade.</u><br>
+   a. Acione o tree-view através o ícone estrutura de arvore <b>&lt;
+   processo&gt;</b>, o software abrira a janela <b>&lt;arvore&gt;</b> do lado
+   esquerdo da tela.<br>
+   b. Seleccione um diagrama desejado na arvore através de um <b>&lt;clique do
+   mouse&gt;</b>,&nbsp;<br>
+   c. Accione o <b>&lt;pop-up menu&gt;</b> com o bot&atilde;o direito do mouse e
+   acionando o item de menu <b>&lt; imprimir processo&gt;, </b>voc&ecirc; pode
+   imprimir toda a documentaç&atilde;o do processo selecionado sem ter dispara-las
+   uma a uma, isto inclui também o diagrama selecionado e seus diagramas
+   subordinados.&nbsp;&nbsp;</font>
+   </p>
+   <p><font size="1" face="Verdana"><u>3.Voc&ecirc; pode imprimir especificaç&otilde;es
+   individuais de cada &quot;DIMENS&Atilde;O&quot; armazenada no banco de dados.</u><br>
+   a. Abra a janela de especificaç&atilde;o da dimens&atilde;o através do menu <b>&lt;
+   dimens&otilde;es&gt;</b> ou <b>&lt;clicando duas vezes&gt; </b>em um símbolo
+   criado em um diagrama<br>
+   b. No cabeçalho da janela da especificaç&otilde;es acione o ícone <b>&lt;imprimir
+   &quot;.....&quot;&gt;.</b><br>
+   c. Confirme ou n&atilde;o o preview acionando ícone <b>&lt; print&gt;</b> no
+   cabeçalho da janela <b>&lt;print preview&gt;, </b>o software imprimirá seu relatório.</font>
+   </p>
+   <p><font face="Verdana" size="1"><u>4. Alem do recurso nativo do software voc&ecirc;
+   pode utilizar geradores de relatório de mercado.</u><br>
+   Para criar relatórios específicos com base no banco de dados aberto
+   utilizado pelo BEST a Mytech fornece a seus clientes o modelo de dados do
+   BEST para que estes possam criar seus relatórios através dos geradores de relatório
+   de mercado.&nbsp;&nbsp;</font>
+   </p>
+   <p><font face="Verdana" size="1">5. Os Relatórios podem ser exportados para
+   diferentes software de mercado tais como Excel, Word(formato RTF) e/ou ppara
+   formatso HTM,XHTM,PDF,TXT.</font>
+   </p>
+   <p><font face="Verdana" color="#0000FF" size="1"><br>
+   </font>
+   <b><u><font face="Verdana" color="#0000FF" size="1">Diagramas
+   </font>
+   </u></b>
+   </p>
+   <p><font face="Verdana" size="1">Voc&ecirc; pode imprimir os diagramas de
+   duas formas:</font>
+   </p>
+   <p><font face="Verdana" size="1">1. Diretamente a partir do diagrama aberto,
+   acione o ícone &lt;imprimir&gt; no cabeçalho da janela de diagramaç&atilde;o.<br>
+   2. Voc&ecirc; também pode imprimir os diagramas utilizando o recurso disponível
+   no tree-view para seu maior conforto e produtividade.<br>
+   a. Acione o tree-view através o ícone estrutura de arvore <b>&lt;
+   processo&gt;</b>, o software abrira a janela <b>&lt;arvore&gt;</b> do lado
+   esquerdo da tela.<br>
+   b. Selecione um diagrama desejado na arvore através de um <b>&lt;clique do
+   mouse&gt;</b>,&nbsp;<br>
+   c. Acione o <b>&lt;pop-up menu&gt;</b> com o bot&atilde;o direito do mouse,<br>
+   d. Acione o item de menu <b>&lt; imprimir processo&gt;, </b>voc&ecirc; pode
+   imprimir toda a documentaç&atilde;o do processo selecionado sem ter dispará-las
+   uma a uma, isto inclui também o diagrama selecionado e seus diagramas
+   subordinados.&nbsp;&nbsp;</font>
+   </p>
+   <p>&nbsp;
+   </p>
+   <hr color="#C0C0C0">
+   <TABLE WIDTH="100%" CELLPADDING="2" CELLSPACING="0" BORDER="0">
+    <TR>
+     <TD HEIGHT="36" WIDTH="100%" BGCOLOR="BLUE" VALIGN=CENTER>
+      <P>
+ <b> <font face="Verdana" color="#FFFFFF" size="4"> Dimens&otilde;es</font></b></TD>
+    </TR>
+   </TABLE>
+   <p><font face="Verdana" color="#0000FF" size="1"><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<br>
+ <a name="cb17"></a><b>Atividade</b></font>
+   </p>
+    <table border="0" width="766">
+      <tr>
+        <td width="905" valign="top">
+          <p align="left"><font face="Verdana" size="1">Componente
+          central do modelo operacional, o elemento atividade é modelado para,
+          de acordo com os recursos de tecnologias passíveis de serem
+          aplicados, transformar&nbsp; &quot;inputs&quot;&nbsp; (insumos) em
+          &quot; outputs&quot;&nbsp; (produtos) em conformidade com os objetivos
+          do negócio.<br>
+          <br>
+          <img border="0" src="../../../Site%20integra/Imagemcommon/Bd14868_.gif" width="12" height="12">
+          As cadeias de atividade (processos de negócio) s&atilde;o
+          determinadas para responder ao estímulo dos Eventos de Negócio do
+          ambiente externo que representam as <b><u>Relaç&otilde;es com o Mercado</u></b>.&nbsp;<br>
+          <img border="0" src="../../../Site%20integra/Imagemcommon/Bd14868_.gif" width="12" height="12">
+          O modelo de atividades ( processo de negócio)&nbsp; é a
+          &quot;espinha dorsal&quot;&nbsp; sobre o qual os demais elementos s&atilde;o
+          conectados e derivados:</font></td>
+      </tr>
+    </table>
+    <table border="0" width="758" height="49">
+      <tr>
+        <td width="754" height="20">
+          <font face="Verdana" size="1"><img border="0" src="../../../Site%20integra/Imagemcommon/Bd14868_.gif" width="12" height="12">
+          As <b><u>Classes
+          de Pessoa</u></b> s&atilde;o atribuídas &agrave;s atividades como responsáveis
+          por sua execuç&atilde;o.<br>
+          <img border="0" src="../../../Site%20integra/Imagemcommon/Bd14868_.gif" width="12" height="12">
+          As <b><u>Informaç&otilde;es</u></b> s&atilde;o combinadas e fragmentadas em
+          agrupamentos para serem manipuladas em cada step do processo.<br>
+          <img border="0" src="../../../Site%20integra/Imagemcommon/Bd14868_.gif" width="12" height="12">
+          A T<u><b>ecnologia de Informaç&atilde;o</b></u> é especificada como
+          requerimento para a execuç&atilde;o de cada step do processos.<br>
+          <img border="0" src="../../../Site%20integra/Imagemcommon/Bd14868_.gif" width="12" height="12">
+          Novas <b><u>Regras de Negócio</u></b> podem ser necessárias para
+          estabelecer controles sobre cada step. E finalmente os steps do
+          processos tem seu processamento distribuído, definindo assim a
+          requerimento pa a configuraç&atilde;o do <b><u>Meio Ambiente de
+          Processamento</u></b>.</font></td>
+      </tr>
+    </table>
+   <hr color="#C0C0C0">
+   <p><font face="Verdana" color="#0000FF" size="1"><br>
+   <b> <a name="cb18"></a>Relaç&otilde;es de mercado</b></font>
+   </p>
+   <p><font face="Verdana" size="1">Uma vez
+          estabelecidos os objetivos do negócio, cada relaç&atilde;o com mercado é
+          estudada de forma a identificar possíveis problemas e determinar a
+          adequada reaç&atilde;o da empresa os estímulos externos.<br>
+          <br>
+          Cada relaç&atilde;o com o mercado constitui uma operaç&atilde;o específica que
+          será modelada para funcionar de forma eficiente, eficaz e flexível
+          produzindo o produto solicitado.<br>
+          <br>
+          Cada &quot;produto&quot; a ser gerado pela relaç&atilde;o é avaliado a
+          partir dos diversos pontos de vista envolvidos ( clientes,
+          fornecedores, governo, acionistas, investidores, credores etc) para
+          determinar sua adequada configuraç&atilde;o a fim de satisfazer &agrave;
+          expectativas das entidades externas. Os inputs s&atilde;o configurados para
+          que possam permitir o adequado processamento e geraç&atilde;o do produto.<br>
+          <br>
+          Toda a operaç&atilde;o da empresa deve se justificar-se a partir das relaç&otilde;es
+          com mercado, sejam estas reativas ou pró-ativas, e para cada relaç&atilde;o
+          deve existir um aç&atilde;o interna planejada e ordenada a fim de produzir
+          os outputs demandados pelo mercado.</font></p>
+   <p>&nbsp;</p>
+   <hr color="#C0C0C0">
+   <p><font face="Verdana" color="#0000FF" size="1"><br>
+   <b> <a name="cb19"></a>Mecanismos de suporte ( TI, Maquinas e equipamentos de
+   transformaç&atilde;o)</b></font>
+   </p>
+   <p><font face="Verdana" size="1">
+            O elemento tecnologia refere-se a dois grupos de mecanismos de
+   suporte:<br>
+   </font>
+   </p>
+   <p><font face="Verdana" size="1">1.A tecnologia de Informaç&atilde;o de
+            Informaç&atilde;o é composto por tr&ecirc;s classes de requerimento:<br>
+            <br>
+   a.<span style="text-shadow: auto"><font color="#000000">&nbsp; Req. </font> </span>funcionais para Sistemas Aplicativos ( Pacotes ou
+            Desenvolvimento)<br>
+   b.<span style="text-shadow: auto"><font color="#000000">&nbsp; Req. </font> </span>de armazenagem, manipulaç&atilde;o e recuperaç&atilde;o de
+            dados/Informaç&atilde;o<br>
+   c.<font color="#000000"><span style="text-shadow: auto">&nbsp; Req. </span></font>de Infra-estrutura<br>
+            <br>
+            Tais requerimentos s&atilde;o parte integrante do modelo operacional de
+            negócio, totalmente derivados do modelo processo
+            de negócio e decomponíveis, sendo cada um deles, uma vez
+            derivados, alvo de especificaç&atilde;o e/ou configuraç&atilde;o detalhada
+            até que se obtenha um modelo completo e implementável de TECNOLOGIA
+            DE INFORMAÇ&Atilde;O.</font>
+   </p>
+   <p><font face="Verdana" size="1">2. A tecnologia de equipamento ( maquinas,
+   dispositivos, ferramentas, etc..) que suportam a execuç&atilde;o de atividades de transformaç&atilde;o
+   de matéria. Estes mecanismos podem estar associados o software ou n&atilde;o
+   e aparecem sendo utilizados em operaç&otilde;es de serviço e produç&atilde;o.</font>
+   </p>
+   <hr color="#C0C0C0">
+   <p><font face="Verdana" color="#0000FF" size="1"><br>
+   <b>
+          &nbsp; <a name="cb20"></a>Informaç&atilde;o</b></font>
+   </p>
+    <table border="0" width="759">
+      <tr>
+        <td width="734" align="left">
+          <p align="left"><font size="1" face="Verdana">O elemento
+          informaç&atilde;o é modelado de forma que sejam conhecidos e&nbsp;
+          definidos os requerimentos de informaç&atilde;o em tr&ecirc;s níveis de observaç&atilde;o:<br>
+          <br>
+          1. Os objetos de negócio, que s&atilde;o "coisas" que possuem características próprias e sentido existencial independente e s&atilde;o "manipuladas" pelo negócio. Sua criaç&atilde;o, alteraç&atilde;o, eliminaç&atilde;o, associaç&atilde;o e transformaç&atilde;o de estado ou condiç&atilde;o representam o objetivo essencial da operaç&atilde;o do negócio.</font></p>
+        </td>
+        <td width="64" align="left" valign="top">
+          <p align="right"></p>
+        </td>
+      </tr>
+    </table>
+    <table border="0" width="758">
+      <tr>
+        <td width="964">
+          <font face="Verdana" size="1">2. Os grupos de dados (
+          fluxos de dados, documentos, telas, formulários etc...) , combinaç&atilde;o
+          específica de dados sobre os objetos de negócio, necessários a cada
+          step ao longo da cadeia de operaç&atilde;o, contendo as&nbsp; informaç&otilde;es
+          úteis a cada step.<br>
+          <br>
+          3. As tabelas e seus
+          atributos, em formato adequado &agrave; Tecnologia de Informaç&atilde;o a ser
+          utilizada no seu processamento, armazenagem&nbsp; e recuperaç&atilde;o.</font></td>
+      </tr>
+    </table>
+   <p>&nbsp;
+   </p>
+   <hr color="#C0C0C0">
+   <p><font face="Verdana" color="#0000FF" size="1"><br>
+   <b> <a name="cb21"></a>Recurso humano</b></font>
+   </p>
+   <p><font face="Verdana" size="1">O
+          elemento &quot;recurso&quot; humano, bem mais valioso das organizaç&otilde;es,
+          tem seus requerimentos&nbsp; modelados através tomando-se como ponto
+          de partida, em uma abordagem &quot;bottom-up&quot;, a apropriaç&atilde;o de
+          classes de pessoas a cada atividades determinada no processo de negócio.<br>
+          A partir deste ponto s&atilde;o especificadas as qualificaç&otilde;es,
+          responsabilidades e autoridade de cada papel, os cargos s&atilde;o avaliados
+          e ajustados &agrave;s necessidades operacionais com vista nas restriç&otilde;es
+          trabalhistas e sindicais. Com base nas métricas e distribuiç&atilde;o de
+          processamento s&atilde;o determinadas a quantificaç&atilde;o, distribuiç&atilde;o e
+          estruturaç&atilde;o do quadro de posiç&otilde;es para conjunto de papeis
+          estabelecidos, e ainda identificados os papeis e posiç&otilde;es de comando
+          requeridas para a estrutura dimensionada.</font>
+   </p>
+   <hr color="#C0C0C0">
+   <p><font face="Verdana" color="#0000FF" size="1"><br>
+   <b> <a name="cb22"></a>Maio ambiente físico</b></font>
+   </p>
+   <p><span style="text-shadow: auto; layout-flow: vertical" lang="EN-US"><font face="Verdana" size="1" color="#000000">A
+          infra estrutura de meio ambiente é projetada para suportar a instalaç&atilde;o
+          dos postos de trabalho e operaç&atilde;o, garantindo a adequaç&atilde;o do
+   layout, ergonomia, iluminaç&atilde;o etc..., necessários &agrave; operaç&atilde;o do
+          negócio, de acordo com o modelo de destruiç&atilde;o de processamento pré-estabelecido
+          para cada &quot;site&quot; físico do negócio.&nbsp;&nbsp;</font></span>
+   </p>
+   <hr color="#C0C0C0">
+   <p><font face="Verdana" color="#0000FF" size="1"><br>
+   <b> <a name="cb23"></a>Regras de negócio</b></font>
+   </p>
+   <p><font face="Verdana" size="1">O elemento regra
+          de negócio determina as restriç&otilde;es e condiç&otilde;es para a execuç&atilde;o
+          de atividades e transformaç&atilde;o de inputs em outputs.</font>
+   </p>
+   <hr color="#C0C0C0">
+   <TABLE WIDTH="100%" CELLPADDING="2" CELLSPACING="0" BORDER="0">
+    <TR>
+     <TD HEIGHT="36" WIDTH="100%" BGCOLOR="BLUE" VALIGN=CENTER>
+      <P>
+       <b><font face="Verdana" color="#FFFFFF" size="4"><a name="cb24"></a>Métricas</font></b></TD>
+    </TR>
+   </TABLE>
+   <p><font face="Verdana" size="1">Aspectos métricos sobre os sete
+        elementos operacionais s&atilde;o mensurados permitindo ao cliente o conhecimento
+        de suas relevâncias para o negócio.&nbsp;<br>
+        S&atilde;o definidas as bases para comparaç&atilde;o entre as situaç&otilde;es ou
+        cenários obtidos no processo de otimizaç&atilde;o, bem como bases métricas
+        para a simulaç&atilde;o da operaç&atilde;o.</font>
+   </p>
+   <p><font face="Verdana" size="1">O BEST armazena junto a algumas dimens&otilde;es
+   informaç&otilde;es sobre métricas temporais, volumétricas, qualitativas e
+   financeiras. Estas dimens&otilde;es s&atilde;o:<br>
+   1. Atividade<br>
+   2. Classe de pessoa<br>
+   3. Pessoa<br>
+   4. Grupo de dados<br>
+   5. Objeto de negócio
+   </font>
+   <font face="Verdana" color="#0000FF" size="1"><br>
+   </font>
+   </p>
+   <hr color="#C0C0C0">
+   <TABLE WIDTH="100%" CELLPADDING="2" CELLSPACING="0" BORDER="0">
+    <TR>
+     <TD HEIGHT="36" WIDTH="100%" BGCOLOR="BLUE" VALIGN=CENTER>
+      <P>
+       <b><font face="Verdana" color="#FFFFFF" size="4"> <a name="cb25"></a>Solucionando problemas</font></b></TD>
+    </TR>
+   </TABLE>
+   <p><font face="Verdana" color="#0000FF" size="1"><br>
+   </font>
+   <font face="Verdana" size="1">Qualquer problema encontrado na utilizaçao do
+   software será prontamente resolvido pelo suporte técnico.
+   </font>
+   </p>
+ </BODY>
+</HTML>
