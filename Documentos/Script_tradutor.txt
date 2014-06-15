@@ -1,0 +1,4 @@
+select idf_if.idf_if, cor_objetos.
+ where idf_if.cli_id = ? 
+   and idf_if.prj_id = ?
+   and cor_objetos.

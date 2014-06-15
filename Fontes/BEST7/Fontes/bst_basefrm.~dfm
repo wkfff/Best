@@ -1,5 +1,5 @@
 object Basefrm: TBasefrm
-  Left = 19
+  Left = 20
   Top = 1
   Width = 454
   Height = 359

@@ -1,0 +1,30 @@
+
+
+-------------------------------------------------------------------------------
+Versão 7.2.11
+
+* Na navegação pelo TreeView efetuar a pergunta da gravação sobre qualquer mudança no diagrama.
+
+-------------------------------------------------------------------------------
+Versão 7.2.8
+
+* Reconhecendo a licença "Livre"
+* Corrigido o problema do Lock de diagramas
+* Correção nos cadastros de domínio
+* Correção do Best Reader
+* Inclusão da exportação para Excel e Word dos relatórios
+* 
+* "bst_ImpProc"
+* "bst_treeAtiv"
+-------------------------------------------------------------------------------
+Versão 7.2.5-20
+
+* Relatório "Imprimir Pendência". Estamos desabilitando a impressão, transformando o botão da impressora em invisível.
+* Relatório "Atividades x Objetos" deverá ser desabilitado
+* Tanto o Form quanto o relatório de "Obejtos de Negócio" precisam ser revistos. Tudo indica que existe erro na query de captura dos dados e possivelmente na gravação das informações.
+-------------------------------------------------------------------------------
+Versão 7.1
+
+* Na tabela "BST_VALIDACAO", foi criado duas colunas "ATUACAO" e "LOCAL", ambos como "Texto" com 50 posições
+* Na Unit "BS"
+-------------------------------------------------------------------------------
