@@ -53,7 +53,6 @@ implementation
 uses bst_main;
 
 
-
 {$R *.DFM}
 
 procedure Tfrm_pdmig.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -131,9 +130,6 @@ begin
        gtQRDBText9.Frame.DrawLeft   := TRue;
        gtQRDBText9.Frame.DrawRight  := TRue;
    end;
-
-      
-    
 
 end;
 

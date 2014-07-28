@@ -1,8 +1,8 @@
 object frm_bancos: Tfrm_bancos
   Left = 538
   Top = 154
-  Width = 438
-  Height = 202
+  Width = 403
+  Height = 201
   Caption = 'Bancos de Dados/Data base'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -16,12 +16,12 @@ object frm_bancos: Tfrm_bancos
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 15
+  TextHeight = 14
   object SpeedButton3: TSpeedButton
-    Left = 162
-    Top = 536
-    Width = 118
-    Height = 23
+    Left = 151
+    Top = 500
+    Width = 110
+    Height = 22
     Caption = 'Query SQL'
     Flat = True
     Glyph.Data = {
@@ -43,10 +43,10 @@ object frm_bancos: Tfrm_bancos
   end
   object SpeedButton1: TSpeedButton
     Tag = 1
-    Left = 36
-    Top = 536
-    Width = 118
-    Height = 23
+    Left = 34
+    Top = 500
+    Width = 110
+    Height = 22
     Caption = 'Tabelas/Tables'
     Flat = True
     Glyph.Data = {
@@ -67,10 +67,10 @@ object frm_bancos: Tfrm_bancos
     OnClick = SpeedButton1Click
   end
   object SpeedButton2: TSpeedButton
-    Left = 294
-    Top = 536
-    Width = 117
-    Height = 23
+    Left = 274
+    Top = 500
+    Width = 110
+    Height = 22
     Caption = 'Cancelar/Cancel'
     Flat = True
     Glyph.Data = {
@@ -86,10 +86,10 @@ object frm_bancos: Tfrm_bancos
     OnClick = SpeedButton2Click
   end
   object rdg: TRadioGroup
-    Left = 9
-    Top = 34
-    Width = 198
-    Height = 130
+    Left = 8
+    Top = 32
+    Width = 185
+    Height = 121
     Caption = 'Bancos de Dados/Data Base'
     Items.Strings = (
       'Access'
@@ -101,66 +101,66 @@ object frm_bancos: Tfrm_bancos
     OnClick = rdgClick
   end
   object gpb: TGroupBox
-    Left = 214
-    Top = 34
-    Width = 199
-    Height = 130
+    Left = 200
+    Top = 32
+    Width = 185
+    Height = 121
     Caption = 'SQL Server'
     TabOrder = 1
     Visible = False
     object Label1: TLabel
-      Left = 11
-      Top = 69
-      Width = 144
-      Height = 15
+      Left = 10
+      Top = 64
+      Width = 139
+      Height = 14
       Caption = 'Nome do Banco/DB name'
     end
     object Label2: TLabel
-      Left = 11
-      Top = 27
-      Width = 83
-      Height = 15
+      Left = 10
+      Top = 25
+      Width = 82
+      Height = 14
       Caption = 'Servidor/Server'
     end
     object cmb_nome: TComboBox
-      Left = 9
-      Top = 86
-      Width = 181
-      Height = 23
-      ItemHeight = 15
+      Left = 8
+      Top = 80
+      Width = 169
+      Height = 22
+      ItemHeight = 14
       TabOrder = 3
       OnCloseUp = cmb_nomeCloseUp
     end
     object cmb_ip: TComboBox
-      Left = 9
-      Top = 43
-      Width = 181
-      Height = 23
-      ItemHeight = 15
+      Left = 8
+      Top = 40
+      Width = 169
+      Height = 22
+      ItemHeight = 14
       TabOrder = 2
       Text = ' '
       OnCloseUp = cmb_ipCloseUp
     end
     object Edit1: TEdit
-      Left = 9
-      Top = 43
-      Width = 159
-      Height = 23
+      Left = 8
+      Top = 40
+      Width = 149
+      Height = 22
       TabOrder = 0
       Text = '*.*'
     end
     object Edit2: TEdit
-      Left = 9
-      Top = 86
-      Width = 159
-      Height = 23
+      Left = 8
+      Top = 80
+      Width = 149
+      Height = 22
       TabOrder = 1
     end
   end
   object CoolBar1: TCoolBar
     Left = 0
     Top = 0
-    Width = 430
+    Width = 395
     Height = 22
     AutoSize = True
     Bands = <
@@ -168,7 +168,7 @@ object frm_bancos: Tfrm_bancos
         Control = ToolBar1
         ImageIndex = -1
         MinHeight = 22
-        Width = 430
+        Width = 395
       end>
     EdgeBorders = []
     EdgeInner = esNone
@@ -176,7 +176,7 @@ object frm_bancos: Tfrm_bancos
     object ToolBar1: TToolBar
       Left = 9
       Top = 0
-      Width = 417
+      Width = 382
       Height = 22
       AutoSize = True
       Caption = 'ToolBar1'
@@ -203,32 +203,32 @@ object frm_bancos: Tfrm_bancos
     end
   end
   object GroupBox1: TGroupBox
-    Left = 9
-    Top = 171
-    Width = 404
-    Height = 224
+    Left = 8
+    Top = 160
+    Width = 377
+    Height = 209
     TabOrder = 3
     Visible = False
     object dc: TDriveComboBox
-      Left = 9
-      Top = 11
-      Width = 386
-      Height = 21
+      Left = 8
+      Top = 10
+      Width = 361
+      Height = 20
       TabOrder = 0
     end
     object dl: TDirectoryListBox
-      Left = 9
-      Top = 36
-      Width = 189
-      Height = 171
+      Left = 8
+      Top = 34
+      Width = 177
+      Height = 159
       ItemHeight = 16
       TabOrder = 1
     end
     object fl: TFileListBox
-      Left = 199
-      Top = 36
-      Width = 196
-      Height = 171
+      Left = 186
+      Top = 34
+      Width = 183
+      Height = 159
       FileEdit = Edit1
       ItemHeight = 16
       ShowGlyphs = True

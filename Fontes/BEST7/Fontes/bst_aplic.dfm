@@ -1,6 +1,6 @@
 inherited frm_aplic: Tfrm_aplic
-  Left = 626
-  Top = 133
+  Left = 628
+  Top = 135
   Caption = 'Aplicativos'
   ClientHeight = 401
   ClientWidth = 409
@@ -317,7 +317,6 @@ inherited frm_aplic: Tfrm_aplic
     inherited ToolBar1: TToolBar
       Width = 396
       inherited ToolButton6: TToolButton
-        Visible = True
         OnClick = sp_printClick
       end
     end

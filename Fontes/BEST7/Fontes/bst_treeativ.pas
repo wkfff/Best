@@ -4851,23 +4851,17 @@ end;
 function Tfrm_treeativ.gera_SQL(pdg : TDg) : boolean;
 var
  Tot,i ,icode,wpos: integer;
-
  sematrib : boolean;
- wTipo ,s,windex, wtamanho      :string;
- tvant   : TTreeNode;
- HaPk,First    : boolean;
-
+ wTipo ,s,windex, wtamanho :string;
+ tvant :TTreeNode;
+ HaPk,First :boolean;
 Begin
-
  If pdg.IDG_DIR <> 'DMI' then
    Raise exception.create(mens107);
-
  HaPk := false;
-
   //PRIMARY KEY (CLIENTE, NO_DOC, EMISSAO)
  try
-
-    Begin
+     Begin
       tot := pdg.SelNodes.count;
       //PB.Max := tot;
       for i := 1 to tot  do
@@ -4905,12 +4899,11 @@ Begin
              windex := windex + pdg.SelNodes.item(i).Text+ ' ADD CONSTRAINT '+
                                 'I0_'+ pdg.SelNodes.item(i).Text+' PRIMARY KEY ( ';
            end;
-
-
         while not ide.fClient.Eof do
          Begin
+
           wTamanho :=  ide.fClient.fieldbyname('idf_type_qualifiers').asstring;
-          If ide.fClient.fieldbyname('idf_pk').asinteger  > 0 then
+          If ide.fClient.fieldbyname('idf_id').asinteger  > 0 then
            Begin
             If haPk then
                windex := windex + ','+ ide.fClient.fieldbyname('idf_designacao').asstring
@@ -4934,7 +4927,7 @@ Begin
                wTipo := wTipo + ','+ide.fClient.fieldbyname('IDF_DECIMAL').asstring+')';
 
            end
-             
+
           else
           If uppercase(ide.fClient.fieldbyname('idf_data_type').asstring)= 'M' then
              Wtipo := 'BLOB SUB_TYPE 1 SEGMENT SIZE 80'
@@ -4963,7 +4956,7 @@ Begin
              wscript.Add(ide.fClient.fieldbyname('idf_designacao').asstring + ' '+Wtipo)
            else
              wscript.Add(','+ide.fClient.fieldbyname('idf_designacao').asstring + ' '+Wtipo) ;
-          If ide.fClient.fieldbyname('idf_pk').asinteger  > 0 then
+          If ide.fClient.fieldbyname('idf_id').asinteger  > 0 then
            wscript[wscript.Count - 1] :=wscript[wscript.Count - 1] + (' NOT NULL ');
           first := false;
           ide.fClient.next;
@@ -5078,7 +5071,7 @@ Begin
 
         while not ide.fClient.Eof do
          Begin
-          If ide.fClient.fieldbyname('idf_pk').asinteger  > 0 then
+          If ide.fClient.fieldbyname('idf_codigo').asinteger  > 0 then
            Begin
             If haPk then
                wTrigger.add( ' OR (NEW.'+ide.fClient.fieldbyname('idf_designacao').asstring  +

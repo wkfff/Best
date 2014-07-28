@@ -436,6 +436,8 @@ TDados_tab = Class(Tdados)
      {Apagar as correlações do filho}
    function Apaga_correlacoesFilho(pCli, pProj,pcodfilho : integer;
       pTipofilho: string): boolean;
+    //Nova função que será usada no relatório de objetos  
+   function get_ObjetoDescricao(pCli, pProj: integer; pTabela,pOrder : string): boolean;
     //////////////USADOS P/CORRECAO
 
   public
@@ -446,8 +448,6 @@ TDados_tab = Class(Tdados)
   IDF_TIPO_ATIVIDADE  : string;
   IDF_VISIBLE         : string;
 end;
-
-
 
 TProv = Class(Tdados_tab)
   private
@@ -478,9 +478,7 @@ TProv = Class(Tdados_tab)
      function Excluir: boolean;
   public
 
-
 end;
-
 
 TPs = Class(Tdados_tab)
   private
@@ -500,9 +498,7 @@ TPs = Class(Tdados_tab)
     function OpenPessoa : boolean;
   public
 
-
 end;
-
 
 TAtor = Class(Tdados_tab)
   private
@@ -758,20 +754,12 @@ TReq = Class(Tdados)     // requerimentos de TI
    function Inclui_alt(pCli, pProj, pTiCodigo, pId: integer): boolean;
 end;
 
-
-
-
-
-
-
 TDiagClass = Class(Tdados)
   Private
 
   published
      function OpenAll : boolean;
   public
-
-
 
 end;
 
@@ -969,18 +957,13 @@ end;
 
 TTemp = Class(Tdados)
   Private
-    
-
 
   published
      function get_all: boolean;
      procedure del_temp;
      function Inclui_temp(pCli,pcenario,pIdg : integer;pNOme : string;pCodigo : integer;pTipo : string;pDes , pObs : string) : boolean;
-
   public
-
 end;
-
 
 Tdominios = Class(Tdados)
   Private
@@ -1094,42 +1077,38 @@ TDad = Class(TDados)
     procedure SetIDF_CAPTION(const Value: STRING);
     procedure SetIDF_OBRIG(const Value: STRING);
 
-
   published
-        property DataFonte: TdataSource read FDataFonte write SetDataFonte;
-        property IDF_CODIGO  :  integer read FIDF_CODIGO write SetIDF_CODIGO;
-	property CLI_ID  :  integer read FCLI_ID write SetCLI_ID;
-	property PRJ_ID  :  integer read FPRJ_ID write SetPRJ_ID;
- 	property IDF_TABELA  : string read FIDF_TABELA write SetIDF_TABELA;
-	property IDF_DESIGNACAO  : string read FIDF_DESIGNACAO write SetIDF_DESIGNACAO;
-	property SUB_NIVEL  :  integer read FSUB_NIVEL write SetSUB_NIVEL;
-	property IDF_NOME  : string read FIDF_NOME write SetIDF_NOME;
-	property IDF_DEL  : string read FIDF_DEL write SetIDF_DEL;
-	property IDF_VISIBLE  : string read FIDF_VISIBLE write SetIDF_VISIBLE;
-	property IDF_DESCRICAO  : string read FIDF_DESCRICAO write SetIDF_DESCRICAO;
-	property IDF_DATA_TYPE  : string read FIDF_DATA_TYPE write SetIDF_DATA_TYPE;
-	property IDF_DEFAULT_VALUE  : string read FIDF_DEFAULT_VALUE write SetIDF_DEFAULT_VALUE;
-	property IDF_DOMINIO  : string read FIDF_DOMINIO write SetIDF_DOMINIO;
-	property IDF_NAMING_PREFIX  : string read FIDF_NAMING_PREFIX write SetIDF_NAMING_PREFIX;
-	property IDF_NATUREZA  : string read FIDF_NATUREZA write SetIDF_NATUREZA;
-	property IDF_NORMALIZE  : string read FIDF_NORMALIZE write SetIDF_NORMALIZE;
-	property IDF_TYPE_QUALIFIERS  : string read FIDF_TYPE_QUALIFIERS write SetIDF_TYPE_QUALIFIERS;
-	property IDF_DE_REPET  :  integer read FIDF_DE_REPET write SetIDF_DE_REPET;
-	property IDF_PK  :  integer read FIDF_PK write SetIDF_PK;
-        property IDF_SEQ  :  integer read FIDF_SEQ write SetIDF_SEQ;
-        property IDF_CAPTION : STRING read FIDF_CAPTION write SetIDF_CAPTION;
-        property IDF_OBRIG : STRING read FIDF_OBRIG write SetIDF_OBRIG;
-        { cria tabela a partir de IDF_IF}
-        function inclui(ptab : string): boolean;
-
-         { inclui elementos diretamente}
-        function Incluidad: boolean;
-
-        {Retorna tudo}
-        function get_all (pCli,pProj : integer) : boolean;
-
-         {Retorna tudo,por descriçào}
-        function get_allbyDesc(pCli, pProj: integer): boolean;
+    property DataFonte: TdataSource read FDataFonte write SetDataFonte;
+    property IDF_CODIGO  :  integer read FIDF_CODIGO write SetIDF_CODIGO;
+	  property CLI_ID  :  integer read FCLI_ID write SetCLI_ID;
+	  property PRJ_ID  :  integer read FPRJ_ID write SetPRJ_ID;
+ 	  property IDF_TABELA  : string read FIDF_TABELA write SetIDF_TABELA;
+	  property IDF_DESIGNACAO  : string read FIDF_DESIGNACAO write SetIDF_DESIGNACAO;
+	  property SUB_NIVEL  :  integer read FSUB_NIVEL write SetSUB_NIVEL;
+	  property IDF_NOME  : string read FIDF_NOME write SetIDF_NOME;
+	  property IDF_DEL  : string read FIDF_DEL write SetIDF_DEL;
+	  property IDF_VISIBLE  : string read FIDF_VISIBLE write SetIDF_VISIBLE;
+	  property IDF_DESCRICAO  : string read FIDF_DESCRICAO write SetIDF_DESCRICAO;
+	  property IDF_DATA_TYPE  : string read FIDF_DATA_TYPE write SetIDF_DATA_TYPE;
+	  property IDF_DEFAULT_VALUE  : string read FIDF_DEFAULT_VALUE write SetIDF_DEFAULT_VALUE;
+	  property IDF_DOMINIO  : string read FIDF_DOMINIO write SetIDF_DOMINIO;
+	  property IDF_NAMING_PREFIX  : string read FIDF_NAMING_PREFIX write SetIDF_NAMING_PREFIX;
+	  property IDF_NATUREZA  : string read FIDF_NATUREZA write SetIDF_NATUREZA;
+	  property IDF_NORMALIZE  : string read FIDF_NORMALIZE write SetIDF_NORMALIZE;
+	  property IDF_TYPE_QUALIFIERS  : string read FIDF_TYPE_QUALIFIERS write SetIDF_TYPE_QUALIFIERS;
+	  property IDF_DE_REPET  :  integer read FIDF_DE_REPET write SetIDF_DE_REPET;
+	  property IDF_PK  :  integer read FIDF_PK write SetIDF_PK;
+    property IDF_SEQ  :  integer read FIDF_SEQ write SetIDF_SEQ;
+    property IDF_CAPTION : STRING read FIDF_CAPTION write SetIDF_CAPTION;
+    property IDF_OBRIG : STRING read FIDF_OBRIG write SetIDF_OBRIG;
+    { cria tabela a partir de IDF_IF}
+    function inclui(ptab : string): boolean;
+    { inclui elementos diretamente}
+    function Incluidad: boolean;
+    {Retorna tudo}
+    function get_all (pCli,pProj : integer) : boolean;
+    {Retorna tudo,por descriçào}
+    function get_allbyDesc(pCli, pProj: integer): boolean;
 
 
         { Imprime tabela Específica}
@@ -1183,12 +1162,6 @@ Tprovider_data = Class(Tdados)
    constructor Create (Aowner : TComponent);
 end;
 
-
-
-
-
-
-
 {Objeto IDF_PY}
 Tidf_py=Class(Tdados)
 private
@@ -1238,9 +1211,6 @@ private
     procedure AftrPost(dataSet: TdataSet);
     procedure BefrPost(dataset: Tdataset);
     procedure SetIDF_LISTA(const Value: INTEGER);
-
-
-
 
 public
      {publicTidf_py}
@@ -1393,8 +1363,6 @@ published
    property MET_VISIBIL   : string read FMET_VISIBIL write SetMET_VISIBIL;
 
 
-
-
     { Inclui 1 registro}
   function Inclui : boolean;
 
@@ -1477,12 +1445,6 @@ private
     procedure SetIDF_TABELA(const Value: string);
     procedure SetIDF_UNIT(const Value: string);
     procedure SetIDF_UNIT_OO(const Value: string);
-
-
-
-
-
-
 
 public
      {publicTidf_cs}
@@ -1642,10 +1604,7 @@ published
       { Inclui 1 registro}
   function Inclui : boolean;
 
-
-
 end;
-
 
 {Objeto IDF_JU}
 Tidf_ju=Class(Tdados)
@@ -1700,7 +1659,6 @@ private
   procedure SetPRJ_ID(const value   : integer );
   procedure SetCLI_ID(const value   : integer );
 
-
 public
      {publicTidf_ju}
    constructor Create (Aowner : TComponent);
@@ -1733,8 +1691,6 @@ published
 
     { Inclui 1 registro}
   function Inclui : boolean;
-
-
 
 end;
 
@@ -1837,9 +1793,6 @@ published
     { Inclui 1 registro}
   function Inclui : boolean;
 
-
-
- 
 end;
 
 {Objeto IDF_CA}
@@ -1975,7 +1928,6 @@ published
   function Inclui : boolean;
 
 
- 
 end;
 
 {Objeto IDF_DG}
@@ -2365,9 +2317,7 @@ published
     { Inclui 1 registro}
   function Inclui : boolean;
 
- 
-  
- 
+
 end;
 
 {Objeto TI_REQ}
@@ -2420,10 +2370,7 @@ published
  
     { Inclui 1 registro}
   function Inclui : boolean;
- 
- 
- 
- 
+
 end;
 
 {Objeto IDF_OI}
@@ -2703,8 +2650,7 @@ published
  
     { Inclui 1 registro}
   function Inclui : boolean;
- 
- 
+
  
 end;
 
@@ -2803,9 +2749,6 @@ published
 
     { Inclui 1 registro}
   function Inclui : boolean;
-
-
-
 
 end;
 
@@ -3038,11 +2981,7 @@ published
     { Inclui 1 registro}
   function Inclui : boolean;
 
-
-
 end;
-
-
 
 {Objeto IDF_PR}
 Tidf_pr=Class(Tdados)
@@ -3093,23 +3032,23 @@ published
     { Inclui 1 registro}
   function Inclui : boolean;
  
- 
+
     { atualizar Objeto específico}
   function Atualiza(pCLI_ID : integer ;pPRJ_ID : integer ;pIDF_CODIGO : integer ) : boolean;
- 
- 
+
+
     { retorna Objeto específico}
   function get_Object(pCLI_ID : integer ;pPRJ_ID : integer ;pIDF_CODIGO : integer ) : boolean;
- 
+
     { retorna todos os registros}
   function get_All : boolean;
 
     { retorna os parámetos do método}
   function get_DoMetodo(pCLI_ID, pPRJ_ID, pMetodo: integer): boolean;
 
-    { deletea os parámetros orfãos dos métodos} 
+    { deletea os parámetros orfãos dos métodos}
   function Del_Orfaos(pCLI_ID, pPRJ_ID: integer): boolean;
- 
+
 end;
 
 procedure dbg_format ( pDbg : Tdbgrid);
@@ -3120,7 +3059,7 @@ var
   GenCount ,Prim: Integer;
   aType,aTipos : array of string;
   mList : uLst     ;
-  
+
 const WOe: array[1..17] of sTRING = ('AP','AC', 'CA', 'DG', 'OI',
                                         'PS', 'OE','DE','JU','RN','SE',
                                          'EN','LF','EV','IF','TX','CS');
@@ -3129,10 +3068,7 @@ const wBlan : string = '              ';
 const WCodClass: array[1..6] of sTRING = ('DPN','DUC', 'DMI', 'DEO', 'LIV','CLS');
 
 
-
-
 implementation
-
 
 
 uses bst_ap, bst_treeAtiv, bst_main, bst_lista, bst_log,bst_dm_rel,ooseg,cl_access2;
@@ -3161,7 +3097,7 @@ begin
           wuse := GetUseCase(pForm,frm_main.idioma);
           oAcesso.IDUSECASE := wUse;
           oAcesso.ID_DIAGRAMA := 0;
-          
+
           free;
         end;
       end
@@ -3989,14 +3925,14 @@ wlist : boolean;
 
  end;
 
- function Tdados_Tab.Get_ListaObjeto(pCli,pProj,pShape : integer; pTab : string;
+function Tdados_Tab.Get_ListaObjeto(pCli,pProj,pShape : integer; pTab : string;
                                      pList : TList;pAtiv,pFlag,pAtor : integer) : boolean;
 var
-i : integer;
-s : string;
-wList : boolean;
-wwbs ,ruc,ruc1,pLista: string;
-mLnk : uLstDado;
+  i : integer;
+  s : string;
+  wList : boolean;
+  wwbs ,ruc,ruc1,pLista: string;
+  mLnk : uLstDado;
 begin
     pLista := '';
     If pShape >= 0 then
@@ -4040,8 +3976,6 @@ begin
         sql.add('AND FILHO_TIPO = '+''''+'CA'+''''+')');
       end;
 
-    
-
   { If wlist then
     Begin
          s := sql[sql.Count-1];
@@ -4079,8 +4013,6 @@ begin
                sql.add(' AND IDF_ATIVIDADE_SUMARIA = '+''''+'S'+'''');
             sql.add(' AND IDF_DESIGNACAO <> '+''''+''+'''');
 
-
-
             If pFlag= 0 then
                sql.add(' ORDER BY CLI_ID,PRJ_ID,IDF_DESIGNACAO ')
             else
@@ -4093,7 +4025,7 @@ begin
     If not eof then
        result := true;
 
- end;
+end;
 
 
 function Tdados_Tab.get_AtivCustos(pCli,pProj,pDiag: integer) : boolean;
@@ -4197,7 +4129,7 @@ begin
     sql.add(''''+plength+''''+')');
     execsql ;
     If Rowsaffected > 0 then
-       result := true;  
+       result := true;
  end;
 
 end;
@@ -5937,9 +5869,9 @@ function Tdados_tab.get_maxKey(ptab : string) : integer; // pega o último número
    result := key0;
  end;
 
- function Tdados_tab.Resetar: boolean;
+function Tdados_tab.Resetar: boolean;
 var
-i : integer;
+  i : integer;
 
 begin
    for i := 1 to length(wObj) do
@@ -9050,14 +8982,13 @@ begin
   open;
   fclient.active := true;
 
-
   If not fclient.Eof then
    result := true;
 end;
 
 function TDad.get_ObjetobyDesc(pCli, pProj: integer; pTabela,pOrder : string): boolean;
 begin
-   result := false;
+  result := false;
   sql.clear;
   fclient.active := false;
   sql.add('SELECT D.IDF_CODIGO ,D.CLI_ID,D.PRJ_ID,D.IDF_TABELA,D.IDF_DESIGNACAO,D.SUB_NIVEL,D.IDF_NOME,D.IDF_DESCRICAO,') ;
@@ -9075,6 +9006,17 @@ begin
 
   If not fclient.Eof then
    result := true;
+end;
+
+//Aqui estou colcoando a nova função
+function TDad.get_ObjetoDescricao(pCli, pProj: integer; pTabela,pOrder : string): boolean;
+begin
+  result := false;
+  sql.clear;
+  fclient.active := false;
+  sql.add('
+
+
 end;
 
 
@@ -9154,10 +9096,6 @@ begin
     fclient.next;
    end;
 end;
-
-
-
-
 
 procedure TDados_tab.SetListaWbs(const Value: string);
 begin

@@ -1,6 +1,6 @@
 inherited frm_data: Tfrm_data
-  Left = 570
-  Top = 124
+  Left = 546
+  Top = 159
   Caption = 'Fluxo de Dados'
   ClientHeight = 442
   ClientWidth = 617
@@ -255,86 +255,6 @@ inherited frm_data: Tfrm_data
         Top = 238
         Height = 102
       end
-      inherited dbg_dg: TDBGrid
-        Top = 26
-        Width = 601
-        FixedColor = clBtnFace
-        TitleFont.Name = 'Calibri'
-        OnDblClick = dbg_dgDblClick
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'IDF_SEQ'
-            Title.Caption = 'Seq.'
-            Visible = False
-          end
-          item
-            Expanded = False
-            FieldName = 'IDF_DESIGNACAO'
-            Title.Caption = 'Nome'
-            Width = 313
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'IDF_CAPTION'
-            Title.Caption = 'T'#237'tulo'
-            Visible = False
-          end
-          item
-            Expanded = False
-            FieldName = 'IDF_DATA_TYPE'
-            PickList.Strings = (
-              'C'
-              'D'
-              'I'
-              'M'
-              'N'
-              'T')
-            Title.Caption = 'Tipo'
-            Width = 53
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'IDF_TYPE_QUALIFIERS'
-            Title.Caption = 'Tamanho'
-            Width = 59
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'IDF_DECIMAL'
-            Title.Caption = 'Dec.'
-            Width = 31
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'IDF_PK'
-            Title.Caption = 'PK'
-            Visible = False
-          end
-          item
-            Expanded = False
-            FieldName = 'IDF_OBRIG'
-            Title.Caption = 'Obrigat'#243'rio'
-            Width = 67
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'IDF_VISIBLE'
-            Title.Caption = 'Mostr.'
-            Visible = False
-          end
-          item
-            Expanded = False
-            FieldName = 'IDF_CODIGO'
-            Title.Caption = 'C'#243'digo'
-            Visible = False
-          end>
-      end
       inherited gb_dom: TGroupBox
         Top = 229
         Height = 109
@@ -375,7 +295,6 @@ inherited frm_data: Tfrm_data
     inherited ToolBar1: TToolBar
       Width = 604
       inherited ToolButton6: TToolButton
-        Visible = True
         OnClick = sp_printClick
       end
     end
