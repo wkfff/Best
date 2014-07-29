@@ -171,7 +171,8 @@ begin
 
   try
     iDe := Tdad.Create(self);
-    If not ide.get_ObjetobyDesc(CLIENTE,CENARIO,DBedit5.text,SortField) then
+//    If not ide.get_ObjetobyDesc(CLIENTE,CENARIO,DBedit5.text,SortField) then
+      if not ide.get_ObjetoDescricao(CLIENTE,CENARIO) then
        Raise exception.create(mens76);
        with frm_pdmig do
         begin

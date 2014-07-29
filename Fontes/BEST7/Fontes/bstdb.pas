@@ -436,8 +436,6 @@ TDados_tab = Class(Tdados)
      {Apagar as correlações do filho}
    function Apaga_correlacoesFilho(pCli, pProj,pcodfilho : integer;
       pTipofilho: string): boolean;
-    //Nova função que será usada no relatório de objetos  
-   function get_ObjetoDescricao(pCli, pProj: integer; pTabela,pOrder : string): boolean;
     //////////////USADOS P/CORRECAO
 
   public
@@ -1114,7 +1112,9 @@ TDad = Class(TDados)
         { Imprime tabela Específica}
         function get_ObjetobyDesc(pCli, pProj: integer; pTabela,pOrder : string): boolean;
 
-
+        //Nova função que será usada no relatório de objetos
+        function get_ObjetoDescricao(pCli, pProj: integer): boolean;
+     
         { retorna os elementos de dados data tabela}
         function Get_dados(ptab : string): boolean;
 
@@ -9009,14 +9009,27 @@ begin
 end;
 
 //Aqui estou colcoando a nova função
-function TDad.get_ObjetoDescricao(pCli, pProj: integer; pTabela,pOrder : string): boolean;
+function TDad.get_ObjetoDescricao(pCli, pProj: integer): boolean;
 begin
   result := false;
   sql.clear;
   fclient.active := false;
-  sql.add('
+  sql.add('SELECT OBJ.PAI_TIPO, OBJ.PAI_ID, DE.IDF_DESIGNACAO, DE.IDF_DESCRICAO, ');
+  sql.add('DE.IDF_DATA_TYPE, DE.IDF_DEFAULT_VALUE, DE.IDF_DOMINIO, DE.IDF_TYPE_QUALIFIERS, ');
+  sql.add('FI.IDF_DESIGNACAO, FI.IDF_DEL, FI.IDF_OBJETIVO, FI.IDF_UNIDADE_TEMPO, ');
+  sql.add('FI.IDF_VOLUME_PROC, FI.IDF_DESCRICAO ');
+  sql.add('FROM IDF_IF FI, COR_OBJETOS OBJ, IDF_DE DE ');
+  sql.add('WHERE DE.CLI_ID = '+ ''+INTTOSTR(PCLI)+''+' ');
+  sql.add('AND DE.PRJ_ID = '+ ''+INTTOSTR(PPROJ)+''+'  ');
+  sql.add('AND OBJ.PAI_TIPO = "IF" ');
+  sql.add('AND OBJ.PAI_ID = FI.IDF_CODIGO ');
+  sql.add('AND OBJ.FILHO_ID = DE.IDF_ID ');
+  sql.add('ORDER BY FI.IDF_DESIGNACAO ');
+  open;
+  fclient.active := true;
 
-
+  if not fclient.Eof then
+    result := true;
 end;
 
 
