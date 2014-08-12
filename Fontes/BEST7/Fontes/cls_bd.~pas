@@ -252,6 +252,8 @@ begin
      raise;
    end;
   end;
+  reg.CloseKey;
+  reg.Free;
 end;
 
 procedure Tbd.SetwLike(const Value: string);

@@ -80,36 +80,36 @@ end;
 
 procedure Tfrm_lf.sp_printClick(Sender: TObject);
 var
-  iTab : Tdados_tab;
-  ide : Tdad;
-  i : integer;
+ i : integer;
+ iAp : TDados_tab;
 begin
   inherited;
-  If frm_pdmig = nil then
-    frm_pdmig := tfrm_pdmig.create(self);
+  If frm_pLf = nil then
+    frm_pLf := tfrm_pLf.create(self);
 
-  try
-    iDe := Tdad.Create(self);
-//    If not ide.get_ObjetobyDesc(CLIENTE,CENARIO,DBedit5.text,SortField) then
-//       Raise exception.create(mens76);
-       with frm_pdmig do
-        begin
-           for i := 0 to componentCount -1 do
-            begin
-             If (Components[i] is Tqrband) or  (Components[i] is TqrChildband) or  (Components[i] is TqrSubDetail)
-                or  (Components[i] is Tqrgroup)then
-                qrdataset(frm_pdmig.Components[i],iDe);
-            end;
-        end;
+    try
+     iaP := Tdados_tab.create(self);
+     iaP.Get_PaisCorrelatos(Cliente,cenario,'AP',Id,'LF','IDF_AP','');
+     frm_pLf.qr_at.dataset := iAp;
+     qrDataset(frm_pLf.qr_at,iAp);
 
-       frm_Pdmig.qrp.DataSet := ide;
-       frm_Pdmig.titulo.caption  := uppercase(def12);
-       frm_Pdmig.qRP.preview ;
-       frm_Pdmig.close;
+     frm_pLf.qrp.DataSet := iDataSource.DataSet;
 
-  finally
-     freeandnil(iDe);
-  end;
+     with frm_pLf do
+      begin
+         for i := 0 to componentCount -1 do
+          begin
+           If (Components[i] is Tqrband) or  (Components[i] is TqrChildband) then
+              qrdataset(frm_pLf.Components[i],idatasource.dataset);
+          end;
+      end;
+      frm_pLf.titulo.caption := def30;
+      //frm_pLf.subtitulo.caption := dbedit6.text;
+      frm_pLf.qrp.preview;
+      FRM_pLf.CLOSE;
+    finally
+
+    end;
 end;
 
 
