@@ -9023,7 +9023,7 @@ begin
   sql.add('AND DE.PRJ_ID = '+ ''+INTTOSTR(PPROJ)+''+'  ');
   sql.add('AND OBJ.PAI_TIPO = "IF" ');
   sql.add('AND OBJ.PAI_ID = FI.IDF_CODIGO ');
-  sql.add('AND OBJ.FILHO_ID = DE.IDF_ID ');
+  sql.add('AND OBJ.FILHO_ID = DE.IDF_CODIGO ');
   sql.add('ORDER BY FI.IDF_DESIGNACAO ');
   open;
   fclient.active := true;

@@ -161,9 +161,9 @@ end;
 
 procedure Tfrm_if.sp_printClick(Sender: TObject);
 var
-iTab : Tdados_tab;
-ide : Tdad;
-i : integer;
+  iTab : Tdados_tab;
+  ide : Tdad;
+  i : integer;
 begin
   inherited;
   If frm_pdmig = nil then

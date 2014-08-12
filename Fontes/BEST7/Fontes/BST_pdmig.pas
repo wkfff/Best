@@ -82,10 +82,10 @@ procedure Tfrm_pdmig.QRBand1BeforePrint(Sender: TQRCustomBand;
 begin
   inherited;
 
-    If QRP.DataSet.fieldbyname('idf_pk').asinteger = 0 then
+    If QRP.DataSet.fieldbyname('idf_codigo').asinteger = 0 then
      pPk.Caption := ''
     else
-     pPk.Caption := QRP.DataSet.fieldbyname('idf_pk').AsString;
+     pPk.Caption := QRP.DataSet.fieldbyname('idf_codigo').AsString;
     If (QRP.DataSet.fieldbyname('idf_descricao').asstring = '') or
      (QRP.DataSet.fieldbyname('idf_descricao').asstring = ' ') then
      Begin
