@@ -1,7 +1,0 @@
-ICE License is installed on your computer, you just need to launch Delphi and install the component.
-
-Go to ICE License folder, and select your Delphi version, after double-click on "ICEv2_D6.dpk" for Delphi 6 and compile.
-
-Don't forget to add ICE License folder on your Delphi IDE environnement folder (go to "Tools", "Libraries", add ICE License folder)
-
-After you can see ICE License VCL in your VCL palette.
