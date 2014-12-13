@@ -1,0 +1,103 @@
+{TODO -c6.37 :
+1 - Atividades
+   - Mostra eventos que disparam
+    - Mostra dg que entram e sai (relatorio global)
+Aspectos Críticos
+ Combo (obrigatório) para Dimensão geal do Aspecto Crítico, conforme definida na Tabela de
+ domínios.
+  
+ATOR  : 
+   Categoria de ator : Responsável(default)
+                                  Participante
+
+Novo : permite copiar frame de diagramas
+
+Relatórios Globais
+ - Aspectos Críticos
+     Aspectos críticos e Alvos de melhoria em relatório de forma tabular
+     Filtro de Seleção ampliado
+ - Atividades ;
+   - Métrica
+   - Fluxos de Entrada e Saída}
+{TODO -c6.00.036 : El,iminado : acesso ao cenário pelo menu
+corrigido : resize da atividade na configuração da atividade.
+Novo : permite copiar frame de diagramas
+Novo ; Aspectos críticos e Alvos de melhoria em relaytório de forma tabular
+Corrigido  : configuração objetos (wbs, ator) 
+Corrigido : não deixa criar mais de uma correlação entre RN e AP
+Corrigido : Correlação RN x AP : deleta a correlação na deleção do último DG somente}
+{TODO -c7 :
+ALTER TABLE COR_OBJETOS
+ADD PERC_CUSTO REAL
+
+ALTER TABLE COR_OBJETOS
+ADD PERC_CODIGO INTEGER
+
+CREATE TABLE CUSTO_TEMP
+	objeto integer  ,tipo varchar(10),obj_seguinte integer,Tipo_seg  varchar(10),custo_tot real, 
+ perc_passag real, custo_pond real)
+ - criar index da tabela custo_temp
+
+	-Novo : % de passagem de junção : 
+             cria correlaçào entre JU e AP e
+               mantém percentual de pasagem na tabela de correlação
+             Deleta correlaçào quando :
+              - deletea DG
+              - Deleta AP
+              - Deleta JU
+}
+{TODO -c6.00.035 : Corrigido : Função cir_provider (parámetro TADOConnection)
+corrigido : preview diagrama : margens
+Corrigido : Erro no Printer setting e nas propriedades
+Novo     : Descrição das Conexões no Diagrama (DMI)
+Novo : IMpressão das Listas de Consulta
+Novo : Nome do Mecanismo no relatório de atividades 
+eliminado : aspectos críticos a n'vel de atividade;
+corrigido : inibido no pop up menu a decomposiçào para objetos que não atividades
+corrigido : quanddo delete dg entre EN e AP, deleta a correlação}
+{TODO -c6.00.034 :
+Corrigido : geração de scrip SQL a nivel de Objeto.
+Gera SQL conforme tipo de banco aberto
+Novo : Histórico de bancos SQL já usados(até 10)
+Novo : Relatóirio Objeto de Negócios ; permitie imprimir 1 página por Objeto}
+{TODO -c6.00.034 :
+Corrigido : geração de scrip SQL a nivel de Objeto.
+Gera SQL conforme tipo de banco aberto
+Novo : Histórico de bancos SQL já usados(até 10)
+Novo : Impressão Diagrama por páginas (PRNFLOW)
+Inclusào de registros na tabela IDF_DADOS , icnclui também na tabela IDF_DADOS
+   porém não mais a correlaçào entre IDF_IF e IDF_DE
+Novo : Engenharia revers traz PK e Indices secundários
+Novo : controle de versào demo
+Novo : Código do cliente gerado a partir do nome fantasia
+Corrigido : quando é e criado um ator ou Local de Proc , na atividade, a correlação é feita automaticamente
+Criado : Diretório no CENARIO para acesso dos Mecanismos
+Novo : Endireitamento de fluxo de dados.}
+{TODO -c6.00.033 : Corrigido : inclusão dos atributos IDF_CAPTION E IDF_OBRIG  a partir da Lista}
+{TODO -c6.00.033 : Corrigido : Nos objetos de negócio, a listar mostra os elementos de dados da tabela IDF_DE  e da Tabela IDF_DADOS}
+{TODO -c6.00.032 : Novo : Permite imprimir um objeto de negócio específico, no diagrama.}
+{TODO -c6.00.032 : Novo : Permite gerar sql de tabelas selecionadas}
+{TODO -c6.00.032 : Novo : campo título , no IDF_DADOS}
+{TODO -c6.00.031 : Botão Compactar}
+{TODO -c6-00-030 : Corrigido : diagrama Livre}
+{TODO -c6-00-030 : Corrigido : diagrama Livre}
+{TODO -c6-00-030 : Corrigido : diagrama Livre}
+{TODO -c6.00.030 :
+Criaço tabela IDF_dados para modelo de informação
+Geraçào SQL : cria index primário
+Modelo de informação : permitir classifiacar por coluna
+                                      permite criar Primary key
+Objeto de Interface : seleciona atributos pela tabela IDF_DADOS}
+{TODO -c6.00.00.29b : Corrigido : splitter do diagrama}
+{TODO -c6.00.00.29b : Permite mostrar diagrama em tela cheia}
+{TODO -c6.00.00.29b : Objetos de negócio : lista em ordem alfa}
+{TODO -c6.00.00.29b : Não permite double click quand tela de configuração}
+{TODO -c6.00.00.29b : Inibe Back up quando banco é SQL.}
+{TODO -c6.00.00.29b :
+Help : mostra o banco de dados em uso
+
+}
+{TODO -c6.00.027 : Corrigido ; Imprerssão da documentaçào via TreeView}
+{TODO 4 -c6.00.023 : Novo : Opção de escolha de lista de aspectos críticos da operação corrente(Diagrama).}
+
+

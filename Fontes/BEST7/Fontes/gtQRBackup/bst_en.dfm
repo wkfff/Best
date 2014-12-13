@@ -1,0 +1,238 @@
+inherited frm_en: Tfrm_en
+  Left = 342
+  Top = 221
+  Caption = 'Rela'#231#227'o com Mercado'
+  ClientHeight = 329
+  ClientWidth = 553
+  PixelsPerInch = 96
+  TextHeight = 14
+  inherited Panel3: TPanel
+    Width = 553
+    inherited sp2: TSpeedButton
+      Left = 558
+    end
+    inherited sp_print: TSpeedButton
+      OnClick = sp_printClick
+    end
+    inherited sp_insert: TSpeedButton
+      Left = 28
+      Width = 101
+    end
+    inherited SP_X: TSpeedButton
+      Left = 407
+    end
+    inherited DBEdit6: TDBEdit
+      Left = 156
+      Width = 378
+    end
+  end
+  inherited BitBtn1: TBitBtn
+    Left = 86
+    Top = 356
+    OnClick = BitBtn1Click
+  end
+  inherited pgcp: TPageControl
+    Width = 553
+    Height = 279
+    inherited tb_geral: TTabSheet
+      Font.Name = 'Calibri'
+      inherited docext: TSpeedButton
+        Left = 4
+        Top = 201
+        Width = 164
+      end
+      object Label3: TLabel [1]
+        Left = 4
+        Top = 8
+        Width = 69
+        Height = 14
+        Caption = 'Nome/Name'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -12
+        Font.Name = 'Calibri'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label5: TLabel [2]
+        Left = 4
+        Top = 57
+        Width = 121
+        Height = 14
+        Caption = 'Descri'#231#227'o/Description'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -12
+        Font.Name = 'Calibri'
+        Font.Style = []
+        ParentFont = False
+      end
+      inherited DBEdit12: TDBEdit
+        Left = 176
+        Top = 201
+        Width = 361
+        TabOrder = 4
+      end
+      object DBEdit2: TDBEdit
+        Left = 4
+        Top = 27
+        Width = 248
+        Height = 22
+        DataField = 'IDF_DESIGNACAO'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -12
+        Font.Name = 'Calibri'
+        Font.Style = []
+        MaxLength = 40
+        ParentFont = False
+        TabOrder = 0
+      end
+      object DBRichEdit1: TDBRichEdit
+        Left = 4
+        Top = 74
+        Width = 533
+        Height = 119
+        DataField = 'IDF_PRE_REQUISITOS'
+        ScrollBars = ssVertical
+        TabOrder = 1
+      end
+      object rg_tipo: TDBRadioGroup
+        Left = 258
+        Top = 2
+        Width = 153
+        Height = 57
+        Caption = 'Tipo/Type'
+        DataField = 'IDF_TIPO'
+        Items.Strings = (
+          'Condicional/Conditional'
+          'Normal/Regular'
+          'Temporal/Timely')
+        TabOrder = 2
+        OnClick = rg_tipoClick
+      end
+      object gb1: TGroupBox
+        Left = 418
+        Top = 2
+        Width = 119
+        Height = 57
+        Caption = 'Per'#237'odo Evento temporal/Period'
+        TabOrder = 3
+        Visible = False
+        object dbl: TDBLookupComboBox
+          Left = 9
+          Top = 27
+          Width = 104
+          Height = 22
+          DataField = 'IDF_PERIOD_EVENTO_TEMPORA'
+          DropDownRows = 15
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Calibri'
+          Font.Style = []
+          KeyField = 'DI_DESCRICAO'
+          ListField = 'DI_DESCRICAO'
+          ParentFont = False
+          TabOrder = 0
+        end
+      end
+    end
+    inherited Tb_atv: TTabSheet
+      Caption = 
+        'Atividades Disparadas pelo Evento/Activities that trigger this E' +
+        'vent'
+      Font.Height = -9
+      object Label1: TLabel [0]
+        Left = 16
+        Top = 0
+        Width = 433
+        Height = 14
+        Caption = 
+          'Atividades Disparadas pelo Evento/Activities that trigger this E' +
+          'vent'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -12
+        Font.Name = 'Calibri'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      inherited trv_atv: TTreeView
+        Left = 2
+        Top = 24
+        Width = 527
+        Height = 201
+      end
+      inherited lv: TListView
+        Left = 16
+        Top = 16
+        Width = 505
+        Height = 201
+        Columns = <
+          item
+            Caption = 'Atividade'
+            ImageIndex = 9
+            Width = 500
+          end
+          item
+            Caption = 'Envolvimento Ator'
+            Width = 0
+          end>
+      end
+    end
+    inherited tb_dados: TTabSheet
+      inherited lb2: TLabel
+        Left = 16
+        Top = 121
+      end
+      inherited db_desc: TDBMemo
+        Top = 137
+      end
+      inherited dbg_dg: TDBGrid
+        Height = 92
+      end
+      inherited gb_dom: TGroupBox
+        Top = 128
+      end
+    end
+  end
+  inherited CoolBar1: TCoolBar
+    Width = 553
+    Bands = <
+      item
+        Control = ToolBar1
+        ImageIndex = -1
+        MinHeight = 22
+        Width = 553
+      end
+      item
+        Control = StandardToolBar
+        ImageIndex = -1
+        MinHeight = 22
+        Width = 553
+      end>
+    inherited StandardToolBar: TToolBar
+      Width = 540
+    end
+    inherited ToolBar1: TToolBar
+      Width = 540
+    end
+  end
+  inherited fnt: TFontDialog
+    Left = 608
+    Top = 76
+  end
+  inherited PopupMenu1: TPopupMenu
+    Left = 607
+    Top = 103
+  end
+  inherited OD: TOpenDialog
+    Left = 614
+    Top = 134
+  end
+  inherited MainMenu1: TMainMenu
+    Left = 604
+    Top = 163
+  end
+end

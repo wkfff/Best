@@ -1,0 +1,92 @@
+unit bst_about;
+
+interface
+
+uses Windows, bst_basefrm,SysUtils, Classes, Graphics, Forms, Controls, StdCtrls,
+  Buttons, ExtCtrls, jpeg;
+
+type
+  Tfrm_about = class(TBaseFRm)
+    Panel1: TPanel;
+    Version: TLabel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    lb4: TLabel;
+    Image1: TImage;
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure OKButtonClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure ProgramIconClick(Sender: TObject);
+  private
+    Fver: string;
+    procedure Setver(const Value: string);
+    { Private declarations }
+  public
+    procedure Loadconstantobj;override;
+
+  PUBLISHED
+   property ver : string read Fver write Setver;
+  end;
+
+var
+  frm_about: Tfrm_about;
+
+implementation
+
+uses bst_main, UProcEFunc;
+
+
+
+{$R *.DFM}
+
+procedure Tfrm_about.FormCreate(Sender: TObject);
+begin
+  //ver := '1.0';
+  ver := GetBuildInfo;
+  label1.caption := frm_main.ver;
+  lb4.caption := frm_main.Mensabout;
+end;
+
+procedure Tfrm_about.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  frm_about := nil;
+  action := caFree;
+end;
+
+procedure Tfrm_about.OKButtonClick(Sender: TObject);
+begin
+  close;
+end;
+
+procedure Tfrm_about.Setver(const Value: string);
+begin
+  Fver := Value;
+end;
+
+procedure Tfrm_about.SpeedButton1Click(Sender: TObject);
+begin
+  close;
+end;
+
+procedure Tfrm_about.ProgramIconClick(Sender: TObject);
+begin
+   close;
+end;
+
+procedure Tfrm_about. Loadconstantobj;
+var
+i : integer;
+
+begin
+  inherited;
+  cAPTION :=  defs18;//     'Sobre'       ;
+  version.Caption  := def1220;//'Versão';
+  label3.Caption   := defe20;// 'E-mail : best.suporte@5a.com.br';
+  label2.caption   := defr5 ;//'Registro INPI :  00048106';
+end;
+
+end.
+
+ 
