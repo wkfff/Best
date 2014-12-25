@@ -712,12 +712,7 @@ TAP = Class(Tdados_tab)
    function Open_uc(pCli, pProj, pId: integer): boolean;
    constructor Create (Aowner : TComponent);
    public
-
-
 end;
-
-
-
 
 TReq = Class(Tdados)     // requerimentos de TI
   Private
@@ -731,8 +726,6 @@ TReq = Class(Tdados)     // requerimentos de TI
     function get_maxKey : integer;
     procedure AftDelete(dataset: Tdataset);
     procedure Aftpost(dataset: Tdataset);
-
-    
 
   published
      function OpenAll : boolean;

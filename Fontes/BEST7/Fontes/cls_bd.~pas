@@ -90,7 +90,7 @@ begin
            form.OnClose  := formClose;
            form.PageControl1.ActivePage := form.tb_configo;
          end;
-    {    }
+
        Reg := TRegistry.Create;
        Reg.RootKey := HKEY_CURRENT_USER;
 
