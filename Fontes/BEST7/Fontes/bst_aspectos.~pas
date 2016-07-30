@@ -173,13 +173,13 @@ begin
 
  If (frm_main.viewer) or (oAcesso.WACCESS = 1) then
  begin
-   spb_del.Visible := false;
+   //spb_del.Visible := false;
    ToolButton4.Enabled := false;
    ToolButton5.Enabled := false;
  end
  else
  begin
-   spb_del.visible := true;
+   //spb_del.visible := true;
    ToolButton4.Enabled := true;
    ToolButton5.Enabled := true;
  end;

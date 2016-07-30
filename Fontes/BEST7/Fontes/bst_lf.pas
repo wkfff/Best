@@ -52,9 +52,6 @@ begin
   Label1. Caption := def39;//'Descrição'  ;
   TabSheet1.Caption := def11231;//'Métrica'  ;
   Label4.Caption := defc5;//'Custo Anual' ;
-
-  
-  
 end;
 
 {procedure Tfrm_lf.BitBtn1Click(Sender: TObject);

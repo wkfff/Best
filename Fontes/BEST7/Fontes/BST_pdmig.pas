@@ -53,7 +53,6 @@ implementation
 uses bst_main;
 
 
-
 {$R *.DFM}
 
 procedure Tfrm_pdmig.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -82,58 +81,57 @@ procedure Tfrm_pdmig.QRBand1BeforePrint(Sender: TQRCustomBand;
   var PrintBand: Boolean);
 begin
   inherited;
-
-    If QRP.DataSet.fieldbyname('idf_pk').asinteger = 0 then
+  {
+    If QRP.DataSet.fieldbyname('idf_codigo').asinteger = 0 then
      pPk.Caption := ''
     else
-     pPk.Caption := QRP.DataSet.fieldbyname('idf_pk').AsString;
-    If (QRP.DataSet.fieldbyname('idf_descricao').asstring = '') or
+     pPk.Caption := QRP.DataSet.fieldbyname('idf_codigo').AsString;
+
+    if (QRP.DataSet.fieldbyname('idf_descricao').asstring = '') or
      (QRP.DataSet.fieldbyname('idf_descricao').asstring = ' ') then
-     Begin
+     begin
   //    QRBAND1.height := 18;
-    
+
      end
   else
   //   qrband1.height := 41;
+  }
   gtQRDBText8.Frame.DrawTop    := false;
   gtQRDBText8.Frame.DrawBottom := false;
   gtQRDBText8.Frame.DrawLeft   := false;
   gtQRDBText8.Frame.DrawRight  := false;
 
- IF QRP.DataSet.fieldbyname('idf_tipodominio').asstring = 'F' then
-     Begin
+ if QRP.DataSet.fieldbyname('idf_tipodominio').asstring = 'F' then
+     begin
        gtQRDBText8.BringToFront;
-       IF trim(QRP.DataSet.fieldbyname('idf_dominio').asstring) <> '' then
-         Begin
+       if trim(QRP.DataSet.fieldbyname('idf_dominio').asstring) <> '' then
+         begin
            gtQRDBText8.Frame.DrawTop    := TRue;
            gtQRDBText8.Frame.DrawBottom := TRue;
            gtQRDBText8.Frame.DrawLeft   := TRue;
            gtQRDBText8.Frame.DrawRight  := TRue;
          end;
-       
+
      end
   else
-     Begin
-       gtQRDBText1.BringToFront;     
+     begin
+       gtQRDBText1.BringToFront;
 
      end;
- IF trim(QRP.DataSet.fieldbyname('idf_descricao').asstring) = '' then
-  Begin
+ if trim(QRP.DataSet.fieldbyname('idf_descricao').asstring) = '' then
+  begin
        gtQRDBText9.Frame.DrawTop    := false;
        gtQRDBText9.Frame.DrawBottom := false;
        gtQRDBText9.Frame.DrawLeft   := false;
        gtQRDBText9.Frame.DrawRight  := false;
   end
  else
-   Begin
+   begin
        gtQRDBText9.Frame.DrawTop    := TRue;
        gtQRDBText9.Frame.DrawBottom := TRue;
        gtQRDBText9.Frame.DrawLeft   := TRue;
        gtQRDBText9.Frame.DrawRight  := TRue;
    end;
-
-      
-    
 
 end;
 

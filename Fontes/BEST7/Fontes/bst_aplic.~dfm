@@ -318,6 +318,7 @@ inherited frm_aplic: Tfrm_aplic
       Width = 396
       inherited ToolButton6: TToolButton
         Visible = True
+        OnClick = sp_printClick
       end
     end
   end

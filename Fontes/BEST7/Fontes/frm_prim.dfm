@@ -1,6 +1,6 @@
 object prim: Tprim
   Left = 303
-  Top = 245
+  Top = 246
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
   BorderStyle = bsSingle

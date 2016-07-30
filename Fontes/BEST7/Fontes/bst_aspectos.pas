@@ -466,12 +466,11 @@ end;
 
 procedure Tfrm_aspectos.sp_printClick(Sender: TObject);
 var
-iTab : TDados_tab;
-i : integer;
-wtipo : string;
+  iTab : TDados_tab;
+  i : integer;
+  wtipo : string;
 begin
   inherited;
-
    sp2Click(frm_aspectos);
    If frm_pac = nil then
       frm_pac := Tfrm_Pac.create(self);

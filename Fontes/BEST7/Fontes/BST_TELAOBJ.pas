@@ -150,7 +150,7 @@ type
     procedure SetFil(const Value: string);
     procedure Eliminar(pTipo : integer);
     procedure Soleitura;
-    
+
 
     { Private declarations }
   published
@@ -214,9 +214,9 @@ begin
 end;
 
 procedure Tfrm_obj.TreeChg(Sender: TObject; Node: TTreeNode);
- begin
+begin
   fChange(sender);
- end;
+end;
 
 
 procedure Tfrm_obj.memoDblClick(sender : Tobject);
@@ -388,7 +388,6 @@ procedure Tfrm_obj.SetVisivel(const Value:string);
 begin
   FVisivel := Value;
 end;
-
 
 
 procedure Tfrm_obj.FormShow(Sender: TObject);
@@ -779,9 +778,7 @@ procedure Tfrm_obj.AftPost(Dataset : Tdataset);
         finally
            free;
         end;
-
-   
-   end;
+     end;
    end;
  end;
 
@@ -843,8 +840,6 @@ begin
      dbg_dg.DataSource.DataSet.Post;
     end;
 end;
-
-
 
 procedure Tfrm_obj.SetDiretor(const Value: string);
 begin
@@ -1007,8 +1002,6 @@ begin
       frm_main.ult_dir := extractFileDir(dbedit12.Text);
 
     end;
-
-
 end;
 
 procedure Tfrm_obj.Loadconstantobjs;

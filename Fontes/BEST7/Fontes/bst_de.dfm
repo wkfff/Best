@@ -1,6 +1,6 @@
 inherited frm_de: Tfrm_de
-  Left = 597
-  Top = 139
+  Left = 477
+  Top = 203
   Caption = 'Elemento de Dado'
   ClientHeight = 360
   ClientWidth = 650
@@ -354,7 +354,6 @@ inherited frm_de: Tfrm_de
         Visible = False
       end
       inherited ToolButton6: TToolButton
-        Visible = True
         OnClick = sp_printClick
       end
       inherited ToolButton7: TToolButton

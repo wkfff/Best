@@ -190,14 +190,14 @@ wcat, Tipe, Query : string;
 Client, Projeto, SelfId, Cod : integer;
 begin
 
-  //inherited;
-  //If frm_de = nil then
-  //Begin
-  //   frm_de := tfrm_de.create(self);
-  //   frm_de.idatasource := dbg_dg.DataSource;
-  //   frm_de.dbg_de.DataSource := dbg_dg.DataSource;
-  //End;
-  //frm_de.showmodal;
+  inherited;
+  If frm_de = nil then
+  Begin
+     frm_de := tfrm_de.create(self);
+     frm_de.idatasource := dbg_dg.DataSource;
+     frm_de.dbg_de.DataSource := dbg_dg.DataSource;
+  End;
+  frm_de.showmodal;
 end;
 
 procedure Tfrm_data.SpeedButton1Click(Sender: TObject);

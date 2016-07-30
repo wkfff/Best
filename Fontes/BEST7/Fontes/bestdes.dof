@@ -237,8 +237,8 @@ IncludeVerInfo=1
 AutoIncBuild=1
 MajorVer=7
 MinorVer=2
-Release=11
-Build=0
+Release=12
+Build=1
 Debug=0
 PreRelease=0
 Special=0
@@ -247,9 +247,9 @@ DLL=0
 Locale=1046
 CodePage=1252
 [Version Info Keys]
-CompanyName=MyTech
+CompanyName=Sammati
 FileDescription=
-FileVersion=7.2.11.0
+FileVersion=7.2.12.1
 InternalName=Best
 LegalCopyright=
 LegalTrademarks=
@@ -265,12 +265,6 @@ C:\Arquivos de programas\Borland\Delphi7\Bin\DCLgtQRExpD70.bpl=Gnostice QRExport
 [HistoryLists\hlUnitAliases]
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
-[HistoryLists\hlSearchPath]
-Count=1
-Item0=$(DELPHI)\Lib\Debug
-[HistoryLists\hlUnitOutputDirectory]
-Count=1
-Item0=C:\TEMP
 [HistoryLists\hlOutputDirectorry]
 Count=1
 Item0=C:\BEST\Bin

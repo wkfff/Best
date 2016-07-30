@@ -90,7 +90,7 @@ begin
            form.OnClose  := formClose;
            form.PageControl1.ActivePage := form.tb_configo;
          end;
-    {    }
+
        Reg := TRegistry.Create;
        Reg.RootKey := HKEY_CURRENT_USER;
 
@@ -252,6 +252,8 @@ begin
      raise;
    end;
   end;
+  reg.CloseKey;
+  reg.Free;
 end;
 
 procedure Tbd.SetwLike(const Value: string);

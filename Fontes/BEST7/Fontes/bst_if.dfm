@@ -1,6 +1,6 @@
 inherited frm_if: Tfrm_if
   Left = 284
-  Top = 200
+  Top = 186
   Caption = 'Objeto de Neg'#243'cio'
   ClientHeight = 457
   ClientWidth = 649
@@ -533,7 +533,7 @@ inherited frm_if: Tfrm_if
           Top = 99
           Width = 153
           Height = 22
-          ItemHeight = 14
+          ItemHeight = 0
           TabOrder = 2
           Text = 'CMB_TAB'
           Visible = False

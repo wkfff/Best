@@ -11,7 +11,7 @@ uses
   pList_Std in 'pList_Std.pas' {frm_pList},
   fonctions in 'fonctions.pas',
   DDSEG in 'DDSEG.pas',
-  bst_unit in 'preprg\bst_unit.pas',
+  bst_unit in '..\preprg\bst_unit.pas',
   bst_main in 'bst_main.pas' {frm_main},
   bst_dm_rel in 'bst_dm_rel.pas' {dm_rel: TDataModule},
   bst_basefrm in 'bst_basefrm.pas' {Basefrm},

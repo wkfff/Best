@@ -189,7 +189,6 @@ wid : integer;
 wcat, Tipe, Query : string;
 Client, Projeto, SelfId, Cod : integer;
 begin
-
   inherited;
   If frm_de = nil then
   Begin
