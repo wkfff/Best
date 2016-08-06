@@ -11,7 +11,7 @@ uses
   registry, ShellAPI, jpeg, ActnList, ActnMan, cls_bd, ADODB, BSTDB, DBClient,
   cls_obj, cls_utils, strutils, bst_telaobj, Qrctrls, QuickRpt, Grids, RxGIF,
   Animate, GIFCtrl, reinit, idglobal, fonctions, DB_TIER, bst_BaseFrm, CL_ACCESS2,
-  bst_dm_rel, ToolWin;
+  bst_dm_rel, ToolWin, bst_objetos;
 
 type
   Tfrm_main = class (TBasefrm)

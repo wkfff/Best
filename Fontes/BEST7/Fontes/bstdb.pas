@@ -1042,7 +1042,7 @@ TDad = Class(TDados)
     FDataFonte: TdataSource;
     FIDF_CAPTION: STRING;
     FIDF_OBRIG: STRING;
-    FIDF_DECIMAL: String;
+    FIDF_DECIMAL: integer;
     procedure AftrPost (dataset : Tdataset);
     procedure BefrPost (dataset : Tdataset);
     procedure SetCLI_ID(const Value: integer);
@@ -1068,7 +1068,7 @@ TDad = Class(TDados)
     procedure SetDataFonte(const Value: TdataSource);
     procedure SetIDF_CAPTION(const Value: STRING);
     procedure SetIDF_OBRIG(const Value: STRING);
-    procedure setIDF_DECIMAL(const Value:String);
+    procedure setIDF_DECIMAL(const Value: integer);
   published
     property DataFonte: TdataSource read FDataFonte write SetDataFonte;
     property IDF_CODIGO  :  integer read FIDF_CODIGO write SetIDF_CODIGO;
@@ -1093,7 +1093,8 @@ TDad = Class(TDados)
     property IDF_SEQ  :  integer read FIDF_SEQ write SetIDF_SEQ;
     property IDF_CAPTION : STRING read FIDF_CAPTION write SetIDF_CAPTION;
     property IDF_OBRIG : STRING read FIDF_OBRIG write SetIDF_OBRIG;
-    property IDF_DECIMAL : String read FIDEF_DECIMAL write SetIDF_DECIMAL;
+    property IDF_DECIMAL : integer read FIDF_DECIMAL write SetIDF_DECIMAL;
+
     { cria tabela a partir de IDF_IF}
     function inclui(ptab : string): boolean;
     { inclui elementos diretamente}
@@ -2549,9 +2550,6 @@ published
     { Inclui 1 registro}
   function Inclui : boolean;
 
-
-
- 
 end;
 
 {Objeto IDF_DADOS}
@@ -2581,7 +2579,6 @@ private
   FIDF_CODIGO : integer ;
   FPRJ_ID : integer ;
   FCLI_ID : integer ;
-  FIDF_DECIMAL: string;
   procedure SetSUB_NIVEL(const value   : integer );
   procedure SetIDF_VISIBLE(const value   : string );
   procedure SetIDF_TYPE_QUALIFIERS(const value   : string );
@@ -2601,12 +2598,10 @@ private
   procedure SetIDF_DECIMAL(const value   : integer );
   procedure SetIDF_DE_REPET(const value   : integer );
   procedure SetIDF_DATA_TYPE(const value   : string );
-  procedure SetIDF_DECIMAL(const value: string);
   procedure SetIDF_CAPTION(const value   : string );
   procedure SetIDF_CODIGO(const value   : integer );
   procedure SetPRJ_ID(const value   : integer );
   procedure SetCLI_ID(const value   : integer );
-  
 
 public
      {publicTidf_dados}
@@ -2629,15 +2624,14 @@ published
   property IDF_DESCRICAO : string  read FIDF_DESCRICAO write SetIDF_DESCRICAO;
   property IDF_DEL : string  read FIDF_DEL write SetIDF_DEL;
   property IDF_DEFAULT_VALUE : string  read FIDF_DEFAULT_VALUE write SetIDF_DEFAULT_VALUE;
-  property IDF_DECIMAL : integer  read FIDF_DECIMAL write SetIDF_DECIMAL;
+  property IDF_DECIMAL: integer read FIDF_DECIMAL write SetIDF_DECIMAL;
   property IDF_DE_REPET : integer  read FIDF_DE_REPET write SetIDF_DE_REPET;
   property IDF_DATA_TYPE : string  read FIDF_DATA_TYPE write SetIDF_DATA_TYPE;
-  property IDF_DECIMAL: string read FIDF_DECIMAL write SetIDF_DECIMAL;
   property IDF_CAPTION : string  read FIDF_CAPTION write SetIDF_CAPTION;
   property IDF_CODIGO : integer  read FIDF_CODIGO write SetIDF_CODIGO;
   property PRJ_ID : integer  read FPRJ_ID write SetPRJ_ID;
   property CLI_ID : integer  read FCLI_ID write SetCLI_ID;
- 
+
     { Inclui 1 registro}
   function Inclui : boolean;
 
@@ -8320,7 +8314,7 @@ end;
 
 procedure TDad.BefrPost(dataset: Tdataset);
 var
-ide : Tdados_tab;
+  ide : Tdados_tab;
 begin
   inherited;
   If  Dataset.fieldbyname('IDF_CODIGO').asinteger = 0 then
@@ -8344,8 +8338,8 @@ begin
         Dataset.fieldbyname('IDF_TABELA').asstring := SELF.IDF_TABELA;
         freeandnil(Ide);
        end;
-      
-   end  ;  
+
+   end  ;
 
 end;
 
@@ -8517,9 +8511,6 @@ begin;
 DecimalSeparator := ',';
 end;
 
-
-
-
 function TDad.Atu_atrib(pCli,pproj,pCodigo,pDecimal : integer;pdesign,pdesc,pnome,ptype,pdominio,pNormal,pqual,ptab : string): boolean;
 
 begin
@@ -8545,13 +8536,11 @@ begin
 
   If Rowsaffected > 0 then
    result := true
-
-
  end;
 
 function TDad.inclui(pTab : string): boolean;
 var
-wmax : integer;
+  wmax : integer;
 begin
 
   with TDad.create(self) do
@@ -8611,11 +8600,10 @@ begin
 
  end;
 
-
 function TDad.incluiObj(pTabde,ptabate : string): boolean;
 var
-wmax : integer;
-idad : Tdad;
+  wmax : integer;
+  idad : Tdad;
 begin
   result := false;
   with TDad.create(self) do
@@ -8653,9 +8641,7 @@ begin
     If Rowsaffected > 0 then
      result := true
     end;
-
  end;
-
 
  function TDad.Del_Object(pCli, pProj, pcodigo : integer;ptabela : string;pSeq : integer): boolean;
  Begin
@@ -8673,8 +8659,6 @@ begin
   If rowsaffected > 0 then
    result := true;
  end;
-
-
 
 function TDad.Get_dados(ptab : string): boolean;
 begin
@@ -8695,15 +8679,15 @@ begin
       with fClient.IndexDefs do
         begin
           add('IDF_SEQ','IDF_SEQ',[]);
-          Items[0].GroupingLevel := 0; 
+          Items[0].GroupingLevel := 0;
         end;
    end;
   //fclient.IndexName := 'IDF_SEQ';
   fCpoLista1        := 'IDF_CODIGO';
-  fCpoLista2        := 'IDF_DESIGNACAO';  
+  fCpoLista2        := 'IDF_DESIGNACAO';
 
   If not fclient.Eof then
-   result := true;   
+   result := true;
 end;
 
 function TDad.Get_dadosObrig(ptab : string): boolean;
@@ -8751,7 +8735,6 @@ begin
   If RowsAffected > 0 then
    result := true;
 end;
-
 
 procedure TDad.SetDataFonte(const Value: TdataSource);
 begin
@@ -9005,7 +8988,6 @@ begin
     result := true;
 end;
 
-
 procedure TDad.SetIDF_CAPTION(const Value: STRING);
 begin
   FIDF_CAPTION := Value;
@@ -9014,6 +8996,11 @@ end;
 procedure TDad.SetIDF_OBRIG(const Value: STRING);
 begin
   FIDF_OBRIG := Value;
+end;
+
+procedure TDad.SetIDF_DECIMAL(const Value: integer);
+begin
+  FIDF_DECIMAL := Value;
 end;
 
 { Tprovider_data }
@@ -11390,12 +11377,10 @@ begin
 end;
 
 {Tidf_dados Métodos}
-
-
 function Tidf_dados.Inclui : boolean;
-VAR
-Wkey,wcli,wproj : integer;
-wtab : string;
+var
+  Wkey,wcli,wproj : integer;
+  wtab : string;
 begin
  DecimalSeparator := '.';
  result := false;
@@ -11404,7 +11389,6 @@ begin
  wcli  := CLI_ID;
  wproj := PRJ_ID;
  wtab := IDF_TABELA;
- 
 
  If Idf_codigo = 0 then ;
   begin

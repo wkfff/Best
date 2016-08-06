@@ -4363,7 +4363,7 @@ begin
        end;
       showModal;
    end;
-   
+
 
 end;
 
@@ -4920,6 +4920,7 @@ Begin
            begin
               Wtipo := 'NUMBER(' ;
               wtipo := wtipo + trim(Ide.fClient.fieldbyname('IDF_TYPE_QUALIFIERS').asstring);
+
               If Ide.fClient.fieldbyname('IDF_DECIMAL').asstring = '' then
                wtipo := wtipo +')'
               else

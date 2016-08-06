@@ -4573,10 +4573,10 @@ iTX : TIdf_TX;
    end;
  end;
 
- function Tfrm_main.Incluir_DAD(pTabImport : TDados_tab; pDiag : TDiag_dados) : integer;
+function Tfrm_main.Incluir_DAD(pTabImport : TDados_tab; pDiag : TDiag_dados) : integer;
 var
-idad: TIdf_dados;
- begin
+  idad: TIdf_dados;
+begin
  try
    result := 0;
    idad := TIdf_dados.create(self);
