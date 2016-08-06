@@ -236,9 +236,9 @@ RootDir=
 IncludeVerInfo=1
 AutoIncBuild=1
 MajorVer=7
-MinorVer=2
-Release=12
-Build=2
+MinorVer=3
+Release=0
+Build=0
 Debug=0
 PreRelease=0
 Special=0
@@ -249,7 +249,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=Sammati
 FileDescription=
-FileVersion=7.2.12.2
+FileVersion=7.3.0.0
 InternalName=Best
 LegalCopyright=
 LegalTrademarks=
@@ -257,11 +257,11 @@ OriginalFilename=
 ProductName=BEST
 ProductVersion=7.x
 [Excluded Packages]
+C:\Arquivos de programas\Borland\Delphi7\Bin\DCLgtQRExpD70.bpl=Gnostice QRExportInterface
+C:\Arquivos de programas\Borland\Delphi7\Bin\DCLgtDocEngD70RE.bpl=Gnostice eDocEngine
 c:\arquivos de programas\borland\delphi7\Projects\Bpl\dclqrt70.bpl=QuickReport Components
 c:\arquivos de programas\borland\delphi7\Projects\Bpl\QRExports.bpl=(untitled)
 C:\Arquivos de programas\Gnostice\eDocEngine VCL Trial\Lib\D7\DCLgtDocEngD70Pro.bpl=Gnostice eDocEngine
-C:\Arquivos de programas\Borland\Delphi7\Bin\DCLgtDocEngD70RE.bpl=Gnostice eDocEngine
-C:\Arquivos de programas\Borland\Delphi7\Bin\DCLgtQRExpD70.bpl=Gnostice QRExportInterface
 [HistoryLists\hlUnitAliases]
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
