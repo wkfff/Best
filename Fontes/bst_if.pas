@@ -51,20 +51,12 @@ type
     procedure SpeedButton5Click(Sender: TObject);
 
     procedure EliminarElementodeDado1Click(Sender: TObject);
-    procedure SpeedButton11Click(Sender: TObject);
     procedure sp2Click(Sender: TObject);
-    procedure dbgdomChange(Sender: TObject);
     procedure cmb_tabCloseUp(Sender: TObject);
-    procedure GroupBox2MouseMove(Sender: TObject; Shift: TShiftState; X,
-      Y: Integer);
-    procedure dbg_dgCellClick(Column: TColumn);
-    procedure BLERClick(Sender: TObject);
+//    procedure BLERClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure sp_insertClick(Sender: TObject);
-    procedure dbg_dg1KeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
-    procedure dbg_dgEnter(Sender: TObject);
     procedure dbg_dgDblClick(Sender: TObject);
   private
     FObjDir: string;
@@ -83,21 +75,13 @@ type
     procedure SetObjeto(const Value: string);
     procedure Eliminar;
     procedure Setform_name(const Value: string);
-
     procedure SetNOME_DFM(const Value: STRING);
     procedure SetNOME_UNIT(const Value: STRING);
-
-    
     function Cria_Panel: boolean;
-    
     procedure SetLASTARGUM(const Value: STRING);
     procedure SetTIPO_LASTARGUM(const Value: STRING);
     procedure SetFIRSTARGUM(const Value: STRING);
     procedure SetiTabRef(const Value: Tdad);
-    
-
-
-    
     { Private declarations }
   public
     { Public declarations }
@@ -114,7 +98,6 @@ type
    property iTabRef : Tdad  read FiTabRef write SetiTabRef;
    procedure Loadconstantobj; override;
   end;
-
 var
   frm_if: Tfrm_if;
   idados : Tdad;
@@ -202,143 +185,10 @@ begin
    dbg_dg.DataSource.DataSet.open;
 end;
 
-{procedure Tfrm_if.pgcpChange(Sender: TObject);
-
-begin
-  //inherited;
-  
-
-  If pgcp.ActivePage = Tb_Dados then
-    Begin
-         SortField := 'IDF_DESIGNACAO';
-         iQuery :=TAdoQuery.create(self);
-
-         iSource := TdataSource.create(self);
-         isource.DataSet := iQuery;
-         If dbedit5.Text = '' then
-            exit;
-         with iQuery do
-           begin
-              try
-                connection := bdx;
-
-                sql.text := 'SELECT * FROM IDF_DADOS WHERE '+
-                            ' CLI_ID = '+ ''+INTTOSTR(cliente)+''+' AND '+
-                            ' PRJ_ID = '+ ''+INTTOSTR(cenario)+''+
-                            ' AND IDF_TABELA = '+''''+dbedit5.Text+'''';
-
-                open;
-
-                If eof then   // tabela vazia-> cria a partir das correlações (compatibiliade)
-                 Begin
-                   itab := Tdados_tab.Create(self);
-                    Begin
-                      itab.Get_Correlatos(Cliente,Cenario,TIPO,Id,'DE','IDF_DE') ;
-                      while not itab.eof do
-                       Begin
-                         with Tdad.Create(self) do
-                          Begin
-                            CLI_ID := Cliente;
-                            PRJ_ID := cenario;
-                            IDF_CODIGO := itab.fieldbyname('IDF_CODIGO').asinteger;
-                            Inclui(Dbedit5.text) ;
-                            free;
-                          end;
-                        iTab.Next;
-                       end;
-                       freeandnil(itab);
-                     iQuery.close;
-                     iQuery.open;
-                    end;
-
-                 end;
-
-                dbg_dg.DataSource    := isource;
-                db_Desc.DataSource   := isource;
-                db_Dom.DataSource    := isource;
-                db_Tab.DataSource    := isource;
-                dbgDom.DataSource    := isource;
-                db_Desc.dataField    := 'IDF_DESCRICAO';
-                db_Dom.dataField     := 'IDF_DOMINIO';
-                db_Tab.dataField     := 'IDF_TABREF';
-                dbgDom.dataField     := 'IDF_TIPODOMINIO';
-              finally
-                dbg_dg.cursor     := crDefault  ;
-
-              end;
-           end;
-     caption := def22 +' - '+ isource.DataSet.fieldbyname('IDF_DESIGNACAO').asstring;   
-
-    end;      
-
-end;      }
-
 procedure Tfrm_if.pgcpChange(Sender: TObject);
-
 begin
   Mostra_dados;
-  {If pgcp.ActivePage = Tb_Dados then
-    Begin
-         with iDados do
-           begin
-              try
-                CLI_ID := cliente;
-                PRJ_ID := Cenario;
-                IDF_TABELA := Dbedit5.text;
-                If dbedit5.Text = '' then
-                 exit;
-                //If not Get_dados(dbedit5.Text) then   // tabela vazia-> cria a partir das correlações (compatibiliade)
-                 //Begin
-                   itab := Tdados_tab.Create(self);
-                    Begin
-                      itab.Get_Correlatos(Cliente,Cenario,TIPO,Id,'DE','IDF_DE') ;
-                      //while not itab.eof do
-                       //Begin
-                         with Tdad.Create(self) do
-                          Begin
-                            //CLI_ID := Cliente;
-                            //PRJ_ID := cenario;
-                            //IDF_CODIGO := itab.fieldbyname('IDF_CODIGO').asinteger;
-                            //Inclui(Dbedit5.text) ;
-                            //free;
-                            //Get_Correlatos(Cliente,Cenario,TIPO,Id,'DE','IDF_DE');
-                            dbg_dg.DataSource    := dataext;
-                            db_Desc.DataSource   := dataext;
-                            db_Dom.DataSource    := dataext;
-                            db_Desc.dataField    := 'IDF_DESCRICAO';
-                            db_Dom.dataField     := 'IDF_DOMINIO';
-                            //BeforePost           := DePost;
-                            //AfterPost            := AftPost;
-                            //AfterDelete          := AftDel;
-                          end;
-                        //iTab.Next;
-                       //end;
-                       freeandnil(itab);
-                       //Get_dados(dbedit5.Text);
-                    end;
-
-                 //end;
-
-                //dbg_dg.DataSource    := dataext;
-                //db_Desc.DataSource   := dataext;
-                //db_Dom.DataSource    := dataext;
-                //db_Tab.DataSource    := dataext;
-                //dbgDom.DataSource    := dataext;
-                //db_Desc.dataField    := 'IDF_DESCRICAO';
-                //db_Dom.dataField     := 'IDF_DOMINIO';
-                //db_Tab.dataField     := 'IDF_TABREF';
-                //dbgDom.dataField     := 'IDF_TIPODOMINIO';
-              finally
-                dbg_dg.cursor     := crDefault  ;
-              end;
-           end;
-     //caption := def22 +' - '+ idatasource.DataSet.fieldbyname('IDF_DESIGNACAO').asstring;
-
-    end;}
-
-end;  
-
-
+end;
 
 procedure Tfrm_if.SetObjDir(const Value: string);
 begin
@@ -358,26 +208,26 @@ begin
   sp2.enabled := true;
 end;
 
-
-
 procedure Tfrm_if.SetObjeto(const Value: string);
 begin
   FObjeto := Value;
 end;
 
 procedure Tfrm_if.sListaClick(Sender: TObject);
-VAR
-WTAbde : string;
-oList : TList;
-i : integer;
-mLista : uListaMult;
+var
+  WTAbde : string;
+  oList : TList;
+  i : integer;
+  mLista : uListaMult;
 begin
  with Tdados_tab.create(self) do
      begin
        ListaCli := Cliente ;
        ListaProj:= Cenario ;
        ListaDim := 'IDF_DE' ;
-       ListaDim := 'IDF_DADOS' ;
+       // Vou comentar a linha debaixo, pq o Marcio disse que o que vale é a
+       // tabela IDF_DE
+//       ListaDim := 'IDF_DADOS' ;
        ListaTit := def26 ;
        ListaTag := 0 ;
        ListaEdit:= false ;
@@ -431,12 +281,6 @@ begin
        frm_tabenga.CLOSE;
      end;
      get_provider;
-     while not eof do
-      Begin
-       //dbg_dg.Columns[3].PickList.add(fieldbyname('TYPE_NAME').asstring);
-       next;
-      end;
-
    end;
 
    iTabRef := Tdad.create(self);
@@ -458,7 +302,7 @@ end;
 
 procedure Tfrm_if.dbg_dgTitleClick(Column: TColumn);
 var
-i : integer;
+ i : integer;
 begin
   inherited;
   with idados.fClient.IndexDefs do
@@ -471,30 +315,11 @@ begin
   end;
 end;
 
-{procedure Tfrm_if.dbg_dgTitleClick(Column: TColumn);
-var
-i : integer;
-begin
-  inherited;
-  with iQuery do
-  begin
-    close;
-    SortField := column.FieldName;
-     sql.text := 'SELECT * FROM IDF_DADOS WHERE '+
-                            ' CLI_ID = '+ ''+INTTOSTR(cliente)+''+' AND '+
-                            ' PRJ_ID = '+ ''+INTTOSTR(cenario)+''+
-                            ' AND IDF_TABELA = '+''''+dbedit5.Text+''''+
-                            ' ORDER BY '+''+column.FieldName+'';
-    OPEN;
-  end;
-end;   }
-
 procedure Tfrm_if.dbg_dgKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   If (shift = ([ssCtrl])) and (key = VK_DELETE) then
      eliminar;
-
 end;
 
 Procedure Tfrm_if.Eliminar ;
@@ -513,23 +338,14 @@ Procedure Tfrm_if.Eliminar ;
  end;
 
 procedure Tfrm_if.SpeedButton5Click(Sender: TObject) ;
- Begin
-   close;
-   
- end;
-
-
-
-
-
-
+begin
+  close;
+end;
 
 procedure Tfrm_if.Setform_name(const Value: string);
 begin
   Fform_name := Value;
 end;
-
-
 
 procedure Tfrm_if.SetNOME_DFM(const Value: STRING);
 begin
@@ -541,14 +357,12 @@ begin
   FNOME_UNIT := Value;
 end;
 
-
-
 function Tfrm_if.Cria_Panel : boolean;
 var
-i,lin_ini,lin_fim,lin_proc,Lin_end: integer;
-ws : string;
+  i,lin_ini,lin_fim,lin_proc,Lin_end: integer;
+  ws : string;
 
- Begin
+begin
    Lin_fim := 0;
    Lin_proc := 0;
    Lin_ini := 0;
@@ -563,35 +377,6 @@ ws : string;
           Lin_end := i
       end;
     end;
-         {  wlist.Insert(Lin_end,' inherited Panel3: TPanel   ');
-           wlist.Insert(Lin_end,'   Width = 1028  ');
-           wlist.Insert(Lin_end,'   Height = 26  ');
-           wlist.Insert(Lin_end,'    Font.Charset = DEFAULT_CHARSET  ');
-           wlist.Insert(Lin_end,'   Font.Name = 'MS Sans Serif' ');
-           wlist.Insert(Lin_end,'   ParentFont = False   ');
-           wlist.Insert(Lin_end,'   inherited sp2: TSpeedButton ');
-           wlist.Insert(Lin_end,'     Left = 896  ');
-           wlist.Insert(Lin_end,'     Width = 127  ');
-           wlist.Insert(Lin_end,'   end      ');
-           wlist.Insert(Lin_end,'   inherited sp_print: TSpeedButton   ');
-           wlist.Insert(Lin_end,'     Left = 21      ');
-           wlist.Insert(Lin_end,'    Visible = False   ');
-           wlist.Insert(Lin_end,'   end          ');
-           wlist.Insert(Lin_end,'  inherited sp_insert: TSpeedButton  ');
-           wlist.Insert(Lin_end,'     Left = 44  ');
-           wlist.Insert(Lin_end,'   end        ');
-           //wlist.Insert(Lin_end,'   inherited spb_del: TSpeedButton  ');
-           wlist.Insert(Lin_end,'     Left = 118      ');
-           wlist.Insert(Lin_end,'     Width = 75      ');
-           wlist.Insert(Lin_end,'     Caption = 'Eliminar   '  ');
-           wlist.Insert(Lin_end,'   end
-           wlist.Insert(Lin_end,'   inherited SP_X: TSpeedButton  ');
-           wlist.Insert(Lin_end,'     Left = 463           ');
-           wlist.Insert(Lin_end,'     Top = 2       ');
-           wlist.Insert(Lin_end,'     OnClick = nil   ');
-           wlist.Insert(Lin_end,'   end     ');
-           wlist.Insert(Lin_end,' 'end '); }
-
 
    wList.Savetofile(OBJDIR+'\'+NOME_UNIT);
 end;
@@ -606,78 +391,31 @@ begin
   FTIPO_LASTARGUM := Value;
 end;
 
-
-
-
-
 procedure Tfrm_if.SetFIRSTARGUM(const Value: STRING);
 begin
   FFIRSTARGUM := Value;
 end;
 
-
-
-
 procedure Tfrm_if.EliminarElementodeDado1Click(Sender: TObject);
 begin
   //inherited;   //delete original
     With Tdad.Create(self)   do
-    Begin
-     Del_object(dbg_dg.DataSource.DataSet.FieldByName('CLI_ID').asinteger,
+    begin
+      Del_object(dbg_dg.DataSource.DataSet.FieldByName('CLI_ID').asinteger,
                 dbg_dg.DataSource.DataSet.FieldByName('PRJ_ID').asinteger,
                 dbg_dg.DataSource.DataSet.FieldByName('IDF_CODIGO').asinteger,
                 dbg_dg.DataSource.DataSet.FieldByName('IDF_TABELA').asstring,
                 dbg_dg.DataSource.DataSet.FieldByName('IDF_SEQ').asinteger);
-     free;
-   //  dbg_dg.DataSource.DataSet.Refresh;
-   pgcpChange (nil);
+      free;
+      pgcpChange (nil);
     end;
-
-
-end;
-
-
-
-
-
-procedure Tfrm_if.SpeedButton11Click(Sender: TObject);
-begin
-  inherited;
-  
-{  with Tdados_tab.create(self) do
-     begin
-       ListaCli := Cliente ;
-       ListaProj:= Cenario ;
-       ListaDim := 'IDF_DE' ;
-       ListaTit := def26 ;
-       ListaTag := 0 ;
-       ListaEdit:= false ;
-       ListaTree:= nil;
-       ListaId  := 0;
-       Listafecha:= true;
-       mostra_lista;
-
-       If ListaCodigo = 0 then
-          exit;
-
-       with Tdad.create(self) do
-       Begin
-          CLI_ID := Cliente;
-          PRJ_ID := cenario;
-          IDF_CODIGO := ListaCodigo;
-          Inclui(Dbedit5.text) ;
-          idados.fClient.Refresh;
-          free;
-       end;
-       pgcpChange(self);
-     end;}
 end;
 
 procedure Tfrm_if.sp2Click(Sender: TObject);
 var
-dados : TDados_tab;
-wtnode : TTreeNode;
-I : INTEGER;
+  dados : TDados_tab;
+  wtnode : TTreeNode;
+  I : INTEGER;
 begin
   inherited;
   If dbg_dg.DataSource <> nil then
@@ -714,7 +452,7 @@ begin
 end;
 
 procedure Tfrm_if.Loadconstantobj;
- Begin
+begin
     label5.caption := def39    ;//descriçaõ
     label9.caption := def10005    ;//nome
     //speedbutton11.caption := def7610       ;//incluir atributos..
@@ -725,39 +463,7 @@ procedure Tfrm_if.Loadconstantobj;
     //dbgdom.Items[2] :=  deff7;// fechado;
     label1.Caption   :=   deff7;// // fechado;
     aberto.Caption   :=  defa25;// aberto;
-    
- end;
-
-procedure Tfrm_if.dbgdomChange(Sender: TObject);
-begin
- // inherited;
-  {case dbgdom.ItemIndex of
-   -1,0 :  Begin
-         db_dom.Visible := false;
-         //cmb_tab.Visible := false;
-         //db_tab.Visible  := false;
-         label1.Visible := false;
-         //aberto.visible := false;
-        end;
-   1 :  Begin
-         db_dom.Visible := false;
-         cmb_tab.Visible := true;
-         db_tab.Visible  := true;
-         label1.Visible := false;
-         aberto.visible := true;
-        end;
-
-   1 :  Begin
-         db_dom.Visible := true;
-         //cmb_tab.Visible := false;
-         //db_tab.Visible  := false;
-         label1.Visible := true;
-         //aberto.visible := false;
-        end;
-  end;}
 end;
-
-
 
 procedure Tfrm_if.SetiTabRef(const Value: Tdad);
 begin
@@ -771,25 +477,15 @@ begin
   db_tab.Field.Text := cmb_tab.items[cmb_tab.itemIndex];
 end;
 
-procedure Tfrm_if.GroupBox2MouseMove(Sender: TObject; Shift: TShiftState;
-  X, Y: Integer);
-begin
-  inherited;
-  dbgdomChange(NIL);
-end;
-
-procedure Tfrm_if.dbg_dgCellClick(Column: TColumn);
-begin
-  inherited;
-  dbgdomChange(nil);
-end;
+{
+ Estou comentando esse código pq não vi utilidade, quero apaga-lo.
 
 procedure Tfrm_if.BLERClick(Sender: TObject);
-VAR
-ide : Tdad;
-i ,j: integer;
-wquery,wquery1 : string;
-iQuery : TADOquery;
+var
+  ide : Tdad;
+  i ,j: integer;
+  wquery,wquery1 : string;
+  iQuery : TADOquery;
 begin
   inherited;
     iQuery := TADOquery.create(self);
@@ -850,6 +546,7 @@ begin
      memo1.Text := memo1.text + memo2.text;
      memo1.lines.SaveToFile('c:\develop\conversao_ind\queryConversaoFuncFIH.txt');
 end;
+}
 
 procedure Tfrm_if.Button2Click(Sender: TObject);
 begin
@@ -871,19 +568,6 @@ begin
   dbEdit5.Enabled := true;
 end;
 
-procedure Tfrm_if.dbg_dg1KeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin
-  inherited;
-  //dbg_dg.ReadOnly := true;
-end;
-
-procedure Tfrm_if.dbg_dgEnter(Sender: TObject);
-begin
-  inherited;
-  //dbg_dg.ReadOnly := true;
-end;
-
 procedure Tfrm_if.dbg_dgDblClick(Sender: TObject);
 Var
   wid : integer;
@@ -892,7 +576,6 @@ begin
    wid := StrToInt(dbg_dg.Columns[10].Field.Value);
    frmViewED.CarregaItem(wid);
    frmViewED.Show;
-
 end;
 
 end.

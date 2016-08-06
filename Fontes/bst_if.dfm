@@ -407,9 +407,7 @@ inherited frm_if: Tfrm_if
         Height = 199
         FixedColor = clBtnFace
         TitleFont.Name = 'Calibri'
-        OnCellClick = dbg_dgCellClick
         OnDblClick = dbg_dgDblClick
-        OnEnter = dbg_dgEnter
         Columns = <
           item
             Expanded = False
@@ -467,6 +465,9 @@ inherited frm_if: Tfrm_if
           item
             Expanded = False
             FieldName = 'IDF_OBRIG'
+            PickList.Strings = (
+              'Verdadeiro'
+              'Falso')
             Title.Caption = 'Obrig.'
             Width = 67
             Visible = True
@@ -494,7 +495,6 @@ inherited frm_if: Tfrm_if
         Top = 234
         Width = 313
         Height = 142
-        OnClick = dbgdomChange
         object Aberto: TLabel [0]
           Left = 8
           Top = 85
@@ -526,14 +526,13 @@ inherited frm_if: Tfrm_if
             'A'
             'F')
           Visible = False
-          OnClick = dbgdomChange
         end
         object CMB_TAB: TComboBox [3]
           Left = 8
           Top = 99
           Width = 153
           Height = 22
-          ItemHeight = 0
+          ItemHeight = 14
           TabOrder = 2
           Text = 'CMB_TAB'
           Visible = False
