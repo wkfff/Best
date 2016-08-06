@@ -1042,6 +1042,7 @@ TDad = Class(TDados)
     FDataFonte: TdataSource;
     FIDF_CAPTION: STRING;
     FIDF_OBRIG: STRING;
+    FIDF_DECIMAL: String;
     procedure AftrPost (dataset : Tdataset);
     procedure BefrPost (dataset : Tdataset);
     procedure SetCLI_ID(const Value: integer);
@@ -1067,7 +1068,7 @@ TDad = Class(TDados)
     procedure SetDataFonte(const Value: TdataSource);
     procedure SetIDF_CAPTION(const Value: STRING);
     procedure SetIDF_OBRIG(const Value: STRING);
-
+    procedure setIDF_DECIMAL(const Value:String);
   published
     property DataFonte: TdataSource read FDataFonte write SetDataFonte;
     property IDF_CODIGO  :  integer read FIDF_CODIGO write SetIDF_CODIGO;
@@ -1092,6 +1093,7 @@ TDad = Class(TDados)
     property IDF_SEQ  :  integer read FIDF_SEQ write SetIDF_SEQ;
     property IDF_CAPTION : STRING read FIDF_CAPTION write SetIDF_CAPTION;
     property IDF_OBRIG : STRING read FIDF_OBRIG write SetIDF_OBRIG;
+    property IDF_DECIMAL : String read FIDEF_DECIMAL write SetIDF_DECIMAL;
     { cria tabela a partir de IDF_IF}
     function inclui(ptab : string): boolean;
     { inclui elementos diretamente}
@@ -1100,28 +1102,20 @@ TDad = Class(TDados)
     function get_all (pCli,pProj : integer) : boolean;
     {Retorna tudo,por descriçào}
     function get_allbyDesc(pCli, pProj: integer): boolean;
-
-
-        { Imprime tabela Específica}
-        function get_ObjetobyDesc(pCli, pProj: integer; pTabela,pOrder : string): boolean;
-
-        //Nova função que será usada no relatório de objetos
-        function get_ObjetoDescricao(pCli, pProj: integer): boolean;
-     
-        { retorna os elementos de dados data tabela}
-        function Get_dados(ptab : string): boolean;
-
-        { retorna os elementos de dados da tabela com opçaõ obrigatórios (Classes)}
-        function Get_dadosObrig(ptab : string): boolean;
-
-        { retorna a sequencia anterior}
-        function Get_seq(pCli,pProj : integer;ptab : string):integer;
-
-        { retorna atributo específico}
-        function Get_atrib(pCli,pProj : integer;ptab : string;pAtrib : integer): boolean;
-
-        { delete atributo específico}
-        function Del_atrib(pCli,pProj : integer;ptab : string;pAtrib : integer): boolean;
+    { Imprime tabela Específica}
+    function get_ObjetobyDesc(pCli, pProj: integer; pTabela,pOrder : string): boolean;
+    //Nova função que será usada no relatório de objetos
+    function get_ObjetoDescricao(pCli, pProj: integer): boolean;
+    { retorna os elementos de dados data tabela}
+    function Get_dados(ptab : string): boolean;
+   { retorna os elementos de dados da tabela com opçaõ obrigatórios (Classes)}
+    function Get_dadosObrig(ptab : string): boolean;
+   { retorna a sequencia anterior}
+    function Get_seq(pCli,pProj : integer;ptab : string):integer;
+   { retorna atributo específico}
+    function Get_atrib(pCli,pProj : integer;ptab : string;pAtrib : integer): boolean;
+   { delete atributo específico}
+    function Del_atrib(pCli,pProj : integer;ptab : string;pAtrib : integer): boolean;
          { delete tabelas do cliente/cenario}
         function DelDoCenario(pCli, pCenario: integer): boolean;
 
@@ -2587,6 +2581,7 @@ private
   FIDF_CODIGO : integer ;
   FPRJ_ID : integer ;
   FCLI_ID : integer ;
+  FIDF_DECIMAL: string;
   procedure SetSUB_NIVEL(const value   : integer );
   procedure SetIDF_VISIBLE(const value   : string );
   procedure SetIDF_TYPE_QUALIFIERS(const value   : string );
@@ -2606,6 +2601,7 @@ private
   procedure SetIDF_DECIMAL(const value   : integer );
   procedure SetIDF_DE_REPET(const value   : integer );
   procedure SetIDF_DATA_TYPE(const value   : string );
+  procedure SetIDF_DECIMAL(const value: string);
   procedure SetIDF_CAPTION(const value   : string );
   procedure SetIDF_CODIGO(const value   : integer );
   procedure SetPRJ_ID(const value   : integer );
@@ -2636,6 +2632,7 @@ published
   property IDF_DECIMAL : integer  read FIDF_DECIMAL write SetIDF_DECIMAL;
   property IDF_DE_REPET : integer  read FIDF_DE_REPET write SetIDF_DE_REPET;
   property IDF_DATA_TYPE : string  read FIDF_DATA_TYPE write SetIDF_DATA_TYPE;
+  property IDF_DECIMAL: string read FIDF_DECIMAL write SetIDF_DECIMAL;
   property IDF_CAPTION : string  read FIDF_CAPTION write SetIDF_CAPTION;
   property IDF_CODIGO : integer  read FIDF_CODIGO write SetIDF_CODIGO;
   property PRJ_ID : integer  read FPRJ_ID write SetPRJ_ID;
@@ -5660,11 +5657,10 @@ s : string;
 
  end;
 
- function TDados_tab.GetTab(pCli,pProj : integer;pDESC : string) : boolean;
+function TDados_tab.GetTab(pCli,pProj : integer;pDESC : string) : boolean;
 var
-s : string;
- begin
-
+  s : string;
+begin
     close    ;
     sql.clear;
     sql.add('SELECT * FROM IDF_DADOS');
@@ -5681,8 +5677,8 @@ s : string;
 
 function TDados_tab.MarcadelInvisivel ( pTipo : string): boolean;
 var
-mtipo : string;
-i : integer;
+  mtipo : string;
+  i : integer;
 begin
        begin
           close;
@@ -5730,8 +5726,8 @@ end;
 
 function TDados_tab.Atualiza_procedural (pcli,pcenario,pId : integer): boolean;
 var                       // atualiza o campo  DF_ATIVIDADE_SUMARIA quando decompoe no gráfico
-mtipo : string;
-i : integer;
+  mtipo : string;
+  i : integer;
 begin
    begin
       close;
@@ -5750,8 +5746,7 @@ end;
 
 function TDados_tab.Apaga_Objeto(pCli,pProj,pId : integer;pTab : string) : boolean;
 var
-pTipoPai : string;
-
+  pTipoPai : string;
 begin
    try
     begin
@@ -5919,8 +5914,7 @@ end;
 
 function TDados_tab.MarcaDel(pTipo : string): boolean;
 var
-i : integer;
-
+  i : integer;
 begin
     If frm_log = nil then
      frm_log := Tfrm_log.create(self);
@@ -5966,7 +5960,6 @@ begin
 end;
 
 function TDados_tab.Mostra_orfas(pTipo: string): boolean;
-
 begin
        result := false;
        close;
@@ -7350,9 +7343,6 @@ begin
   FListaProj := Value;
 end;
 
-
-
-
 procedure TDados_tab.SetListaFecha(const Value: Boolean);
 begin
   FListaFecha := Value;
@@ -8126,8 +8116,6 @@ begin
   Fdados := Value;
 end;
 
-
-
 procedure TDados_tab.SetListaCanc(const Value: boolean);
 begin
   FListaCanc := Value;
@@ -8138,10 +8126,7 @@ begin
   FOperacao := Value;
 end;
 
-
-
 { TDad }
-
 constructor Tdad.Create;
  begin
    inherited create(screen.activeForm);
@@ -8177,10 +8162,8 @@ constructor Tdad.Create;
   // fclient.OnPostError         := PostErr;
    //fclient.PacketRecords       := 500;
    //fclient.FetchOnDemand       := true;
-
-
+ 
  end;
-
 
  { TTodo }
 
@@ -8333,7 +8316,6 @@ end;
 procedure TDad.AftrPost(dataSet: TdataSet);
 begin
   fClient.ApplyUpdates(0);
-
 end;
 
 procedure TDad.BefrPost(dataset: Tdataset);
@@ -8470,13 +8452,12 @@ end;
 
 function Tdad.Incluidad : boolean;
 var
-wmax,wcod : integer;
+  wmax,wcod : integer;
 begin;
-DecimalSeparator := '.';
-
-  Begin
+  DecimalSeparator := '.';
+  begin
      with TDad.create(self) do
-       Begin
+       begin
         If self.IDF_PK = 0 then
           wmax := Get_seq(self.CLI_ID,self.PRJ_ID,self.IDF_TABELA) + 10
         else
@@ -8491,7 +8472,6 @@ DecimalSeparator := '.';
         free;
        end;
   end ;
-
 
 
  result := false;
@@ -8554,7 +8534,7 @@ begin
   sql.add('IDF_DOMINIO = '+''''+ pDOMINIO+''''+',');
   sql.add('IDF_NORMALIZE = '+''''+ pnormal+''''+',');
   sql.add('IDF_TYPE_QUALIFIERS = '+''''+ pqual+'''');
- // sql.add('IDF_DECIMAL = '+''''+ inttostr(pdecimal)+'''');
+  sql.add('IDF_DECIMAL = '+''''+ inttostr(pdecimal)+'''');
   sql.add(' WHERE ');
   sql.add(' CLI_ID = '+ ''+inttostr(pCli)+''+' AND ');
   sql.add(' PRJ_ID = '+ ''+INTTOSTR(pproj)+''+' AND ');
@@ -9035,7 +9015,6 @@ procedure TDad.SetIDF_OBRIG(const Value: STRING);
 begin
   FIDF_OBRIG := Value;
 end;
-
 
 { Tprovider_data }
 

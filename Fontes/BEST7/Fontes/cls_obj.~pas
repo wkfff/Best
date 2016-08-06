@@ -2930,7 +2930,8 @@ end;
 
 procedure Tdg.DiagExit(Sender: TObject);
 begin
-  self.Salvar;
+  if (MessageDlg(mens36,mtCustom, [mbYes, mbNo,mbCancel], 0) = mrYes) then
+    self.Salvar;
 end;
 
 function Tdg.Get_Objeto : Tdados_tab;

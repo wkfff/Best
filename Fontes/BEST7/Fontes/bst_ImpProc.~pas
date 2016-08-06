@@ -6,7 +6,7 @@ uses
   Windows, bst_basefrm,Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ExtCtrls, FileCtrl, Buttons, QrCtrls,  QuickRpt,cls_obj,
   Mask, Animate, GIFCtrl, ActnList, ImgList, ComCtrls, ToolWin, rxAnimate,
-  rxGIFCtrl, bst_objetos;
+  rxGIFCtrl;
 
 type
    uListaDoc = ^TListadoc ;

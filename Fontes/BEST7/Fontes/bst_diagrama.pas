@@ -6,7 +6,7 @@ uses
   Windows, bst_basefrm, Messages, SysUtils, Classes, Graphics, Controls, Forms, 
   Dialogs, DBCtrls, StdCtrls, Buttons, ExtCtrls, Mask, Grids, DBGrids, ComCtrls,
   db, dbtables, Menus, cls_obj, BSTdb, OOSEG, bst_dm_rel, ActnList, ImgList,
-  ToolWin;
+  ToolWin, bst_objetos;
 
 type
   Tfrm_diag = class(TBasefrm)

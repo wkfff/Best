@@ -1,6 +1,6 @@
 inherited frm_if: Tfrm_if
-  Left = 284
-  Top = 186
+  Left = 490
+  Top = 59
   Caption = 'Objeto de Neg'#243'cio'
   ClientHeight = 457
   ClientWidth = 649

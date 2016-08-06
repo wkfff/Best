@@ -712,12 +712,7 @@ TAP = Class(Tdados_tab)
    function Open_uc(pCli, pProj, pId: integer): boolean;
    constructor Create (Aowner : TComponent);
    public
-
-
 end;
-
-
-
 
 TReq = Class(Tdados)     // requerimentos de TI
   Private
@@ -731,8 +726,6 @@ TReq = Class(Tdados)     // requerimentos de TI
     function get_maxKey : integer;
     procedure AftDelete(dataset: Tdataset);
     procedure Aftpost(dataset: Tdataset);
-
-    
 
   published
      function OpenAll : boolean;
@@ -1049,6 +1042,7 @@ TDad = Class(TDados)
     FDataFonte: TdataSource;
     FIDF_CAPTION: STRING;
     FIDF_OBRIG: STRING;
+    FIDF_DECIMAL: String;
     procedure AftrPost (dataset : Tdataset);
     procedure BefrPost (dataset : Tdataset);
     procedure SetCLI_ID(const Value: integer);
@@ -1074,7 +1068,7 @@ TDad = Class(TDados)
     procedure SetDataFonte(const Value: TdataSource);
     procedure SetIDF_CAPTION(const Value: STRING);
     procedure SetIDF_OBRIG(const Value: STRING);
-
+    procedure setIDF_DECIMAL(const Value:String);
   published
     property DataFonte: TdataSource read FDataFonte write SetDataFonte;
     property IDF_CODIGO  :  integer read FIDF_CODIGO write SetIDF_CODIGO;
@@ -1099,6 +1093,7 @@ TDad = Class(TDados)
     property IDF_SEQ  :  integer read FIDF_SEQ write SetIDF_SEQ;
     property IDF_CAPTION : STRING read FIDF_CAPTION write SetIDF_CAPTION;
     property IDF_OBRIG : STRING read FIDF_OBRIG write SetIDF_OBRIG;
+    property IDF_DECIMAL : String read FIDEF_DECIMAL write SetIDF_DECIMAL;
     { cria tabela a partir de IDF_IF}
     function inclui(ptab : string): boolean;
     { inclui elementos diretamente}

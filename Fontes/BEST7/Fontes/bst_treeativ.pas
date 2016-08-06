@@ -632,7 +632,7 @@ end;
 
 var
   iTv : TTv;
-  ide     : TDad;
+  ide : TDad;
   wTab : TstringList;
   frm_treeativ: Tfrm_treeativ;
   I, Wwidg, tot_no: INTEGER;
@@ -4669,7 +4669,7 @@ begin
    begin
      PopNode.Items[16].enabled := false ;  //imprimir missão
      PopNode.Items[17].Enabled := false; //gerar use case
-     
+
 
 
      If  tv.Diagrama.SelNodes.Item(1).shape in[11,50,79,62] then
@@ -4809,8 +4809,7 @@ end;
 procedure Tfrm_treeativ.cmb_schemaCloseUp(Sender: TObject);
 begin
   dir_canc := false;
- 
-  
+
   case cmb_schema.ItemIndex of
 
     0 : Begin
@@ -4850,22 +4849,22 @@ end;
 
 function Tfrm_treeativ.gera_SQL(pdg : TDg) : boolean;
 var
- Tot,i ,icode,wpos: integer;
- sematrib : boolean;
- wTipo ,s,windex, wtamanho :string;
- tvant :TTreeNode;
- HaPk,First :boolean;
+  Tot,i ,icode,wpos: integer;
+  sematrib : boolean;
+  wTipo ,s,windex, wtamanho :string;
+  tvant :TTreeNode;
+  HaPk,First :boolean;
 Begin
- If pdg.IDG_DIR <> 'DMI' then
-   Raise exception.create(mens107);
- HaPk := false;
+  If pdg.IDG_DIR <> 'DMI' then
+    Raise exception.create(mens107);
+  HaPk := false;
   //PRIMARY KEY (CLIENTE, NO_DOC, EMISSAO)
- try
-     Begin
+  try
+    Begin
       tot := pdg.SelNodes.count;
       //PB.Max := tot;
       for i := 1 to tot  do
-      Begin
+      begin
         First := true;
         inc(wpos);
         //pb.Position := wpos;

@@ -271,8 +271,6 @@ begin
 end;
 
 procedure Tfrm_objetos. Loadconstantobj;
-var
- i: integer;
 begin
 
 end;

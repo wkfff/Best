@@ -6,7 +6,7 @@ uses Windows, SysUtils, Classes, Graphics, Forms, Controls, StdCtrls,
   Buttons, ComCtrls, ExtCtrls, Mask, Grids, DBGrids,
   Dialogs, ImgList, ToolWin,Activex, db, Menus, DBCtrls,
   cls_utils, dbtables, cls_obj, bstdb,adodb, AddFlow3Lib_TLB, fonctions,
-  OleCtrls,bst_basefrm, ActnList;
+  OleCtrls,bst_basefrm, ActnList, bst_objetos;
 
 type
   Tfrm_obj = class(TBasefrm)

@@ -158,7 +158,7 @@ begin
       frm_idiomas       := Tfrm_idiomas .create(application);
    frm_idiomas .showmodal;    }
 
-  Application.Title := 'Best 7.2';
+  Application.Title := 'Best 7.3';
   Application.CreateForm(Tdm_rel, dm_rel);
   Application.CreateForm(Tfrm_main, frm_main);
   Application.CreateForm(TDualListDlg, DualListDlg);
