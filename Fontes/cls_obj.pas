@@ -8779,9 +8779,9 @@ END;
 
 procedure Atu_schema;  // atualizaçào DDL : atualizar a constante WTABELAS com novas tabelas
 var
-iTab,iFld : TstringList;
-i,wseq : integer;
-   begin
+  iTab,iFld : TstringList;
+  i,wseq : integer;
+begin
   adoc := TAdoConnection.create(application);
   qry_cria_idf_dados := TadoQuery.create(application);
 
@@ -8793,7 +8793,7 @@ i,wseq : integer;
   adoc.connected        := false;
   adoc.ConnectionString := bdx.ConnectionString ;
 
-   begin
+  begin
       adoc.GetTableNames(itab,false);
       qry_cria_Idf_dados.Connection := BDX;
       //ACRESCENTA OS CAMPOS USUARIO E DATA DE ATUALIZAÇÃO PARA CONTROLE DE USUARIOS

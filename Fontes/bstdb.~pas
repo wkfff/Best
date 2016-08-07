@@ -3036,6 +3036,7 @@ published
 end;
 
 procedure dbg_format ( pDbg : Tdbgrid);
+
 function Checa_Acesso(pForm : string;phabilitado : boolean;pDiag : integer) : boolean;
 var
   BDx : TBd;
