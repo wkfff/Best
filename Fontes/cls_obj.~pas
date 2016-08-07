@@ -39,7 +39,6 @@ uses
 
   end;
 
-
 TDG = Class(TAddFlow)
   Private
     fProporcProp : integer;  // proporçao propriedades
@@ -730,7 +729,6 @@ begin
              exit;
            end;
         end;
-
     end
    else
     begin
@@ -755,8 +753,6 @@ begin
         If not copyfile(OldDir,Newdir,true) then
            RESULT := FALSE;
      end;
-
-
      pBDImport.DirFluxo := DirNome +'\';
      pBDImport.Dirbanco := pBDImport.DirFluxo+nome;
      pbdImport.Connected := false;
@@ -1647,8 +1643,6 @@ end;
 
 end;
 
-
-
 constructor TDG.Create;
 begin
  Inherited create(screen.ActiveForm);
@@ -1685,8 +1679,8 @@ begin
 
 procedure Tdg.Criar_correl_decomposto(pDg : Tdg;pEntity : afnode) ;
 var
-i : integer;
- begin
+  i : integer;
+begin
     for i := 1 to pDg.selectednode.InLinks.Count do
      begin
        If pDg.selectednode.InLinks.item(i).Org.Shape = 56 then    //evento de negócio
@@ -1712,7 +1706,7 @@ i : integer;
 
 function Tdg.Check_Ascendencia(pCli,pCenario,pidg,pCodigo : integer) : boolean;
 var
-iDiag : TDiag_dados;
+  iDiag : TDiag_dados;
 Begin
    result := false;
    try
@@ -1748,8 +1742,8 @@ end;
 
 function Tdg.Get_Fluxos(tvin,tvout : TTreeView;pNode :afNode) : integer;
 var
-oList : TList;
-mObj : uobj;
+  oList : TList;
+  mObj : uobj;
 begin
  If pNode <> nil then
         Begin
@@ -1785,9 +1779,9 @@ end;
 
 
 function TDG.Get_RightDiagrama : integer;   // retorna a parte + a esquersa do diagrama ; p/caber em folha A4 horizontal , largura max = 15720
-vAR
-wmax : integer;
-Begin
+var
+  wmax : integer;
+begin
   wmax := 0;
 
   for i := 1 to self.Nodes.Count do
@@ -2073,16 +2067,12 @@ begin                                    // pTipo : 1 : total;2 : Mobra;3: Tecno
  end;
 end;
 
-
-
-
-
 procedure TDg.Desmarca;  //desmarca todos os objetos de um diagrama
 var
-i,j : integer;
-awbs,aAtor : afNode;
- Begin
-    
+  i,j : integer;
+  awbs,aAtor : afNode;
+begin
+   
     for i := 1 to  Nodes.Count do
       Begin
        Nodes.Item(i).Marked := false;

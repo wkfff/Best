@@ -1464,13 +1464,13 @@ begin
 end;
 
 function Tfrm_main.Abre_banco(pChoose : boolean) : boolean;
-var i  : integer;
+var
+  i  : integer;
 begin
   try
     result := true;
     begin
-
-      If bdx = nil then
+      if bdx = nil then
         bdx := TBd.create(true, true, pChoose);
 
       Atu_schema;

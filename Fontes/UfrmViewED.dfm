@@ -1,6 +1,6 @@
 object frmViewED: TfrmViewED
-  Left = 203
-  Top = 204
+  Left = 461
+  Top = 240
   Width = 649
   Height = 347
   Caption = 'Visualiza'#231#227'o do Elemento de Dados.'

@@ -2550,9 +2550,6 @@ published
     { Inclui 1 registro}
   function Inclui : boolean;
 
-
-
- 
 end;
 
 {Objeto IDF_DADOS}
@@ -2627,13 +2624,14 @@ published
   property IDF_DESCRICAO : string  read FIDF_DESCRICAO write SetIDF_DESCRICAO;
   property IDF_DEL : string  read FIDF_DEL write SetIDF_DEL;
   property IDF_DEFAULT_VALUE : string  read FIDF_DEFAULT_VALUE write SetIDF_DEFAULT_VALUE;
+  property IDF_DECIMAL: integer read FIDF_DECIMAL write SetIDF_DECIMAL;
   property IDF_DE_REPET : integer  read FIDF_DE_REPET write SetIDF_DE_REPET;
   property IDF_DATA_TYPE : string  read FIDF_DATA_TYPE write SetIDF_DATA_TYPE;
   property IDF_CAPTION : string  read FIDF_CAPTION write SetIDF_CAPTION;
   property IDF_CODIGO : integer  read FIDF_CODIGO write SetIDF_CODIGO;
   property PRJ_ID : integer  read FPRJ_ID write SetPRJ_ID;
   property CLI_ID : integer  read FCLI_ID write SetCLI_ID;
- 
+
     { Inclui 1 registro}
   function Inclui : boolean;
 
@@ -3038,6 +3036,7 @@ published
 end;
 
 procedure dbg_format ( pDbg : Tdbgrid);
+
 function Checa_Acesso(pForm : string;phabilitado : boolean;pDiag : integer) : boolean;
 var
   BDx : TBd;
@@ -11379,12 +11378,10 @@ begin
 end;
 
 {Tidf_dados Métodos}
-
-
 function Tidf_dados.Inclui : boolean;
-VAR
-Wkey,wcli,wproj : integer;
-wtab : string;
+var
+  Wkey,wcli,wproj : integer;
+  wtab : string;
 begin
  DecimalSeparator := '.';
  result := false;
@@ -11393,7 +11390,6 @@ begin
  wcli  := CLI_ID;
  wproj := PRJ_ID;
  wtab := IDF_TABELA;
- 
 
  If Idf_codigo = 0 then ;
   begin
