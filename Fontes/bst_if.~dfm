@@ -45,7 +45,6 @@ inherited frm_if: Tfrm_if
     Top = 48
     Width = 649
     Height = 409
-    ActivePage = tb_dados
     inherited tb_geral: TTabSheet
       Font.Name = 'Calibri'
       inherited docext: TSpeedButton

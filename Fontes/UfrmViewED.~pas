@@ -59,11 +59,11 @@ uses bst_main, fonctions;
 {$R *.dfm}
 
 procedure TfrmViewED.CarregaItem(IDF_CODIGO :integer);
-Begin
+begin
   ADOQuery1.ConnectionString := bdx.ConnectionString;
   ADOQuery1.Parameters.Items[0].Value := IDF_CODIGO;
   ADOQuery1.Active := true;
-End;
+end;
 
 
 procedure TfrmViewED.FormClose(Sender: TObject; var Action: TCloseAction);
