@@ -1,0 +1,557 @@
+unit basetier;
+
+// This is a basic framework unit that provides base classes for
+// Problem Domain (PD) and Data Management (DM) objects.
+// It is a simple yet functional example - much more can be done!
+// In particular much better data control can be managed, and PD classes
+// can be less onerous to implement.
+//
+// Author: Philip Brown
+// Copyright Informatica Systems Ltd, 1999
+//
+// This code may be freely used by the companies represented and delegates of
+// the UK BUG OOP Masterclass on 29th July 1999.
+
+interface
+
+uses
+  Classes,Aligrid,stdctrls,dialogs;
+
+
+
+type
+  // Something we will use to represent unique object ID's
+  TObjectID = type Integer;
+  TObjectKey = type string;
+  TResulta = Type  variant ;
+  // Forward references
+  TOObject = class;
+  TDObject = class;
+
+  // Class reference type
+  TOOClass = class of TOObject;
+
+  // The main class of Problem Domain objects, that represent real-life
+  // "business objects" in the system
+
+
+  TPk = class
+  private
+    FPK3ANT: VARIANT;
+    FPK3: variant;
+    FPK2ANT: VARIANT;
+    FPK1ANT: VARIANT;
+    FPK2: variant;
+    FPK1: variant;
+    procedure SetPK1(const Value: variant);
+    procedure SetPK1ANT(const Value: VARIANT);
+    procedure SetPK2(const Value: variant);
+    procedure SetPK2ANT(const Value: VARIANT);
+    procedure SetPK3(const Value: variant);
+    procedure SetPK3ANT(const Value: VARIANT);
+
+
+  published
+   property PK1    : variant  read FPK1 write SetPK1;
+   property PK2    : variant  read FPK2 write SetPK2;
+   property PK3    : variant  read FPK3 write SetPK3;
+   property PK1ANT : VARIANT  read FPK1ANT write SetPK1ANT;
+   property PK2ANT : VARIANT  read FPK2ANT write SetPK2ANT;
+   property PK3ANT : VARIANT  read FPK3ANT write SetPK3ANT;
+
+   constructor create;
+  end;
+
+  Tprop=Class(TObject)
+  private
+    Fnomecampo: string;
+    FStatus: string;
+    procedure Setnomecampo(const Value: string);
+    procedure SetStatus(const Value: string);
+
+    published
+     property nomecampo : string  read Fnomecampo write Setnomecampo;
+     property Status : string read FStatus write SetStatus;
+  end;
+
+  TOObject = class
+  private
+    // The unique ID for this object
+
+    FKEY : TOBjectKey;
+    FCHAVE: TOBjectKey;
+    FAtributoLista: string;
+    FPK: tpk;
+    FoProp: Tprop;
+    Fresulta: Tresulta;
+    FListaGrid: TStringAlignGrid;
+    FLista: TStringList;
+    FID: TObjectID;
+    FFK: string;
+    
+    function GetIsAssigned: Boolean;
+    procedure SetCHAVE(const Value: TOBjectKey);
+    procedure SetAtributoLista(const Value: string);
+    procedure SetLista(const Value: TStringList);
+    procedure SetListaGrid(const Value: TStringAlignGrid);
+    procedure SetoProp(const Value: Tprop);
+    procedure SetPK(const Value: tpk);
+    procedure Setresulta(const Value: Tresulta);
+    procedure SetID(const Value: TObjectID);
+    procedure SetFK(const Value: string);
+
+  protected
+    // This is a reference to a class which will be used to load and save us.
+    // It must be initialised in the object constructor.
+    DMObject: TDObject;
+    
+    function GetObject (ObjectClass: TOOClass; var PDObject: TOObject; ObjectID: TObjectID): TOObject;
+  public
+    oFields    : TStringList;   //novo
+    // Need a virtual constructor so that objects are created correctly
+    constructor Create; virtual;
+
+    // These methods are virtual to allow PD objects to override them.
+    // This is rarely necessary, however.
+    procedure Load (ID: TObjectID); virtual;
+    procedure Save; virtual;
+    procedure Delete; virtual;
+    procedure Assign (OtherObject: TOObject); virtual;
+    function IsSameObject (OtherObject: TOObject): Boolean;
+
+    property ID: TObjectID  read FID write SetID;
+    property CHAVE : TOBjectKey read FCHAVE write SetCHAVE;
+    property ATRIBUTOLISTA : STRING read FATRIBUTOLISTA write SetATRIBUTOLISTA;
+    property FK    : string read FFK write SetFK;
+    property IsAssigned: Boolean read GetIsAssigned;
+
+
+    procedure GetAll;virtual;
+    procedure GetAllGrid(pWhereField,pSortField : string);virtual;
+    procedure  GetListObjects(pId : integer) ;virtual;
+    procedure  DeleteListObjects(pId : integer) ;virtual;
+    function  GetDetailsGrid(pField : string;pFK : integer ): TStringAlignGrid;virtual;
+    { retorna detalhes do pai (Chave estrangeira) pField atributo estrangeiro;pFk : valor pField}
+    function  GetDetailsFK(pField : string;pFK : integer ): TStringList;virtual;
+    { retorna detalhes com pField = valor pField}
+    function  GetDetailsSpec(pField : string;pFK : string ): TStringList;virtual;
+  //  function GetProperties : TstringList;virtual;
+
+    function  GetItem(pList : TListBox) : string;
+    function  GetNextId : integer;virtual;
+    property  PK : tpk  read FPK write SetPK;
+    property  resulta : Tresulta  read Fresulta write Setresulta; // mensagem da operação
+    property  Lista : TStringList read FLista write SetLista;    // Lsita dos objetos mostrados no form
+    property  ListaGrid : TStringAlignGrid read FListaGrid write SetListaGrid;
+    property  oProp : Tprop  read FoProp write SetoProp;
+
+    function PopulaCombo ( pCombo : TComboBox) :TStringList; virtual;
+
+
+
+  end;
+
+  // The class of Data Management objects, responsible for storing PD object
+  // state information persistently. This is a database-independent definition,
+  // which is abstract (ie not implemented here). It defines a "contract"
+  // for descendant classes to follow. This allows us to provide database
+  // representation independence. The interface to your DMObject depends entirely
+  // upon the functionality your framework requires, but should remain database
+  // independent. This simple framework for demonstration purposes makes few demands
+  // on our DMObject, but real-world frameworks can get more complex. Note that
+  // this class has no public interface, as it is conceptually a worker class
+  // that is *only* used by the framework internals.
+
+  TDObject = class
+  protected
+    // As the ID property of objects is read-only to prevent abuse, this method
+    // can be called by DMObject descendants to update the ID of an object when
+    // loading. This avoids making the ID publicly writeable.
+    procedure SetObjectID (ObjectToSet: TOObject; ID: TObjectID);
+    // This method is called to populate an object from persistent storage. The
+    // ID of the object to load should already be defined.
+    procedure LoadObject (ObjectToLoad: TOObject); virtual; abstract;
+    // This method is called to save an object to persistent storage. The ID may
+    // be undefined, which indicates a new instance to be saved. The persistent
+    // storage mechanism should allocate a unique ID to the object in this case.
+    procedure SaveObject (ObjectToSave: TOObject); virtual; abstract;
+    // This method deletes an object from persistent storage.
+    procedure DeleteObject (ObjectToDelete: TOObject); virtual; abstract;
+    // This method should populate the passed object as the "next" object from a
+    // list. It should return True if there was a object to populate, or False if
+    // list exhausted.
+    function NextObject (ObjectToLoad: TOObject;pList : TObject ): Boolean; virtual; abstract;
+    function GetAllObjects (PDObject: TOObject) : TStringList; virtual; abstract;
+    function GetAllObjectsGrid (PDObject: TOObject;pWhereField,pSortField : string) : TStringAlignGrid; virtual; abstract;
+    procedure DeleteObjects (PDObject: TOObject;pId : integer) ; virtual; abstract;
+    function GetObjects (PDObject: TOObject;pId : integer) : TStringList; virtual; abstract;
+    function GetAllDetailsGrid(PDObject: TOObject;pField : string;pFK : integer ): TStringAlignGrid;virtual; abstract;
+    function GetMaxkey (PDObject: TOObject) : Integer; virtual; abstract;
+
+    function  GetObjectsFK(PDObject: TOObject;pField : string;pFK : integer ): TStringList;virtual;abstract;
+    function  GetObjectsSpec(PDObject: TOObject;pField : string;pFK : string ): TStringList;virtual;abstract;
+    function PopulaComboObject ( PDObject: TOObject;pCombo : TComboBox) :TStringList; virtual; abstract;
+   // function GetObjectProperties( PDObject: TOObject) : TStringList;virtual;abstract ;
+  end;
+
+  // A class reponsible for presenting lists of objects.
+  // This is a very simple and non-optimal version; interface and implementation
+  // opportunities are endless! The interface presented here is a preferred one,
+  // as it is more general and applies to many implementation options where the
+  // list member count cannot be determined exactly.
+
+  TPDList = class
+  private
+    List: TList;
+    Index: Integer;
+    function GetCurrentObject: TOObject;
+    function GetIsFirst: Boolean;
+    function GetIsLast: Boolean;
+  public
+    // Creates the list of objects of class PDClass, using the supplied DMObject
+    // The PDList "owns" the DMObject, therefore the calling class should not
+    // attempt to free the DMObject at any stage
+    constructor Create (PDClass: TOOClass; DMObject: TDObject);
+    destructor Destroy; override;
+    procedure First;
+    procedure Next;
+    procedure Previous;
+    procedure Last;
+    property IsFirst: Boolean read GetIsFirst;
+    property IsLast: Boolean read GetIsLast;
+    property CurrentObject: TOObject read GetCurrentObject;
+  end;
+
+// Some procedures to convert our ID's to string representations
+
+function IDToStr (ID: TObjectID): String;
+function StrToID (IDStr: String): TObjectID;
+
+implementation
+
+uses
+  SysUtils, Forms, IniFiles;
+
+const
+  // This constant represents an ID which means "object not assigned".
+  // It has been chosen so that we don't explicitly need to initialise it in
+  // our PDObject constructors, as they will hold this value by default.
+  NullID = 0;
+
+
+Constructor Tpk.create;
+   Begin
+     inherited;
+      {pk1    := null;
+      pk2    := null;
+      pk3    := null;
+      pk1ant := null;
+      pk2ant := null;
+      pk3ant := null;  }
+   end;
+
+
+// TOObject
+
+constructor TOObject.Create;
+begin
+  // Introduce virtual constructor
+  inherited;
+end;
+
+function TOObject.GetObject (ObjectClass: TOOClass; var PDObject: TOObject; ObjectID: TObjectID): TOObject;
+begin
+  if PDObject = nil then begin
+    // Create a new PDObject if we need one - note that this relies upon a virtual
+    // constructor to work correctly
+    PDObject := ObjectClass.Create;
+    // If the object has an ID then initialise it from the database
+    if ObjectID <> NullID then PDObject.Load (ObjectID);
+  end;
+  Result := PDObject;
+end;
+
+procedure TOObject.Load (ID: TObjectID);
+begin
+  // Note that a PDObject has no concept of how to actually perform a load or
+  // save operation; all it can do is request something else to perform those tasks.
+  Assert (DMObject <> nil, Self.ClassName + '.Load: no DMObject assigned!');
+  Assert (ID <> NullID, Self.ClassName + '.Load: attempt to load null object ID!');
+  FID := ID;
+  DMObject.LoadObject (Self);
+end;
+
+procedure TOObject.Save;
+begin
+  Assert (DMObject <> nil, Self.ClassName + '.Load: no DMObject assigned!');
+  DMObject.SaveObject (Self);
+end;
+
+procedure TOObject.Delete;
+begin
+  DMObject.DeleteObject (Self);
+end;
+
+procedure TOObject.GetAll;
+begin
+  fLista := DMObject.GetAllObjects (Self);
+end;
+
+{function TOObject.GetProperties : TstringList;
+begin
+  result := DMObject.GetObjectProperties (Self);
+end; }
+
+procedure TOObject.GetAllGrid(pWhereField,pSortField : string);
+begin
+  fListaGrid := DMObject.GetAllObjectsGrid (Self,pWhereField,pSortField);
+end;
+
+procedure TOObject.GetListObjects(pId : integer);
+begin
+  fLista := DMObject.GetObjects (Self,pId);
+end;
+
+function TOObject.PopulaCombo (pCombo : TComboBox) :TStringList;
+  Begin
+    pCombo.Items := DMObject.GetAllObjects (Self);
+  end;
+
+procedure TOObject.DeleteListObjects(pId : integer);
+begin
+    DMObject.DeleteObjects (Self,pId);
+end;
+
+function TOObject.GetDetailsGrid(pField : string;pFK : integer  ): TStringAlignGrid;
+  Begin
+    fListaGrid := DMObject.GetAllDetailsGrid(self,pField,pFK );
+  end;
+
+
+function TOObject.GetDetailsFK(pField : string;pFK : integer ): TStringList;
+  Begin
+    fLista := DMObject.GetOBjectsFK(self,pField,pFK );
+  end;
+
+function TOObject.GetDetailsSpec(pField : string;pFK : string ): TStringList;
+  Begin
+    fLista := DMObject.GetOBjectsSpec(self,pField,pFK );
+  end;
+
+function TOObject.GetNextId : integer;
+begin
+  result := DMObject.GetMaxkey (Self);
+end;
+
+procedure TOObject.Assign (OtherObject: TOObject);
+begin
+  // Copy the contents of the other object into this one.
+  // Easy way to is to just load the other object ID into this one.
+  Assert (OtherObject.IsAssigned, Self.ClassName + '.Assign: other object has not been assigned!');
+  Load (OtherObject.ID);
+end;
+
+function TOObject.IsSameObject (OtherObject: TOObject): Boolean;
+begin
+  Result := (ID = OtherObject.ID);
+end;
+
+function TOObject.GetIsAssigned: Boolean;
+begin
+  Result := (ID <> NullID);
+end;
+
+// TDObject
+
+procedure TDObject.SetObjectID (ObjectToSet: TOObject; ID: TObjectID);
+begin
+  ObjectToSet.FID := ID;
+end;
+
+// TPDList
+
+// This is a very simple implementation of a PDList and simply loads all
+// objects into a delegated TList when the list is constructed. More optimal
+// versions have the same interface, but hold a dynamic resultset open and
+// scan through the database cursor. Of course, actual implementation details
+// can vary greatly depending upon your database support and the design of your
+// DMObjects.
+
+constructor TPDList.Create (PDClass: TOOClass; DMObject: TDObject);
+var
+  NewObject: TOObject;
+begin
+  inherited Create;
+  List := TList.Create;
+  // Navigate through the DM object, saving all objects in our list
+  repeat
+    // Create a new instance of the PD class required
+    NewObject := PDClass.Create;
+    If DMObject.NextObject (NewObject,nil) then
+      begin
+        // Add it to the list
+        List.Add (NewObject);
+      end
+    else
+       begin
+        // Release resources and indicate list exhausted
+        NewObject.Free;
+        NewObject := nil;
+      end;
+  until NewObject = nil;
+end;
+
+destructor TPDList.Destroy;
+begin
+  while List.Count > 0 do begin
+    TOObject (List[0]).Free;
+    List.Delete (0);
+  end;
+  List.Free;
+  inherited;
+end;
+
+function TPDList.GetCurrentObject: TOObject;
+begin
+  Assert ((Index >= 0) and (Index < List.Count) , Self.ClassName + '.GetCurrentObject: invalid index value = '+inttostr(index)+'!');
+  Result := List[Index];
+end;
+
+function TPDList.GetIsFirst: Boolean;
+begin
+  Result := (Index < 0);
+end;
+
+function TPDList.GetIsLast: Boolean;
+begin
+  Result := (Index >= List.Count);//Index >= List.Count);
+end;
+
+procedure TPDList.First;
+begin
+  Index := 0;
+end;
+
+procedure TPDList.Next;
+begin
+  Inc (Index);
+end;
+
+procedure TPDList.Previous;
+begin
+  Dec (Index);
+end;
+
+procedure TPDList.Last;
+begin
+  Index := List.Count;
+end;
+
+// Unit methods
+
+function IDToStr (ID: TObjectID): String;
+begin
+  Result := IntToStr (ID);
+end;
+
+function StrToID (IDStr: String): TObjectID;
+begin
+  Result := StrToInt (IDStr);
+end;
+
+procedure TOObject.SetCHAVE(const Value: TOBjectKey);
+begin
+  FCHAVE := Value;
+end;
+
+{ Tprop }
+
+procedure Tprop.Setnomecampo(const Value: string);
+begin
+  Fnomecampo := Value;
+end;
+
+procedure Tprop.SetStatus(const Value: string);
+begin
+  FStatus := Value;
+end;
+
+{ TPk }
+
+procedure TPk.SetPK1(const Value: variant);
+begin
+  FPK1 := Value;
+end;
+
+procedure TPk.SetPK1ANT(const Value: VARIANT);
+begin
+  FPK1ANT := Value;
+end;
+
+procedure TPk.SetPK2(const Value: variant);
+begin
+  FPK2 := Value;
+end;
+
+procedure TPk.SetPK2ANT(const Value: VARIANT);
+begin
+  FPK2ANT := Value;
+end;
+
+procedure TPk.SetPK3(const Value: variant);
+begin
+  FPK3 := Value;
+end;
+
+procedure TPk.SetPK3ANT(const Value: VARIANT);
+begin
+  FPK3ANT := Value;
+end;
+
+function TOObject.GetItem(pList: TListBox): string;
+begin
+  result := TPK(pList.Items.Objects[pList.ItemIndex] ).PK1; 
+end;
+
+procedure TOObject.SetAtributoLista(const Value: string);
+begin
+  FAtributoLista := Value;
+end;
+
+procedure TOObject.SetLista(const Value: TStringList);
+begin
+  FLista := Value;
+end;
+
+procedure TOObject.SetListaGrid(const Value: TStringAlignGrid);
+begin
+  FListaGrid := Value;
+end;
+
+procedure TOObject.SetoProp(const Value: Tprop);
+begin
+  FoProp := Value;
+end;
+
+procedure TOObject.SetPK(const Value: tpk);
+begin
+  FPK := Value;
+end;
+
+procedure TOObject.Setresulta(const Value: Tresulta);
+begin
+  Fresulta := Value;
+end;
+
+procedure TOObject.SetID(const Value: TObjectID);
+begin
+  FID := Value;
+end;
+
+procedure TOObject.SetFK(const Value: string);
+begin
+  FFK := Value;
+end;
+
+end.
+

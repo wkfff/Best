@@ -1,0 +1,67 @@
+ICE License Protection for Delphi & C++ Builder 
+Copyright © 2004 Ionworx Technology 
+All Rights Reserved 
+
+This License Agreement is a legal Agreement between you (an individual) and Ionworx Technology. Please, read it carefully. 
+
+
+SOFTWARE LICENSE AGREEMENT 
+
+
+BY INSTALLING, COPYING, OR OTHERWISE USING THE SOFTWARE, YOU AGREE TO BE BOUND BY ALL OF THE TERMS AND CONDITIONS OF THE LICENSE AGREEMENT. 
+
+a. This Software is owned by Ionworx Technology and is protected by copyright law and international copyright treaty. Therefore, you must treat this Software like any other copyrighted material (for instance a book), except that you may either make one copy of the Software solely for backup or archival purposes or transfer the Software to a single hard disk provided that you keep the original solely for backup purposes. 
+
+1. You are granted a non-exclusive licence to use the library for commercial. 
+Except if you use evaluation version, you cannot use for commercial project. 
+The library may not be rented, leased, diffused or transferred. 
+
+2. On payment of the appropriate license fee, the user is entitled to use a single copy 
+of the software for development purposes for each license purchased. 
+
+3. The license is granted per developer, which means that it is permissible for the same developer to install more than 
+one copy of the software provided that only one copy is in use at any time. If you want make distributor Key Generator you need to buy license for your distributor to use ICE License Manager. 
+
+4. A royalty-free license is also granted for unlimited installation of the software on end-users systems concerning protection only. As long as, no portion of this module may be exposed. 
+
+5. You may not distribute, copy, emulate, clone, rent, lease, sell, modify, decompile, disassemble, or otherwise reverse 
+engineer, or transfer the library, or any subset of the library. 
+
+6. All rights not expressly granted here are reserved by Ionworx Technology. 
+Purchase of this product does not transfer any right, title, or interest in the software except as specifically set forth in 
+this agreement. 
+
+You are hereby notified that the software product is protected by EEC Copyright Law and you may be held responsible by Ionworx Technolohy for any infringement of such rights or violations of this agreement. 
+
+7. The library is distributed "AS IS" and you assume full responsibility for determining the suitability of the library and for 
+results obtained. 
+
+8. Installing or using the library signifies acceptance of these terms and conditions of the licence. 
+
+9. If you do not agree with the terms of this licence you must remove the library from your storage devices and cease to 
+use the library forthwith. 
+
+10. Modifications to the Software. 
+Ionworx Technology reserves the right to change license at any moment, the executable code and to remove, add or 
+change the Software's functions. 
+
+11. Any variation to the terms of this Agreement shall only be valid if made and delivered by Bruno Branciforti. If you do 
+not agree to any clause of this Agreement you may ask for explanations from Bruno Branciforti. However, this doesn't 
+authorize you to consider this Agreement admitted. 
+
+12. You may not remove or alter any Bruno Branciforti copyright, trademark or other proprietary rights notice contained in 
+any portion of Bruno Branciforti libraries or other files that bear such a notice. 
+
+13. I have never claimed that ICE License is uncrackable protection 
+
+
+12. LEGAL DISCLAIMER 
+________________ 
+
+THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE SOFTWARE IS WITH YOU. SHOULD THE SOFTWARE PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION. IF ANY ALGORITHM IS PATENTED IN YOUR COUNTRY, YOU SHOULD ACQUIRE A LICENSE BEFORE USING THIS COMPONENT. 
+
+IN NO EVENT WILL THE AUTHOR OR ANY OTHER PARTY WHO MAY HAVE DISTRIBUTED THE SOFTWARE AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE SOFTWARE (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. 
+
+THIS COMPONENT USES STRONG ENCRYPTION ALGORITHM, IT WAS DEVELOPED TOTALLY OUTSIDE OF THE USA AND SO IT IS FREE FROM EXPORT RESTRICTIONS. HOWEVER IF YOU HAVE LAWS IN YOUR COUNTRY WHICH PREVENT THE USE OF STRONG CRYPTOGRAPHICAL PRODUCTS THEN PLEASE REMOVE THIS ARCHIVE FROM YOUR COMPUTER. I RETAIN NO RESPONSIBLY FOR THIS LIBRARY. 
+
+ALL OTHER TRADEMARKS AND REGISTERED TRADEMARKS ARE THE SOLE PROPERTY OF THEIR RESPECTIVE OWNER. 
