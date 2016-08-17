@@ -102,7 +102,6 @@ TDados = Class(TADOQuery)
   published
    DB: TBD  ;
    property DataExt: TdataSource read fdataSource write SetDataSource;
-
    public
     fClient     : TClientDataset;
     Status     : char;

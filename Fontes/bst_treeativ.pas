@@ -4849,18 +4849,18 @@ end;
 
 function Tfrm_treeativ.gera_SQL(pdg : TDg) : boolean;
 var
-  Tot,i ,icode,wpos: integer;
+  Tot, i, icode, wpos: integer;
   sematrib : boolean;
-  wTipo ,s,windex, wtamanho :string;
+  wTipo, s, windex, wtamanho :string;
   tvant :TTreeNode;
-  HaPk,First :boolean;
-Begin
-  If pdg.IDG_DIR <> 'DMI' then
-    Raise exception.create(mens107);
+  HaPk, First :boolean;
+begin
+  if pdg.IDG_DIR <> 'DMI' then
+    raise exception.create(mens107);
   HaPk := false;
   //PRIMARY KEY (CLIENTE, NO_DOC, EMISSAO)
   try
-    Begin
+    begin
       tot := pdg.SelNodes.count;
       //PB.Max := tot;
       for i := 1 to tot  do
@@ -4899,8 +4899,7 @@ Begin
                                 'I0_'+ pdg.SelNodes.item(i).Text+' PRIMARY KEY ( ';
            end;
         while not ide.fClient.Eof do
-         Begin
-
+        begin
           wTamanho :=  ide.fClient.fieldbyname('idf_type_qualifiers').asstring;
           If ide.fClient.fieldbyname('idf_id').asinteger  > 0 then
            Begin

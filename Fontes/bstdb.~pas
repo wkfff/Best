@@ -3668,9 +3668,9 @@ end;
 
 function TDados_tab.Exporta_Dim(pCli_de,pProj_de,pCli_ate,pProj_ate : integer;pTabela : string) : boolean;
 var
-iFld : TstringList;
-wcpo,wcpo1 : string;
-i : integer;
+  iFld : TstringList;
+  wcpo,wcpo1 : string;
+  i : integer;
 begin
   iFld :=  TStringList.create;
   DecimalSeparator := '.';
@@ -3684,7 +3684,7 @@ begin
   If fieldbyname('TOT').asinteger = 0 then  //não foi exportado
    Begin
       close;
-      sql.CLEAR;            
+      sql.CLEAR;
       BDX.GetFieldNames(''+pTabela+'',ifld);
     //  showmessage(bdx.ConnectionString);
     //  showmessage(pTabela);
@@ -6416,9 +6416,9 @@ function Tcenario.Count_All : integer;  //pega todos os cenários
  end;
 
 function TTemp.Inclui_temp(pCli,pcenario,pIdg : integer;pNOme : string;pCodigo : integer;pTipo : string;pDes , pObs : string) : boolean;
- var
- s : string;
- Begin
+var
+  s : string;
+begin
       s := bdx.ConnectionString;
       result := false;
       close;
