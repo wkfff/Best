@@ -4861,6 +4861,7 @@ begin
   //PRIMARY KEY (CLIENTE, NO_DOC, EMISSAO)
   try
     begin
+      // Total de objetos selecionados
       tot := pdg.SelNodes.count;
       //PB.Max := tot;
       for i := 1 to tot  do
@@ -4869,7 +4870,11 @@ begin
         inc(wpos);
         //pb.Position := wpos;
         //pb.Repaint;
+
+        // Aqui é capturado o PAI_ID do objeto selecionado. Isso é
+        // referente a tabela COR_OBJETOS
         iCode := pdg.SelNodes.item(i).UserData;
+
        //showmessage(pdg.SelNodes.item(i).text);
         If pdg.SelNodes.item(i).Shape <> 1 then
           continue;
@@ -4884,7 +4889,8 @@ begin
            begin
              CLI_ID := pdg.EMPRESA;
              PRJ_ID := pdg.CENARIO;
-             get_dados(pdg.SelNodes.item(i).Text);
+             
+             get_dados_unico(pdg.SelNodes.item(i).Text, icode);
              If ide.fClient.Eof then
                sematrib := true
              else
@@ -4900,6 +4906,7 @@ begin
            end;
         while not ide.fClient.Eof do
         begin
+
           wTamanho :=  ide.fClient.fieldbyname('idf_type_qualifiers').asstring;
           If ide.fClient.fieldbyname('idf_id').asinteger  > 0 then
            Begin
