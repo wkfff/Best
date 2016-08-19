@@ -4858,18 +4858,14 @@ begin
   if pdg.IDG_DIR <> 'DMI' then
     raise exception.create(mens107);
   HaPk := false;
-  //PRIMARY KEY (CLIENTE, NO_DOC, EMISSAO)
   try
     begin
       // Total de objetos selecionados
       tot := pdg.SelNodes.count;
-      //PB.Max := tot;
       for i := 1 to tot  do
       begin
         First := true;
         inc(wpos);
-        //pb.Position := wpos;
-        //pb.Repaint;
 
         // Aqui é capturado o PAI_ID do objeto selecionado. Isso é
         // referente a tabela COR_OBJETOS
@@ -4889,7 +4885,7 @@ begin
            begin
              CLI_ID := pdg.EMPRESA;
              PRJ_ID := pdg.CENARIO;
-             
+
              get_dados_unico(pdg.SelNodes.item(i).Text, icode);
              If ide.fClient.Eof then
                sematrib := true
@@ -4931,7 +4927,6 @@ begin
                wtipo := wtipo +')'
               else
                wTipo := wTipo + ','+ide.fClient.fieldbyname('IDF_DECIMAL').asstring+')';
-
            end
 
           else
@@ -4955,7 +4950,6 @@ begin
                    Wtipo :=  uppercase(ide.fClient.fieldbyname('idf_data_type').asstring)+'('+
                                    ide.fClient.fieldbyname('idf_type_qualifiers').asstring+')';
              end;
-
            end;
 
           If first then
@@ -4993,8 +4987,8 @@ end;
 
 function Tfrm_treeativ.geraSQL_filho(pdg : Tdg; pId : integer) : boolean;
 var
-iDiag : Tdg;
-wnome : string;
+  iDiag : Tdg;
+  wnome : string;
 begin
 with TDiag_dados.create(self) do
    Begin
@@ -5026,20 +5020,23 @@ end;
 
 function Tfrm_treeativ.gera_Triggers: boolean;
 var
- Tot,i ,icode,wpos: integer;
- wTipo ,s : string;
- tvant   : TTreeNode;
- HaPk,First    : boolean;
- wexcept,wtrigger : Tstrings;
- wexc : string;
+  Tot,i ,icode,wpos: integer;
+  wTipo ,s : string;
+  tvant   : TTreeNode;
+  HaPk,First    : boolean;
+  wexcept,wtrigger : Tstrings;
+  wexc : string;
 Begin
+  // Aqui é capturado o PAI_ID do objeto selecionado. Isso é
+  // referente a tabela COR_OBJETOS
+  //iCode := pdg.SelNodes.item(i).UserData;
 
- If wexcept = nil then
-  wexcept := TStringList.create;
- wtrigger := nil;
- If wtrigger = nil then
-  wtrigger:= TStringList.create;
- HaPk := false;
+  If wexcept = nil then
+    wexcept := TStringList.create;
+  wtrigger := nil;
+  If wtrigger = nil then
+    wtrigger:= TStringList.create;
+  HaPk := false;
 
   //PRIMARY KEY (CLIENTE, NO_DOC, EMISSAO)
  try
@@ -5062,7 +5059,7 @@ Begin
            begin
              CLI_ID := TV.Diagrama.EMPRESA;
              PRJ_ID := TV.Diagrama.CENARIO;
-             get_dados(wtab[i]);
+             get_dados_unico(wtab[i], icode);
              ide.fClient.First;
 
            end;
@@ -5077,6 +5074,7 @@ Begin
 
         while not ide.fClient.Eof do
          Begin
+         
           If ide.fClient.fieldbyname('idf_codigo').asinteger  > 0 then
            Begin
             If haPk then

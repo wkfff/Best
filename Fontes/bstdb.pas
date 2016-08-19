@@ -8693,7 +8693,6 @@ begin
   sql.add(' IDF_DE.CLI_ID = '+ ''+INTTOSTR(CLI_ID)+' AND ');
   sql.add(' IDF_DE.PRJ_ID = '+ ''+INTTOSTR(PRJ_ID)+' AND ');
   sql.Add('(COR_OBJETOS.PAI_ID= '+INTTOSTR(icode)+')');
-
   open;
   fclient.active := true;
 
@@ -8739,7 +8738,7 @@ begin
    end;
   fclient.IndexName := 'IDF_SEQ';
   fCpoLista1        := 'IDF_CODIGO';
-  fCpoLista2        := 'IDF_DESIGNACAO'; 
+  fCpoLista2        := 'IDF_DESIGNACAO';
 
   If not fclient.Eof then
    result := true;
@@ -11792,17 +11791,11 @@ InttoStr(SUB_NIVEL)+
  DecimalSeparator := ',';
 end;
 
-
-
 constructor Tidf_ps.Create ;
 begin
  inherited create(application);
-
 end;
- 
 
-
- 
 {Tidf_pr Métodos}
 
 procedure Tidf_pr.AftrScroll(DataSet: TDataSet);
