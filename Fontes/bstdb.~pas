@@ -8692,7 +8692,7 @@ begin
   sql.Add('WHERE ');
   sql.add(' IDF_DE.CLI_ID = '+ ''+INTTOSTR(CLI_ID)+' AND ');
   sql.add(' IDF_DE.PRJ_ID = '+ ''+INTTOSTR(PRJ_ID)+' AND ');
-  sql.Add('(COR_OBJETOS.PAI_ID)= '+INTTOSTR(icode)+')');
+  sql.Add('(COR_OBJETOS.PAI_ID= '+INTTOSTR(icode)+')');
 
   open;
   fclient.active := true;
