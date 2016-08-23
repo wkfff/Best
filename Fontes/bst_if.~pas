@@ -573,9 +573,10 @@ Var
   wid : integer;
 begin
   //inherited;
+  {
    wid := StrToInt(dbg_dg.Columns[10].Field.Value);
    frmViewED.CarregaItem(wid);
-   frmViewED.Show;
+   frmViewED.Show; }
 end;
 
 end.

@@ -1,7 +1,4 @@
 unit BSTDB;
-{
-Criar TAP : inibidos atributos IDF_DIRETORIO E TELA_DIRETORIO}
-
 interface
 
 uses
@@ -102,7 +99,6 @@ TDados = Class(TADOQuery)
   published
    DB: TBD  ;
    property DataExt: TdataSource read fdataSource write SetDataSource;
-
    public
     fClient     : TClientDataset;
     Status     : char;
@@ -112,8 +108,6 @@ TDados = Class(TADOQuery)
     function Cria_index(pClient : TClientDataSet; pField : string;  pGroup : integer) : string;
     function Criar (sender : Tobject) : boolean;
     procedure Cria_lista (pLista: TTreeView;pMostraKey,pLimpa : boolean );
-
-
 end;
 
 Tbanco = Class(Tdados)
@@ -136,7 +130,6 @@ Tbanco = Class(Tdados)
      function Incluir : boolean;
      function Get_bd : boolean;
   public
-
 
 end;
 
@@ -1109,6 +1102,7 @@ TDad = Class(TDados)
     function get_ObjetoDescricao(pCli, pProj: integer): boolean;
     { retorna os elementos de dados data tabela}
     function Get_dados(ptab : string): boolean;
+    function Get_dados_unico(ptab: string; icode: Integer): boolean;
    { retorna os elementos de dados da tabela com opçaõ obrigatórios (Classes)}
     function Get_dadosObrig(ptab : string): boolean;
    { retorna a sequencia anterior}
@@ -3668,9 +3662,9 @@ end;
 
 function TDados_tab.Exporta_Dim(pCli_de,pProj_de,pCli_ate,pProj_ate : integer;pTabela : string) : boolean;
 var
-iFld : TstringList;
-wcpo,wcpo1 : string;
-i : integer;
+  iFld : TstringList;
+  wcpo,wcpo1 : string;
+  i : integer;
 begin
   iFld :=  TStringList.create;
   DecimalSeparator := '.';
@@ -3684,7 +3678,7 @@ begin
   If fieldbyname('TOT').asinteger = 0 then  //não foi exportado
    Begin
       close;
-      sql.CLEAR;            
+      sql.CLEAR;
       BDX.GetFieldNames(''+pTabela+'',ifld);
     //  showmessage(bdx.ConnectionString);
     //  showmessage(pTabela);
@@ -6416,9 +6410,9 @@ function Tcenario.Count_All : integer;  //pega todos os cenários
  end;
 
 function TTemp.Inclui_temp(pCli,pcenario,pIdg : integer;pNOme : string;pCodigo : integer;pTipo : string;pDes , pObs : string) : boolean;
- var
- s : string;
- Begin
+var
+  s : string;
+begin
       s := bdx.ConnectionString;
       result := false;
       close;
@@ -8666,12 +8660,40 @@ begin
   result := false;
   sql.clear;
   fclient.active := false;
-  //sql.add('SELECT * FROM IDF_DADOS WHERE ');
   sql.add('SELECT * FROM IDF_DE WHERE ');
   sql.add(' CLI_ID = '+ ''+INTTOSTR(CLI_ID)+''+' AND ');
   sql.add(' PRJ_ID = '+ ''+INTTOSTR(PRJ_ID)+'');
-  //If pTab <> '' then
-     //sql.add(' AND IDF_TABELA = '+''''+ptab+'''');
+  open;
+  fclient.active := true;
+
+  If fclient.IndexDefs.IndexOf('IDF_SEQ') < 0 then
+   Begin
+      with fClient.IndexDefs do
+        begin
+          add('IDF_SEQ','IDF_SEQ',[]);
+          Items[0].GroupingLevel := 0;
+        end;
+   end;
+  //fclient.IndexName := 'IDF_SEQ';
+  fCpoLista1        := 'IDF_CODIGO';
+  fCpoLista2        := 'IDF_DESIGNACAO';
+
+  If not fclient.Eof then
+   result := true;
+end;
+
+function TDad.Get_dados_unico(ptab: string; icode: Integer): boolean;
+begin
+  result := false;
+  sql.clear;
+  fclient.active := false;
+  sql.add('SELECT COR_OBJETOS.PAI_ID, IDF_DE.* ');
+  sql.Add('FROM COR_OBJETOS INNER JOIN IDF_DE ON COR_OBJETOS.FILHO_ID = IDF_DE.IDF_CODIGO ');
+  sql.Add('WHERE ');
+  sql.add(' IDF_DE.CLI_ID = '+ ''+INTTOSTR(CLI_ID)+' AND ');
+  sql.add(' IDF_DE.PRJ_ID = '+ ''+INTTOSTR(PRJ_ID)+' AND ');
+  sql.Add('(COR_OBJETOS.PAI_ID= '+INTTOSTR(icode)+')');
+
   open;
   fclient.active := true;
 
@@ -8900,10 +8922,7 @@ begin
     IDF_CODIGO := wcod;
     result := true;
    end;
-
 end;
-
-
 
 function TDad.get_all(pCli, pProj: integer): boolean;
 begin
