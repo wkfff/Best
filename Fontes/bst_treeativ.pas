@@ -5815,6 +5815,11 @@ begin
      ToolButton1.Enabled := false;
      popNode.Items[4].Enabled := false;
      popNode.Items[5].Enabled := false;
+     // Inibição dos botões de descer nível e subir nível
+     SpeedButton14.Enabled := false;
+     SpeedButton15.Enabled := false;
+     ToolButton5.Enabled := false;
+     ToolButton6.Enabled := false;
    end;
 
    If frm_main.wassist then

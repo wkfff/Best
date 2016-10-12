@@ -5029,7 +5029,7 @@ var
 Begin
   // Aqui é capturado o PAI_ID do objeto selecionado. Isso é
   // referente a tabela COR_OBJETOS
-  iCode := pdg.SelNodes.item(i).UserData;
+  //iCode := pdg.SelNodes.item(i).UserData;
 
   If wexcept = nil then
     wexcept := TStringList.create;
@@ -5074,6 +5074,7 @@ Begin
 
         while not ide.fClient.Eof do
          Begin
+         
           If ide.fClient.fieldbyname('idf_codigo').asinteger  > 0 then
            Begin
             If haPk then
@@ -5814,6 +5815,9 @@ begin
      ToolButton1.Enabled := false;
      popNode.Items[4].Enabled := false;
      popNode.Items[5].Enabled := false;
+     // Inibição dos botões de descer nível e subir nível
+     SpeedButton6.Enabled := false;
+     SpeedButton15.Enabled := false;
    end;
 
    If frm_main.wassist then

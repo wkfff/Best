@@ -3249,16 +3249,12 @@ Begin
 
 end;
 
-
-
-
-
 function TDg.Get_Title(pNode: afnode): afnode;
 var
-i : integer;
+  i : integer;
 begin
- result := nil;
- for i := 1 to pNode.OutLinks.Count do
+  result := nil;
+  for i := 1 to pNode.OutLinks.Count do
   Begin
    If pNode.OutLinks.Item(i).LinkStyle = 3 then
     Begin
