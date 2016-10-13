@@ -1385,12 +1385,13 @@ begin
   Viewer := false; { TODO : Aqui parece que habilita o Viewer }
 
   Wusers := false;
-  If viewer = true then
-  begin SEGHABILIATADO := false end;
+  if viewer = true then
+    SEGHABILIATADO := false;
+
   IDIOMA := 'PT';
   inherited;
 
-  edit2.Text := '7.20';
+  edit2.Text := '7.30';
   cFluxos := [2, 5, 6, 9]; //fluxos de dados
 
   If frm_logo = nil then
@@ -1420,9 +1421,9 @@ begin
   end;
 
   if (serpens = 'D') then
-  begin Relatrios1.Enabled := false end
+    Relatrios1.Enabled := false
   else
-  begin Relatrios1.Enabled := true end;
+    Relatrios1.Enabled := true;
 
 
   If not viewer then

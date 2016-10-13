@@ -1,6 +1,6 @@
 inherited frm_ev: Tfrm_ev
-  Left = 356
-  Top = 173
+  Left = 333
+  Top = 80
   Caption = 'frm_ev'
   ClientHeight = 481
   WindowState = wsMaximized
@@ -51,7 +51,8 @@ inherited frm_ev: Tfrm_ev
       Left = 68
     end
     inherited SP_X: TSpeedButton
-      Left = 622
+      Left = 606
+      Width = 123
     end
     inherited spb_del: TSpeedButton
       Left = 193
@@ -95,7 +96,6 @@ inherited frm_ev: Tfrm_ev
     Top = 49
     Width = 553
     Height = 432
-    ActivePage = ts_lay
     inherited tb_geral: TTabSheet
       inherited docext: TSpeedButton
         Left = 16
@@ -422,7 +422,6 @@ inherited frm_ev: Tfrm_ev
           TitleFont.Name = 'MS Sans Serif'
           TitleFont.Style = []
           OnEnter = dbg_eventoEnter
-          OnKeyDown = dbg_eventoKeyDown
           Columns = <
             item
               Expanded = False

@@ -93,8 +93,6 @@ begin
   frm_main.FormShow(sender);
 end;
 
-
-
 procedure Tfrm_clifull.BitBtn2Click(Sender: TObject);
 begin
   empresas.status := ' ';
@@ -174,20 +172,15 @@ end;
 procedure Tfrm_clifull.DBEdit1Change(Sender: TObject);
 begin
   SP2.ENABLED := TRUE;
-
 end;
 
 
 procedure Tfrm_clifull.sp_delClick(Sender: TObject);
 begin
-
   empresas.Apagar(empresas.CLI_ID) ;
   Limpa_tela;
   FormShow(frm_clifull);
 end;
-
-
-
 
 procedure Tfrm_clifull.FormCreate(Sender: TObject);
 begin
@@ -207,7 +200,7 @@ end;
 
 procedure Tfrm_clifull.Limpa_Tela;
 begin
-   edit1.Text := '';
+  edit1.Text := '';
   edit2.Text := '';
   edit3.Text := '';
 end;
@@ -308,9 +301,6 @@ begin
   //sp_canc.Hint := 'Cancela';
   //sp_canc.Caption := 'Desfazer';
   sp2.Caption := def903;//'Confirmar';
-
-
-
 end;
 
 end.
