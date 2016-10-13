@@ -1381,8 +1381,8 @@ VAR
 begin
   SEGHABILIATADO := false;  //habilita ou o controle de acesso;
 
-  oAcesso.WACCESS := 1;     //Valor 2 permite a atualização - 1 Reader
-  Viewer := true; { TODO : Aqui parece que habilita o Viewer }
+  oAcesso.WACCESS := 2;     //Valor 2 permite a atualização - 1 Reader
+  Viewer := fase; { TODO : Aqui parece que habilita o Viewer }
 
   Wusers := false;
   if viewer = true then

@@ -3249,16 +3249,12 @@ Begin
 
 end;
 
-
-
-
-
 function TDg.Get_Title(pNode: afnode): afnode;
 var
-i : integer;
+  i : integer;
 begin
- result := nil;
- for i := 1 to pNode.OutLinks.Count do
+  result := nil;
+  for i := 1 to pNode.OutLinks.Count do
   Begin
    If pNode.OutLinks.Item(i).LinkStyle = 3 then
     Begin
@@ -3693,8 +3689,8 @@ var
  mens : string;
  empty : boolean;
 Begin
-try
-     begin
+  try
+    begin
      self.salvar;
      If tv.selected.level < 3 then  // se nível diagram, não faz nada
          exit;

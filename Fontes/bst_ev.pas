@@ -56,8 +56,6 @@ type
     procedure pgcpChange(Sender: TObject);
     procedure SpeedButton4Click(Sender: TObject);
     procedure Laypost(Dataset : TdataSet);
-    procedure dbg_eventoKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
     procedure dbg_layKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure MenuItem1Click(Sender: TObject);
@@ -141,8 +139,8 @@ end;
 
 procedure Tfrm_ev.FormShow(Sender: TObject);
 var
-iTab : Tdados_tab;
-IpAI : INTEGER;
+  iTab : Tdados_tab;
+  IpAI : INTEGER;
 begin
   inherited;
    If (frm_main.viewer) or (oAcesso.waccess = 1) then
@@ -194,12 +192,9 @@ begin
   finally
      FREEANDNIL(ItAB);
   end;
-
-
 end;
 
 procedure Tfrm_ev.pgcpChange(Sender: TObject);
-
 begin
   inherited;
 
@@ -295,20 +290,6 @@ begin
    pgcpChange(frm_ev);  
 end;
 
-procedure Tfrm_ev.dbg_eventoKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin
-  inherited;
-   {If key = VK_DELETE then
-     begin
-     If MessageDlg(mens26,
-              mtConfirmation, [mbYes, mbNo], 0) <> mrYes then
-        begin
-           raise exception.create(mens25);
-        end;
-     end; } 
-end;
-
 procedure Tfrm_ev.dbg_layKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
@@ -381,8 +362,6 @@ If frm_treeativ <> nil then
          TabSheet2.caption := def18;
        end
       end;
-
-
    end
 else
    begin
@@ -423,9 +402,8 @@ else
 end;
 
 procedure Tfrm_ev.TV_tabClick(Sender: TObject);
-VAR
-I : integer;
-
+var
+  I : integer;
 begin
   inherited;
    iTab := Tdad.create(self);
@@ -512,28 +490,6 @@ begin
       If fechatree then
        frm_treeativ.close;
   end;
-
-
-
-  {frm_explor1.tb.close;
-  frm_explor1.tb.tablename := Tv_Tab.Selected.text;
-  frm_explor1.tb.open;
-  lb_cpo.rowcount := frm_explor1.tb.fieldList.count;
-  lb_cpo.rowcount := 0;
-
-  for i := 0 to frm_explor1.tb.FieldList.Count - 1 do
-  begin
-    lb_cpo.rowcount := lb_cpo.rowcount + 1;
-    t := frm_explor1.tb.FieldlIST.fields[i].DataType;
-    k := t;
-    WNom  := trim(frm_explor1.tb.FieldlIST.fields[i].displayname);
-    Wtipo := trim(Wtype [k]);
-    WTam  := trim(inttostr(frm_explor1.tb.FieldlIST.fields[i].size));
-    If frm_explor1.tb.FieldlIST.fields[i].size > 0 then
-       Wtipo := Wtipo +'('+Wtam+')';
-    lb_cpo.cells[0,i]  := Wnom;
-    lb_cpo.cells[1,i]  := Wtipo;
- end; }
 end;
 
 procedure Tfrm_ev.sp_printClick(Sender: TObject);
@@ -559,8 +515,6 @@ begin
    try
     If Tipo = 'OI' then
     Begin
-
-
        qrDataset(frm_puc.QRsubdetail2,iLay);
        iLay.Get_layout(Cliente,Cenario,Id);
        frm_puc.titulo.caption := uppercase(def6);
@@ -727,10 +681,8 @@ end;
 procedure Tfrm_ev.dbg_dgKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-
  If (shift = ([ssCtrl])) and (key = VK_DELETE) then
    Raise exception.create(mens54);
-
 end;
 
 procedure Tfrm_ev.DBGrid1DblClick(Sender: TObject);
@@ -830,7 +782,7 @@ end;
 
 procedure Tfrm_ev.Loadconstantobj;
 var
-i : integer;
+  i : integer;
 
 begin
 
@@ -846,7 +798,7 @@ begin
   Label6.Caption := def39 ;//'Especificação' ;
   Label11.Caption := defn2;//'Nome externo' ;
   SPP1.Hint := defd3;//'Diretórios'      ;
-  sp6. Caption := defp6;//'Protótipo de Tela'  ;
+  sp6.Caption := defp6;//'Protótipo de Tela'  ;
   dbrg_cli.Caption := defd4;//'Distribuição'  ;
   dbrg_cli.items[0]  := defc11;//'Cliente'      ;
   dbrg_cli.items[1]  :=  def99;//'Servidor';   ;
@@ -857,7 +809,7 @@ begin
   sp6.Caption := defp6;//'Protótipo de Tela'  ;
   SpeedButton1.Caption := def102;//'Lista   ' ;
   ts_lay.Caption := 'Lay Out'      ;
-  Label12. Caption := defl2;//'Lay Out da tela'  ;
+  Label12.Caption := defl2;//'Lay Out da tela'  ;
   PopupMenu3.Items[0].Caption := defe4;// 'Excluir  Correlação' ;
   DBG_LAY.Columns[1].Title.CAPTION := defa1;//'Atributo';
   DBG_LAY.Columns[2].Title.CAPTION :=  defc12;//'Consulta';
@@ -867,7 +819,6 @@ begin
   dbgrid1.Columns[2].Title.caption  := def1210;//'Tipo';
   dbgrid1.Columns[3].Title.caption  := def270;//'Tamanho';
   dbgrid1.Columns[4].Title.caption := 'PK';
-
 end;
 
 end.

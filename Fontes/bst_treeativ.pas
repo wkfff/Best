@@ -1,4 +1,4 @@
-unit bst_treeAtiv;        //6_38
+unit bst_treeAtiv;
 
 interface
    // testar : mudança de ativiadaee via lista ; se ha decomposicao, nao
@@ -2378,7 +2378,7 @@ begin
       end;
 
 
-   
+
    If Wparent = nil then   //topitem
       exit;
 
@@ -2666,7 +2666,7 @@ i: integer;
              next;
             end;
          end;  {}
-         
+
           free;
         end;
       except
@@ -3354,7 +3354,6 @@ begin
 end;
 
 procedure Tfrm_treeativ.sp2Click(Sender: TObject);
-
 begin
  tv.diagrama.selectAction := afNoSelection;
  tv.diagrama.linkstyle := TSpeedButton(sender as Tobject).tag;
@@ -3374,13 +3373,10 @@ begin
    end ;
 end;
 
-
-
 procedure Tfrm_treeativ.SpeedButton18Click(Sender: TObject);
 begin
   tv.diagrama.selectAction := afNoSelection;
   tv.diagrama.shape := TSpeedButton(sender as Tobject).tag;
-
 
   if TSpeedButton(sender as Tobject).tag <> 2 then
   Begin
@@ -3983,10 +3979,10 @@ Begin
 
  end;
 
- procedure Tfrm_treeativ.recria_corrRel(pdg : afLink);
+procedure Tfrm_treeativ.recria_corrRel(pdg : afLink);
 var
-i : integer;
-itb : TDados_tab;
+  i : integer;
+  itb : TDados_tab;
  Begin
    try
      iTb :=  tDados_tab.create(self);
@@ -4013,8 +4009,8 @@ end;
 
 procedure Tfrm_treeativ.Atrs1Click(Sender: TObject);
 var
-wbs,wator : afNode;
-i : integer;
+  wbs,wator : afNode;
+  i : integer;
 begin
   If tv.Diagrama.SelNodes.Count > 0 then
    begin
@@ -4029,8 +4025,8 @@ end;
 
 procedure Tfrm_treeativ.Frente1Click(Sender: TObject);
 var
-wbs,wator : afNode;
-i : integer;
+  wbs,wator : afNode;
+  i : integer;
 begin
 
  If tv.Diagrama.SelNodes.Count > 0 then
@@ -4306,7 +4302,6 @@ begin
         oAtor  := tv.diagrama.Obtem_ator(tv.Diagrama.selNodes.item(1)) ;
       end;
 
-
       wfont := tv.Diagrama.selNodes.Item(1).font;
       SetOleFont(fnt.font,Wfont);
 
@@ -4314,8 +4309,6 @@ begin
       rg_espessura.Itemindex := Wi ;
       showmodal;
    end;
-
-
 end;
 
 procedure Tfrm_treeativ.SpeedButton84Click(Sender: TObject);
@@ -4363,8 +4356,6 @@ begin
        end;
       showModal;
    end;
-
-
 end;
 
 procedure Tfrm_treeativ.SetOrigem_dados(const Value: integer);
@@ -4523,8 +4514,6 @@ begin
   finally
      freeandnil(itab);
   end;
-
-
 end;
 
 procedure Tfrm_treeativ.Exec_mecanismo(pId : integer; pProg : string) ;
@@ -4555,37 +4544,7 @@ wdir,wexec : string;
         If not fileExists(wexec ) then
           Raise exception.create(mens1010+wexec+mens102);
          ExecProg(wexec,'');
-
-             //   iF iTab.Get_Correlatos(tv.Diagrama.EMPRESA,tv.Diagrama.CENARIO,'AP',
-     //                       TV.Diagrama.SelectedNode.UserData,'SE','IDF_SE') then
-    {     begin
-             If iTab.fieldbyname('IDF_SIGLA').asstring = '' then
-                raise exception.create(mens44);
-            If wdir = '' then
-               wdir := Pega_Diretorio_Padrao(tv.Diagrama.EMPRESA,tv.Diagrama.CENARIO);
-            wprg :=  ExtractFilename( iTab.fieldbyname('IDF_SIGLA').asstring);
-
-            If wdir <> '' then
-             Begin
-               If (wdir[length(wdir)] <> '\') and  (wdir[length(wdir)] <> '/') then
-                 wexec := wdir + '\' +wprg
-               else
-                 wexec := wdir + wprg;
-             end
-            else
-             wexec := iTab.fieldbyname('IDF_SIGLA').asstring;
-
-        end;
-      end;
-       If not fileExists(wexec ) then
-        Raise exception.create(mens1010+wexec+mens102);
-       ExecProg(wexec,'');
-
-     If wprg = '' then
-         Raise exception.create(mens103);
-       //   ExecProg(iTab.fieldbyname('IDF_SIGLA').asstring,''); }
-
- end;
+end;
 
 function Tfrm_treeativ.Pega_diretorio_padrao(pcli,pProj : integer) : string;
  Begin
@@ -5074,7 +5033,7 @@ Begin
 
         while not ide.fClient.Eof do
          Begin
-         
+
           If ide.fClient.fieldbyname('idf_codigo').asinteger  > 0 then
            Begin
             If haPk then
@@ -5123,13 +5082,12 @@ Begin
  end;
 end;
 
-
 function Tfrm_treeativ.Mostra_sql : boolean;
  Begin
   If frm_log = nil then
        frm_log := tfrm_log.create(self);
     If wscript = nil then
-      exit;   
+      exit;
     frm_log.Memo1.Lines := wscript;
     frm_log.Caption := def93;
     panel1.Visible := true;
@@ -5141,9 +5099,7 @@ function Tfrm_treeativ.Mostra_sql : boolean;
     //pb.Position := 0;
     //tv.selected := tvant;
    // tv.TvClick(self);
- end;
-
-
+end;
 
 function Tfrm_treeativ.gera_Modelo(pbanco : integer) : boolean;
  Begin
@@ -5481,7 +5437,7 @@ try
            dm_rel.qry_req.post;
            //freeandnil(iTi);
   end;
-finally
+  finally
         freeandnil(iUc);
         freeandnil(iTab);
         freeandnil(iPpg);
@@ -5492,7 +5448,7 @@ finally
        frm_mensagem.sp_imp.Enabled := true;
        If bdx.TIPOBANCO = 0 then
        frm_mensagem.sp_exp.Enabled := true;
-end;
+  end;
 end;
 
 
@@ -5654,8 +5610,8 @@ end;
 
 procedure Tfrm_treeativ.AspectosCrticos1Click(Sender: TObject);
 var
-iTab : Tdados_tab;
-existe : boolean;
+  iTab : Tdados_tab;
+  existe : boolean;
 begin
     try
       iTab := Tdados_tab.create(self);
@@ -5816,10 +5772,10 @@ begin
      popNode.Items[4].Enabled := false;
      popNode.Items[5].Enabled := false;
      // Inibição dos botões de descer nível e subir nível
-     SpeedButton14.Enabled := false;
+    { SpeedButton14.Enabled := false;
      SpeedButton15.Enabled := false;
      ToolButton5.Enabled := false;
-     ToolButton6.Enabled := false;
+     ToolButton6.Enabled := false;}
    end;
 
    If frm_main.wassist then
@@ -5852,7 +5808,6 @@ begin
         tv.Diagrama.SelectedNode := nil;
        end;
     end;
-    
 
     tv.Selected := tv.TopItem;
     tv.TVCLICK(NIL);
@@ -5944,10 +5899,10 @@ end;
 
 procedure Tfrm_treeativ.AjustaLinha1Click(Sender: TObject);
 var
-i ,wcount: integer;
-wx,wy ,wmeio: real;
-worg ,wdst : afLinkPoint;
-ObjDst,ObjOrg : afNode;
+  i ,wcount: integer;
+  wx,wy ,wmeio: real;
+  worg ,wdst : afLinkPoint;
+  ObjDst,ObjOrg : afNode;
 begin
   wcount := tv.Diagrama.SelLinks.Count ;
   If wCount > 0 then
@@ -5965,7 +5920,7 @@ begin
         tv.diagrama.SelLinks.item(i).ExtraPoints.Item[tv.diagrama.SelLinks.item(i).ExtraPoints.count-1]  := wdst;
       end;
    end;
-  
+
 end;
 
 procedure Tfrm_treeativ.Setdmi_desc(const Value: string);
@@ -5975,15 +5930,15 @@ end;
 
 procedure Tfrm_treeativ.sp_prClick(Sender: TObject);
 begin
-   If frm_preprint= nil then
+  If frm_preprint= nil then
     frm_preprint     := Tfrm_preprint.create(self);
- frm_preprint.show;
+  frm_preprint.show;
 end;
 
 procedure Tfrm_treeativ.sp_copClick(Sender: TObject);
 var
-i,j : integer;
-aWbs,aAtor : afNode;
+  i,j : integer;
+  aWbs,aAtor : afNode;
 begin
   tv.Diagrama.Copia_Sel;
 end;
@@ -6001,7 +5956,6 @@ begin
   FDiagm := Value;
 end;
 
-
 procedure Tfrm_treeativ.SetPERC(const Value: real);
 begin
   FPERC := Value;
@@ -6017,14 +5971,10 @@ begin
  tv.Diagrama.Get_Nodes(tv.Diagrama.SelectedNode,'I');
 end;
 
-
-
 procedure Tfrm_treeativ.SetLISTA_DG(const Value: BOOLEAN);
 begin
   FLISTA_DG := Value;
 end;
-
-
 
 procedure Tfrm_treeativ.FormCreate(Sender: TObject);
 begin
@@ -6036,11 +5986,11 @@ begin
   DataList := TList.Create;
   ListaDados := TList.Create;
   oDgLocked := TDg.create;
-  If tv = nil then
+  if tv = nil then
     tv  := TTv.create;
 
-  If not tv.Diagrama.Carga_Atrib then
-   Begin
+  if not tv.Diagrama.Carga_Atrib then
+   begin
      Showmessage(mens8+ ' '+BDx.DirFluxo +dg_atu);
      frm_main.PARA := true;
      close;
@@ -6494,10 +6444,10 @@ end;
 
 procedure Tfrm_treeativ.sp_recortClick(Sender: TObject);
 var
-tp : TShiftState;
+  tp : TShiftState;
 begin
- tp := [ssctrl];
- tv.Diagrama.wKeyAction(VK_DELETE,tp);
+  tp := [ssctrl];
+  tv.Diagrama.wKeyAction(VK_DELETE,tp);
 end;
 
 procedure Tfrm_treeativ.SetPARA(const Value: boolean);
@@ -6563,7 +6513,7 @@ end;
 
 procedure Tfrm_treeativ.EscondeMostraFluxo1Click(Sender: TObject);
 var
-i : integer;
+  i : integer;
 begin
   If tv.Diagrama.SelLinks.Count > 0 then
    begin
@@ -6575,8 +6525,6 @@ begin
           tv.Diagrama.SelLinks.Item(i).DrawStyle :=  afTransparent;
 
      end;
-
-
    end;
 end;
 
@@ -6597,12 +6545,12 @@ end;
 
 procedure Tfrm_treeativ.ImportarDiagrama1Click(Sender: TObject);
 var
-TvImport : TTv;
+  TvImport : TTv;
 begin
- TvImport := TTv.create;
- BdImport := Tbd.create(true,true,true);
- //copia do diretório a importar para diretório temporário
- salvar_diretorio;
+  TvImport := TTv.create;
+  BdImport := Tbd.create(true,true,true);
+  //copia do diretório a importar para diretório temporário
+  salvar_diretorio;
 end;
 
 procedure Tfrm_treeativ.salvar_diretorio;
@@ -6645,17 +6593,11 @@ begin
         copyfile(OldDir,Newdir,true);
 
      end;
-
-
-
-
-
-
-
  finally
 
  end;
- end;
+end;
+
 procedure Tfrm_treeativ.SetoAtor(const Value: afnode);
 begin
   FoAtor := Value;
@@ -6673,8 +6615,6 @@ begin
   for i := 1 to tv.Diagrama.Nodes.Count do
     showmessage(tv.Diagrama.Nodes.item(i).text + ' '+inttostr(tv.Diagrama.Nodes.item(i).userdata));
 end;
-
-
 
 procedure Tfrm_treeativ.spb_sqlClick(Sender: TObject);
 begin
