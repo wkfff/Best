@@ -294,14 +294,16 @@ procedure Tfrm_ev.dbg_layKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   inherited;
-   If key = VK_DELETE then
+   if key = VK_DELETE then
+   begin
+     if MessageDlg(mens27, mtConfirmation, [mbYes, mbNo], 0) <> mrYes then
+      raise exception.create(mens25)
+     else
      begin
-     If MessageDlg(mens27,
-              mtConfirmation, [mbYes, mbNo], 0) <> mrYes then
-        begin
-           raise exception.create(mens25);
-        end;
+       // Aqui deverei colocar o código para o caso de confirmação de deleção.
+
      end;
+   end;
 end;
 
 procedure Tfrm_ev.MenuItem1Click(Sender: TObject);
@@ -403,10 +405,14 @@ end;
 
 procedure Tfrm_ev.TV_tabClick(Sender: TObject);
 var
-  I : integer;
+  I, iCode : integer;
 begin
   inherited;
    iTab := Tdad.create(self);
+   // Se o quadro está vazio, não há o que fazer.
+   if TV_tab.Items.Count = 0 then
+     exit;
+
     If uOe(tv_TAB.Selected.data)^.fTipo = 'OE' then
       Begin
        Lb_cpo.Visible := true;
@@ -421,25 +427,19 @@ begin
            begin
           // Get_Correlatos(Cliente,CENARIO,uoe(Tv_Tab.Selected.data)^.fTipo,
           //                 uOe(Tv_Tab.Selected.data)^.fCodigo,'DE','IDF_DE');
+
             Lb_cpo.Visible := false;
             dbgrid1.Visible := true;
             CLI_ID := CLIENTE;
             PRJ_ID := CENARIO;
-            dbgrid1.DataSource := itab.DataExt;
-            get_dados(tv_tab.selected.text);
-            {lb_cpo.RowCount := 0;
-            i := 0;
-            while not eof do
-              Begin
-                lb_cpo.RowCount := lb_cpo.RowCount + 1;
-                lb_cpo.cells[0,i] := fieldbyname('idf_designacao').value;
-                lb_cpo.cells[1,i] := fieldbyname('idf_data_type').value;
-                next;
-                inc(i);
 
-              end;}
+            iCode := uOe(Tv_Tab.Selected.data)^.fCodigo;
+
+
+            dbgrid1.DataSource := itab.DataExt;
+            Get_dados_unico(tv_tab.selected.text, iCode);
            end;
-       end ;
+       end;
      end;
 end;
 procedure TFRM_ev.Abre_banco;
@@ -458,7 +458,6 @@ begin
          frm_Treeativ := Tfrm_Treeativ.Create(self);
          fechatree := true;
        end;
-        
 
       case uOe(Tv_Tab.Selected.data)^.fTipo_banco of
        0 : Begin
@@ -646,6 +645,10 @@ end;
 procedure Tfrm_ev.TV_tabDblClick(Sender: TObject);
 begin
   inherited;
+   // Se o quadro está vazio, não há o que fazer.
+   if TV_tab.Items.Count = 0 then
+     exit;
+
     edit1.text := uppercase(' '+tv_tab.Selected.text+' ');
     edit1.selectall;
     edit1.CopyToClipboard;
