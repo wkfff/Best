@@ -8660,7 +8660,7 @@ begin
   sql.clear;
   fclient.active := false;
   sql.add('SELECT * FROM IDF_DE WHERE ');
-  sql.add(' CLI_ID = '+ ''+INTTOSTR(CLI_ID)+''+' AND ');
+  sql.add(' CLI_ID = '+ ''+INTTOSTR(CLI_ID)+' AND ');
   sql.add(' PRJ_ID = '+ ''+INTTOSTR(PRJ_ID)+'');
   open;
   fclient.active := true;

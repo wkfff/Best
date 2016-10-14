@@ -96,7 +96,6 @@ inherited frm_ev: Tfrm_ev
     Top = 49
     Width = 553
     Height = 432
-    ActivePage = ts_lay
     inherited tb_geral: TTabSheet
       inherited docext: TSpeedButton
         Left = 16
@@ -672,7 +671,7 @@ inherited frm_ev: Tfrm_ev
               Title.Font.Height = -12
               Title.Font.Name = 'Calibri'
               Title.Font.Style = []
-              Width = 350
+              Width = 300
               Visible = True
             end
             item

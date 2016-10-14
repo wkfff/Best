@@ -3162,11 +3162,10 @@ procedure dbg_format ( pDbg : Tdbgrid);
      If pdbg.Columns[i].Field is TIntegerField then
            (pdbg.Columns[i].Field as TIntegerField ).DisplayFormat := '### ### ##0';
     end;
- end;
-
+end;
 
 constructor Tdados.Create;
- begin
+begin
    inherited create(application);
 
    If BDx = nil then
@@ -3175,7 +3174,7 @@ constructor Tdados.Create;
    DataExt               := TdataSource.create(self);
    dataext.DataSet       := self;
 
- end;
+end;
 
 function Tdados.Criar(sender : Tobject) : boolean;
  begin
@@ -3818,10 +3817,10 @@ function Tdados_Tab.get_Inst(pCli,pProj,pId : integer;pTab : string) : boolean;
 
 function Tdados_Tab.Get_ListaAp(pCli,pProj : integer; pList : TList) : boolean;
 var
-i : integer;
-s : string;
-wlist : boolean;
- begin
+  i : integer;
+  s : string;
+  wlist : boolean;
+begin
     fprovider  := TProvider.create(self);
 
    with fProvider do

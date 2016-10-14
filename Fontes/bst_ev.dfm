@@ -671,7 +671,7 @@ inherited frm_ev: Tfrm_ev
               Title.Font.Height = -12
               Title.Font.Name = 'Calibri'
               Title.Font.Style = []
-              Width = 350
+              Width = 300
               Visible = True
             end
             item
