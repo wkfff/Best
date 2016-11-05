@@ -1689,10 +1689,10 @@ end;
 
 procedure Tfrm_ap.DBRGClick(Sender: TObject);
 var
-tipoant : string;
+  tipoant : string;
 begin
- Alterou_TipAtiv := true;
- If dbrg.ItemIndex = 0 then
+  Alterou_TipAtiv := true;
+  If dbrg.ItemIndex = 0 then
     begin
       Tabsheet8.tabvisible := false  ;
       Tabsheet2.tabvisible := false  ;
