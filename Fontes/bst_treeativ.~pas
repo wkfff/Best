@@ -5945,8 +5945,8 @@ end;
 
 procedure Tfrm_treeativ.xp_colClick(Sender: TObject);
 var
-i,j ,tot: integer;
-awbs,aAtor : afNode;
+  i,j ,tot: integer;
+  awbs,aAtor : afNode;
 begin
    tv.Diagrama.Cola_sel(true,true,false,0);
 end;

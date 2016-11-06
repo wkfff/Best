@@ -2909,7 +2909,8 @@ private
   procedure AftrScroll (DataSet: TDataSet);
   procedure AftrPost(dataSet: TdataSet);
   procedure BefrPost(dataset: Tdataset);
-  function Get_seq(pCli, pProj, pMetodo: integer): integer;
+    function Get_seq(pCli, pProj, pMetodo: integer): integer;
+
 
 public
      {publicTidf_pr}
@@ -3853,6 +3854,15 @@ begin
         sql.add('AND FILHO_ID = '+''+inttostr(pAtor)+'');
         sql.add('AND FILHO_TIPO = '+''''+'CA'+''''+')');
       end;
+
+  { If wlist then
+    Begin
+         s := sql[sql.Count-1];
+         s[length(s)] := ')';
+         sql[sql.Count-1] := s;
+    end
+   else
+    sql[sql.Count-1] :=sql[sql.Count-1]+ '-1)';   }
 
    If ptab = 'IDF_AP' then
        Begin
