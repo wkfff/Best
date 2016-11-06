@@ -2072,16 +2072,21 @@ var
   i,j : integer;
   awbs,aAtor : afNode;
 begin
+   
     for i := 1 to  Nodes.Count do
       Begin
        Nodes.Item(i).Marked := false;
+
        for j := 1 to Nodes.Item(i).Links.Count do
           begin
             Nodes.Item(i).Links.item(j).Marked := false;
            // showmessage(Nodes.Item(i).Links.item(j).text);
+
           end;
+           
         If Nodes.Item(i).Shape = 50 then
           Begin
+
            aWbs  := Obtem_wbs(Nodes.Item(i));
            aAtor := Obtem_ator(Nodes.Item(i));
            If awbs <> nil then
