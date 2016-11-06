@@ -306,25 +306,22 @@ begin
        spp1.Visible := true;
      end;
   Alterou_TipAtiv := false;
-
-
-
-end;
+ end;
 
 procedure Tfrm_ap.pgcpChange(Sender: TObject);
 var
-i ,j,wid,wtot: integer;
-vList : TStringList;
-wnode : afNode;
-oNode : afNode;
+  i ,j,wid,wtot: integer;
+  vList : TStringList;
+  wnode : afNode;
+  oNode : afNode;
 
-mLst : uLst;
-oList : TList;
-dgx : TAddFlow;
-iDg : Tdg;
-wCusto_Tec : real;
-oRec : TCusto;
-mObj : uobj;
+  mLst : uLst;
+  oList : TList;
+  dgx : TAddFlow;
+  iDg : Tdg;
+  wCusto_Tec : real;
+  oRec : TCusto;
+  mObj : uobj;
 begin
   inherited;
 
@@ -343,36 +340,6 @@ begin
          oNode := tv.Diagrama.SelectedNode;
 
       iDg.Get_Fluxos(trv_in,trv_out,oNode);
-       {If oNode <> nil then
-        Begin
-           oList := Get_links(oNode,' ');
-           for i := 0 to oList.Count-1 do
-            Begin
-              mLst := oList.Items[i];
-              If trim(mLst^.lnk.Text) = '' then
-               continue;
-              If mLst^.tipo = 'I' then
-                Begin
-                 If InList(mLst^.lnk.Text,trv_in) then
-                    continue;
-                  new(mObj);
-                  mObj.Fcodigo := inttostr(mLst^.lnk.userdata);
-                  trv_In.Items.AddObject(nil,mLst^.lnk.Text,mObj)  ;
-
-                end
-              else
-              If mLst^.tipo = 'O' then
-                Begin
-                 If InList(mLst^.lnk.Text,trv_Out) then
-                    continue;
-                 new(mObj);
-                 mObj.Fcodigo := inttostr(mLst^.lnk.userdata);
-                 trv_out.Items.AddObject(nil,mLst^.lnk.Text,mObj)  ;
-
-                end;
-
-            end;
-        end; }
    end;
   finally
     If dgx <> nil then
@@ -461,19 +428,19 @@ end;
 
 procedure TFrm_ap.Mostra_TI;
 var
-i ,j,wid,wtot: integer;
-vList : TStringList;
-wnode : afNode;
-oNode : afNode;
+  i ,j,wid,wtot: integer;
+  vList : TStringList;
+  wnode : afNode;
+  oNode : afNode;
 
-mLst : uLst;
-oList : TList;
-dgx : TAddFlow;
-iDg : Tdg;
-wCusto_Tec : real;
-oRec : TCusto;
-mObj : uobj;
- begin
+  mLst : uLst;
+  oList : TList;
+  dgx : TAddFlow;
+  iDg : Tdg;
+  wCusto_Tec : real;
+  oRec : TCusto;
+  mObj : uobj;
+begin
 
 { CRIA CORRELAÇÕES COM DG}
 

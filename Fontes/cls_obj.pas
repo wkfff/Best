@@ -2168,17 +2168,17 @@ end;
 
 procedure TDg.Copia_Sel;
 var
-i,j : integer;
-aWbs,aAtor,iUp : afNode;
+  i,j : integer;
+  aWbs,aAtor,iUp : afNode;
 begin
-     dg_classe  := tv.Diagrama.IDG_DIR;
-     dg_cenario := tv.Diagrama.CENARIO;
-     dg_cli     := tv.Diagrama.EMPRESA;
-     Desmarca ; //desmarca todos os objetos
+  dg_classe  := tv.Diagrama.IDG_DIR;
+  dg_cenario := tv.Diagrama.CENARIO;
+  dg_cli     := tv.Diagrama.EMPRESA;
+  Desmarca ; //desmarca todos os objetos
 
-     for i := 1 to  Nodes.Count do
-      Begin
-        If not Nodes.Item(i).Selected then   // desmarca tudo
+  for i := 1 to  Nodes.Count do
+  begin
+    if not Nodes.Item(i).Selected then   // desmarca tudo
            continue;
 
         If (Nodes.Item(i).Shape = 1) and (dg_classe = 'DPN') then  //junção
@@ -2224,17 +2224,16 @@ begin
       end;
       Copy(2);  //copia os marcados(marked = true)
       Desmarca;
-
 end;
 
 procedure TDG.Cola_sel( pCompleto : boolean;pConfirm : boolean;pABaixo : boolean;IdNode : integer);
 var
-i,j,k: integer;
-awbs,aAtor,oAtiv : afNode;
-wmin,wleft : double;
-listaadeletar : tstringlist;
-wlista : uListaObj;
-oList : TList;
+  i,j,k: integer;
+  awbs,aAtor,oAtiv : afNode;
+  wmin,wleft : double;
+  listaadeletar : tstringlist;
+  wlista : uListaObj;
+  oList : TList;
 begin
    oList := TList.create;
    pCompleto := false;
@@ -2351,12 +2350,8 @@ begin
                                      Nodes.Item(i).UserData,Nodes.Item(i).Text,SELF.IDG_DIR,false);
 
              end;
-
           end;
-
       end;
-
-
 
       {If pAbaixo then
        begin

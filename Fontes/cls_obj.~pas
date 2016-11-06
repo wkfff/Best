@@ -3346,9 +3346,7 @@ try
             else
              Begin
                wclass := 'DPN';
-               If (frm_main.viewer) then    //security
-                 exit
-               else
+               if not (frm_main.viewer) then    //security
                 begin
                    with Tdados_tab.create(self) do
                     Begin
@@ -3684,10 +3682,10 @@ end;}
 
 procedure TDG.Acima;
 var
- i,WAtiv,Wpai_ant,WIDG : integer;
- Wnode   : TTreeNode;
- mens : string;
- empty : boolean;
+  i,WAtiv,Wpai_ant,WIDG : integer;
+  Wnode   : TTreeNode;
+  mens : string;
+  empty : boolean;
 Begin
   try
     begin
@@ -3703,7 +3701,6 @@ Begin
 
      Wativ       := udado(tv.selected.Data)^.fDiag;
      tv.selected := tv.selected.Parent;
-     
 
      tv.tvClick(self);
      With self do    //posiciona na atividade recomposta
