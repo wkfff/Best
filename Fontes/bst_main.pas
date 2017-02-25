@@ -4968,9 +4968,9 @@ iPs : TIdf_ps;
 
 procedure Tfrm_main.Cria_ChaveDupl;   // CRIA ATRIBUTO PARA RECEBER NOVA CHAVE , NA IMPORTAÇÀO
 var
-iTab,iFld,iFldnovo : TstringList;
-i,wseq : integer;
-  begin
+  iTab,iFld,iFldnovo : TstringList;
+  i,wseq : integer;
+begin
   adoc := TAdoConnection.create(application);
   qry_cria_idf_dados := TadoQuery.create(application);
 
