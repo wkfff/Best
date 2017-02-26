@@ -5819,7 +5819,7 @@ var
   iOn : Tdados_tab;
   i,j : integer;
 begin
-  If  frm_Cimp    =   nil then
+  If  frm_Cimp = nil then
      frm_Cimp    := Tfrm_Cimp.Create(self);
   frm_cimp.label1.caption := TmenuItem(sender as Tobject).caption;
 
@@ -5835,14 +5835,13 @@ begin
   for j := 1 to tv.Diagrama.SelNodes.Count do
   begin
 
-  iDe := Tdad.Create(self);
+    iDe := Tdad.Create(self);
 
-
-  If not ide.get_ObjetobyDesc(tv.Diagrama.EMPRESA,tv.Diagrama.CENARIO,TV.Diagrama.SelNodes.item(j).text,'') then
-     Raise exception.create(mens76);
-     with frm_pdmig do
-      begin
-         for i := 0 to componentCount -1 do
+    If not ide.get_ObjetobyDesc(tv.Diagrama.EMPRESA,tv.Diagrama.CENARIO,TV.Diagrama.SelNodes.item(j).text,'') then
+      Raise exception.create(mens76);
+    with frm_pdmig do
+    begin
+      for i := 0 to componentCount -1 do
           begin
            If (Components[i] is Tqrband) or  (Components[i] is TqrChildband) or  (Components[i] is TqrSubDetail)
               or  (Components[i] is Tqrgroup)then
@@ -5857,15 +5856,13 @@ begin
         frm_Pdmig.qRP.preview
      else
         frm_Pdmig.qrp.print;
-  end;
+   end;
 
-  finally
+   finally
      frm_Pdmig.close;
      freeandnil(iDe);
-  end;
-
+   end;
 end;
-
 
 procedure Tfrm_treeativ.GerarScriptSQL1Click(Sender: TObject);
 begin
@@ -5920,7 +5917,6 @@ begin
         tv.diagrama.SelLinks.item(i).ExtraPoints.Item[tv.diagrama.SelLinks.item(i).ExtraPoints.count-1]  := wdst;
       end;
    end;
-
 end;
 
 procedure Tfrm_treeativ.Setdmi_desc(const Value: string);
@@ -5945,8 +5941,8 @@ end;
 
 procedure Tfrm_treeativ.xp_colClick(Sender: TObject);
 var
-i,j ,tot: integer;
-awbs,aAtor : afNode;
+  i,j ,tot: integer;
+  awbs,aAtor : afNode;
 begin
    tv.Diagrama.Cola_sel(true,true,false,0);
 end;

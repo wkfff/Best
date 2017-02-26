@@ -2072,21 +2072,16 @@ var
   i,j : integer;
   awbs,aAtor : afNode;
 begin
-   
     for i := 1 to  Nodes.Count do
       Begin
        Nodes.Item(i).Marked := false;
-
        for j := 1 to Nodes.Item(i).Links.Count do
           begin
             Nodes.Item(i).Links.item(j).Marked := false;
            // showmessage(Nodes.Item(i).Links.item(j).text);
-
           end;
-           
         If Nodes.Item(i).Shape = 50 then
           Begin
-
            aWbs  := Obtem_wbs(Nodes.Item(i));
            aAtor := Obtem_ator(Nodes.Item(i));
            If awbs <> nil then
@@ -2168,17 +2163,17 @@ end;
 
 procedure TDg.Copia_Sel;
 var
-i,j : integer;
-aWbs,aAtor,iUp : afNode;
+  i,j : integer;
+  aWbs,aAtor,iUp : afNode;
 begin
-     dg_classe  := tv.Diagrama.IDG_DIR;
-     dg_cenario := tv.Diagrama.CENARIO;
-     dg_cli     := tv.Diagrama.EMPRESA;
-     Desmarca ; //desmarca todos os objetos
+  dg_classe  := tv.Diagrama.IDG_DIR;
+  dg_cenario := tv.Diagrama.CENARIO;
+  dg_cli     := tv.Diagrama.EMPRESA;
+  Desmarca ; //desmarca todos os objetos
 
-     for i := 1 to  Nodes.Count do
-      Begin
-        If not Nodes.Item(i).Selected then   // desmarca tudo
+  for i := 1 to  Nodes.Count do
+  begin
+    if not Nodes.Item(i).Selected then   // desmarca tudo
            continue;
 
         If (Nodes.Item(i).Shape = 1) and (dg_classe = 'DPN') then  //junção
@@ -2224,17 +2219,16 @@ begin
       end;
       Copy(2);  //copia os marcados(marked = true)
       Desmarca;
-
 end;
 
 procedure TDG.Cola_sel( pCompleto : boolean;pConfirm : boolean;pABaixo : boolean;IdNode : integer);
 var
-i,j,k: integer;
-awbs,aAtor,oAtiv : afNode;
-wmin,wleft : double;
-listaadeletar : tstringlist;
-wlista : uListaObj;
-oList : TList;
+  i,j,k: integer;
+  awbs,aAtor,oAtiv : afNode;
+  wmin,wleft : double;
+  listaadeletar : tstringlist;
+  wlista : uListaObj;
+  oList : TList;
 begin
    oList := TList.create;
    pCompleto := false;
@@ -2351,12 +2345,8 @@ begin
                                      Nodes.Item(i).UserData,Nodes.Item(i).Text,SELF.IDG_DIR,false);
 
              end;
-
           end;
-
       end;
-
-
 
       {If pAbaixo then
        begin

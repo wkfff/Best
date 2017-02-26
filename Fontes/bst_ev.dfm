@@ -282,9 +282,9 @@ inherited frm_ev: Tfrm_ev
         end
         object dbmemo2: TDBRichEdit
           Left = 8
-          Top = 163
+          Top = 155
           Width = 521
-          Height = 150
+          Height = 162
           DataField = 'IDF_MINIESPECIFICACAO'
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack

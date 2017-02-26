@@ -754,7 +754,7 @@ resourcestring
   mensPT64  = 'Não ha nenhuma Ator Associado a esta Atividade!';
   mensPT65  = 'Não é possível copiar para outro Empresa/Cenário';
   mensPT66  = 'Não é possível copiar para outra classe de Diagrama!';
-  mensPT67  = 'Colar Completo ou somente esqueleto ?';
+  mensPT67  = 'Colar Completo(SIM) ou somente esqueleto(NÃO) ?';
   mensPT68  = 'Diagrama sem Atividade!';
   mensPT69  = 'Não ha Local de Processamento definido';
   mensPT70  = 'Informar se Atividade procedural ou não';

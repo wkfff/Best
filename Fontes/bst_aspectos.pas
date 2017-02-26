@@ -120,7 +120,7 @@ end;
 
 
 procedure Tfrm_aspectos.Load_constantsAC;
-  Begin
+begin
    Aclassed  [1]  := Def51 ;
    Aclassed  [2]  := Def13 ;
    Aclassed  [3]  := def63 ;
@@ -131,8 +131,8 @@ procedure Tfrm_aspectos.Load_constantsAC;
    Aclassed  [8]  := def9 ;
    Aclassed  [9]  := def26 ;
    Aclassed  [10]  := def49 ;
-   Aclassed  [11]  := def5 ; 
-  end;
+   Aclassed  [11]  := def5 ;
+end;
 
 
 procedure Tfrm_aspectos.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -145,7 +145,7 @@ end;
 
 procedure Tfrm_aspectos.FormShow(Sender: TObject);
 var
-mtipo : string;
+  mtipo : string;
 begin
   inherited;
   dtp1.date := date;
@@ -156,13 +156,11 @@ begin
     begin
       Open_Dominio('NOR',frm_main.Idioma) ;
       cmb_norma.ListSource := Dataext;
-
      end;
   with Tdominios.create(self) do
     begin
       Open_Dominio('VIS',frm_main.Idioma) ;
       cmb_ptVista.ListSource := Dataext;
-
      end;
 
   with TDiag_Dados.create(self)  do     //operaçoes

@@ -1,4 +1,4 @@
-unit bst_treeAtiv;        //6_38
+unit bst_treeAtiv;
 
 interface
    // testar : mudança de ativiadaee via lista ; se ha decomposicao, nao
@@ -5945,8 +5945,8 @@ end;
 
 procedure Tfrm_treeativ.xp_colClick(Sender: TObject);
 var
-i,j ,tot: integer;
-awbs,aAtor : afNode;
+  i,j ,tot: integer;
+  awbs,aAtor : afNode;
 begin
    tv.Diagrama.Cola_sel(true,true,false,0);
 end;

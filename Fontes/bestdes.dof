@@ -236,7 +236,7 @@ AutoIncBuild=1
 MajorVer=7
 MinorVer=3
 Release=2
-Build=3
+Build=5
 Debug=0
 PreRelease=0
 Special=0
@@ -247,7 +247,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=Sammati
 FileDescription=
-FileVersion=7.3.2.3
+FileVersion=7.3.2.5
 InternalName=Best
 LegalCopyright=
 LegalTrademarks=

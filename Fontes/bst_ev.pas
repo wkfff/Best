@@ -27,6 +27,17 @@ type
     Label15: TLabel;
     DBGrid1: TDBGrid;
     SpeedButton97: TSpeedButton;
+    GroupBox3: TGroupBox;
+    SpeedButton7: TSpeedButton;
+    Label9: TLabel;
+    dbg_evento: TDBGrid;
+    sptel: TSpeedButton;
+    DBEdit3: TDBEdit;
+    Label10: TLabel;
+    Dbmemo1: TDBRichEdit;
+    GroupBox4: TGroupBox;
+    Label12: TLabel;
+    dbg_lay: TDBGrid;
     GroupBox2: TGroupBox;
     Label4: TLabel;
     Label11: TLabel;
@@ -39,17 +50,6 @@ type
     Edit1: TEdit;
     dbmemo2: TDBRichEdit;
     DBEdit1: TDBEdit;
-    GroupBox3: TGroupBox;
-    SpeedButton7: TSpeedButton;
-    Label9: TLabel;
-    dbg_evento: TDBGrid;
-    sptel: TSpeedButton;
-    DBEdit3: TDBEdit;
-    Label10: TLabel;
-    Dbmemo1: TDBRichEdit;
-    GroupBox4: TGroupBox;
-    Label12: TLabel;
-    dbg_lay: TDBGrid;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -202,12 +202,12 @@ begin
       SpeedButton17Click(nil);
 
   begin
-     If pgcp.ActivePage = tb_geral then
+     if pgcp.ActivePage <> tb_geral then
       begin
        {If dbmemo2.Text = '' then
           dbmemo2.Text := 'OBJETIVO'; }
       end
-  else
+     else
 
      If pgcp.ActivePage = TabSheet2 then       // eventos
        begin
@@ -327,35 +327,35 @@ begin
      iDataSource.DataSet.edit;
      Dbedit2.field.text := od1.FileName;
    end;
-   
+
 end;
 
 procedure Tfrm_ev.FormCreate(Sender: TObject);
 begin
   inherited;
-Bd_ant := '';
-dbrg_cli.ItemIndex := 0;
-pgcp.ActivePage := Tb_geral;
-lb_cpo.ColWidths[0] := 140;
-lb_cpo.ColWidths[1] := 60;
-If (frm_main.viewer) or (oAcesso.WACCESS = 1) then
-     Begin
-       sp2.visible := false;
-       spp1.visible := false;
-       sp_insert.visible := false;
-       ToolButton4.Enabled := false;
-       ToolButton5.Enabled := false;
-     end;
-If frm_treeativ <> nil then
-   begin
+  Bd_ant := '';
+  dbrg_cli.ItemIndex := 0;
+  pgcp.ActivePage := Tb_geral;
+  lb_cpo.ColWidths[0] := 140;
+  lb_cpo.ColWidths[1] := 60;
+  if (frm_main.viewer) or (oAcesso.WACCESS = 1) then
+  begin
+     sp2.visible := false;
+     spp1.visible := false;
      sp_insert.visible := false;
-     If  tv.Diagrama.SelectedNode <> nil then
-      Begin
+     ToolButton4.Enabled := false;
+     ToolButton5.Enabled := false;
+  end;
+  if frm_treeativ <> nil then
+  begin
+     sp_insert.visible := false;
+     if  tv.Diagrama.SelectedNode <> nil then
+     begin
        Ev_codigo := tv.Diagrama.SelectedNode.Userdata;
        If tv.Diagrama.SelectedNode.Shape =  8 then //'objeto_controle'
        begin
          WTipoObjeto := 'OC';
-         dbmemo2.height := 221;
+//         dbmemo2.height := 221;
          TabSheet2.caption := def19;
        end
        else
@@ -365,16 +365,12 @@ If frm_treeativ <> nil then
        end
       end;
    end
-else
+  else
    begin
-        begin
-          //sp_insert.visible := true;
-        end;
-
      If WTipoObjeto =  'OC' then
        begin
          caption := def20;
-         dbmemo2.height := 221;
+//         dbmemo2.height := 221;
          TabSheet2.caption := def19;
          sp6.visible := false;
          dbedit1.Visible := false;
@@ -391,7 +387,7 @@ else
         begin
           ts_Lay.tabvisible := true;
           caption := def86;
-          
+
         end
     else
        begin
@@ -444,20 +440,20 @@ begin
 end;
 procedure TFRM_ev.Abre_banco;
 var
- i ,k: integer;
- t : variant;
- wnom,Wtipo,Wtam,wnom1 : string;
- idbAdo : TAdoConnection;
- fechatree : boolean;
+  i ,k: integer;
+  t : variant;
+  wnom,Wtipo,Wtam,wnom1 : string;
+  idbAdo : TAdoConnection;
+  fechatree : boolean;
 begin
   fechatree := false;
-  If  (uOe(Tv_Tab.Selected.data)^.fBd <> Bd_ant) or (uOe(Tv_Tab.Selected.data)^.fBd = '') then
-  Begin
-      If frm_TreeAtiv = nil then        
-       Begin
-         frm_Treeativ := Tfrm_Treeativ.Create(self);
-         fechatree := true;
-       end;
+  if  (uOe(Tv_Tab.Selected.data)^.fBd <> Bd_ant) or (uOe(Tv_Tab.Selected.data)^.fBd = '') then
+  begin
+    if frm_TreeAtiv = nil then
+    begin
+      frm_Treeativ := Tfrm_Treeativ.Create(self);
+      fechatree := true;
+    end;
 
       case uOe(Tv_Tab.Selected.data)^.fTipo_banco of
        0 : Begin
@@ -484,16 +480,16 @@ begin
            end;
         end;
       idbAdo.GetFieldNames(tv_tab.Selected.Text,lb_cpo.Cols[0]);
-      
+
       bd_ant :=  uOe(Tv_Tab.Selected.data)^.fBd;
-      If fechatree then
+      if fechatree then
        frm_treeativ.close;
   end;
 end;
 
 procedure Tfrm_ev.sp_printClick(Sender: TObject);
-Begin
- Imprime('V');
+begin
+  Imprime('V');
 end;
 
 procedure Tfrm_ev.imprime(pTipo : string);
@@ -501,7 +497,7 @@ var
   iTab,iLay: Tdados_tab;
 begin
   inherited;
-  If frm_puc = nil then
+  if frm_puc = nil then
      frm_puc := Tfrm_Puc.Create(self);
 
   frm_puc.qrp.DataSet := iDataSource.DataSet;
@@ -555,16 +551,14 @@ end;
 procedure Tfrm_ev.sp2Click(Sender: TObject);
 begin
   inherited;
-   If iEvento <> nil then
-      begin
-       If iEvento.State in [dsEdit,dsInsert] then
-        begin
-          iEvento.edit;
-          iEvento.post ;
-        end;
-
-      end;
-
+  if iEvento <> nil then
+  begin
+    if iEvento.State in [dsEdit,dsInsert] then
+    begin
+      iEvento.edit;
+      iEvento.post ;
+    end;
+  end;
 end;
 
 procedure Tfrm_ev.SpeedButton17Click(Sender: TObject);
@@ -582,33 +576,32 @@ begin
                   tv_tab.Selected.text+'.'+
                   lb_cpo.cells[lb_cpo.col,lb_cpo.row]+' ');
     copia;
-
 end;
+
 procedure Tfrm_ev.copia;
-Begin
-    edit1.selectall;
-    edit1.CopyToClipboard;
-    If wactive = nil then
-     exit;
-    ActiveControl := Wactive;
-    iF ACTIVECONTROL = Dbmemo2 then
-       dbmemo2.PasteFromClipboard
-    else
-    iF ACTIVECONTROL = Dbmemo1 then
-       dbmemo1.PasteFromClipboard
-    else
-    If ActiveControl = Dbg_Lay then
-       begin
-         iLay.edit;
-         ilay.fieldbyname('LAY_DE').asstring := edit1.text;
-       end;
+begin
+  edit1.selectall;
+  edit1.CopyToClipboard;
+  if wactive = nil then
+   exit;
+  ActiveControl := Wactive;
+  if ACTIVECONTROL = Dbmemo2 then
+     dbmemo2.PasteFromClipboard
+  else
+  if ACTIVECONTROL = Dbmemo1 then
+     dbmemo1.PasteFromClipboard
+  else
+  if ActiveControl = Dbg_Lay then
+  begin
+    iLay.edit;
+    ilay.fieldbyname('LAY_DE').asstring := edit1.text;
+  end;
 end;
 
 procedure Tfrm_ev.dbmemo2Enter(Sender: TObject);
 begin
   inherited;
   wactive := dbmemo2;
-
 end;
 
 procedure Tfrm_ev.Dbmemo1Enter(Sender: TObject);
@@ -653,21 +646,20 @@ begin
     edit1.selectall;
     edit1.CopyToClipboard;
     ActiveControl := Wactive;
-    iF ACTIVECONTROL = Dbmemo2 then
+    if ACTIVECONTROL = Dbmemo2 then
        dbmemo2.PasteFromClipboard
     else
-    iF ACTIVECONTROL = Dbmemo1 then
+    if ACTIVECONTROL = Dbmemo1 then
        dbmemo1.PasteFromClipboard ;
 
 end;
 
 procedure Tfrm_ev.DBGrid1TitleClick(Column: TColumn);
 var
-i : integer;
+  i : integer;
 begin
  // inherited;
-
- If itab <> nil then
+ if itab <> nil then
   Begin
      with iTab.fClient.IndexDefs do
       begin
@@ -788,7 +780,6 @@ var
   i : integer;
 
 begin
-
  // Caption := 'frm_ev'   ;
  // SpeedButton97.Hint := 'SQL' ;
   //SpeedButton97.Caption := 'SQL'   ;
