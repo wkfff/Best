@@ -149,7 +149,6 @@ type
     procedure Class1Click(Sender : TObject);
     procedure sp_treeClick(Sender : TObject);
     procedure SpeedButton10Click(Sender : TObject);
-    procedure AppException(Sender : TObject; E : Exception);
     procedure Configurao1Click(Sender : TObject);
     procedure ConfiguraoObjetos1Click(Sender : TObject);
     procedure Atividades2Click(Sender : TObject);
@@ -1450,18 +1449,6 @@ begin
   image2.Left := 0;
   image2.Top := 0;
   image2.Height := frm_main.Height;
-
-
-{  if ToolButton1.Enabled = false then
-  Begin
-      if frm_clifull = nil then
-      Begin
-        ShowMessage('Não existe empresa cadastrada');
-        Empresas1Click(sender);
-        frm_main.SendToBack;
-      end;
-  End;
-}
 end;
 
 function Tfrm_main.Abre_banco(pChoose : boolean) : boolean;
@@ -1489,10 +1476,6 @@ begin
         bdx.Mode := (cmRead);
       end;
 
-      { If bdx.TIPOBANCO  > 0 then // bancos SQL
-         mm.Items[3].Items[6].Enabled := false
-       else
-        mm.Items[3].Items[6].Enabled := true; }
       fl.Directory := bdx.DirFluxo;  //tirar
 
       If wdemo then
@@ -1509,7 +1492,6 @@ begin
               bdx := nil;
               result := false;
               exit;
-                   //  Diretrio1Click(nil);
             end;
           end;
           free;
@@ -1528,12 +1510,6 @@ begin
   end;
 end;
 
-procedure Tfrm_main.AppException(Sender : TObject; E : Exception);
-begin
-  //  Application.ShowException(E);
-   // application.Terminate;
-end;
-
 function Tfrm_main.ExecuteF(const FileName, Params, DefaultDir : string;
   ShowCmd : Integer) : THandle;
 var
@@ -1548,16 +1524,10 @@ procedure Tfrm_main.AreadeInteresse1Click(Sender : TObject);
 begin
   If Checa_Acesso(uppercase('frm_ari'), SEGHABILIATADO, 0) then
   Begin
-
     If frm_ari = nil then
     begin
-//       frm_ari := Tfrm_ari.create(self);
       Application.CreateForm(Tfrm_ari, frm_ari);
     end;
-    {frm_ari.Top := 0;
-    frm_ari.Left := 0;
-    frm_ari.Show;}
-    //frm_ari.ShowModal;
   end;
 end;
 
@@ -1568,11 +1538,7 @@ begin
     If frm_clifull = nil then
     begin
       Application.CreateForm(Tfrm_clifull, frm_clifull);
-         //frm_clifull := Tfrm_clifull.create(self);
     end;
-      //frm_clifull.Top := 0;
-      //frm_clifull.Left := 0;
-      //frm_clifull.show;
   end;
 end;
 
@@ -1599,13 +1565,8 @@ begin
   Begin
     If frm_diversos = nil then
     begin
-        //frm_diversos := Tfrm_diversos.create(self);
       Application.CreateForm(Tfrm_diversos, frm_diversos);
     end;
-      {frm_diversos.Top := 0;
-      frm_diversos.Left := 0;
-      frm_diversos.Show;}
-      //frm_diversos.showModal;
   end;
 end;
 
@@ -1677,16 +1638,17 @@ begin
   begin SpeedButton10Click(frm_main) end;
   wfecha := true;
   If not canc_cli then
-  begin Abre_Objeto(TMenuItem(sender as Tobject).Tag, TMenuItem(sender as Tobject).Caption, true) end;
+  begin
+    Abre_Objeto(TMenuItem(sender as Tobject).Tag, TMenuItem(sender as Tobject).Caption, true);
+  end;
   wfecha := true;
 end;
 
 procedure Tfrm_main.Abre_objeto(pTag : integer; pTit : string; mostraLista : boolean);
 var
-mTab,mCodigo : string;
-//itab : Tdados_tab;
-iFrm : Tfrm_obj;
-Existe : boolean;
+  mTab,mCodigo : string;
+  iFrm : Tfrm_obj;
+  Existe : boolean;
 begin
   iTab.Connection := bdx;
   case  ptag of
@@ -1705,7 +1667,6 @@ begin
    15 : mtab := 'IDF_IF';
    20 : mtab := 'IDF_TX';
   end;
-
   try
    with itab  do
    while true do
@@ -2129,9 +2090,9 @@ end;
 
 procedure Tfrm_main.SpeedButton1Click(Sender: TObject);
 var
-Wdiag : Tdiag_dados;
-i,p : integer;
-Wname : string;
+  Wdiag : Tdiag_dados;
+  i,p : integer;
+  Wname : string;
 begin
   Wdiag := TDiag_dados.create(self);
   for i := 0 to fl.Items.count -1 do
@@ -2147,8 +2108,6 @@ begin
     If not Wdiag.Get_Diagrama(12,14,strtoint(Wname)) then
        deletefile(fl.filename);
    end;
-
-
 end;
 
 procedure Tfrm_main.ObjetodeInterface1Click(Sender: TObject);
@@ -2177,12 +2136,11 @@ begin
          frm_escativ  := tfrm_escativ.create(self);
       frm_escativ.show;
     end;
-
 end;
 
 procedure Tfrm_main.EventosdeNegcio1Click(Sender: TObject);
 var
-wprev : string;
+  wprev : string;
 begin
 //MessageBox(Application.Handle,'Disponível apenas na versão completa do sistema','BEST', MB_ICONINFORMATION + MB_OK);
   If CurrEmpresa = nil then
@@ -2210,8 +2168,7 @@ end;
 
 procedure Tfrm_main.RegrasdeNegcio2Click(Sender: TObject);
 var
-wprev : string;
-
+  wprev : string;
 begin
 //MessageBox(Application.Handle,'Disponível apenas na versão completa do sistema','BEST', MB_ICONINFORMATION + MB_OK);
   If CurrEmpresa = nil then
@@ -2238,8 +2195,8 @@ end;
 
 procedure Tfrm_main.EntidadesExternas1Click(Sender: TObject);
 var
-wprev : string;
- Begin
+  wprev : string;
+begin
 //MessageBox(Application.Handle,'Disponível apenas na versão completa do sistema','BEST', MB_ICONINFORMATION + MB_OK);
   If CurrEmpresa = nil then
       SpeedButton10Click(frm_main) ;
@@ -2266,8 +2223,8 @@ end;
 
 procedure Tfrm_main.Fluxosdedados1Click(Sender: TObject)  ;
 var
-wprev : string;
- Begin
+  wprev : string;
+begin
 // MessageBox(Application.Handle,'Disponível apenas na versão completa do sistema','BEST', MB_ICONINFORMATION + MB_OK);
 
    If CurrEmpresa = nil then
