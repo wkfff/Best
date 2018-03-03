@@ -438,6 +438,7 @@ begin
        end;
      end;
 end;
+
 procedure TFRM_ev.Abre_banco;
 var
   i ,k: integer;
@@ -651,7 +652,6 @@ begin
     else
     if ACTIVECONTROL = Dbmemo1 then
        dbmemo1.PasteFromClipboard ;
-
 end;
 
 procedure Tfrm_ev.DBGrid1TitleClick(Column: TColumn);

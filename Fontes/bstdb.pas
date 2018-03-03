@@ -5247,9 +5247,9 @@ function Tdados_tab.Mostra_lista : string;
                                    a escolha feita.
                         pId      : Código do Objeto corrente}
 var
-iTipo,iTipoAtiv  : string;
-Lista : Tfrm_lista;
-wtipo : integer;
+  iTipo,iTipoAtiv  : string;
+  Lista : Tfrm_lista;
+  wtipo : integer;
  begin
       result := '';  
       listaCodigo:= 0;
@@ -5328,7 +5328,7 @@ wtipo : integer;
              ListaCodigo := strtoint(uObj(lb_Lista.selected.data)^.Fcodigo);
              ListaDesc   := lb_lista.selected.text;
              ListaWbs    := uObj(lb_Lista.selected.data)^.fWbs;
-             If ListaDim = 'IDF_DADOS' then
+             If (ListaDim = 'IDF_DADOS') or (ListaDim = 'IDF_EV') then
              Begin
                 with Tdad.create(self) do
                 Begin
