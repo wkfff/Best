@@ -431,7 +431,6 @@ begin
 
             iCode := uOe(Tv_Tab.Selected.data)^.fCodigo;
 
-
             dbgrid1.DataSource := itab.DataExt;
             Get_dados_unico(tv_tab.selected.text, iCode);
            end;
@@ -528,7 +527,6 @@ begin
        frm_puc.titulo.caption    := uppercase(def7);
        frm_puc.QRLabel19.caption := def19;
     end;
-
 
   frm_Puc.subtitulo.caption := Dbedit4.text;
   If pTipo = 'V' then
@@ -670,7 +668,6 @@ begin
         iTab.fclient.First;
       end;
   end;
-
 end;
 
 procedure Tfrm_ev.dbg_dgKeyDown(Sender: TObject; var Key: Word;
@@ -686,7 +683,7 @@ begin
   edit1.text := uppercase(' '+
                   tv_tab.Selected.text+'.'+
                   dbgrid1.DataSource.DataSet.fieldbyname('IDF_DESIGNACAO').asstring+' ');
-  copia;                
+  copia;
 end;
 
 procedure Tfrm_ev.sp6Click(Sender: TObject);
@@ -703,7 +700,6 @@ begin
        dbedit1.DataSource.DataSet.edit;
        dbedit1.field.text := od.filename;
      end;
-
    end
   else
    Begin
@@ -715,7 +711,6 @@ begin
       frm_main.ult_dir := extractFileDir(dbedit1.Text);
 
     end;
-
 end;
 
 procedure Tfrm_ev.sptelClick(Sender: TObject);
@@ -732,7 +727,6 @@ begin
        dbedit3.DataSource.DataSet.edit;
        dbedit3.field.text := od.filename;
      end;
-
    end
   else
    Begin
@@ -742,7 +736,6 @@ begin
   If dbedit3.Text <> '' then
     begin
       frm_main.ult_dir := extractFileDir(dbedit3.Text);
-
     end;
 end;
 

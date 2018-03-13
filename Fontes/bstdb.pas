@@ -4152,7 +4152,7 @@ function Tdados_Tab.OpenAllDistinct(pCli,pProj : integer) : boolean;
   end;
 
 function Tdados_Tab.OpenAll(pCli,pProj : integer;pTab,pTipo,pTipoAtiv : string;pOp : integer) : boolean;
- begin
+begin
     result := true;
     close;
     sql.clear;
@@ -4172,7 +4172,6 @@ function Tdados_Tab.OpenAll(pCli,pProj : integer;pTab,pTipo,pTipoAtiv : string;p
        sql.add(' AND (IDF_DESIGNACAO <> '+''''+''+'''');
        sql.add(' AND  IDF_DESIGNACAO <> '+''''+ ' '+''''+')');
       end;
-
 
     If ptipo <> '' then   // somente para OI e OC
        sql.add(' AND IDF_TIPO_ATIVIDADE IN ('+''''+pTipo+''''+')');
@@ -5247,10 +5246,10 @@ function Tdados_tab.Mostra_lista : string;
                                    a escolha feita.
                         pId      : Código do Objeto corrente}
 var
-  iTipo,iTipoAtiv  : string;
+  iTipo, iTipoAtiv  : string;
   Lista : Tfrm_lista;
   wtipo : integer;
- begin
+begin
       result := '';  
       listaCodigo:= 0;
       ListaDesc  := '';
@@ -5298,10 +5297,10 @@ var
              sp_confirm.Enabled := true;
            end;
        { se a Lista a mostrar é de elementos de dados (IDF_DE, inclui também os atributos de IDF_DADOS}
-        If ListaDim = 'IDF_DADOS' then
+        If ListaDim = 'IDF_DE' then
             OpenAllDistinct(ListaCli ,ListaProj)
         else
-           OpenAll(ListaCli ,ListaProj,ListaDim,iTipo,iTipoAtiv,Operacao);
+           OpenAll(ListaCli, ListaProj, ListaDim, iTipo, iTipoAtiv, Operacao);
 
         Cria_lista(Lb_lista,false,true);
 
