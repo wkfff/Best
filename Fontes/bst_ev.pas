@@ -197,47 +197,35 @@ end;
 procedure Tfrm_ev.pgcpChange(Sender: TObject);
 begin
   inherited;
-
-  If dbg_evento.DataSource <> nil then
+  if dbg_evento.DataSource <> nil then
       SpeedButton17Click(nil);
-
+  if pgcp.ActivePage = TabSheet2 then       // eventos
   begin
-     if pgcp.ActivePage <> tb_geral then
-      begin
-       {If dbmemo2.Text = '' then
-          dbmemo2.Text := 'OBJETIVO'; }
-      end
-     else
-
-     If pgcp.ActivePage = TabSheet2 then       // eventos
-       begin
-        If iEvento = nil then
-           iEvento := Tdados_Tab.create(self);
-        with iEvento do
-         begin
-            Get_Correlatos(self.cliente,self.cenario,wtipoObjeto,Id,'EV','IDF_EV') ;
-            dbg_evento.DataSource := dataext;
-            DbMemo1.DataSource := dataext;
-            dbmemo1.dataField := 'IDF_MINIESPECIFICACAO';
-            dbedit3.DataSource := dataext;
-            BeforePost := EvPost;
-         end;
-       end
+    if iEvento = nil then
+      iEvento := Tdados_Tab.create(self);
+    with iEvento do
+    begin
+      Get_Correlatos(self.cliente,self.cenario,wtipoObjeto,Id,'EV','IDF_EV') ;
+      dbg_evento.DataSource := dataext;
+      DbMemo1.DataSource := dataext;
+      dbmemo1.dataField := 'IDF_MINIESPECIFICACAO';
+      dbedit3.DataSource := dataext;
+      BeforePost := EvPost;
+    end;
+  end
   else
-     begin
-
-       If pgcp.ActivePage = Ts_lay then       // lay out
-        begin
-          If iLay = nil then
-             iLay := Tdados_Tab.create(self);
-          with iLay do
-           begin
-             Get_layout(Cliente,Cenario,Id);
-             dbg_lay.DataSource := Dataext;
-             BeforePost         := layPost;
-           end;
-        end;
-     end;
+  begin
+    if pgcp.ActivePage = Ts_lay then       // lay out
+    begin
+      if iLay = nil then
+        iLay := Tdados_Tab.create(self);
+      with iLay do
+      begin
+        Get_layout(Cliente,Cenario,Id);
+        dbg_lay.DataSource := Dataext;
+        BeforePost         := layPost;
+      end;
+    end;
   end;
 end;
 
@@ -431,13 +419,13 @@ begin
 
             iCode := uOe(Tv_Tab.Selected.data)^.fCodigo;
 
-
             dbgrid1.DataSource := itab.DataExt;
             Get_dados_unico(tv_tab.selected.text, iCode);
            end;
        end;
      end;
 end;
+
 procedure TFRM_ev.Abre_banco;
 var
   i ,k: integer;
@@ -527,7 +515,6 @@ begin
        frm_puc.titulo.caption    := uppercase(def7);
        frm_puc.QRLabel19.caption := def19;
     end;
-
 
   frm_Puc.subtitulo.caption := Dbedit4.text;
   If pTipo = 'V' then
@@ -651,7 +638,6 @@ begin
     else
     if ACTIVECONTROL = Dbmemo1 then
        dbmemo1.PasteFromClipboard ;
-
 end;
 
 procedure Tfrm_ev.DBGrid1TitleClick(Column: TColumn);
@@ -670,7 +656,6 @@ begin
         iTab.fclient.First;
       end;
   end;
-
 end;
 
 procedure Tfrm_ev.dbg_dgKeyDown(Sender: TObject; var Key: Word;
@@ -686,7 +671,7 @@ begin
   edit1.text := uppercase(' '+
                   tv_tab.Selected.text+'.'+
                   dbgrid1.DataSource.DataSet.fieldbyname('IDF_DESIGNACAO').asstring+' ');
-  copia;                
+  copia;
 end;
 
 procedure Tfrm_ev.sp6Click(Sender: TObject);
@@ -703,7 +688,6 @@ begin
        dbedit1.DataSource.DataSet.edit;
        dbedit1.field.text := od.filename;
      end;
-
    end
   else
    Begin
@@ -715,7 +699,6 @@ begin
       frm_main.ult_dir := extractFileDir(dbedit1.Text);
 
     end;
-
 end;
 
 procedure Tfrm_ev.sptelClick(Sender: TObject);
@@ -732,7 +715,6 @@ begin
        dbedit3.DataSource.DataSet.edit;
        dbedit3.field.text := od.filename;
      end;
-
    end
   else
    Begin
@@ -742,7 +724,6 @@ begin
   If dbedit3.Text <> '' then
     begin
       frm_main.ult_dir := extractFileDir(dbedit3.Text);
-
     end;
 end;
 

@@ -4152,7 +4152,7 @@ function Tdados_Tab.OpenAllDistinct(pCli,pProj : integer) : boolean;
   end;
 
 function Tdados_Tab.OpenAll(pCli,pProj : integer;pTab,pTipo,pTipoAtiv : string;pOp : integer) : boolean;
- begin
+begin
     result := true;
     close;
     sql.clear;
@@ -4172,7 +4172,6 @@ function Tdados_Tab.OpenAll(pCli,pProj : integer;pTab,pTipo,pTipoAtiv : string;p
        sql.add(' AND (IDF_DESIGNACAO <> '+''''+''+'''');
        sql.add(' AND  IDF_DESIGNACAO <> '+''''+ ' '+''''+')');
       end;
-
 
     If ptipo <> '' then   // somente para OI e OC
        sql.add(' AND IDF_TIPO_ATIVIDADE IN ('+''''+pTipo+''''+')');
@@ -4403,11 +4402,9 @@ function Tdados_Tab.Get_Correlatos( pCli : integer;    // pega todos os correlat
                                    pTipoFilho : string;
                                    ptab : string) : boolean;  //editável!!!!!
 begin
-
    close;
    result := true;
    sql.clear;
-
 
    sql.add('SELECT * FROM '+''+ptab+''+' I ');
    //sql.add('WHERE I.IDF_CODIGO IN  ');
@@ -4433,7 +4430,6 @@ end;
 
 function Tdados_Tab.Get_Aplicativos( pCli : integer; pProj : integer; pId : integer ) :integer;
 begin
-
    close;
    result := 0;
    sql.clear;
@@ -4442,12 +4438,9 @@ begin
    sql.add(' AND PRJ_ID = '+''+ INTTOSTR(pproj) +'');
    sql.add(' AND S.IDF_COD_APLIC= '+''+INTTOSTR(pId)+'');
 
-
    open;
    If NOT eof then
       result := FIELDBYNAME('TOT').ASINTEGER;
-
-
 end;
 
 function Tdados_Tab.Get_qtdeAtivLoc( pCli : integer; pProj : integer; pId : integer ) :integer;
@@ -4468,8 +4461,6 @@ begin                                          //PID : LOCAL DE PROC
    open;
    If NOT eof then
       result := FIELDBYNAME('TOT').ASINTEGER;
-
-
 end;
 
 
@@ -5247,10 +5238,10 @@ function Tdados_tab.Mostra_lista : string;
                                    a escolha feita.
                         pId      : Código do Objeto corrente}
 var
-iTipo,iTipoAtiv  : string;
-Lista : Tfrm_lista;
-wtipo : integer;
- begin
+  iTipo, iTipoAtiv  : string;
+  Lista : Tfrm_lista;
+  wtipo : integer;
+begin
       result := '';  
       listaCodigo:= 0;
       ListaDesc  := '';
@@ -5298,10 +5289,10 @@ wtipo : integer;
              sp_confirm.Enabled := true;
            end;
        { se a Lista a mostrar é de elementos de dados (IDF_DE, inclui também os atributos de IDF_DADOS}
-        If ListaDim = 'IDF_DADOS' then
+        If ListaDim = 'IDF_DE' then
             OpenAllDistinct(ListaCli ,ListaProj)
         else
-           OpenAll(ListaCli ,ListaProj,ListaDim,iTipo,iTipoAtiv,Operacao);
+           OpenAll(ListaCli, ListaProj, ListaDim, iTipo, iTipoAtiv, Operacao);
 
         Cria_lista(Lb_lista,false,true);
 
@@ -5328,7 +5319,7 @@ wtipo : integer;
              ListaCodigo := strtoint(uObj(lb_Lista.selected.data)^.Fcodigo);
              ListaDesc   := lb_lista.selected.text;
              ListaWbs    := uObj(lb_Lista.selected.data)^.fWbs;
-             If ListaDim = 'IDF_DADOS' then
+             If (ListaDim = 'IDF_DADOS') or (ListaDim = 'IDF_EV') then
              Begin
                 with Tdad.create(self) do
                 Begin
