@@ -4402,11 +4402,9 @@ function Tdados_Tab.Get_Correlatos( pCli : integer;    // pega todos os correlat
                                    pTipoFilho : string;
                                    ptab : string) : boolean;  //editável!!!!!
 begin
-
    close;
    result := true;
    sql.clear;
-
 
    sql.add('SELECT * FROM '+''+ptab+''+' I ');
    //sql.add('WHERE I.IDF_CODIGO IN  ');
@@ -4432,7 +4430,6 @@ end;
 
 function Tdados_Tab.Get_Aplicativos( pCli : integer; pProj : integer; pId : integer ) :integer;
 begin
-
    close;
    result := 0;
    sql.clear;
@@ -4441,12 +4438,9 @@ begin
    sql.add(' AND PRJ_ID = '+''+ INTTOSTR(pproj) +'');
    sql.add(' AND S.IDF_COD_APLIC= '+''+INTTOSTR(pId)+'');
 
-
    open;
    If NOT eof then
       result := FIELDBYNAME('TOT').ASINTEGER;
-
-
 end;
 
 function Tdados_Tab.Get_qtdeAtivLoc( pCli : integer; pProj : integer; pId : integer ) :integer;
@@ -4467,8 +4461,6 @@ begin                                          //PID : LOCAL DE PROC
    open;
    If NOT eof then
       result := FIELDBYNAME('TOT').ASINTEGER;
-
-
 end;
 
 
