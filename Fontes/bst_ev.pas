@@ -681,37 +681,31 @@ begin
    od.InitialDir := frm_main.ULT_DIR
   else
    od.InitialDir := getcurrentdir;
-  If dbedit1.text = '' then
-   Begin
-    If OD.execute then
-     Begin
+  if dbedit1.text = '' then
+   begin
+    if OD.execute then
+     begin
        dbedit1.DataSource.DataSet.edit;
        dbedit1.field.text := od.filename;
      end;
    end
   else
-   Begin
-     ExecProg(dbedit1.text,'');
-
-   end;
-  If dbedit1.Text <> '' then
-    begin
-      frm_main.ult_dir := extractFileDir(dbedit1.Text);
-
-    end;
+    ExecProg(dbedit1.text,'');
+  if dbedit1.Text <> '' then
+    frm_main.ult_dir := extractFileDir(dbedit1.Text);
 end;
 
 procedure Tfrm_ev.sptelClick(Sender: TObject);
 begin
   inherited;
-  If frm_main.ULT_DIR <> '' then
+  if frm_main.ULT_DIR <> '' then
    od.InitialDir := frm_main.ULT_DIR
   else
    od.InitialDir := getcurrentdir;
-  If dbedit3.text = '' then
-   Begin
-    If OD.execute then
-     Begin
+  if dbedit3.text = '' then
+   begin
+    if OD.execute then
+     begin
        dbedit3.DataSource.DataSet.edit;
        dbedit3.field.text := od.filename;
      end;
@@ -759,7 +753,6 @@ end;
 procedure Tfrm_ev.Loadconstantobj;
 var
   i : integer;
-
 begin
  // Caption := 'frm_ev'   ;
  // SpeedButton97.Hint := 'SQL' ;
