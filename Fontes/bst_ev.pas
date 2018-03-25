@@ -120,12 +120,12 @@ uses bst_main, bst_dir4, bst_treeAtiv, bst_puc, bst_dm_rel;
 procedure Tfrm_ev.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
-  If itab <> nil then
-   Begin
-      If iTab.IndexName <> '' then
-         itab.IndexName := '';
-      freeandnil(itab);
-   end;
+  if itab <> nil then
+  begin
+    if iTab.IndexName <> '' then
+      itab.IndexName := '';
+    freeandnil(itab);
+  end;
 
   frm_ev  := nil;
   action := caFree;
@@ -289,7 +289,8 @@ begin
      else
      begin
        // Aqui deverei colocar o código para o caso de confirmação de deleção.
-
+       dbg_lay.DataSource.DataSet.Edit;
+       dbg_lay.DataSource.DataSet.Delete;
      end;
    end;
 end;

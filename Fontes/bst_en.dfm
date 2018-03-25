@@ -34,6 +34,7 @@ inherited frm_en: Tfrm_en
   inherited pgcp: TPageControl
     Width = 553
     Height = 279
+    ActivePage = tb_dados
     inherited tb_geral: TTabSheet
       Font.Name = 'Calibri'
       inherited docext: TSpeedButton
@@ -146,7 +147,7 @@ inherited frm_en: Tfrm_en
       object Label1: TLabel [0]
         Left = 16
         Top = 0
-        Width = 433
+        Width = 333
         Height = 14
         Caption = 
           'Atividades Disparadas pelo Evento/Activities that trigger this E' +

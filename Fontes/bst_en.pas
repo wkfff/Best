@@ -188,10 +188,6 @@ begin
   Label1.Caption := def56;;//'Atividades Disparadas pelo Evento/Activities that trigger this E' +          'vent'
   //   lv.Columns[0].Caption := def63       ;
   //    lv.Columns[1].Caption := def10000 ;// envolvim. ator
-      
-
-
-
 end;
 
 procedure Tfrm_en.SpeedButton5Click(Sender: TObject);
