@@ -2644,8 +2644,8 @@ end;
 
 procedure Tfrm_treeativ.Mostra_tabelas(pbanco : Tadoconnection; pTab : string;pForm : TForm ;pList: TListBox;pMostraTudo : boolean);
 var
-i: integer;
- Begin
+  i: integer;
+begin
    Begin
       If pBanco <> nil then
       begin
@@ -2714,16 +2714,12 @@ i: integer;
 
 
 procedure Tfrm_treeativ.Pesq_Banco(pDir : boolean; pTab : string;pList : TListBox);
-
-Begin
-  If pDir then
-   Begin
-     If frm_dir4 = nil then
-        frm_dir4 := Tfrm_dir4.create(self);
-   end;
-
-
-
+begin
+  if pDir then
+  begin
+    if frm_dir4 = nil then
+      frm_dir4 := Tfrm_dir4.create(self);
+  end;
   case Tipo_banco of
    0 : Begin
          If pDir then
@@ -2762,17 +2758,11 @@ Begin
          idbDbase.ConnectionString := 'Provider=Microsoft.Jet.OLEDB.4.0;Data Source='+Diretorio+';Extended Properties=Dbase III;Persist Security Info=False';
          IdbAdo := iDbDbase;
        end;
-
-
-
   end;
-
-
 
   If tv.Diagrama.IDG_DIR = 'DUC' then
    Begin
       plist.Clear;
-
       try
        iDBado.GetTableNames(frm_objetos.lb.items,false);
       except
@@ -2792,8 +2782,6 @@ Begin
          Edit2.Text := Nome_banco;
          Edit1.Text := dir_db;
        end;
-
-
    end
   else
    If tv.Diagrama.IDG_DIR = 'DMI' then
@@ -2832,19 +2820,18 @@ end;
 
 procedure Tfrm_treeativ.Cria_tabela;
 var
-iTab : tdados_tab;
- Begin
+  iTab : tdados_tab;
+begin
 
- end;
-
+end;
 
 procedure Tfrm_treeativ.Tree_Edit(Sender: TObject);
 begin
- case tv.selected.level of
+  case tv.selected.level of
     0 : TVNovoCli(sender);
     1 : Abre_cenario(sender);
     2 : Abre_Diag(sender);
- end;
+  end;
 end;
 
 procedure Tfrm_treeativ.Ed_todo(Sender: TObject);
@@ -2875,16 +2862,16 @@ end;
 
 procedure  Tfrm_treeativ.Trata_Entity(pEnt : afNode; pMouse : integer); //ENTIDADE
 var
-Wshape ,w: integer;
-iTab : Tdados_tab;
-wn : string;
-iObj : afNode;
-wlist : Tstrings;
-s : String;
-Begin
-  If tv.Diagrama.IDG_DIR = 'LIV' then
-   Begin
-     If pent.Shape = 75 then
+  Wshape ,w: integer;
+  iTab : Tdados_tab;
+  wn : string;
+  iObj : afNode;
+  wlist : Tstrings;
+  s : String;
+begin
+  if tv.Diagrama.IDG_DIR = 'LIV' then
+   begin
+     if pent.Shape = 75 then
        begin
             If frm_text = nil then
                frm_text  := Tfrm_text.create(self);
@@ -3715,9 +3702,9 @@ begin
             iTab.mostra_lista;
             if iTab.ListaCodigo = 0 then
               raise exception.create(mens11);
-            { atualiza dewscrição da instancia criada : para cada descricao obtida da lista,
+            { atualiza descrição da instancia criada : para cada descricao obtida da lista,
             é criada um registro na tabela OI - atenção todos os objetos aparecem duplicados na lista}
-            with Tdados_tab.create(self) do
+           { with Tdados_tab.create(self) do
             begin
               if  Open_objeto(tv.Empresas.cenarios.CLI_ID,tv.Empresas.cenarios.PRJ_ID,
                                  SelectedNode.UserData ,'IDF_OI') then
@@ -3727,7 +3714,7 @@ begin
                 post;
                 free;
               end;
-            end;
+            end; }
             SelectedNode.text        :=  itab.Listadesc;
             SelectedNode.UserData    :=  itab.ListaCodigo;
           end;
