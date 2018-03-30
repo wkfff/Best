@@ -28,6 +28,7 @@ inherited frm_de: Tfrm_de
   inherited pgcp: TPageControl
     Width = 650
     Height = 311
+    ActivePage = tb_geral
     inherited tb_geral: TTabSheet
       inherited docext: TSpeedButton
         Left = 10

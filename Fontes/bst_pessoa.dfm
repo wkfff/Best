@@ -32,7 +32,7 @@ inherited frm_pessoa: Tfrm_pessoa
     Top = 52
     Width = 633
     Height = 317
-    ActivePage = Tb_atv
+    ActivePage = tb_geral
     inherited tb_geral: TTabSheet
       inherited docext: TSpeedButton
         Left = 6
@@ -400,7 +400,6 @@ inherited frm_pessoa: Tfrm_pessoa
     inherited ToolBar1: TToolBar
       Width = 620
       inherited ToolButton6: TToolButton
-        Visible = True
         OnClick = sp_printClick
       end
     end

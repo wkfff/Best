@@ -5289,9 +5289,9 @@ begin
              sp_confirm.Enabled := true;
            end;
        { se a Lista a mostrar é de elementos de dados (IDF_DE, inclui também os atributos de IDF_DADOS}
-        If ListaDim = 'IDF_DE' then
+        {If ListaDim = 'IDF_DE' then
             OpenAllDistinct(ListaCli ,ListaProj)
-        else
+        else  }
            OpenAll(ListaCli, ListaProj, ListaDim, iTipo, iTipoAtiv, Operacao);
 
         Cria_lista(Lb_lista,false,true);
@@ -5467,82 +5467,74 @@ Begin
   result := FieldbyName('CODIGO').AsInteger;
 End;
 
-function TDados_tab.Open_Objeto(pCli,pProj,pId : integer;pTab : string) : boolean;
+function TDados_tab.Open_Objeto(pCli, pProj, pId : integer;pTab : string) : boolean;
 var
-s : string;
- begin
+  s : string;
+begin
+  close;
+  sql.clear;
+  sql.add('SELECT * FROM '+''+ptab+'');
+  sql.add(' WHERE CLI_ID = '+''+INTTOSTR(PCLI)+''+' AND ');
+  sql.add(' PRJ_ID = '+''+INTTOSTR(PPROJ)+''+' AND ');
+  sql.add(' IDF_CODIGO = '+''+INTTOSTR(PID)+'');
+  if(ptab = 'IDF_DE') or (ptab = 'IDF_DATA') or (ptab = 'IDF_IF')then
+    sql.add('ORDER BY CLI_ID,PRJ_ID,SUB_NIVEL');
+  open;
+  if not eof then
+  begin
+    fCpoLista1 := 'IDF_CODIGO';
+    fCpoLista2 := 'IDF_DESIGNACAO';
+    result     := true;
+    CLI_ID     := pCli;
+    PRJ_ID     := pProj;
+    IDF_CODIGO := pId;
+  end;
+end;
 
-    close    ;
-    sql.clear;
-    sql.add('SELECT * FROM '+''+ptab+'');
-    sql.add(' WHERE CLI_ID = '+''+INTTOSTR(PCLI)+''+' AND ');
-    sql.add(' PRJ_ID = '+''+INTTOSTR(PPROJ)+''+' AND ');
-    sql.add(' IDF_CODIGO = '+''+INTTOSTR(PID)+'');
-    If(ptab = 'IDF_DE') or (ptab = 'IDF_DATA') or (ptab = 'IDF_IF')then
-     sql.add('ORDER BY CLI_ID,PRJ_ID,SUB_NIVEL');
-    open;
-    If not eof then
-       begin
-          fCpoLista1 := 'IDF_CODIGO';
-          fCpoLista2 := 'IDF_DESIGNACAO';
-          result     := true;
-          CLI_ID     := pCli;
-          PRJ_ID     := pProj;
-          IDF_CODIGO := pId;
-
-       end;
-
- end;
-
- function TDados_tab.Open_Objetos(pCli,pProj : integer;pTab : string) : boolean;
+function TDados_tab.Open_Objetos(pCli,pProj : integer;pTab : string) : boolean;
 var
-s : string;
- begin
-
-    close    ;
-    sql.clear;
-    sql.add('SELECT * FROM '+''+ptab+'');
-    sql.add(' WHERE CLI_ID = '+''+INTTOSTR(PCLI)+''+' AND ');
-    sql.add(' PRJ_ID = '+''+INTTOSTR(PPROJ)+'');
-    open;
-    If not eof then
-       result := true;
-
- end;
+  s : string;
+begin
+  close;
+  sql.clear;
+  sql.add('SELECT * FROM '+''+ptab+'');
+  sql.add(' WHERE CLI_ID = '+''+INTTOSTR(PCLI)+''+' AND ');
+  sql.add(' PRJ_ID = '+''+INTTOSTR(PPROJ)+'');
+  open;
+  if not eof then
+    result := true;
+end;
 
 function TDados_tab.Open_ObjetosByDesc(pCli,pProj : integer;pTab : string) : boolean;
 var
-s : string;
- begin
-
-    close    ;
-    sql.clear;
-    sql.add('SELECT * FROM '+''+ptab+'');
-    sql.add(' WHERE CLI_ID = '+''+INTTOSTR(PCLI)+''+' AND ');
-    sql.add(' PRJ_ID = '+''+INTTOSTR(PPROJ)+'');
-    sql.add(' ORDER BY IDF_DESIGNACAO');
-    open;
-    If not eof then
-       result := true;
-
- end;
+  s : string;
+begin
+  close;
+  sql.clear;
+  sql.add('SELECT * FROM '+''+ptab+'');
+  sql.add(' WHERE CLI_ID = '+''+INTTOSTR(PCLI)+''+' AND ');
+  sql.add(' PRJ_ID = '+''+INTTOSTR(PPROJ)+'');
+  sql.add(' ORDER BY IDF_DESIGNACAO');
+  open;
+  if not eof then
+    result := true;
+end;
 
 function TDados_tab.GetTab(pCli,pProj : integer;pDESC : string) : boolean;
 var
   s : string;
 begin
-    close    ;
-    sql.clear;
-    sql.add('SELECT * FROM IDF_DADOS');
-    sql.add(' WHERE CLI_ID = '+''+INTTOSTR(PCLI)+''+' AND ');
-    sql.add(' PRJ_ID = '+''+INTTOSTR(PPROJ)+'');
-    sql.add(' AND IDF_DESIGNACAO =  '+''''+pDesc+'''');
+  close;
+  sql.clear;
+  sql.add('SELECT * FROM IDF_DADOS');
+  sql.add(' WHERE CLI_ID = '+''+INTTOSTR(PCLI)+''+' AND ');
+  sql.add(' PRJ_ID = '+''+INTTOSTR(PPROJ)+'');
+  sql.add(' AND IDF_DESIGNACAO =  '+''''+pDesc+'''');
 
-    open;
-    If not eof then
-       result := true;
-
- end;
+  open;
+  if not eof then
+    result := true;
+end;
 
 
 function TDados_tab.MarcadelInvisivel ( pTipo : string): boolean;
