@@ -63,35 +63,22 @@ begin
   action := caFree;
 end;
 
-{procedure Tfrm_pessoa.BitBtn1Click(Sender: TObject);
-begin
-  inherited;
-  close;
-end;}
-
 procedure Tfrm_pessoa.FormShow(Sender: TObject);
 begin
   inherited;
   tb_atv.TabVisible   := false;
   tb_dados.TabVisible := false;
- // If frm_treeativ <> nil then
-    Begin
-        with Tcenario.create(self) do
-         Begin
-           open_cenario(self.Cliente,self.Cenario);
-           edit1.Text := PRJ_PATH;
+  with Tcenario.create(self) do
+  begin
+    open_cenario(self.Cliente,self.Cenario);
+    edit1.Text := PRJ_PATH;
 
-           free;
-         end;
-
-    end ;
-
-
-
+    free;
+  end;
 end;
 
 procedure Tfrm_pessoa.sp_printClick(Sender: TObject);
- var
+var
  i : integer;
 begin
   inherited;
@@ -101,7 +88,7 @@ begin
     try
       frm_ppessoa.qrp.DataSet := iDataSource.DataSet;
 
-     with frm_ppessoa do
+      with frm_ppessoa do
       begin
          for i := 0 to componentCount -1 do
           begin
@@ -116,8 +103,6 @@ begin
     finally
 
     end;
-
-
 end;
 
 procedure Tfrm_pessoa.pgcpChange(Sender: TObject);

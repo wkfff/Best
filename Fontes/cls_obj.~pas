@@ -2168,17 +2168,17 @@ end;
 
 procedure TDg.Copia_Sel;
 var
-i,j : integer;
-aWbs,aAtor,iUp : afNode;
+  i,j : integer;
+  aWbs,aAtor,iUp : afNode;
 begin
-     dg_classe  := tv.Diagrama.IDG_DIR;
-     dg_cenario := tv.Diagrama.CENARIO;
-     dg_cli     := tv.Diagrama.EMPRESA;
-     Desmarca ; //desmarca todos os objetos
+  dg_classe  := tv.Diagrama.IDG_DIR;
+  dg_cenario := tv.Diagrama.CENARIO;
+  dg_cli     := tv.Diagrama.EMPRESA;
+  Desmarca ; //desmarca todos os objetos
 
-     for i := 1 to  Nodes.Count do
-      Begin
-        If not Nodes.Item(i).Selected then   // desmarca tudo
+  for i := 1 to  Nodes.Count do
+  begin
+    if not Nodes.Item(i).Selected then   // desmarca tudo
            continue;
 
         If (Nodes.Item(i).Shape = 1) and (dg_classe = 'DPN') then  //junção
@@ -2224,17 +2224,16 @@ begin
       end;
       Copy(2);  //copia os marcados(marked = true)
       Desmarca;
-
 end;
 
 procedure TDG.Cola_sel( pCompleto : boolean;pConfirm : boolean;pABaixo : boolean;IdNode : integer);
 var
-i,j,k: integer;
-awbs,aAtor,oAtiv : afNode;
-wmin,wleft : double;
-listaadeletar : tstringlist;
-wlista : uListaObj;
-oList : TList;
+  i,j,k: integer;
+  awbs,aAtor,oAtiv : afNode;
+  wmin,wleft : double;
+  listaadeletar : tstringlist;
+  wlista : uListaObj;
+  oList : TList;
 begin
    oList := TList.create;
    pCompleto := false;
@@ -2351,12 +2350,8 @@ begin
                                      Nodes.Item(i).UserData,Nodes.Item(i).Text,SELF.IDG_DIR,false);
 
              end;
-
           end;
-
       end;
-
-
 
       {If pAbaixo then
        begin
@@ -3249,16 +3244,12 @@ Begin
 
 end;
 
-
-
-
-
 function TDg.Get_Title(pNode: afnode): afnode;
 var
-i : integer;
+  i : integer;
 begin
- result := nil;
- for i := 1 to pNode.OutLinks.Count do
+  result := nil;
+  for i := 1 to pNode.OutLinks.Count do
   Begin
    If pNode.OutLinks.Item(i).LinkStyle = 3 then
     Begin
@@ -3350,9 +3341,7 @@ try
             else
              Begin
                wclass := 'DPN';
-               If (frm_main.viewer) then    //security
-                 exit
-               else
+               if not (frm_main.viewer) then    //security
                 begin
                    with Tdados_tab.create(self) do
                     Begin
@@ -3688,13 +3677,13 @@ end;}
 
 procedure TDG.Acima;
 var
- i,WAtiv,Wpai_ant,WIDG : integer;
- Wnode   : TTreeNode;
- mens : string;
- empty : boolean;
+  i,WAtiv,Wpai_ant,WIDG : integer;
+  Wnode   : TTreeNode;
+  mens : string;
+  empty : boolean;
 Begin
-try
-     begin
+  try
+    begin
      self.salvar;
      If tv.selected.level < 3 then  // se nível diagram, não faz nada
          exit;
@@ -3707,7 +3696,6 @@ try
 
      Wativ       := udado(tv.selected.Data)^.fDiag;
      tv.selected := tv.selected.Parent;
-     
 
      tv.tvClick(self);
      With self do    //posiciona na atividade recomposta
@@ -8779,9 +8767,9 @@ END;
 
 procedure Atu_schema;  // atualizaçào DDL : atualizar a constante WTABELAS com novas tabelas
 var
-iTab,iFld : TstringList;
-i,wseq : integer;
-   begin
+  iTab,iFld : TstringList;
+  i,wseq : integer;
+begin
   adoc := TAdoConnection.create(application);
   qry_cria_idf_dados := TadoQuery.create(application);
 
@@ -8793,7 +8781,7 @@ i,wseq : integer;
   adoc.connected        := false;
   adoc.ConnectionString := bdx.ConnectionString ;
 
-   begin
+  begin
       adoc.GetTableNames(itab,false);
       qry_cria_Idf_dados.Connection := BDX;
       //ACRESCENTA OS CAMPOS USUARIO E DATA DE ATUALIZAÇÃO PARA CONTROLE DE USUARIOS

@@ -1,6 +1,6 @@
 inherited frm_de: Tfrm_de
-  Left = 323
-  Top = 197
+  Left = 477
+  Top = 203
   Caption = 'Elemento de Dado'
   ClientHeight = 360
   ClientWidth = 650

@@ -35,7 +35,7 @@ var
 
 implementation
 
-uses bst_main;
+uses bst_main, UProcEFunc;
 
 
 
@@ -44,6 +44,7 @@ uses bst_main;
 procedure Tfrm_about.FormCreate(Sender: TObject);
 begin
   //ver := '1.0';
+  ver := GetBuildInfo;
   label1.caption := frm_main.ver;
   lb4.caption := frm_main.Mensabout;
 end;

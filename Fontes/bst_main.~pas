@@ -149,7 +149,6 @@ type
     procedure Class1Click(Sender : TObject);
     procedure sp_treeClick(Sender : TObject);
     procedure SpeedButton10Click(Sender : TObject);
-    procedure AppException(Sender : TObject; E : Exception);
     procedure Configurao1Click(Sender : TObject);
     procedure ConfiguraoObjetos1Click(Sender : TObject);
     procedure Atividades2Click(Sender : TObject);
@@ -1385,12 +1384,13 @@ begin
   Viewer := false; { TODO : Aqui parece que habilita o Viewer }
 
   Wusers := false;
-  If viewer = true then
-  begin SEGHABILIATADO := false end;
+  if viewer = true then
+    SEGHABILIATADO := false;
+
   IDIOMA := 'PT';
   inherited;
 
-  edit2.Text := '7.20';
+  edit2.Text := '7.30';
   cFluxos := [2, 5, 6, 9]; //fluxos de dados
 
   If frm_logo = nil then
@@ -1420,9 +1420,9 @@ begin
   end;
 
   if (serpens = 'D') then
-  begin Relatrios1.Enabled := false end
+    Relatrios1.Enabled := false
   else
-  begin Relatrios1.Enabled := true end;
+    Relatrios1.Enabled := true;
 
 
   If not viewer then
@@ -1449,28 +1449,16 @@ begin
   image2.Left := 0;
   image2.Top := 0;
   image2.Height := frm_main.Height;
-
-
-{  if ToolButton1.Enabled = false then
-  Begin
-      if frm_clifull = nil then
-      Begin
-        ShowMessage('Não existe empresa cadastrada');
-        Empresas1Click(sender);
-        frm_main.SendToBack;
-      end;
-  End;
-}
 end;
 
 function Tfrm_main.Abre_banco(pChoose : boolean) : boolean;
-var i  : integer;
+var
+  i  : integer;
 begin
   try
     result := true;
     begin
-
-      If bdx = nil then
+      if bdx = nil then
         bdx := TBd.create(true, true, pChoose);
 
       Atu_schema;
@@ -1488,10 +1476,6 @@ begin
         bdx.Mode := (cmRead);
       end;
 
-      { If bdx.TIPOBANCO  > 0 then // bancos SQL
-         mm.Items[3].Items[6].Enabled := false
-       else
-        mm.Items[3].Items[6].Enabled := true; }
       fl.Directory := bdx.DirFluxo;  //tirar
 
       If wdemo then
@@ -1508,7 +1492,6 @@ begin
               bdx := nil;
               result := false;
               exit;
-                   //  Diretrio1Click(nil);
             end;
           end;
           free;
@@ -1525,12 +1508,6 @@ begin
 
     end;
   end;
-end;
-
-procedure Tfrm_main.AppException(Sender : TObject; E : Exception);
-begin
-  //  Application.ShowException(E);
-   // application.Terminate;
 end;
 
 function Tfrm_main.ExecuteF(const FileName, Params, DefaultDir : string;
@@ -4573,10 +4550,10 @@ iTX : TIdf_TX;
    end;
  end;
 
- function Tfrm_main.Incluir_DAD(pTabImport : TDados_tab; pDiag : TDiag_dados) : integer;
+function Tfrm_main.Incluir_DAD(pTabImport : TDados_tab; pDiag : TDiag_dados) : integer;
 var
-idad: TIdf_dados;
- begin
+  idad: TIdf_dados;
+begin
  try
    result := 0;
    idad := TIdf_dados.create(self);
@@ -4967,9 +4944,9 @@ iPs : TIdf_ps;
 
 procedure Tfrm_main.Cria_ChaveDupl;   // CRIA ATRIBUTO PARA RECEBER NOVA CHAVE , NA IMPORTAÇÀO
 var
-iTab,iFld,iFldnovo : TstringList;
-i,wseq : integer;
-  begin
+  iTab,iFld,iFldnovo : TstringList;
+  i,wseq : integer;
+begin
   adoc := TAdoConnection.create(application);
   qry_cria_idf_dados := TadoQuery.create(application);
 

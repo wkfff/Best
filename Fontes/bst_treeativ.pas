@@ -1,4 +1,4 @@
-unit bst_treeAtiv;        //6_38
+unit bst_treeAtiv;
 
 interface
    // testar : mudança de ativiadaee via lista ; se ha decomposicao, nao
@@ -2378,7 +2378,7 @@ begin
       end;
 
 
-   
+
    If Wparent = nil then   //topitem
       exit;
 
@@ -2644,8 +2644,8 @@ end;
 
 procedure Tfrm_treeativ.Mostra_tabelas(pbanco : Tadoconnection; pTab : string;pForm : TForm ;pList: TListBox;pMostraTudo : boolean);
 var
-i: integer;
- Begin
+  i: integer;
+begin
    Begin
       If pBanco <> nil then
       begin
@@ -2666,7 +2666,7 @@ i: integer;
              next;
             end;
          end;  {}
-         
+
           free;
         end;
       except
@@ -2714,16 +2714,12 @@ i: integer;
 
 
 procedure Tfrm_treeativ.Pesq_Banco(pDir : boolean; pTab : string;pList : TListBox);
-
-Begin
-  If pDir then
-   Begin
-     If frm_dir4 = nil then
-        frm_dir4 := Tfrm_dir4.create(self);
-   end;
-
-
-
+begin
+  if pDir then
+  begin
+    if frm_dir4 = nil then
+      frm_dir4 := Tfrm_dir4.create(self);
+  end;
   case Tipo_banco of
    0 : Begin
          If pDir then
@@ -2762,17 +2758,11 @@ Begin
          idbDbase.ConnectionString := 'Provider=Microsoft.Jet.OLEDB.4.0;Data Source='+Diretorio+';Extended Properties=Dbase III;Persist Security Info=False';
          IdbAdo := iDbDbase;
        end;
-
-
-
   end;
-
-
 
   If tv.Diagrama.IDG_DIR = 'DUC' then
    Begin
       plist.Clear;
-
       try
        iDBado.GetTableNames(frm_objetos.lb.items,false);
       except
@@ -2792,8 +2782,6 @@ Begin
          Edit2.Text := Nome_banco;
          Edit1.Text := dir_db;
        end;
-
-
    end
   else
    If tv.Diagrama.IDG_DIR = 'DMI' then
@@ -2832,19 +2820,18 @@ end;
 
 procedure Tfrm_treeativ.Cria_tabela;
 var
-iTab : tdados_tab;
- Begin
+  iTab : tdados_tab;
+begin
 
- end;
-
+end;
 
 procedure Tfrm_treeativ.Tree_Edit(Sender: TObject);
 begin
- case tv.selected.level of
+  case tv.selected.level of
     0 : TVNovoCli(sender);
     1 : Abre_cenario(sender);
     2 : Abre_Diag(sender);
- end;
+  end;
 end;
 
 procedure Tfrm_treeativ.Ed_todo(Sender: TObject);
@@ -2875,16 +2862,16 @@ end;
 
 procedure  Tfrm_treeativ.Trata_Entity(pEnt : afNode; pMouse : integer); //ENTIDADE
 var
-Wshape ,w: integer;
-iTab : Tdados_tab;
-wn : string;
-iObj : afNode;
-wlist : Tstrings;
-s : String;
-Begin
-  If tv.Diagrama.IDG_DIR = 'LIV' then
-   Begin
-     If pent.Shape = 75 then
+  Wshape ,w: integer;
+  iTab : Tdados_tab;
+  wn : string;
+  iObj : afNode;
+  wlist : Tstrings;
+  s : String;
+begin
+  if tv.Diagrama.IDG_DIR = 'LIV' then
+   begin
+     if pent.Shape = 75 then
        begin
             If frm_text = nil then
                frm_text  := Tfrm_text.create(self);
@@ -3354,7 +3341,6 @@ begin
 end;
 
 procedure Tfrm_treeativ.sp2Click(Sender: TObject);
-
 begin
  tv.diagrama.selectAction := afNoSelection;
  tv.diagrama.linkstyle := TSpeedButton(sender as Tobject).tag;
@@ -3374,13 +3360,10 @@ begin
    end ;
 end;
 
-
-
 procedure Tfrm_treeativ.SpeedButton18Click(Sender: TObject);
 begin
   tv.diagrama.selectAction := afNoSelection;
   tv.diagrama.shape := TSpeedButton(sender as Tobject).tag;
-
 
   if TSpeedButton(sender as Tobject).tag <> 2 then
   Begin
@@ -3456,260 +3439,236 @@ var
   iTab : Tdados_tab;
   iup,iDown  : afNode;
 begin
-  If (tv.Diagrama.SelNodes.Count > 1) or (tv.Diagrama.SelNodes.Count = 0) then
-   Raise exception.create(mens11);
+  if (tv.Diagrama.SelNodes.Count > 1) or (tv.Diagrama.SelNodes.Count = 0) then
+    Raise exception.create(mens11);
 
-  If (tv.Diagrama.SelectedNode.Text <> '')
-     and (tv.Diagrama.SelectedNode.Text <> def90)
-     and (tv.Diagrama.SelectedNode.Text <> def91)
-     and (tv.Diagrama.SelectedNode.Text <> 'xxxxxxxx') then
-   Raise exception.create(Mens46);
+  if (tv.Diagrama.SelectedNode.Text <> '')
+    and (tv.Diagrama.SelectedNode.Text <> def90)
+    and (tv.Diagrama.SelectedNode.Text <> def91)
+    and (tv.Diagrama.SelectedNode.Text <> 'xxxxxxxx') then
+    Raise exception.create(Mens46);
   iTab := Tdados_tab.create(self);
-try
-  with itab  do
-  begin
-   ListaCli := tv.Empresas.cenarios.CLI_ID ;
-   ListaProj:= tv.Empresas.cenarios.PRJ_ID ;
-   ListaTag := 0 ;
-   ListaEdit:= false ;
-   ListaTree:= nil;
-   Listafecha := true;
-   ListaId  := 0;
-  end;
-  wNodeSelected :=  tv.Diagrama.SelectedNode.UserData;
-  with tv.Diagrama do
-   begin
-// diagramas atividades
-
-       If IDG_DIR = 'DPN' then
+  try
+    with itab  do
+    begin
+      ListaCli := tv.Empresas.cenarios.CLI_ID ;
+      ListaProj:= tv.Empresas.cenarios.PRJ_ID ;
+      ListaTag := 0 ;
+      ListaEdit:= false ;
+      ListaTree:= nil;
+      Listafecha := true;
+      ListaId  := 0;
+    end;
+    wNodeSelected :=  tv.Diagrama.SelectedNode.UserData;
+    with tv.Diagrama do
+    begin
+      // diagramas atividades
+      if IDG_DIR = 'DPN' then
+      begin
+        if SelectedNode <> nil then
         begin
-          If SelectedNode <> nil then
+          case SelectedNode.Shape of 11,50,79:   //atividade
           begin
-           Case SelectedNode.Shape of     //atividade
-           11,50,79:
-              begin
-                 iTab.ListaDim := 'IDF_AP' ;
-                 itab.ListaTit := Def63+'s' ;
-                 iTab.mostra_lista;
-                 If (iTab.ListaCodigo = 0)  then
-                    raise exception.create(mens11);
-                 DiagDupl := false;
-                 Check_Ascendencia(udado(tv.selected.data)^.Fcli,udado(tv.selected.data)^.FProj,udado(tv.selected.data)^.FDiag,
+            iTab.ListaDim := 'IDF_AP' ;
+            itab.ListaTit := Def63+'s' ;
+            iTab.mostra_lista;
+            if (iTab.ListaCodigo = 0)  then
+              raise exception.create(mens11);
+            DiagDupl := false;
+            Check_Ascendencia(udado(tv.selected.data)^.Fcli,udado(tv.selected.data)^.FProj,udado(tv.selected.data)^.FDiag,
                                                                             itab.listaCodigo);
-                 If DiagDupl then
-                     raise exception.create(Mens12);
+            if DiagDupl then
+              raise exception.create(Mens12);
             //    If iTab.ListaCodigo = tv.Diagrama.IDG then   // atividade escolhida = diagrama corrente
+            //verifica se a atividade tem decomposição ...........
+              WNodeExcl := tv.get_filho(tv.selected,SelectedNode.UserData);
+              if WNodeExcl <> nil then
+                tv.Items.Delete(WNodeexcl);
 
-
-
-               //verifica se a atividade tem decomposição ...........
-                WNodeExcl := tv.get_filho(tv.selected,SelectedNode.UserData);
-                IF WNodeExcl <> nil then
-                   tv.Items.Delete(WNodeexcl);
-
-                  If SelectedNode.shape in [11,79,50] then
-                     begin
-                       with Tdados_tab.create(self) do
-                        begin
-                          open_objeto(udado(tv.selected.data)^.Fcli,
+              if SelectedNode.shape in [11,79,50] then
+              begin
+                with Tdados_tab.create(self) do
+                begin
+                  open_objeto(udado(tv.selected.data)^.Fcli,
                                       udado(tv.selected.data)^.FProj,
                                       itab.listaCodigo,'IDF_AP');
-                          If SelectedNode.shape in [11,50] then
-                           Begin
-                             tv.Diagrama.Obtem_Ator(selectedNode).Text := fieldbyname('IDF_ATOR1').asstring;
-                             tv.Diagrama.Obtem_wbs(selectedNode).text  := fieldbyname('IDF_WBS_CODE').asstring;
-                           end;
-
-                          selectednode.ToolTip :=  fieldbyname('IDF_TIPO_ATIV').asstring;
-
-                        end;
-                       If selectednode.ToolTip = 'UC' then
-                          begin
-                            wclass := 'DUC' ;
-                            Rig_width  := tv.Diagrama.Width / 7;
-                            Rig_Height := Rig_Width ;;
-                            Rig_top    := tv.Diagrama.SelectedNode.Top + tv.Diagrama.SelectedNode.Height;
-                            Rig_Left   := (tv.Diagrama.SelectedNode.Left +
-                                           tv.Diagrama.SelectedNode.Width) - Rig_width;
-                            tv.Diagrama.Cria_ducant(tv.Diagrama.SelectedNode,false,
-                              0,Rig_top,Rig_left,Rig_width,rig_height,12); // compatibilidade versoes anteriores
-                            tv.Diagrama.Cria_duc(tv.Diagrama.SelectedNode,True,
-                              0,Rig_top,Rig_left,Rig_width,rig_height,4);
-                          end
-
-                       else
-                          begin
-                            wclass := 'DPN';
-                            tv.Diagrama.Cria_duc( tv.Diagrama.SelectedNode,False,
-                             0,0,0,0,0,4);
-                             
-                            
-                          end;
-
-
-                       SelectedNode.text        :=  itab.Listadesc;
-                       SelectedNode.UserData    :=  itab.ListaCodigo;
-
-
-                      // Recria_corr(SelectedNode); // recria as correlações com nova atividade
-                       tv.Incluir_TVDiag(Tv.selected,udado(tv.selected.data)^.Fcli,
-                                      udado(tv.selected.data)^.FProj,
-                                      itab.listaCodigo,iTab.ListaDesc,wclass,false);
-
-                       { TODO 4 -c6.00.023 :
-Corrigido :	Quando e pressionado alguma letra como atalho em uma lista qualquer e não e confirmado a escolha,  o BEST confirma a escolha do item da lista, obrigando o usuário a apagar o item e refazer o desenho
-Lay out tela requerimentos de TI rearrangada
-Reposicionamento na atividade após escolha na lista }
-                       tv.Diagrama.SelectedNode := tv.Diagrama.Get_Node(tv.Diagrama,itab.ListaCodigo) ;
-                       frm_main.decomposto := false;
-                       tv.Diagrama.Criar_correl_decomposto(tv.Diagrama,tv.Diagrama.SelectedNode);
-                     end;
-
-              end;
-              54 :              //processo externo
-              begin
-                 iTab.ListaDim := 'IDF_AP' ;
-                 itab.ListaTit := Def63+'s' ;
-                 iTab.mostra_lista;
-                 If iTab.ListaCodigo = 0 then
-                   raise exception.create(mens11);
-                 SelectedNode.text        :=  itab.Listadesc+#13+#13+iTab.ListaWbs;
-                 SelectedNode.UserData    :=  itab.ListaCodigo;
-              end;
-              55 :              //entidade externa
-              begin
-                 iTab.ListaDim := 'IDF_CA' ;
-                 itab.ListaTit := Def4 ;
-                 iTab.mostra_lista;
-                 If iTab.ListaCodigo = 0 then
-                   raise exception.create(mens11);
-                 SelectedNode.text        :=  itab.Listadesc;
-                 SelectedNode.UserData    :=  itab.ListaCodigo;
-              end;
-
-               53 :              //ator  externo
-                begin
-                   iTab.ListaDim := 'IDF_CA' ;
-                   itab.ListaTit := Def4 ;
-                   iTab.mostra_lista;
-                   If iTab.ListaCodigo = 0 then
-                     raise exception.create(mens11);
-                   SelectedNode.text        :=  itab.Listadesc;
-                   SelectedNode.UserData    :=  itab.ListaCodigo;
-                end;
-                 14 :              //regras
-              begin
-                 iTab.ListaDim := 'IDF_RN' ;
-                 itab.ListaTit := Def5 ;
-                 iTab.mostra_lista;
-                 If iTab.ListaCodigo = 0 then
-                   raise exception.create(mens11);
-                 SelectedNode.text        :=  itab.Listadesc;
-                 SelectedNode.UserData    :=  itab.ListaCodigo;
-                // Recria_corr(selectedNode); // cria correl. entre nova regra e atividade
-              end;
-              65,56 :              //evento de negócio
-              begin
-                 iTab.ListaDim := 'IDF_EN' ;
-                 itab.ListaTit := Def2 ;
-                 iTab.mostra_lista;
-                 If iTab.ListaCodigo = 0 then
-                   raise exception.create(mens11);
-                 SelectedNode.text        :=  itab.Listadesc;
-                 SelectedNode.UserData    :=  itab.ListaCodigo;
-                // Recria_corr(SelectedNode);   // cria correlação entre novo evento e atividade
-              end;
-              2 :              //Junção   (parte de cima)
-              begin
-                 iTab.ListaDim := 'IDF_JU' ;
-                 itab.ListaTit := Def3 ;
-                 iTab.mostra_lista;
-                 If iTab.ListaCodigo = 0 then
-                   raise exception.create(mens11);
-                 iDown:= tv.diagrama.Obtem_Junc(SelectedNode);
-                 with Tdados_tab.create(self) do
-                   Begin
-                    If  open_objeto(udado(tv.selected.data)^.Fcli,
-                                      udado(tv.selected.data)^.FProj,
-                                      itab.listaCodigo,'IDF_JU') then
-                       Begin
-                         If  iDown <> nil then
-                            iDown.Text := fieldbyname('IDF_LOGICA').asstring;;
-
-                       end;
-                    free;
-                  end;
-                 SelectedNode.text        :=  itab.Listadesc;
-                 SelectedNode.UserData    :=  itab.ListaCodigo;
-              end;
-             1 :              //Junção  (parte de baixo0
-              begin   { TODO -c6-00-25 : Corrigido : colocação do O,E,E/OU na parte inferior do objeto junção }
-                 iUp := tv.Diagrama.Obtem_JuncUp(selectedNode)  ;
-                 iDown := selectedNode;
-                 If iUp <> nil then
+                  if SelectedNode.shape in [11,50] then
                   begin
-                   iTab.ListaDim := 'IDF_JU' ;
-                   itab.ListaTit := Def3 ;
-                   iTab.mostra_lista;
-                   If iTab.ListaCodigo = 0 then
-                     raise exception.create(mens11);
+                    tv.Diagrama.Obtem_Ator(selectedNode).Text := fieldbyname('IDF_ATOR1').asstring;
+                    tv.Diagrama.Obtem_wbs(selectedNode).text  := fieldbyname('IDF_WBS_CODE').asstring;
+                  end;
+                  selectednode.ToolTip :=  fieldbyname('IDF_TIPO_ATIV').asstring;
+                end;
+                if selectednode.ToolTip = 'UC' then
+                begin
+                  wclass := 'DUC' ;
+                  Rig_width  := tv.Diagrama.Width / 7;
+                  Rig_Height := Rig_Width ;;
+                  Rig_top    := tv.Diagrama.SelectedNode.Top + tv.Diagrama.SelectedNode.Height;
+                  Rig_Left   := (tv.Diagrama.SelectedNode.Left +
+                                 tv.Diagrama.SelectedNode.Width) - Rig_width;
+                  tv.Diagrama.Cria_ducant(tv.Diagrama.SelectedNode,false,
+                    0,Rig_top,Rig_left,Rig_width,rig_height,12); // compatibilidade versoes anteriores
+                  tv.Diagrama.Cria_duc(tv.Diagrama.SelectedNode,True,
+                    0,Rig_top,Rig_left,Rig_width,rig_height,4);
+                end
+                else
+                begin
+                  wclass := 'DPN';
+                  tv.Diagrama.Cria_duc( tv.Diagrama.SelectedNode,False,0,0,0,0,0,4);
+                end;
+                SelectedNode.text        :=  itab.Listadesc;
+                SelectedNode.UserData    :=  itab.ListaCodigo;
+                // Recria_corr(SelectedNode); // recria as correlações com nova atividade
+                tv.Incluir_TVDiag(Tv.selected,udado(tv.selected.data)^.Fcli,
+                                udado(tv.selected.data)^.FProj,
+                                itab.listaCodigo,iTab.ListaDesc,wclass,false);
 
-                   with Tdados_tab.create(self) do
-                   Begin
-                    If  open_objeto(udado(tv.selected.data)^.Fcli,
+                { TODO 4 -c6.00.023 :
+                  Corrigido :	Quando e pressionado alguma letra como atalho em
+                  uma lista qualquer e não e confirmado a escolha,  o BEST
+                  confirma a escolha do item da lista, obrigando o usuário a
+                  apagar o item e refazer o desenho Lay out tela requerimentos
+                  de TI rearrangada Reposicionamento na atividade após escolha na lista }
+                tv.Diagrama.SelectedNode := tv.Diagrama.Get_Node(tv.Diagrama,itab.ListaCodigo) ;
+                frm_main.decomposto := false;
+                tv.Diagrama.Criar_correl_decomposto(tv.Diagrama,tv.Diagrama.SelectedNode);
+              end;
+            end;
+            54 :              //processo externo
+            begin
+              iTab.ListaDim := 'IDF_AP' ;
+              itab.ListaTit := Def63+'s' ;
+              iTab.mostra_lista;
+              if iTab.ListaCodigo = 0 then
+                raise exception.create(mens11);
+              SelectedNode.text        :=  itab.Listadesc+#13+#13+iTab.ListaWbs;
+              SelectedNode.UserData    :=  itab.ListaCodigo;
+            end;
+            55 :              //entidade externa
+            begin
+              iTab.ListaDim := 'IDF_CA' ;
+              itab.ListaTit := Def4 ;
+              iTab.mostra_lista;
+              if iTab.ListaCodigo = 0 then
+                raise exception.create(mens11);
+              SelectedNode.text        :=  itab.Listadesc;
+              SelectedNode.UserData    :=  itab.ListaCodigo;
+            end;
+            53 :              //ator  externo
+            begin
+              iTab.ListaDim := 'IDF_CA' ;
+              itab.ListaTit := Def4 ;
+              iTab.mostra_lista;
+              if iTab.ListaCodigo = 0 then
+                raise exception.create(mens11);
+              SelectedNode.text        :=  itab.Listadesc;
+              SelectedNode.UserData    :=  itab.ListaCodigo;
+            end;
+            14 :              //regras
+            begin
+              iTab.ListaDim := 'IDF_RN' ;
+              itab.ListaTit := Def5 ;
+              iTab.mostra_lista;
+              if iTab.ListaCodigo = 0 then
+                raise exception.create(mens11);
+              SelectedNode.text        :=  itab.Listadesc;
+              SelectedNode.UserData    :=  itab.ListaCodigo;
+              // Recria_corr(selectedNode); // cria correl. entre nova regra e atividade
+            end;
+            65,56 :              //evento de negócio
+            begin
+              iTab.ListaDim := 'IDF_EN' ;
+              itab.ListaTit := Def2 ;
+              iTab.mostra_lista;
+              if iTab.ListaCodigo = 0 then
+                raise exception.create(mens11);
+              SelectedNode.text        :=  itab.Listadesc;
+              SelectedNode.UserData    :=  itab.ListaCodigo;
+              // Recria_corr(SelectedNode);   // cria correlação entre novo evento e atividade
+            end;
+            2 :              //Junção   (parte de cima)
+            begin
+              iTab.ListaDim := 'IDF_JU' ;
+              itab.ListaTit := Def3 ;
+              iTab.mostra_lista;
+              if iTab.ListaCodigo = 0 then
+                raise exception.create(mens11);
+              iDown:= tv.diagrama.Obtem_Junc(SelectedNode);
+              with Tdados_tab.create(self) do
+              begin
+                if  open_objeto(udado(tv.selected.data)^.Fcli,
                                       udado(tv.selected.data)^.FProj,
                                       itab.listaCodigo,'IDF_JU') then
-                       Begin
-                         If  iDown <> nil then
-                            iDown.Text := fieldbyname('IDF_LOGICA').asstring;;
-
-                       end;
-
-
-                    free;
-                  end;
-
-                   iUp.text        :=  itab.Listadesc;
-                   iUp.UserData    :=  itab.ListaCodigo;
-
-                  end;
-
+                begin
+                  if  iDown <> nil then
+                    iDown.Text := fieldbyname('IDF_LOGICA').asstring;;
+                end;
+                free;
               end;
-
-           end; //endcase
-          end // end selectednode <> nil
-        end //end IDGDIR
-        else
-//diagramas use case
-        If IDG_DIR = 'DUC' then
+              SelectedNode.text        :=  itab.Listadesc;
+              SelectedNode.UserData    :=  itab.ListaCodigo;
+            end;
+            1 :              //Junção  (parte de baixo0
+            begin   { TODO -c6-00-25 : Corrigido : colocação do O,E,E/OU na parte inferior do objeto junção }
+              iUp := tv.Diagrama.Obtem_JuncUp(selectedNode)  ;
+              iDown := selectedNode;
+              if iUp <> nil then
+              begin
+                iTab.ListaDim := 'IDF_JU' ;
+                itab.ListaTit := Def3 ;
+                iTab.mostra_lista;
+                if iTab.ListaCodigo = 0 then
+                  raise exception.create(mens11);
+                with Tdados_tab.create(self) do
+                begin
+                  if  open_objeto(udado(tv.selected.data)^.Fcli,
+                                      udado(tv.selected.data)^.FProj,
+                                      itab.listaCodigo,'IDF_JU') then
+                  begin
+                    if  iDown <> nil then
+                      iDown.Text := fieldbyname('IDF_LOGICA').asstring;;
+                  end;
+                  free;
+                end;
+                iUp.text        :=  itab.Listadesc;
+                iUp.UserData    :=  itab.ListaCodigo;
+              end;
+            end;
+          end; //endcase
+        end // end selectednode <> nil
+      end //end IDGDIR
+      else
+        //diagramas use case
+      if IDG_DIR = 'DUC' then
+      begin
+        if SelectedNode <> nil then
+        begin
+          Case SelectedNode.Shape of
+          53 :              //atores
           begin
-           If SelectedNode <> nil then
-           begin
-             Case SelectedNode.Shape of
-             53 :              //atores
-              begin
-                 iTab.ListaDim := 'IDF_CA' ;
-                 itab.ListaTit := Def10 ;
-                 iTab.mostra_lista;
-                 If iTab.ListaCodigo = 0 then
-                   raise exception.create(mens11);
-                 SelectedNode.text        :=  itab.Listadesc;
-                 SelectedNode.UserData    :=  itab.ListaCodigo;
-              end;
-             58 :              //Objeto de interface
-              begin
-                 iTab.ListaTag := 5;
-                 iTab.ListaDim := 'IDF_OI' ;
-                 itab.ListaTit := Def6 ;
-                 z :=  SelectedNode.UserData ;
-                 iTab.mostra_lista;
-                 If iTab.ListaCodigo = 0 then
-                   raise exception.create(mens11);
-                   { atualiza dewscrição da instancia criada : para cada descricao obtida da lista,
-                     é criada um registro na tabela OI - atenção todos os objetos aparecem duplicados na lista}
+            iTab.ListaDim := 'IDF_CA' ;
+            itab.ListaTit := Def10 ;
+            iTab.mostra_lista;
+            If iTab.ListaCodigo = 0 then
+            raise exception.create(mens11);
+            SelectedNode.text        :=  itab.Listadesc;
+            SelectedNode.UserData    :=  itab.ListaCodigo;
+          end;
+          58 :              //Objeto de interface
+          begin
+            iTab.ListaTag := 5;
+            iTab.ListaDim := 'IDF_OI' ;
+            itab.ListaTit := Def6 ;
+            z :=  SelectedNode.UserData ;
+            iTab.mostra_lista;
+            if iTab.ListaCodigo = 0 then
+              raise exception.create(mens11);
+            { atualiza dewscrição da instancia criada : para cada descricao obtida da lista,
+              é criada um registro na tabela OI - atenção todos os objetos aparecem duplicados na lista}
 
-                {inibido em 12/07/2005, para evitar redundancia na tabela OI}
-                { with Tdados_tab.create(self) do
+            {inibido em 12/07/2005, para evitar redundancia na tabela OI}
+            { with Tdados_tab.create(self) do
                   Begin
                     If  Open_objeto(tv.Empresas.cenarios.CLI_ID,tv.Empresas.cenarios.PRJ_ID,
                                  SelectedNode.UserData ,'IDF_OI') then
@@ -3720,185 +3679,172 @@ Reposicionamento na atividade após escolha na lista }
                          free;
                         end;  
                   end;     }
-                 SelectedNode.text        :=  itab.Listadesc;
-                 SelectedNode.UserData    :=  itab.ListaCodigo;
+            SelectedNode.text        :=  itab.Listadesc;
+            SelectedNode.UserData    :=  itab.ListaCodigo;
                 // ReCria_corr(SelectedNode);
-              end;
-             62 :              //use case
-              begin
-                 iTab.ListaTag := 999;
-                 iTab.ListaDim := 'IDF_AP' ;
-                 itab.ListaTit := Def64+'s' ;
-                 iTab.mostra_lista;
-                 If iTab.ListaCodigo = 0 then
-                   raise exception.create(mens11);
-
-                 SelectedNode.text        :=  itab.Listadesc;
-                 SelectedNode.UserData    :=  itab.ListaCodigo;
-              end;
-               8 :              //Objeto de controle
-              begin
-                 iTab.ListaTag := 16;
-                 iTab.ListaDim := 'IDF_OI' ;
-                 itab.ListaTit := Def7 ;
-                 iTab.mostra_lista;
-                 If iTab.ListaCodigo = 0 then
-                   raise exception.create(mens11);
-                   { atualiza dewscrição da instancia criada : para cada descricao obtida da lista,
-                     é criada um registro na tabela OI - atenção todos os objetos aparecem duplicados na lista}
-                 with Tdados_tab.create(self) do
-                  Begin
-                    If  Open_objeto(tv.Empresas.cenarios.CLI_ID,tv.Empresas.cenarios.PRJ_ID,
+          end;
+          62 :              //use case
+          begin
+            iTab.ListaTag := 999;
+            iTab.ListaDim := 'IDF_AP' ;
+            itab.ListaTit := Def64+'s' ;
+            iTab.mostra_lista;
+            if iTab.ListaCodigo = 0 then
+              raise exception.create(mens11);
+            SelectedNode.text        :=  itab.Listadesc;
+            SelectedNode.UserData    :=  itab.ListaCodigo;
+          end;
+          8 :              //Objeto de controle
+          begin
+            iTab.ListaTag := 16;
+            iTab.ListaDim := 'IDF_OI' ;
+            itab.ListaTit := Def7 ;
+            iTab.mostra_lista;
+            if iTab.ListaCodigo = 0 then
+              raise exception.create(mens11);
+            { atualiza descrição da instancia criada : para cada descricao obtida da lista,
+            é criada um registro na tabela OI - atenção todos os objetos aparecem duplicados na lista}
+           { with Tdados_tab.create(self) do
+            begin
+              if  Open_objeto(tv.Empresas.cenarios.CLI_ID,tv.Empresas.cenarios.PRJ_ID,
                                  SelectedNode.UserData ,'IDF_OI') then
-                        Begin
-                         edit;
-                         fieldbyname('IDF_DESIGNACAO').value :=  itab.Listadesc;
-                         post;
-                         free;
-                        end;
-                  end;        
-                 SelectedNode.text        :=  itab.Listadesc;
-                 SelectedNode.UserData    :=  itab.ListaCodigo;
-              end;
-              0 :              //Objeto entidade
               begin
-                //Abre_Objeto;
-
-                 iTab.ListaDim := 'IDF_IF' ;
-                 itab.ListaTit := Def8 ;
-                 iTab.mostra_lista;
-                 If iTab.ListaCodigo = 0 then
-                   raise exception.create(mens11);
-                 SelectedNode.text        :=  itab.Listadesc;
-                 SelectedNode.UserData    :=  itab.ListaCodigo;
-
+                edit;
+                fieldbyname('IDF_DESIGNACAO').value :=  itab.Listadesc;
+                post;
+                free;
               end;
-             end; // endcase
-           end;
-          end
-        else
-          If IDG_DIR = 'DMI' then
-           begin
-             If SelectedNode <> nil then
-              begin
-                Case SelectedNode.Shape of
-                   1 :              //Objeto de Negocio
-                  begin
-                     iTab.ListaDim := 'IDF_IF' ;
-                     itab.ListaTit := Def12 ;
-                     iTab.mostra_lista;
-                     If iTab.ListaCodigo = 0 then
-                       raise exception.create(mens11);
-                     DiagDupl := false;
-                     Check_Ascendencia(udado(tv.selected.data)^.Fcli,udado(tv.selected.data)^.FProj,udado(tv.selected.data)^.FDiag,
+            end; }
+            SelectedNode.text        :=  itab.Listadesc;
+            SelectedNode.UserData    :=  itab.ListaCodigo;
+          end;
+          0 :              //Objeto entidade
+          begin
+            //Abre_Objeto;
+            iTab.ListaDim := 'IDF_IF' ;
+            itab.ListaTit := Def8 ;
+            iTab.mostra_lista;
+            if iTab.ListaCodigo = 0 then
+              raise exception.create(mens11);
+            SelectedNode.text        :=  itab.Listadesc;
+            SelectedNode.UserData    :=  itab.ListaCodigo;
+          end;
+        end; // endcase
+      end;
+    end
+    else
+    if IDG_DIR = 'DMI' then
+    begin
+      if SelectedNode <> nil then
+      begin
+        case SelectedNode.Shape of
+          1 :              //Objeto de Negocio
+          begin
+            iTab.ListaDim := 'IDF_IF' ;
+            itab.ListaTit := Def12 ;
+            iTab.mostra_lista;
+            if iTab.ListaCodigo = 0 then
+              raise exception.create(mens11);
+            DiagDupl := false;
+            Check_Ascendencia(udado(tv.selected.data)^.Fcli,udado(tv.selected.data)^.FProj,udado(tv.selected.data)^.FDiag,
                                                                             itab.listaCodigo);
-                     If DiagDupl then
-                       raise exception.create(Mens12);
-                     SelectedNode.text        :=  itab.Listadesc;
-                     SelectedNode.UserData    :=  itab.ListaCodigo;
-                  end;
-
-                end;
-              end;
-           end
-         else
-          If IDG_DIR = 'DEO' then
-           begin
-             If SelectedNode <> nil then
-              begin
-                Case SelectedNode.Shape of
-                  9 :              //atores
-                  begin
-                     iTab.ListaDim := 'IDF_CA' ;
-                     itab.ListaTit := Def10 ;
-                     iTab.mostra_lista;
-                     If iTab.ListaCodigo = 0 then
-                       raise exception.create(mens11);
-                       DiagDupl := false;
-                       Check_Ascendencia(udado(tv.selected.data)^.Fcli,udado(tv.selected.data)^.FProj,udado(tv.selected.data)^.FDiag,
-                                                                            itab.listaCodigo);
-                       If DiagDupl then
-                         raise exception.create(Mens12);//stadesc;
-                     SelectedNode.UserData    :=  itab.ListaCodigo;
-                     SelectedNode.text        :=  itab.Listadesc;
-                  end;
-                   61 :              //pessoas
-                  begin
-                     iTab.ListaDim := 'IDF_PS' ;
-                     itab.ListaTit := Def13 ;
-                     iTab.mostra_lista;
-                     If iTab.ListaCodigo = 0 then
-                       raise exception.create(mens11);
-                     SelectedNode.text        :=  itab.Listadesc;
-                     SelectedNode.UserData    :=  itab.ListaCodigo;
-                  end;
-
-                end;
-              end;
-           end
-          else
-          If IDG_DIR = 'CLS' then
-           begin
-             If SelectedNode <> nil then
-              begin
-                Case SelectedNode.Shape of
-                  1 :              //atores
-                  begin
-                     iTab.ListaDim := 'IDF_CS' ;
-                     itab.ListaTit := Def233 ;
-                     iTab.mostra_lista;
-                     If iTab.ListaCodigo = 0 then
-                       raise exception.create(mens11);
-                       DiagDupl := false;
-
-                     If DiagDupl then
-                         raise exception.create(Mens12);//stadesc;
-                     SelectedNode.UserData    :=  itab.ListaCodigo;
-
-
-                     with  tv.empresas.cenarios.Diagramas.Objeto do
-                      begin
-                         Tabela := 'IDF_CS';
-                         CLI_ID := udado(tv.selected.Data)^.Fcli;
-                         PRJ_ID := udado(tv.selected.Data)^.FProj;
-
-                       If not Open_Objeto(CLI_ID,PRJ_ID,SelectedNode.UserData,TABELA) then
-                             raise exception.Create(EI1);
-                       end;
-
-                      If frm_CS   = nil then
-                          frm_CS := tfrm_CS.Create(self);
-                      with frm_CS do
-                       begin
-                          Id          :=  SelectedNode.UserData  ;
-                          Tipo        := 'CS';
-                          Visivel     := 'S';
-                          Mode        := 'M';
-                          AutoFecha   := true;
-                          idatasource := tv.empresas.cenarios.Diagramas.Objeto.DataExt;
-                          FormShow(nil);
-                          sp2Click(nil);   //confirma
-                          
-                       end;
-                 end;
-
-                end;
-              end;
-           end
-
-   end;
-finally
- If  tv.Diagrama.SelectedNode <> nil then
-   tv.Diagrama.SelectedNode.EnsureVisible;
- freeandnil(iTab);
-end;
+            if DiagDupl then
+              raise exception.create(Mens12);
+            SelectedNode.text        :=  itab.Listadesc;
+            SelectedNode.UserData    :=  itab.ListaCodigo;
+          end;
+        end;
+      end;
+    end
+    else
+    if IDG_DIR = 'DEO' then
+    begin
+      if SelectedNode <> nil then
+      begin
+        case SelectedNode.Shape of
+          9 :              //atores
+          begin
+            iTab.ListaDim := 'IDF_CA' ;
+            itab.ListaTit := Def10 ;
+            iTab.mostra_lista;
+            if iTab.ListaCodigo = 0 then
+              raise exception.create(mens11);
+            DiagDupl := false;
+            Check_Ascendencia(udado(tv.selected.data)^.Fcli,udado(tv.selected.data)^.FProj,udado(tv.selected.data)^.FDiag,
+                                                                    itab.listaCodigo);
+            if DiagDupl then
+              raise exception.create(Mens12);//stadesc;
+            SelectedNode.UserData    :=  itab.ListaCodigo;
+            SelectedNode.text        :=  itab.Listadesc;
+          end;
+          61 :              //pessoas
+          begin
+            iTab.ListaDim := 'IDF_PS' ;
+            itab.ListaTit := Def13 ;
+            iTab.mostra_lista;
+            if iTab.ListaCodigo = 0 then
+              raise exception.create(mens11);
+            SelectedNode.text        :=  itab.Listadesc;
+            SelectedNode.UserData    :=  itab.ListaCodigo;
+          end;
+        end;
+      end;
+    end
+    else
+    if IDG_DIR = 'CLS' then
+    begin
+      if SelectedNode <> nil then
+      begin
+        case SelectedNode.Shape of
+        1 :              //atores
+        begin
+          iTab.ListaDim := 'IDF_CS' ;
+          itab.ListaTit := Def233 ;
+          iTab.mostra_lista;
+          if iTab.ListaCodigo = 0 then
+            raise exception.create(mens11);
+          DiagDupl := false;
+          if DiagDupl then
+            raise exception.create(Mens12);//stadesc;
+          SelectedNode.UserData    :=  itab.ListaCodigo;
+          with  tv.empresas.cenarios.Diagramas.Objeto do
+          begin
+            Tabela := 'IDF_CS';
+            CLI_ID := udado(tv.selected.Data)^.Fcli;
+            PRJ_ID := udado(tv.selected.Data)^.FProj;
+            if not Open_Objeto(CLI_ID,PRJ_ID,SelectedNode.UserData,TABELA) then
+              raise exception.Create(EI1);
+          end;
+          if frm_CS   = nil then
+            frm_CS := tfrm_CS.Create(self);
+            with frm_CS do
+            begin
+              Id          :=  SelectedNode.UserData  ;
+              Tipo        := 'CS';
+              Visivel     := 'S';
+              Mode        := 'M';
+              AutoFecha   := true;
+              idatasource := tv.empresas.cenarios.Diagramas.Objeto.DataExt;
+              FormShow(nil);
+              sp2Click(nil);   //confirma
+            end;
+          end;
+        end;
+      end;
+    end
+  end;
+  finally
+    if tv.Diagrama.SelectedNode <> nil then
+      tv.Diagrama.SelectedNode.EnsureVisible;
+    freeandnil(iTab);
+  end;
 end;
 
 procedure Tfrm_treeativ.recria_corr(pNode : afNode);
 var
   i : integer;
   itb : TDados_tab;
-Begin
+begin
    try
      iTb :=  tDados_tab.create(self);
      If pNode.shape in [11,79,50] then //atividade
@@ -3983,10 +3929,10 @@ Begin
 
  end;
 
- procedure Tfrm_treeativ.recria_corrRel(pdg : afLink);
+procedure Tfrm_treeativ.recria_corrRel(pdg : afLink);
 var
-i : integer;
-itb : TDados_tab;
+  i : integer;
+  itb : TDados_tab;
  Begin
    try
      iTb :=  tDados_tab.create(self);
@@ -4013,8 +3959,8 @@ end;
 
 procedure Tfrm_treeativ.Atrs1Click(Sender: TObject);
 var
-wbs,wator : afNode;
-i : integer;
+  wbs,wator : afNode;
+  i : integer;
 begin
   If tv.Diagrama.SelNodes.Count > 0 then
    begin
@@ -4029,8 +3975,8 @@ end;
 
 procedure Tfrm_treeativ.Frente1Click(Sender: TObject);
 var
-wbs,wator : afNode;
-i : integer;
+  wbs,wator : afNode;
+  i : integer;
 begin
 
  If tv.Diagrama.SelNodes.Count > 0 then
@@ -4306,7 +4252,6 @@ begin
         oAtor  := tv.diagrama.Obtem_ator(tv.Diagrama.selNodes.item(1)) ;
       end;
 
-
       wfont := tv.Diagrama.selNodes.Item(1).font;
       SetOleFont(fnt.font,Wfont);
 
@@ -4314,8 +4259,6 @@ begin
       rg_espessura.Itemindex := Wi ;
       showmodal;
    end;
-
-
 end;
 
 procedure Tfrm_treeativ.SpeedButton84Click(Sender: TObject);
@@ -4363,8 +4306,6 @@ begin
        end;
       showModal;
    end;
-
-
 end;
 
 procedure Tfrm_treeativ.SetOrigem_dados(const Value: integer);
@@ -4523,8 +4464,6 @@ begin
   finally
      freeandnil(itab);
   end;
-
-
 end;
 
 procedure Tfrm_treeativ.Exec_mecanismo(pId : integer; pProg : string) ;
@@ -4555,37 +4494,7 @@ wdir,wexec : string;
         If not fileExists(wexec ) then
           Raise exception.create(mens1010+wexec+mens102);
          ExecProg(wexec,'');
-
-             //   iF iTab.Get_Correlatos(tv.Diagrama.EMPRESA,tv.Diagrama.CENARIO,'AP',
-     //                       TV.Diagrama.SelectedNode.UserData,'SE','IDF_SE') then
-    {     begin
-             If iTab.fieldbyname('IDF_SIGLA').asstring = '' then
-                raise exception.create(mens44);
-            If wdir = '' then
-               wdir := Pega_Diretorio_Padrao(tv.Diagrama.EMPRESA,tv.Diagrama.CENARIO);
-            wprg :=  ExtractFilename( iTab.fieldbyname('IDF_SIGLA').asstring);
-
-            If wdir <> '' then
-             Begin
-               If (wdir[length(wdir)] <> '\') and  (wdir[length(wdir)] <> '/') then
-                 wexec := wdir + '\' +wprg
-               else
-                 wexec := wdir + wprg;
-             end
-            else
-             wexec := iTab.fieldbyname('IDF_SIGLA').asstring;
-
-        end;
-      end;
-       If not fileExists(wexec ) then
-        Raise exception.create(mens1010+wexec+mens102);
-       ExecProg(wexec,'');
-
-     If wprg = '' then
-         Raise exception.create(mens103);
-       //   ExecProg(iTab.fieldbyname('IDF_SIGLA').asstring,''); }
-
- end;
+end;
 
 function Tfrm_treeativ.Pega_diretorio_padrao(pcli,pProj : integer) : string;
  Begin
@@ -5074,7 +4983,7 @@ Begin
 
         while not ide.fClient.Eof do
          Begin
-         
+
           If ide.fClient.fieldbyname('idf_codigo').asinteger  > 0 then
            Begin
             If haPk then
@@ -5123,13 +5032,12 @@ Begin
  end;
 end;
 
-
 function Tfrm_treeativ.Mostra_sql : boolean;
  Begin
   If frm_log = nil then
        frm_log := tfrm_log.create(self);
     If wscript = nil then
-      exit;   
+      exit;
     frm_log.Memo1.Lines := wscript;
     frm_log.Caption := def93;
     panel1.Visible := true;
@@ -5141,9 +5049,7 @@ function Tfrm_treeativ.Mostra_sql : boolean;
     //pb.Position := 0;
     //tv.selected := tvant;
    // tv.TvClick(self);
- end;
-
-
+end;
 
 function Tfrm_treeativ.gera_Modelo(pbanco : integer) : boolean;
  Begin
@@ -5481,7 +5387,7 @@ try
            dm_rel.qry_req.post;
            //freeandnil(iTi);
   end;
-finally
+  finally
         freeandnil(iUc);
         freeandnil(iTab);
         freeandnil(iPpg);
@@ -5492,7 +5398,7 @@ finally
        frm_mensagem.sp_imp.Enabled := true;
        If bdx.TIPOBANCO = 0 then
        frm_mensagem.sp_exp.Enabled := true;
-end;
+  end;
 end;
 
 
@@ -5654,8 +5560,8 @@ end;
 
 procedure Tfrm_treeativ.AspectosCrticos1Click(Sender: TObject);
 var
-iTab : Tdados_tab;
-existe : boolean;
+  iTab : Tdados_tab;
+  existe : boolean;
 begin
     try
       iTab := Tdados_tab.create(self);
@@ -5815,6 +5721,11 @@ begin
      ToolButton1.Enabled := false;
      popNode.Items[4].Enabled := false;
      popNode.Items[5].Enabled := false;
+     // Inibição dos botões de descer nível e subir nível
+    { SpeedButton14.Enabled := false;
+     SpeedButton15.Enabled := false;
+     ToolButton5.Enabled := false;
+     ToolButton6.Enabled := false;}
    end;
 
    If frm_main.wassist then
@@ -5847,7 +5758,6 @@ begin
         tv.Diagrama.SelectedNode := nil;
        end;
     end;
-    
 
     tv.Selected := tv.TopItem;
     tv.TVCLICK(NIL);
@@ -5859,7 +5769,7 @@ var
   iOn : Tdados_tab;
   i,j : integer;
 begin
-  If  frm_Cimp    =   nil then
+  If  frm_Cimp = nil then
      frm_Cimp    := Tfrm_Cimp.Create(self);
   frm_cimp.label1.caption := TmenuItem(sender as Tobject).caption;
 
@@ -5875,14 +5785,13 @@ begin
   for j := 1 to tv.Diagrama.SelNodes.Count do
   begin
 
-  iDe := Tdad.Create(self);
+    iDe := Tdad.Create(self);
 
-
-  If not ide.get_ObjetobyDesc(tv.Diagrama.EMPRESA,tv.Diagrama.CENARIO,TV.Diagrama.SelNodes.item(j).text,'') then
-     Raise exception.create(mens76);
-     with frm_pdmig do
-      begin
-         for i := 0 to componentCount -1 do
+    If not ide.get_ObjetobyDesc(tv.Diagrama.EMPRESA,tv.Diagrama.CENARIO,TV.Diagrama.SelNodes.item(j).text,'') then
+      Raise exception.create(mens76);
+    with frm_pdmig do
+    begin
+      for i := 0 to componentCount -1 do
           begin
            If (Components[i] is Tqrband) or  (Components[i] is TqrChildband) or  (Components[i] is TqrSubDetail)
               or  (Components[i] is Tqrgroup)then
@@ -5897,15 +5806,13 @@ begin
         frm_Pdmig.qRP.preview
      else
         frm_Pdmig.qrp.print;
-  end;
+   end;
 
-  finally
+   finally
      frm_Pdmig.close;
      freeandnil(iDe);
-  end;
-
+   end;
 end;
-
 
 procedure Tfrm_treeativ.GerarScriptSQL1Click(Sender: TObject);
 begin
@@ -5939,10 +5846,10 @@ end;
 
 procedure Tfrm_treeativ.AjustaLinha1Click(Sender: TObject);
 var
-i ,wcount: integer;
-wx,wy ,wmeio: real;
-worg ,wdst : afLinkPoint;
-ObjDst,ObjOrg : afNode;
+  i ,wcount: integer;
+  wx,wy ,wmeio: real;
+  worg ,wdst : afLinkPoint;
+  ObjDst,ObjOrg : afNode;
 begin
   wcount := tv.Diagrama.SelLinks.Count ;
   If wCount > 0 then
@@ -5960,7 +5867,6 @@ begin
         tv.diagrama.SelLinks.item(i).ExtraPoints.Item[tv.diagrama.SelLinks.item(i).ExtraPoints.count-1]  := wdst;
       end;
    end;
-  
 end;
 
 procedure Tfrm_treeativ.Setdmi_desc(const Value: string);
@@ -5970,23 +5876,23 @@ end;
 
 procedure Tfrm_treeativ.sp_prClick(Sender: TObject);
 begin
-   If frm_preprint= nil then
+  If frm_preprint= nil then
     frm_preprint     := Tfrm_preprint.create(self);
- frm_preprint.show;
+  frm_preprint.show;
 end;
 
 procedure Tfrm_treeativ.sp_copClick(Sender: TObject);
 var
-i,j : integer;
-aWbs,aAtor : afNode;
+  i,j : integer;
+  aWbs,aAtor : afNode;
 begin
   tv.Diagrama.Copia_Sel;
 end;
 
 procedure Tfrm_treeativ.xp_colClick(Sender: TObject);
 var
-i,j ,tot: integer;
-awbs,aAtor : afNode;
+  i,j ,tot: integer;
+  awbs,aAtor : afNode;
 begin
    tv.Diagrama.Cola_sel(true,true,false,0);
 end;
@@ -5995,7 +5901,6 @@ procedure Tfrm_treeativ.SetDiagm(const Value: Tdg);
 begin
   FDiagm := Value;
 end;
-
 
 procedure Tfrm_treeativ.SetPERC(const Value: real);
 begin
@@ -6012,14 +5917,10 @@ begin
  tv.Diagrama.Get_Nodes(tv.Diagrama.SelectedNode,'I');
 end;
 
-
-
 procedure Tfrm_treeativ.SetLISTA_DG(const Value: BOOLEAN);
 begin
   FLISTA_DG := Value;
 end;
-
-
 
 procedure Tfrm_treeativ.FormCreate(Sender: TObject);
 begin
@@ -6031,11 +5932,11 @@ begin
   DataList := TList.Create;
   ListaDados := TList.Create;
   oDgLocked := TDg.create;
-  If tv = nil then
+  if tv = nil then
     tv  := TTv.create;
 
-  If not tv.Diagrama.Carga_Atrib then
-   Begin
+  if not tv.Diagrama.Carga_Atrib then
+   begin
      Showmessage(mens8+ ' '+BDx.DirFluxo +dg_atu);
      frm_main.PARA := true;
      close;
@@ -6489,10 +6390,10 @@ end;
 
 procedure Tfrm_treeativ.sp_recortClick(Sender: TObject);
 var
-tp : TShiftState;
+  tp : TShiftState;
 begin
- tp := [ssctrl];
- tv.Diagrama.wKeyAction(VK_DELETE,tp);
+  tp := [ssctrl];
+  tv.Diagrama.wKeyAction(VK_DELETE,tp);
 end;
 
 procedure Tfrm_treeativ.SetPARA(const Value: boolean);
@@ -6558,7 +6459,7 @@ end;
 
 procedure Tfrm_treeativ.EscondeMostraFluxo1Click(Sender: TObject);
 var
-i : integer;
+  i : integer;
 begin
   If tv.Diagrama.SelLinks.Count > 0 then
    begin
@@ -6570,8 +6471,6 @@ begin
           tv.Diagrama.SelLinks.Item(i).DrawStyle :=  afTransparent;
 
      end;
-
-
    end;
 end;
 
@@ -6592,12 +6491,12 @@ end;
 
 procedure Tfrm_treeativ.ImportarDiagrama1Click(Sender: TObject);
 var
-TvImport : TTv;
+  TvImport : TTv;
 begin
- TvImport := TTv.create;
- BdImport := Tbd.create(true,true,true);
- //copia do diretório a importar para diretório temporário
- salvar_diretorio;
+  TvImport := TTv.create;
+  BdImport := Tbd.create(true,true,true);
+  //copia do diretório a importar para diretório temporário
+  salvar_diretorio;
 end;
 
 procedure Tfrm_treeativ.salvar_diretorio;
@@ -6640,17 +6539,11 @@ begin
         copyfile(OldDir,Newdir,true);
 
      end;
-
-
-
-
-
-
-
  finally
 
  end;
- end;
+end;
+
 procedure Tfrm_treeativ.SetoAtor(const Value: afnode);
 begin
   FoAtor := Value;
@@ -6668,8 +6561,6 @@ begin
   for i := 1 to tv.Diagrama.Nodes.Count do
     showmessage(tv.Diagrama.Nodes.item(i).text + ' '+inttostr(tv.Diagrama.Nodes.item(i).userdata));
 end;
-
-
 
 procedure Tfrm_treeativ.spb_sqlClick(Sender: TObject);
 begin

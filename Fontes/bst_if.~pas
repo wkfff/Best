@@ -263,7 +263,7 @@ end;
 
 procedure Tfrm_if.FormCreate(Sender: TObject);
 Var
-Tempo : TDominios;
+Tempo : TDominios;            
 begin
   inherited;
   wtext :=  TStringList.create;

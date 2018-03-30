@@ -60,15 +60,13 @@ begin
  
  form := nil;
  action := caFree;
-
 end;
-
 
 constructor TBD.Create(pAtu,psalva,pChoose : boolean);
 VAR
-REG : TREGISTRY;
-i : integer;
-bdname : string;
+  REG : TREGISTRY;
+  i : integer;
+  bdname : string;
 begin
  Inherited create(application);
   try
@@ -85,12 +83,9 @@ begin
                   If NOT Checa_Acesso(uppercase('frm_ConfigDB'),frm_main.SEGHABILIATADO,0) then
                     form.tb_configo.TabVisible := false;
               end;
-
-
            form.OnClose  := formClose;
            form.PageControl1.ActivePage := form.tb_configo;
          end;
-
        Reg := TRegistry.Create;
        Reg.RootKey := HKEY_CURRENT_USER;
 

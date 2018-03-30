@@ -136,10 +136,9 @@ procedure Tfrm_en.sp_printClick(Sender: TObject);
 Begin
  If frm_pen = nil then
     frm_pen:= tfrm_pen.create(self);
- //frm_pen.subtitulo.caption  := dbedit2.text;
+ frm_pen.subtitulo.caption  := dbedit2.text;
  Imprime('V');
  frm_pen.close;
-
 end;
 
 procedure Tfrm_en.Imprime(pTipo : string);

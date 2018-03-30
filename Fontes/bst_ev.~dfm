@@ -1,6 +1,6 @@
 inherited frm_ev: Tfrm_ev
-  Left = 356
-  Top = 173
+  Left = 333
+  Top = 80
   Caption = 'frm_ev'
   ClientHeight = 481
   WindowState = wsMaximized
@@ -51,7 +51,8 @@ inherited frm_ev: Tfrm_ev
       Left = 68
     end
     inherited SP_X: TSpeedButton
-      Left = 622
+      Left = 606
+      Width = 123
     end
     inherited spb_del: TSpeedButton
       Left = 193
@@ -282,9 +283,9 @@ inherited frm_ev: Tfrm_ev
         end
         object dbmemo2: TDBRichEdit
           Left = 8
-          Top = 163
+          Top = 155
           Width = 521
-          Height = 150
+          Height = 135
           DataField = 'IDF_MINIESPECIFICACAO'
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
@@ -422,7 +423,6 @@ inherited frm_ev: Tfrm_ev
           TitleFont.Name = 'MS Sans Serif'
           TitleFont.Style = []
           OnEnter = dbg_eventoEnter
-          OnKeyDown = dbg_eventoKeyDown
           Columns = <
             item
               Expanded = False
@@ -672,7 +672,7 @@ inherited frm_ev: Tfrm_ev
               Title.Font.Height = -12
               Title.Font.Name = 'Calibri'
               Title.Font.Style = []
-              Width = 350
+              Width = 300
               Visible = True
             end
             item

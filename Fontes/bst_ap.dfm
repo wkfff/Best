@@ -1,6 +1,6 @@
 inherited frm_ap: Tfrm_ap
-  Left = 6
-  Top = 97
+  Left = 447
+  Top = 122
   Caption = 'Atividade'
   ClientHeight = 428
   ClientWidth = 782

@@ -306,25 +306,22 @@ begin
        spp1.Visible := true;
      end;
   Alterou_TipAtiv := false;
-
-
-
-end;
+ end;
 
 procedure Tfrm_ap.pgcpChange(Sender: TObject);
 var
-i ,j,wid,wtot: integer;
-vList : TStringList;
-wnode : afNode;
-oNode : afNode;
+  i ,j,wid,wtot: integer;
+  vList : TStringList;
+  wnode : afNode;
+  oNode : afNode;
 
-mLst : uLst;
-oList : TList;
-dgx : TAddFlow;
-iDg : Tdg;
-wCusto_Tec : real;
-oRec : TCusto;
-mObj : uobj;
+  mLst : uLst;
+  oList : TList;
+  dgx : TAddFlow;
+  iDg : Tdg;
+  wCusto_Tec : real;
+  oRec : TCusto;
+  mObj : uobj;
 begin
   inherited;
 
@@ -343,36 +340,6 @@ begin
          oNode := tv.Diagrama.SelectedNode;
 
       iDg.Get_Fluxos(trv_in,trv_out,oNode);
-       {If oNode <> nil then
-        Begin
-           oList := Get_links(oNode,' ');
-           for i := 0 to oList.Count-1 do
-            Begin
-              mLst := oList.Items[i];
-              If trim(mLst^.lnk.Text) = '' then
-               continue;
-              If mLst^.tipo = 'I' then
-                Begin
-                 If InList(mLst^.lnk.Text,trv_in) then
-                    continue;
-                  new(mObj);
-                  mObj.Fcodigo := inttostr(mLst^.lnk.userdata);
-                  trv_In.Items.AddObject(nil,mLst^.lnk.Text,mObj)  ;
-
-                end
-              else
-              If mLst^.tipo = 'O' then
-                Begin
-                 If InList(mLst^.lnk.Text,trv_Out) then
-                    continue;
-                 new(mObj);
-                 mObj.Fcodigo := inttostr(mLst^.lnk.userdata);
-                 trv_out.Items.AddObject(nil,mLst^.lnk.Text,mObj)  ;
-
-                end;
-
-            end;
-        end; }
    end;
   finally
     If dgx <> nil then
@@ -461,19 +428,19 @@ end;
 
 procedure TFrm_ap.Mostra_TI;
 var
-i ,j,wid,wtot: integer;
-vList : TStringList;
-wnode : afNode;
-oNode : afNode;
+  i ,j,wid,wtot: integer;
+  vList : TStringList;
+  wnode : afNode;
+  oNode : afNode;
 
-mLst : uLst;
-oList : TList;
-dgx : TAddFlow;
-iDg : Tdg;
-wCusto_Tec : real;
-oRec : TCusto;
-mObj : uobj;
- begin
+  mLst : uLst;
+  oList : TList;
+  dgx : TAddFlow;
+  iDg : Tdg;
+  wCusto_Tec : real;
+  oRec : TCusto;
+  mObj : uobj;
+begin
 
 { CRIA CORRELAÇÕES COM DG}
 
@@ -1005,11 +972,11 @@ begin
               Tv.Diagrama.Cria_duc( Tv.Diagrama.SelectedNode,True,0,Rig_top,Rig_left,Rig_width,rig_height,4);
               WClass := 'DUC';
               // Aqui eu inclui a cor Azul para a Atividade do tipo Use Case
-              tv.Diagrama.SelNodes.Item(1).FillColor:= clSkyBlue;
+              // tv.Diagrama.SelNodes.Item(1).FillColor:= clSkyBlue;
             end
             else
               // Aqui vou colocar a cor Branca
-              tv.Diagrama.SelNodes.Item(1).FillColor:= clWhite;
+              // tv.Diagrama.SelNodes.Item(1).FillColor:= clWhite;
 
               Tv.Diagrama.Cria_duc(Tv.Diagrama.SelectedNode,False,0,0,0,0,0,4);
             end;
@@ -1417,17 +1384,14 @@ begin
      edit2.Text := floattostr( frm_main.itab.Get_Lead);
 end;
 
-
-
-
 procedure Tfrm_ap.Check_Procedural;
 var
-iNode1,iAtu: TTreenode;
-iNode2 : TTV;
-iAtiv : integer;
-iNo,iNoatu: afNode;
-iDiag,iDiagAtu : Tdg;
-tipoant : string;
+  iNode1,iAtu: TTreenode;
+  iNode2 : TTV;
+  iAtiv : integer;
+  iNo,iNoatu: afNode;
+  iDiag,iDiagAtu : Tdg;
+  tipoant : string;
 begin
   inherited;
 try
@@ -1459,20 +1423,19 @@ try
                        // ...filho é DPN e é atividade procedural OU filho é DPN e é USE CASE = erro
                       If ((udado(iNode1.data)^.fClasse = 'DPN') AND (dbrg.itemindex = 0) AND (dbrg1.itemindex = 0)) or
                          ((udado(iNode1.data)^.fClasse = 'DUC') AND (dbrg.itemindex = 1))   then
-                      else   
+                      else
                          raise exception.Create(mens18);
                     end;
                end ;
              free;
              end;
-         
          end;
       end;
   except
     raise;
   end;
 finally
-  
+
 end;
 end;
 
@@ -1689,10 +1652,10 @@ end;
 
 procedure Tfrm_ap.DBRGClick(Sender: TObject);
 var
-tipoant : string;
+  tipoant : string;
 begin
- Alterou_TipAtiv := true;
- If dbrg.ItemIndex = 0 then
+  Alterou_TipAtiv := true;
+  If dbrg.ItemIndex = 0 then
     begin
       Tabsheet8.tabvisible := false  ;
       Tabsheet2.tabvisible := false  ;

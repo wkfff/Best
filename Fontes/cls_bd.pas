@@ -43,7 +43,7 @@ var
 dirb,dirf : string;
 implementation
 
-uses bst_main,cls_obj,bstdb, des_main;
+uses bst_main, cls_obj, bstdb, des_main;
 
 procedure TBd.formClose(Sender: TObject; var Action: TCloseAction);
 begin
@@ -63,7 +63,7 @@ begin
 end;
 
 constructor TBD.Create(pAtu,psalva,pChoose : boolean);
-VAR
+var
   REG : TREGISTRY;
   i : integer;
   bdname : string;
@@ -121,7 +121,6 @@ begin
                         form.edit6.text := Nomebanco;
                         form.edit5.text := Servidor;
                     end;
-               {   }
 
                   If Dirbanco = '' then
                      TIPOBANCO := 1
@@ -142,11 +141,7 @@ begin
                          form.rg.ItemIndex := i;
                        end;
                     end;
-
-                {    }
                 end ;
-
-
                end;
             If pChoose then
                form.showmodal;
@@ -181,8 +176,7 @@ begin
                   Reg.WriteString('Nome_banco',nomebanco) ;
                end;
 
-
-              provider         := 'SQLOLEDB.1';
+             provider         := 'SQLOLEDB.1';
              // ConnectionString := 'Provider=SQLOLEDB.1;Persist Security Info=False;Initial Catalog='+'BEST'+';Data Source='+SERVIDOR;
              ConnectionString := 'Provider=SQLOLEDB.1;Persist Security Info=False;Initial Catalog='+NOMEBANCO+';Data Source='+SERVIDOR;
              // ConnectionString := 'Provider=SQLOLEDB.1;Persist Security Info=False;Initial Catalog='+DIRBANCO+';Data Source='+SERVIDOR;

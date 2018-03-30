@@ -6,7 +6,7 @@ uses Windows, SysUtils, Classes, Graphics, Forms, Controls, StdCtrls,
   Buttons, ComCtrls, ExtCtrls, Mask, Grids, DBGrids,
   Dialogs, ImgList, ToolWin,Activex, db, Menus, DBCtrls,
   cls_utils, dbtables, cls_obj, bstdb,adodb, AddFlow3Lib_TLB, fonctions,
-  OleCtrls,bst_basefrm, ActnList;
+  OleCtrls,bst_basefrm, ActnList, bst_objetos;
 
 type
   Tfrm_obj = class(TBasefrm)
@@ -151,7 +151,6 @@ type
     procedure Eliminar(pTipo : integer);
     procedure Soleitura;
 
-
     { Private declarations }
   published
     procedure Mostra_dados;
@@ -185,22 +184,21 @@ implementation
 uses  bst_main, bst_dir4, bst_ap, bst_juncao, bst_treeAtiv, bst_ev,bst_regra,
   bst_idiomas,bst_dm_rel, bst_de;
 
-
 {$R *.DFM}
 
 procedure Tfrm_obj.Mostra_Dir(Sender: TObject); // retorna diretorio e nome do arquivo
 var
- iDir : tfrm_Dir4;
- begin
-    iDir := Tfrm_dir4.create(self);
-    with iDir do
-     begin
-        showModal;
-        Diretor := dl.Directory;
-        Arquivo := edit2.text;
-        Fil := iDir.fl.FileName;
-     end;
- end;
+  iDir : tfrm_Dir4;
+begin
+  iDir := Tfrm_dir4.create(self);
+  with iDir do
+  begin
+    showModal;
+    Diretor := dl.Directory;
+    Arquivo := edit2.text;
+    Fil := iDir.fl.FileName;
+  end;
+end;
 
 procedure Tfrm_obj.fChange(Sender: TObject);
 begin
@@ -210,7 +208,6 @@ end;
 procedure Tfrm_obj.fEnter(Sender: TObject);
 begin
   idatasource.DataSet.edit;
-
 end;
 
 procedure Tfrm_obj.TreeChg(Sender: TObject; Node: TTreeNode);
@@ -221,77 +218,33 @@ end;
 
 procedure Tfrm_obj.memoDblClick(sender : Tobject);
 begin
-  If  (sender as Tobject is TDBRichedit)  then
-   begin
+  if  (sender as Tobject is TDBRichedit)  then
+  begin
+    if Memo_width > 0 then
+    begin
+      TDbRichEdit(sender as Tobject).width :=Memo_width  ;
+      TDbRichEdit(sender as Tobject).height:=memo_height ;
+      TDbRichEdit(sender as Tobject).top   :=memo_top ;
+      TDbRichEdit(sender as Tobject).left  :=memo_left ;
 
-  //    If  TDbRichEdit(sender as Tobject).Align = alClient then
-        If Memo_width > 0 then
-        begin
-  //         TDbRichEdit(sender as Tobject).Align := alNone;
-           TDbRichEdit(sender as Tobject).width :=Memo_width  ;
-           TDbRichEdit(sender as Tobject).height:=memo_height ;
-           TDbRichEdit(sender as Tobject).top   :=memo_top ;
-           TDbRichEdit(sender as Tobject).left  :=memo_left ;
-
-          Memo_width :=  0;
-          memo_height:=  0;
-          Memo_Top   :=  0;
-          Memo_Left  :=  0;
-    {      If TDbRichEdit(sender as Tobject).Owner is Tfrm_ev then
-           Begin
-             (TDbRichEdit(sender as Tobject).Owner as Tform).WindowState := wsNormal;
-              frm_ev.pgcp.Align      := alnone;
-
-           end
-          else
-          If TDbRichEdit(sender as Tobject).Owner is Tfrm_regra then
-           Begin
-             (TDbRichEdit(sender as Tobject).Owner as Tform).WindowState := wsNormal;
-             frm_regra.pgcp.Align      := alnone;
-           end ; }
-
-        end
-
-       else
-       begin
-          Memo_width := TDbRichEdit(sender as Tobject).width;
-          memo_height:= TDbRichEdit(sender as Tobject).height;
-          Memo_Top   := TDbRichEdit(sender as Tobject).top;
-          Memo_Left  := TDbRichEdit(sender as Tobject).Left;
-          TDbRichEdit(sender as Tobject).BringToFront;
-         { If TDbRichEdit(sender as Tobject).Owner is Tfrm_ev then
-           Begin
-             (TDbRichEdit(sender as Tobject).Owner as Tform).WindowState := wsMaximized;
-             frm_ev.pgcp.Align      := alclient;
-
-           end
-          else
-          If TDbRichEdit(sender as Tobject).Owner is Tfrm_regra then
-           Begin }
-
-             TDbRichEdit(sender as Tobject).width     :=  (TDbRichEdit(sender as Tobject).Parent as TTabSheet).Width;
-             TDbRichEdit(sender as Tobject).height    :=  (TDbRichEdit(sender as Tobject).Parent as TTabSheet).height;
-             TDbRichEdit(sender as Tobject).top       :=  (TDbRichEdit(sender as Tobject).Parent as TTabSheet).top;
-             TDbRichEdit(sender as Tobject).Left      :=  (TDbRichEdit(sender as Tobject).Parent as TTabSheet).Left;
-
-           //  (TDbRichEdit(sender as Tobject).Owner as TForm).WindowState := wsMaximized;
-           //  frm_regra.pgcp.Align      := alclient;
-          { end ;
-
-           Begin
-             TDbRichEdit(sender as Tobject).Align := alClient;
-             TDbRichEdit(sender as Tobject).BringToFront;
-           end; }
-
-
-
-          {TDbRichEdit(sender as Tobject).height:= self.height;
-          TDbRichEdit(sender as Tobject).top   := self.top;
-          TDbRichEdit(sender as Tobject).ScrollBars  := ssvertical;
-          TDbRichEdit(sender as Tobject).BringToFront; }
-
-        end;
-   end;
+      Memo_width :=  0;
+      memo_height:=  0;
+      Memo_Top   :=  0;
+      Memo_Left  :=  0;
+    end
+    else
+    begin
+      Memo_width := TDbRichEdit(sender as Tobject).width;
+      memo_height:= TDbRichEdit(sender as Tobject).height;
+      Memo_Top   := TDbRichEdit(sender as Tobject).top;
+      Memo_Left  := TDbRichEdit(sender as Tobject).Left;
+      TDbRichEdit(sender as Tobject).BringToFront;
+      TDbRichEdit(sender as Tobject).width     :=  (TDbRichEdit(sender as Tobject).Parent as TTabSheet).Width;
+      TDbRichEdit(sender as Tobject).height    :=  (TDbRichEdit(sender as Tobject).Parent as TTabSheet).height;
+      TDbRichEdit(sender as Tobject).top       :=  (TDbRichEdit(sender as Tobject).Parent as TTabSheet).top;
+      TDbRichEdit(sender as Tobject).Left      :=  (TDbRichEdit(sender as Tobject).Parent as TTabSheet).Left;
+    end;
+  end;
 end;
 
 procedure Tfrm_obj.Setidataset(const Value: TdataSource);
@@ -300,66 +253,63 @@ begin
 end;
 
 procedure Tfrm_obj.sp2Click(Sender: TObject);
-Var
+var
   str : string;
 begin
-   activeControl := nil;
-   str := idatasource.DataSet.fieldbyname('IDF_DESIGNACAO').AsString;
-   If trim(str)  = '' then
-    Begin
-      If frm_juncao <> nil then
-       Begin
-        If frm_treeativ <> nil then
-         Begin
-          If frm_juncao.dbrg.ItemIndex <> 0  then
-           Raise exception.create(mens22)  ;
-         end;
-       end
-      else
-       Raise exception.create(mens22);
+  activeControl := nil;
+  str := idatasource.DataSet.fieldbyname('IDF_DESIGNACAO').AsString;
+  if trim(str)  = '' then
+  begin
+    if frm_juncao <> nil then
+    begin
+      if frm_treeativ <> nil then
+      begin
+        if frm_juncao.dbrg.ItemIndex <> 0  then
+          Raise exception.create(mens22);
+      end;
     end
-   else
-   If frm_Treeativ <> nil then
-   begin
-    with  tv.Diagrama  do
-     begin
-        If SelectedLink <> nil then
-        Begin
-           selectedlink.Text := idatasource.DataSet.fieldbyname('IDF_DESIGNACAO').AsString;
-           if tv.Diagrama.SelectedNode <> nil then
-           Begin
-             tv.Diagrama.SelectedNode.Tag  := 'IF';
-             tv.Diagrama.SelectedNode.Text := idatasource.DataSet.fieldbyname('IDF_DESIGNACAO').AsString;
-             tv.Diagrama.SelectedNode.UserData := idatasource.DataSet.fieldbyname('IDF_CODIGO').AsInteger;
-           End;
-        End
-        else
-        If selectedNode <> nil then
-          Begin
-            If (uppercase(screen.ActiveForm.Name) <> 'FRM_AC') and (uppercase(screen.ActiveForm.Name) <> 'FRM_JUNCAO') then
-              Begin
-                If (selectednode.Shape = 54) and (selectedNode.UserData = idatasource.DataSet.fieldbyname('IDF_CODIGO').asinteger) then //processo externo
-                   selectedNode.Text := idatasource.DataSet.fieldbyname('IDF_DESIGNACAO').AsString+#13+#13+
-                   idatasource.DataSet.fieldbyname('IDF_WBS_CODE').AsString
-                ELSE
-                Begin
-                  If (uppercase(screen.ActiveForm.Name) = 'FRM_AP') and  (not selectednode.Shape in [50,79] ) then
-                  else
-                  If (uppercase(screen.ActiveForm.Name) = 'FRM_CS') then   //classes
-                   Begin
-                     tv.Diagrama.Get_Title(tv.Diagrama.SelectedNode).Text := idatasource.DataSet.fieldbyname('IDF_DESIGNACAO').AsString;
-                     //carregar atributos
-                     //carregar métodos
-                   end
-
-                  else
-                   Begin
-                      If selectedNode.userdata = idatasource.DataSet.fieldbyname('IDF_CODIGO').asinteger then
-                         selectedNode.Text := idatasource.DataSet.fieldbyname('IDF_DESIGNACAO').AsString ;
-                   end;
-                end;
-              end
+    else
+      Raise exception.create(mens22);
+    end
+    else
+    if frm_Treeativ <> nil then
+    begin
+      with  tv.Diagrama  do
+      begin
+        if SelectedLink <> nil then
+        begin
+          selectedlink.Text := idatasource.DataSet.fieldbyname('IDF_DESIGNACAO').AsString;
+          if tv.Diagrama.SelectedNode <> nil then
+          begin
+            tv.Diagrama.SelectedNode.Tag  := 'IF';
+            tv.Diagrama.SelectedNode.Text := idatasource.DataSet.fieldbyname('IDF_DESIGNACAO').AsString;
+            tv.Diagrama.SelectedNode.UserData := idatasource.DataSet.fieldbyname('IDF_CODIGO').AsInteger;
           end;
+        end
+        else
+        if selectedNode <> nil then
+        begin
+          if (uppercase(screen.ActiveForm.Name) <> 'FRM_AC') and (uppercase(screen.ActiveForm.Name) <> 'FRM_JUNCAO') then
+          begin
+            if (selectednode.Shape = 54) and (selectedNode.UserData = idatasource.DataSet.fieldbyname('IDF_CODIGO').asinteger) then //processo externo
+                selectedNode.Text := idatasource.DataSet.fieldbyname('IDF_DESIGNACAO').AsString+#13+#13+
+                   idatasource.DataSet.fieldbyname('IDF_WBS_CODE').AsString
+            else
+            begin
+              if (uppercase(screen.ActiveForm.Name) = 'FRM_AP') and  (not selectednode.Shape in [50,79] ) then
+               // O que fazer aqui ? um if sem o menor sentido.
+
+              else
+              if (uppercase(screen.ActiveForm.Name) = 'FRM_CS') then   //classes
+                tv.Diagrama.Get_Title(tv.Diagrama.SelectedNode).Text := idatasource.DataSet.fieldbyname('IDF_DESIGNACAO').AsString
+              else
+              begin
+                if selectedNode.userdata = idatasource.DataSet.fieldbyname('IDF_CODIGO').asinteger then
+                  selectedNode.Text := idatasource.DataSet.fieldbyname('IDF_DESIGNACAO').AsString ;
+              end;
+            end;
+          end;
+        end;
      end;
    end;
 
@@ -392,7 +342,7 @@ end;
 
 procedure Tfrm_obj.FormShow(Sender: TObject);
 var
-i : integer;
+  i : integer;
 begin
   inherited;
  // Ling(frm_main.Idioma,self); //idiomas
@@ -497,26 +447,26 @@ end;
 
 
 procedure Tfrm_obj.Soleitura;
-  Begin
-    sp_insert.visible := false;;
+begin
+  sp_insert.visible := false;;
 //    spb_del.Visible := false;
-    sp_x.Visible := false;
-    sp2.visible := false;
-    standardToolBar.Visible := false;
-    ToolButton4.Enabled := false;
-    ToolButton5.Enabled := false;
-  end;
+  sp_x.Visible := false;
+  sp2.visible := false;
+  standardToolBar.Visible := false;
+  ToolButton4.Enabled := false;
+  ToolButton5.Enabled := false;
+end;
 
 procedure Tfrm_obj.sp_insertClick(Sender: TObject);
 var
-Wtab : string;
+  Wtab : string;
 begin
     If tipo = 'OC' then
       Wtab := 'IDF_OI'
-    else  
+    else
        Wtab := 'IDF_'+tipo;
     obj := Tdados_tab.create(SELF);
-   
+
     with obj  do
      begin
          with Tdg.create do
@@ -529,7 +479,7 @@ begin
              end;
              free;
            end;
-         
+
         If not Cria_Inst(Cliente,Cenario,0,Wtab,tipo,visivel,'',' ') then
            raise exception.create(ei4);    // cria registro com código   ....
 
@@ -599,7 +549,7 @@ end;
 
 procedure Tfrm_obj.FormCreate(Sender: TObject);
 var
-i : integer;
+  i : integer;
 begin
    pgcp.Brush.Color := $00F9F2F2;
    standardToolBar.Visible := true;
@@ -616,8 +566,6 @@ begin
         Cenario := CurrEmpresa.cenarios.PRJ_ID;
         Id      := CurrEmpresa.cenarios.Diagramas.Objeto.IDF_CODIGO;
       end;
- // ver_obj.Text := frm_main.edit2.text
-  //caption := caption + '                                 '+frm_main.edit2.text ;
   loadconstantObjs;
 end;
 
@@ -659,167 +607,159 @@ end;
 
 procedure Tfrm_obj.pgcpChange(Sender: TObject);
 var
-wcat,wdesc : string;
-ListItem : TListItem;
+  wcat,wdesc : string;
+  ListItem : TListItem;
 begin
-   If pgcp.ActivePage = Tb_dados then // dados
+   if pgcp.ActivePage = Tb_dados then // dados
    begin
-        dbg_dg.Cursor := crHourGlass;
-        Mostra_dados;
+     dbg_dg.Cursor := crHourGlass;
+     Mostra_dados;
    end
    else
-   If pgcp.ActivePage = Tb_Atv then // atividades
-    begin
-         //trv_atv.Items.Clear;
-         lv.Items.Clear;
-         lv.Columns[0].Caption := def63;
-         lv.Columns[1].Caption := defe1  ;
-         with Tdados_tab.create(self) do
+   if pgcp.ActivePage = Tb_Atv then // atividades
+   begin
+     //trv_atv.Items.Clear;
+     lv.Items.Clear;
+     lv.Columns[0].Caption := def63;
+     lv.Columns[1].Caption := defe1  ;
+     with Tdados_tab.create(self) do
+     begin
+       try
+         Get_PaisCorrelatosBis(Cliente,cenario,'AP',Id,TIPO,'IDF_AP','ATOR_CATEGORIA','D') ;
+         while not eof do
          begin
-           try
-            Get_PaisCorrelatosBis(Cliente,cenario,'AP',Id,TIPO,'IDF_AP','ATOR_CATEGORIA','D') ;
-            while not eof do
-             Begin
-             { new(mObj);
-              mObj^.Fcodigo := fieldbyname('IDF_CODIGO').asstring ;
-              mObj^.fDesc   := fieldbyname('IDF_DESIGNACAO').asstring ;
-              mObj^.fcat    := fieldbyname('ATOR_CATEGORIA').asstring ; }
-              wcat := FormataCampo(trim(fieldbyname('ATOR_CATEGORIA').asstring),'B',15,'R');
-              If trim(wcat) = 'Responsável' then
-               wcat := def45
-              else
-              If trim(wcat) = 'Participante' then
+           { new(mObj);
+           mObj^.Fcodigo := fieldbyname('IDF_CODIGO').asstring ;
+           mObj^.fDesc   := fieldbyname('IDF_DESIGNACAO').asstring ;
+           mObj^.fcat    := fieldbyname('ATOR_CATEGORIA').asstring ; }
+           wcat := FormataCampo(trim(fieldbyname('ATOR_CATEGORIA').asstring),'B',15,'R');
+           if trim(wcat) = 'Responsável' then
+             wcat := def45
+           else
+             if trim(wcat) = 'Participante' then
                wcat := Def46
-              else
+             else
                wcat := Def380;
-              wdesc := FormataCampo(trim(fieldbyname('IDF_DESIGNACAO').asstring),'B',55,'R');
-              //trv_ATV.Items.AddObject(nil,wdesc,mObj);
+             wdesc := FormataCampo(trim(fieldbyname('IDF_DESIGNACAO').asstring),'B',55,'R');
+             //trv_ATV.Items.AddObject(nil,wdesc,mObj);
 
-              ListItem := lv.items.add;
-              ListItem.Caption := wdesc;
-              ListItem.SubItems.Add(wcat);
-              ListItem.SubItems.Add(fieldbyname('IDF_CODIGO').asstring);
-              next;
-             end;
-           finally
-             free;
-           end;
+             ListItem := lv.items.add;
+             ListItem.Caption := wdesc;
+             ListItem.SubItems.Add(wcat);
+             ListItem.SubItems.Add(fieldbyname('IDF_CODIGO').asstring);
+             next;
          end;
+         finally
+           free;
+         end;
+       end;
     end ;
 end;
 
 procedure Tfrm_obj.Mostra_dados;
-Begin
- If Ide = nil then
-          Begin
-            ide := Tdados_tab.Create(self);
-          end;
+begin
+  if Ide = nil then
+    ide := Tdados_tab.Create(self);
 
-          with iDe do
-           begin
-              try
-                Get_Correlatos(Cliente,Cenario,TIPO,Id,'DE','IDF_DE');
-                dbg_dg.DataSource    := dataext;
-                db_Desc.DataSource   := dataext;
-                db_Dom.DataSource    := dataext;
-                db_Desc.dataField    := 'IDF_DESCRICAO';
-                db_Dom.dataField     := 'IDF_DOMINIO';
-                BeforePost           := DePost;
-                AfterPost            := AftPost;
-                AfterDelete          := AftDel;
-              finally
-                dbg_dg.cursor     := crDefault
-              end;
-           end;
+    with iDe do
+    begin
+      try
+        Get_Correlatos(Cliente,Cenario,TIPO,Id,'DE','IDF_DE');
+        dbg_dg.DataSource    := dataext;
+        db_Desc.DataSource   := dataext;
+        db_Dom.DataSource    := dataext;
+        db_Desc.dataField    := 'IDF_DESCRICAO';
+        db_Dom.dataField     := 'IDF_DOMINIO';
+        BeforePost           := DePost;
+        AfterPost            := AftPost;
+        AfterDelete          := AftDel;
+      finally
+        dbg_dg.cursor     := crDefault
+      end;
+    end;
 end;
 
 procedure Tfrm_obj.DePost(Dataset : Tdataset);
- begin
+begin
    { TODO -c6-00-028 : Corrigido : atualização de elemento de dado }
-   
-   with Tdados_tab.create(self) do
-      begin
-         try
-           CLI_ID := cliente;
-           PRJ_ID := cenario;
-           dbg_dg.DataSource.DataSet.fieldbyname('CLI_ID').Value := cliente;
-           dbg_dg.DataSource.DataSet.fieldbyname('PRJ_ID').Value := cenario;
-           dbg_dg.DataSource.DataSet.fieldbyname('IDF_TIPO_ATIVIDADE').Value := 'DE';
-           dbg_dg.DataSource.DataSet.fieldbyname('IDF_DATA_TYPE').asstring := uppercase(dbg_dg.DataSource.DataSet.fieldbyname('IDF_DATA_TYPE').asstring);
-         
-           If  (dbg_dg.DataSource.DataSet.fieldbyname('IDF_DATA_TYPE').asstring <> 'C') and
-               (dbg_dg.DataSource.DataSet.fieldbyname('IDF_DATA_TYPE').asstring <> 'I') and
-               (dbg_dg.DataSource.DataSet.fieldbyname('IDF_DATA_TYPE').asstring <> 'N') and
-               (dbg_dg.DataSource.DataSet.fieldbyname('IDF_DATA_TYPE').asstring <> 'M') and
-               (dbg_dg.DataSource.DataSet.fieldbyname('IDF_DATA_TYPE').asstring <> 'D') and
-               (dbg_dg.DataSource.DataSet.fieldbyname('IDF_DATA_TYPE').asstring <> 'T') then
 
-             Raise exception.create(mens98);
-        If  dbg_dg.DataSource.DataSet.State = dsedit then
-          exit;
-           iCodigo := get_MaxKey('IDF_DE')+1;
-           dbg_dg.DataSource.DataSet.fieldbyname('IDF_CODIGO').Value := iCodigo;
+  with Tdados_tab.create(self) do
+  begin
+    try
+      CLI_ID := cliente;
+      PRJ_ID := cenario;
+      dbg_dg.DataSource.DataSet.fieldbyname('CLI_ID').Value := cliente;
+      dbg_dg.DataSource.DataSet.fieldbyname('PRJ_ID').Value := cenario;
+      dbg_dg.DataSource.DataSet.fieldbyname('IDF_TIPO_ATIVIDADE').Value := 'DE';
+      dbg_dg.DataSource.DataSet.fieldbyname('IDF_DATA_TYPE').asstring := uppercase(dbg_dg.DataSource.DataSet.fieldbyname('IDF_DATA_TYPE').asstring);
 
-         finally
-            free;
-         end;
-      end;
- end;
+      if  (dbg_dg.DataSource.DataSet.fieldbyname('IDF_DATA_TYPE').asstring <> 'C') and
+        (dbg_dg.DataSource.DataSet.fieldbyname('IDF_DATA_TYPE').asstring <> 'I') and
+        (dbg_dg.DataSource.DataSet.fieldbyname('IDF_DATA_TYPE').asstring <> 'N') and
+        (dbg_dg.DataSource.DataSet.fieldbyname('IDF_DATA_TYPE').asstring <> 'M') and
+        (dbg_dg.DataSource.DataSet.fieldbyname('IDF_DATA_TYPE').asstring <> 'D') and
+        (dbg_dg.DataSource.DataSet.fieldbyname('IDF_DATA_TYPE').asstring <> 'T') then
+        Raise exception.create(mens98);
+      if  dbg_dg.DataSource.DataSet.State = dsedit then
+        exit;
+      iCodigo := get_MaxKey('IDF_DE')+1;
+      dbg_dg.DataSource.DataSet.fieldbyname('IDF_CODIGO').Value := iCodigo;
+      finally
+        free;
+    end;
+  end;
+end;
 
 procedure Tfrm_obj.AftPost(Dataset : Tdataset);
- begin
-    If iCodigo = 0 then
-     exit;
-    begin
-     with Tdados_tab.Create(self) do
-       begin
-        try
-          Cria_Correlacao(cliente,cenario,TIPO,iD,'DE',iCodigo,' ',0,0);
-        finally
-           free;
-        end;
-     end;
-   end;
- end;
+begin
+  if iCodigo = 0 then
+    exit;
+  with Tdados_tab.Create(self) do
+  begin
+    try
+      Cria_Correlacao(cliente,cenario,TIPO,iD,'DE',iCodigo,' ',0,0);
+    finally
+      free;
+    end;
+  end;
+end;
 
 procedure Tfrm_obj.AftDel(Dataset : Tdataset);
- begin
+begin
   //  ide.Apaga_correlacao(cliente,cenario,TIPO,ID,'DE',
   //        dbg_dg.DataSource.DataSet.fieldbyname('IDF_CODIGO').asinteger) ;
   //  pgcpChange(self);
- end;
+end;
 
 procedure Tfrm_obj.sLista1Click(Sender: TObject);
 begin
- with Tdados_tab.create(self) do
-     begin
-       ListaCli := Cliente ;
-       ListaProj:= Cenario ;
-       ListaDim := 'IDF_DE' ;
-       ListaTit := def26 ;
-       ListaTag := 0 ;
-       ListaEdit:= false ;
-       ListaTree:= nil;
-       ListaId  := 0;
-       Listafecha:= true;
-       mostra_lista;
-       If ListaCodigo = 0 then
-          exit;
-       If not Cria_Correlacao(Cliente,Cenario,TIPO,self.Id,'DE',ListaCodigo,' ',0,0) then
-        Raise exception.create(mens99);
-       pgcpChange(self);
-     end;
+  with Tdados_tab.create(self) do
+  begin
+    ListaCli := Cliente ;
+    ListaProj:= Cenario ;
+    ListaDim := 'IDF_DE' ;
+    ListaTit := def26 ;
+    ListaTag := 0 ;
+    ListaEdit:= false ;
+    ListaTree:= nil;
+    ListaId  := 0;
+    Listafecha:= true;
+    mostra_lista;
+    if ListaCodigo = 0 then
+      exit;
+    if not Cria_Correlacao(Cliente,Cenario,TIPO,self.Id,'DE',ListaCodigo,' ',0,0) then
+      Raise exception.create(mens99);
+    pgcpChange(self);
+  end;
 end;
 
 procedure Tfrm_obj.Excluir1Click(Sender: TObject);
 begin
-  If MessageDlg(mens24,
-              mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-     begin
-       ide.Apaga_correlacao(cliente,cenario,TIPO,ID,'DE',
-                 dbg_dg.DataSource.DataSet.fieldbyname('IDF_CODIGO').asinteger);
-       pgcpChange(self);
-     end;
+  if MessageDlg(mens24, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    ide.Apaga_correlacao(cliente,cenario,TIPO,ID,'DE', dbg_dg.DataSource.DataSet.fieldbyname('IDF_CODIGO').asinteger);
+    pgcpChange(self);
+  end;
 end;
 
 procedure Tfrm_obj.dbg_dg1KeyDown(Sender: TObject; var Key: Word;
@@ -831,14 +771,14 @@ end;
 
 procedure Tfrm_obj.Eliminar(pTipo : integer);
 begin
-   If MessageDlg(mens23,mtConfirmation, [mbYes, mbNo], 0) <> mrYes then
-      raise exception.create(mens25);
-   If pTipo = 2 then
-    Begin
-     dbg_dg.Datasource.Dataset.edit;
-     dbg_dg.DataSource.DataSet.Delete;
-     dbg_dg.DataSource.DataSet.Post;
-    end;
+  if MessageDlg(mens23,mtConfirmation, [mbYes, mbNo], 0) <> mrYes then
+    raise exception.create(mens25);
+  if pTipo = 2 then
+  begin
+    dbg_dg.Datasource.Dataset.edit;
+    dbg_dg.DataSource.DataSet.Delete;
+    dbg_dg.DataSource.DataSet.Post;
+  end;
 end;
 
 procedure Tfrm_obj.SetDiretor(const Value: string);
@@ -853,7 +793,8 @@ end;
 
 procedure Tfrm_obj.spb_delClick(Sender: TObject);
 begin
- //spb_del.enabled := false;
+  //spb_del.enabled := false;
+  ShowMessage('Aqui na Delecao');
 end;
 
 procedure Tfrm_obj.FormClose(Sender: TObject; var Action: TCloseAction);

@@ -99,7 +99,7 @@ begin
     frm_ppessoa := tfrm_ppessoa.create(self);
 
     try
-      //frm_ppessoa.qrp.DataSet := iDataSource.DataSet;
+      frm_ppessoa.qrp.DataSet := iDataSource.DataSet;
 
      with frm_ppessoa do
       begin
@@ -109,10 +109,10 @@ begin
               qrdataset(frm_ppessoa.Components[i],idatasource.dataset);
           end;
       end;
-      //frm_Ppessoa.titulo.caption := uppercase(def59);
-      //frm_Ppessoa.subtitulo.caption := dbedit6.text;
-      //frm_ppessoa.qrp.preview;
-      //FRM_Ppessoa.CLOSE;
+      frm_Ppessoa.titulo.caption := uppercase(def59);
+      frm_Ppessoa.subtitulo.caption := dbedit6.text;
+      frm_ppessoa.qrp.preview;
+      FRM_Ppessoa.CLOSE;
     finally
 
     end;
