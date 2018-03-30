@@ -5289,9 +5289,9 @@ begin
              sp_confirm.Enabled := true;
            end;
        { se a Lista a mostrar é de elementos de dados (IDF_DE, inclui também os atributos de IDF_DADOS}
-        If ListaDim = 'IDF_DE' then
+        {If ListaDim = 'IDF_DE' then
             OpenAllDistinct(ListaCli ,ListaProj)
-        else
+        else  }
            OpenAll(ListaCli, ListaProj, ListaDim, iTipo, iTipoAtiv, Operacao);
 
         Cria_lista(Lb_lista,false,true);

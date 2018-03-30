@@ -96,7 +96,6 @@ inherited frm_ev: Tfrm_ev
     Top = 49
     Width = 553
     Height = 432
-    ActivePage = ts_lay
     inherited tb_geral: TTabSheet
       inherited docext: TSpeedButton
         Left = 16
