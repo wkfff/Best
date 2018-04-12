@@ -118,7 +118,7 @@ uses bst_main, bst_dir4, bst_treeAtiv, bst_puc, bst_dm_rel;
 {$R *.dfm}
 
 procedure Tfrm_ev.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
+begin                                              
   inherited;
   if itab <> nil then
   begin
@@ -143,6 +143,7 @@ var
   IpAI : INTEGER;
 begin
   inherited;
+  
    If (frm_main.viewer) or (oAcesso.waccess = 1) then
    begin
      speedbutton17.Visible := false;

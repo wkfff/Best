@@ -1,6 +1,7 @@
 inherited frm_de: Tfrm_de
   Left = 477
   Top = 203
+  BorderIcons = [biSystemMenu, biMaximize]
   Caption = 'Elemento de Dado'
   ClientHeight = 360
   ClientWidth = 650

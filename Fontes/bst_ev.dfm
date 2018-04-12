@@ -1,9 +1,10 @@
 inherited frm_ev: Tfrm_ev
-  Left = 333
-  Top = 80
+  Left = 551
+  Top = 272
+  BorderIcons = [biSystemMenu, biMaximize]
   Caption = 'frm_ev'
   ClientHeight = 481
-  WindowState = wsMaximized
+  ClientWidth = 855
   PixelsPerInch = 96
   TextHeight = 14
   inherited SpeedButton5: TSpeedButton
@@ -38,6 +39,7 @@ inherited frm_ev: Tfrm_ev
     OnClick = SpeedButton97Click
   end
   inherited Panel3: TPanel
+    Width = 855
     Color = clBtnFace
     Visible = False
     inherited sp2: TSpeedButton
@@ -94,8 +96,10 @@ inherited frm_ev: Tfrm_ev
   end
   inherited pgcp: TPageControl
     Top = 49
-    Width = 553
+    Width = 605
     Height = 432
+    ActivePage = tb_geral
+    Anchors = [akLeft, akTop, akRight, akBottom]
     inherited tb_geral: TTabSheet
       inherited docext: TSpeedButton
         Left = 16
@@ -111,6 +115,7 @@ inherited frm_ev: Tfrm_ev
         Top = -2
         Width = 537
         Height = 355
+        Anchors = [akLeft, akTop, akRight, akBottom]
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -12
@@ -720,10 +725,11 @@ inherited frm_ev: Tfrm_ev
     end
   end
   object GroupBox1: TGroupBox [5]
-    Left = 558
+    Left = 629
     Top = 81
     Width = 227
     Height = 400
+    Anchors = [akTop, akRight]
     Caption = 'Dados'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
@@ -930,7 +936,25 @@ inherited frm_ev: Tfrm_ev
     end
   end
   inherited CoolBar1: TCoolBar
+    Width = 855
+    Bands = <
+      item
+        Control = ToolBar1
+        ImageIndex = -1
+        MinHeight = 22
+        Width = 855
+      end
+      item
+        Control = StandardToolBar
+        ImageIndex = -1
+        MinHeight = 22
+        Width = 855
+      end>
+    inherited StandardToolBar: TToolBar
+      Width = 842
+    end
     inherited ToolBar1: TToolBar
+      Width = 842
       inherited ToolButton6: TToolButton
         OnClick = sp_printClick
       end
