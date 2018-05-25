@@ -1,6 +1,6 @@
 inherited frm_en: Tfrm_en
-  Left = 342
-  Top = 221
+  Left = 760
+  Top = 322
   Caption = 'Rela'#231#227'o com Mercado'
   ClientHeight = 329
   ClientWidth = 553
@@ -34,7 +34,6 @@ inherited frm_en: Tfrm_en
   inherited pgcp: TPageControl
     Width = 553
     Height = 279
-    ActivePage = tb_dados
     inherited tb_geral: TTabSheet
       Font.Name = 'Calibri'
       inherited docext: TSpeedButton

@@ -220,7 +220,7 @@ procedure Tfrm_obj.memoDblClick(sender : Tobject);
 begin
   if  (sender as Tobject is TDBRichedit)  then
   begin
-    if Memo_width > 0 then
+    if Memo_width <> 0 then
     begin
       TDbRichEdit(sender as Tobject).width :=Memo_width  ;
       TDbRichEdit(sender as Tobject).height:=memo_height ;
@@ -239,10 +239,16 @@ begin
       Memo_Top   := TDbRichEdit(sender as Tobject).top;
       Memo_Left  := TDbRichEdit(sender as Tobject).Left;
       TDbRichEdit(sender as Tobject).BringToFront;
+      TDbRichEdit(sender as Tobject).width     :=  800;
+      TDbRichEdit(sender as Tobject).height    :=  600;
+      TDbRichEdit(sender as Tobject).top       :=  25;
+      TDbRichEdit(sender as Tobject).Left      :=  10;
+
+      {
       TDbRichEdit(sender as Tobject).width     :=  (TDbRichEdit(sender as Tobject).Parent as TTabSheet).Width;
       TDbRichEdit(sender as Tobject).height    :=  (TDbRichEdit(sender as Tobject).Parent as TTabSheet).height;
       TDbRichEdit(sender as Tobject).top       :=  (TDbRichEdit(sender as Tobject).Parent as TTabSheet).top;
-      TDbRichEdit(sender as Tobject).Left      :=  (TDbRichEdit(sender as Tobject).Parent as TTabSheet).Left;
+      TDbRichEdit(sender as Tobject).Left      :=  (TDbRichEdit(sender as Tobject).Parent as TTabSheet).Left;}
     end;
   end;
 end;
